@@ -13,15 +13,17 @@ body {
 .div-wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   height: calc(100vh - 60px);
 }
 
 .wrapper {
-  width: 40%;
-  min-height: 400px;
-  padding: 40px 30px 30px 30px;
-  border-radius: 15px;
+  width: 50%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .wrapper-light {
@@ -97,7 +99,6 @@ body {
   font-weight: 600;
   font-size: 1.6rem;
   letter-spacing: 1.3px;
-  padding-left: 10px;
 }
 
 .wrapper .form-field input {
@@ -107,13 +108,11 @@ body {
   outline: none;
   background: none;
   font-size: 1.2rem;
-  padding: 10px 15px 10px 10px;
+  text-align: center;
 }
 
 .wrapper .form-field {
-  padding-left: 10px;
-  margin-bottom: 20px;
-  border-radius: 20px;
+  margin: 20px 0;
 }
 
 .wrapper .form-field .fas {
@@ -121,12 +120,16 @@ body {
 }
 
 .wrapper .btn {
-  width: 100%;
+  width: 250px;
   height: 40px;
-  background-color: #03a9f4;
+  background-color: #719FED;
   color: #fff;
-  border-radius: 25px;
+  border-radius: 0;
   letter-spacing: 1.3px;
+}
+
+.wrapper .main-logo {
+  width: 250px;
 }
 
 .wrapper .btn:hover {
@@ -222,20 +225,23 @@ body {
 
 
 @media (max-width: 1200px) {
-  .wrapper {
-    width: 60%;
-  }
 }
 
 @media (max-width: 992px) {
   .div-wrapper {
-    height: calc(100vh - 178px);
+    height: calc(100vh - 96px);
   }
 }
 
 @media (max-width: 768px) {
+  .div-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
   .wrapper {
-    width: 80%;
+    width: 100%;
   }
 }
 
@@ -249,10 +255,7 @@ body {
 }
 
 @media (max-width: 380px) {
-  .wrapper {
-    margin: 30px 20px;
-    padding: 40px 15px 15px 15px;
-  }
+
 }
 
 

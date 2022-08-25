@@ -15,18 +15,10 @@ body {
 }
 
 #root {
-  padding-bottom: 20px;
-}
-
-.dark-bg {
-  background-color: #4a5c6d;
-}
-.light-bg {
-  background-color: #ECF0F3;
+  background-color: #719FED;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-

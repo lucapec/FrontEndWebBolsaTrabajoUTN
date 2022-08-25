@@ -1,32 +1,20 @@
-import { useContext, useMemo } from "react";
-import ThemeContext from "../context/ThemeContext";
+import { useContext } from "react";
 import LoginContext from "../context/LoginContext";
 import { Link } from "react-router-dom";
-import ChangeTheme from "./ChangeTheme";
 import Logout from "./Logout";
+import "./Navbar.css";
+import utnLogo from '../assets/white-utn-logo.png';
 
 const Navbar = () => {
-  const { theme } = useContext(ThemeContext);
   const { logged } = useContext(LoginContext);
 
-  const styles = useMemo(() => {
-    if (theme === "dark") {
-      return {
-        classes: "navbar navbar-expand-lg navbar-dark bg-dark",
-        object: {},
-      };
-    } else {
-      return {
-        classes: "navbar navbar-expand-lg navbar-light bg-light",
-        object: {},
-      };
-    }
-  }, [theme]);
-
   return (
-    <nav className={styles.classes}>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <div className="navbar-brand">Bolsa de Trabajo</div>
+        <div className="navbar-brand">
+          Bolsa de Trabajo
+          <img src={utnLogo} alt="UTN Logo" className="navbar-logo"/>
+        </div>
         <div className="" id="navbarNav">
           <ul className="navbar-nav">
             {logged ? (
@@ -65,9 +53,6 @@ const Navbar = () => {
               </li>
             )}
             {logged ? <Logout /> : ""}
-            <li className="nav-link">
-              <ChangeTheme />
-            </li>
           </ul>
         </div>
       </div>
