@@ -1,10 +1,17 @@
 import React from "react";
-import UserForm from "../components/forms/UserForm";
+import LoginForm from "../components/forms/LoginForm";
 
 const Login = () => {
   return (
     <div className="div-wrapper">
-      <UserForm loginSetup={true} h1Text="Iniciar sesión" btnText="Ingresar" linkToText="Aún no tengo cuenta" linkTo="/register" />
+      <LoginForm
+        loginSetup={true}
+        h1Text="Iniciar sesión"
+        btnText="Ingresar"
+        linkToText="Aún no tengo cuenta"
+        linkTo="/registro"
+        left={false}
+      />
     </div>
   );
 };

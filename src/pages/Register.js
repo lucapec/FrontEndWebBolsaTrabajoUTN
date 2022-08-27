@@ -1,12 +1,18 @@
-import React from 'react'
-import UserForm from '../components/forms/UserForm'
+import { useState } from "react";
+import RegisterForm from "../components/forms/RegisterForm";
 
 const Register = () => {
   return (
     <div className="div-wrapper">
-        <UserForm loginSetup={false} h1Text="Registrarse" btnText="Registrarse" linkToText="Ya tengo una cuenta" linkTo="/login"/>
+      <RegisterForm
+        h1Text="Registrarse"
+        btnText="Registrarse"
+        linkToText="Ya tengo una cuenta"
+        linkTo="/ingreso"
+        left={true}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

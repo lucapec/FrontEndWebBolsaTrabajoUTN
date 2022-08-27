@@ -1,14 +1,14 @@
-import { useState, useContext } from "react";
-import { Link, Navigate } from "react-router-dom";
-import LoginContext from "../../context/LoginContext";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Forms.css";
-import utnLogo from '../../assets/logo-utn.png';
+import utnLogo from "../../assets/logo-utn.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const LoginForm = ({ loginSetup, h1Text, btnText, linkToText, linkTo }) => {
+const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
+  const [isStudent, setIsStudent] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { logged, setLogged } = useContext(LoginContext);
-
 
   const emailValidation = () => {
     return String(email)
@@ -26,18 +26,12 @@ const LoginForm = ({ loginSetup, h1Text, btnText, linkToText, linkTo }) => {
   const dataValidation = (e) => {
     e.preventDefault();
     if (emailValidation() && passwordValidation()) {
-      if (loginSetup) {
-        // Authenticate user API call
-        setLogged(true);
-      } else {
-        // Create new user API call
-      }
+      // Create new user API call
     } else {
-      const validationMsg = document.getElementById("validation-message");
-      validationMsg.style.display = "flex";
-      setTimeout(() => {
-        validationMsg.style.display = "none";
-      }, 3000);
+      toast("Ingrese datos válidos!", {
+        autoClose: 3000,
+        hideProgressBar: false,
+      });
     }
   };
 
@@ -56,12 +50,16 @@ const LoginForm = ({ loginSetup, h1Text, btnText, linkToText, linkTo }) => {
 
   return (
     <>
-      {logged && <Navigate replace to="/ofertas" />}
-      <div className="wrapper">
-        <figure>
-          <img src={utnLogo} alt="UTN Logo" className="main-logo" />
-        </figure>
-      </div>
+      <ToastContainer />
+      {left ? (
+        <div className="wrapper">
+          <figure>
+            <img src={utnLogo} alt="UTN Logo" className="main-logo" />
+          </figure>
+        </div>
+      ) : (
+        ""
+      )}
       <div id="wrapper" className="wrapper wrapper-dark">
         <div className="text-center mt-4 name">{h1Text}</div>
         <form className="pb-3 mt-3">
@@ -87,9 +85,6 @@ const LoginForm = ({ loginSetup, h1Text, btnText, linkToText, linkTo }) => {
               onChange={inputHandler}
             />
           </div>
-          <div id="validation-message">
-            <p>Ingrese datos válidos para continuar</p>
-          </div>
           <button onClick={dataValidation} className="btn mt-3">
             {btnText}
           </button>
@@ -98,8 +93,17 @@ const LoginForm = ({ loginSetup, h1Text, btnText, linkToText, linkTo }) => {
           <Link to={linkTo}>{linkToText}</Link>
         </div>
       </div>
+      {left ? (
+        ""
+      ) : (
+        <div className="wrapper">
+          <figure>
+            <img src={utnLogo} alt="UTN Logo" className="main-logo" />
+          </figure>
+        </div>
+      )}
     </>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
