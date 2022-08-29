@@ -7,8 +7,14 @@ import "react-toastify/dist/ReactToastify.css";
 
 const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
   const [isStudent, setIsStudent] = useState(true);
+  const [legajo, setLegajo] = useState(null);
+  const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const legajoValidation = () => {
+    return typeof legajo === Number;
+  }
 
   const emailValidation = () => {
     return String(email)
@@ -25,7 +31,7 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
 
   const dataValidation = (e) => {
     e.preventDefault();
-    if (emailValidation() && passwordValidation()) {
+    if (legajoValidation() && emailValidation() && passwordValidation()) {
       // Create new user API call
     } else {
       toast("Ingrese datos válidos!", {
@@ -37,11 +43,24 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
 
   const inputHandler = (e) => {
     switch (e.target.id) {
+      case "legajo":
+        setLegajo(e.target.value);
+        break;
+      case "company":
+        setCompany(e.target.value);
+        break;
       case "email":
         setEmail(e.target.value);
         break;
       case "password":
         setPassword(e.target.value);
+        break;
+      case "typeUser":
+        if (e.target.value === "alumno") {
+          setIsStudent(true);
+        } else {
+          setIsStudent(false);
+        }
         break;
       default:
         break;
@@ -63,8 +82,30 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
       <div id="wrapper" className="wrapper wrapper-dark">
         <div className="text-center mt-4 name">{h1Text}</div>
         <form className="pb-3 mt-3">
+          <div className="form-field d-flex align-items-center justify-content-center">
+            <select id="typeUser" name="typeUser" select={isStudent} onChange={inputHandler}>
+              <option value="alumno">Soy alumno</option>
+              <option value="empresa">Soy empresa</option>
+            </select>
+          </div>
           <div className="form-field d-flex align-items-center">
-            <span className="far fa-user"></span>
+            {isStudent ? (<input
+              type="text"
+              name="legajo"
+              id="legajo"
+              value={legajo}
+              placeholder="Legajo"
+              onChange={inputHandler}
+            />) : (<input
+              type="text"
+              name="company"
+              id="company"
+              value={company}
+              placeholder="Razon Social"
+              onChange={inputHandler}
+            />)}
+          </div>
+          <div className="form-field d-flex align-items-center">
             <input
               type="email"
               name="email"
@@ -75,7 +116,6 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
             />
           </div>
           <div className="form-field d-flex align-items-center">
-            <span className="fas fa-key"></span>
             <input
               type="password"
               name="password"
