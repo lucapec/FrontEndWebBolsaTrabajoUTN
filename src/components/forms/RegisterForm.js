@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Forms.css";
-import utnLogo from "../../assets/logo-utn.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import utnLogo from "../../assets/logo-utn.png";
 
 const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
   const [isStudent, setIsStudent] = useState(true);

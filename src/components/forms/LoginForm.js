@@ -2,6 +2,8 @@ import { useState, useContext } from "react";
 import { Link, Navigate } from "react-router-dom";
 import LoginContext from "../../context/LoginContext";
 import "./Forms.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import utnLogo from "../../assets/logo-utn.png";
 
 const LoginForm = ({
@@ -39,11 +41,10 @@ const LoginForm = ({
         // Create new user API call
       }
     } else {
-      const validationMsg = document.getElementById("validation-message");
-      validationMsg.style.display = "flex";
-      setTimeout(() => {
-        validationMsg.style.display = "none";
-      }, 3000);
+      toast("Ingrese datos válidos!", {
+        autoClose: 3000,
+        hideProgressBar: false,
+      });
     }
   };
 
@@ -62,6 +63,7 @@ const LoginForm = ({
 
   return (
     <>
+      <ToastContainer />
       {logged && <Navigate replace to="/ofertas" />}
       {left ? (
         <div className="wrapper">
