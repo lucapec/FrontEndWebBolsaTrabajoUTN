@@ -136,6 +136,18 @@ body {
   background-color: #039be5;
 }
 
+.wrapper #typeUser {
+  width: 160px;
+  color: white;
+  text-align: center;
+  background-color: #719FED;
+  border: #719FED;
+}
+
+.wrapper #typeUser:hover {
+  cursor: pointer;
+}
+
 .wrapper a {
   text-decoration: none;
   font-size: 0.8rem;
@@ -157,7 +169,6 @@ body {
   width: 18px;
   height: 18px;
   background-color: #BFBFBF;
-
   border-radius: 100%;
   display: inline-block;
   -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
