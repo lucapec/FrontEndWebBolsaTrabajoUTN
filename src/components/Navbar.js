@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import LoginContext from "../context/LoginContext";
+import UserContext from "../context/UserContext";
 import { Link } from "react-router-dom";
 import Logout from "./Logout";
 import "./Navbar.css";
 import utnLogo from "../assets/white-utn-logo.png";
 
 const Navbar = () => {
-  const { logged } = useContext(LoginContext);
+  const { user } = useContext(UserContext);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -17,7 +17,7 @@ const Navbar = () => {
         </div>
         <div className="" id="navbarNav">
           <ul className="navbar-nav">
-            {logged ? (
+            {user ? (
               <li className="nav-item">
                 <Link className="nav-link" to="/ofertas">
                   Ofertas
@@ -30,7 +30,7 @@ const Navbar = () => {
                 </Link>
               </li>
             )}
-            {logged ? (
+            {user ? (
               <li className="nav-item">
                 <Link className="nav-link" to="/perfil">
                   Perfil
@@ -43,7 +43,7 @@ const Navbar = () => {
                 </Link>
               </li>
             )}
-            {logged ? <Logout /> : ""}
+            {user ? <Logout /> : ""}
           </ul>
         </div>
       </div>

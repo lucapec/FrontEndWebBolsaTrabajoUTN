@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { Link, Navigate } from "react-router-dom";
-import LoginContext from "../../context/LoginContext";
+import UserContext from "../../context/UserContext";
 import "./Forms.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,7 +15,7 @@ const LoginForm = ({
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { logged, setLogged } = useContext(LoginContext);
+  const { user, setUser } = useContext(UserContext);
 
   const emailValidation = () => {
     return String(email)
@@ -34,8 +34,8 @@ const LoginForm = ({
     e.preventDefault();
     if (emailValidation() && passwordValidation()) {
       // Authenticate user API call
-      if (true) { // En caso de que la llamada a la API sea exitoso
-        setLogged(true);
+      if (true) { // In case the API call is successful set the user data in the Context
+        setUser({});
       }
     } else {
       toast("Ingrese datos válidos!", {
@@ -61,7 +61,8 @@ const LoginForm = ({
   return (
     <>
       <ToastContainer />
-      {logged && <Navigate replace to="/ofertas" />}
+      {user?.activated && <Navigate replace to="/ofertas" />}
+      {user && !user.activated && <Navigate replace to="/perfil" />}
       {left ? (
         <div className="wrapper">
           <figure>
@@ -95,9 +96,6 @@ const LoginForm = ({
               placeholder="Contraseña"
               onChange={inputHandler}
             />
-          </div>
-          <div id="validation-message">
-            <p>Ingrese datos válidos para continuar</p>
           </div>
           <button onClick={dataValidation} className="btn mt-3">
             {btnText}
