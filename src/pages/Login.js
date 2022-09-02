@@ -5,7 +5,6 @@ const Login = () => {
   return (
     <div className="div-wrapper">
       <LoginForm
-        loginSetup={true}
         h1Text="Iniciar sesión"
         btnText="Ingresar"
         linkToText="Aún no tengo cuenta"

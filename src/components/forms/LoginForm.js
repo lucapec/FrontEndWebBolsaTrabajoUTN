@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import utnLogo from "../../assets/logo-utn.png";
 
 const LoginForm = ({
-  loginSetup,
   h1Text,
   btnText,
   linkToText,
@@ -34,11 +33,9 @@ const LoginForm = ({
   const dataValidation = (e) => {
     e.preventDefault();
     if (emailValidation() && passwordValidation()) {
-      if (loginSetup) {
-        // Authenticate user API call
+      // Authenticate user API call
+      if (true) { // En caso de que la llamada a la API sea exitoso
         setLogged(true);
-      } else {
-        // Create new user API call
       }
     } else {
       toast("Ingrese datos válidos!", {
