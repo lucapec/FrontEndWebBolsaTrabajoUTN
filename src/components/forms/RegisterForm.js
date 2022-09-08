@@ -56,6 +56,7 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
           hideProgressBar: false,
           type: "error",
           theme: "dark",
+          position: toast.POSITION.TOP_LEFT,
         });
       });
     }
@@ -100,7 +101,7 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer className="mt-5" />
       {left ? (
         <div className="wrapper">
           <figure>

@@ -16,34 +16,42 @@ const LoginForm = ({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { user, setUser } = useContext(UserContext);
+  let passwordRegExp = /^[A-Za-z]\w{7,14}$/;
 
-  const emailValidation = () => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
-
-  const passwordValidation = () => {
-    let passwordRegExp = /^[A-Za-z]\w{7,14}$/;
-    return passwordRegExp.test(password);
+  const errorsList = () => {
+    const errorsList = [];
+    if (!String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    )) {
+      errorsList.push({ message: "Ingrese un email válido"});
+    }
+    if (!passwordRegExp.test(password)) {
+      errorsList.push({ message: "La contraseña debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número"});
+    }
+    return errorsList;
   };
 
   const dataValidation = (e) => {
     e.preventDefault();
-    if (emailValidation() && passwordValidation()) {
-      // Authenticate user API call
-      if (true) { // In case the API call is successful set the user data in the Context
-        setUser({});
-      }
+    const errors = errorsList();
+    if (errors.length === 0) {
+      // Create new user API call
+      console.log(setUser);
+      console.log("No hay errores, Llamada API");
     } else {
-      toast("Ingrese datos válidos!", {
-        autoClose: 3000,
-        hideProgressBar: false,
+      errors.forEach(error => {
+        toast(error.message, {
+          autoClose: 3000,
+          hideProgressBar: false,
+          type: "error",
+          theme: "dark",
+          position: toast.POSITION.TOP_RIGHT,
+        });
       });
     }
-  };
+  }
 
   const inputHandler = (e) => {
     switch (e.target.id) {
@@ -60,7 +68,7 @@ const LoginForm = ({
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer className="mt-5" />
       {user?.activated && <Navigate replace to="/ofertas" />}
       {user && !user.activated && <Navigate replace to="/perfil" />}
       {left ? (
