@@ -7,42 +7,70 @@ import utnLogo from "../../assets/logo-utn.png";
 
 const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
   const [isStudent, setIsStudent] = useState(true);
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [legajo, setLegajo] = useState(null);
   const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  let passwordRegExp = /^[A-Za-z]\w{7,14}$/;
 
-  const legajoValidation = () => {
-    return typeof legajo === Number;
-  }
-
-  const emailValidation = () => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
-
-  const passwordValidation = () => {
-    let passwordRegExp = /^[A-Za-z]\w{7,14}$/;
-    return passwordRegExp.test(password);
+  const errorsList = () => {
+    const errorsList = [];
+    if (company === "" && !isStudent) {
+      errorsList.push({ message: "Ingrese la razón social de su empresa"});
+    }
+    if ((legajo === null) && isStudent) {
+      errorsList.push({ message: "El Legajo debe ser un número"});
+    }
+    if ((firstname === "" || lastname === "") && isStudent) {
+      errorsList.push({ message: "Ingrese su nombre y apellido"});
+    }
+    if (!String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    )) {
+      errorsList.push({ message: "Ingrese un email válido"});
+    }
+    if (!passwordRegExp.test(password)) {
+      errorsList.push({ message: "La contraseña debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número"});
+    }
+    if (password !== confirmPassword) {
+      errorsList.push({ message: "Ambas contraseñas deben coincidir"});
+    }
+    return errorsList;
   };
 
   const dataValidation = (e) => {
     e.preventDefault();
-    if (legajoValidation() && emailValidation() && passwordValidation()) {
+    const errors = errorsList();
+    if (errors.length === 0) {
       // Create new user API call
+      console.log("No hay errores, Llamada API");
     } else {
-      toast("Ingrese datos válidos!", {
-        autoClose: 3000,
-        hideProgressBar: false,
+      errors.forEach(error => {
+        toast(error.message, {
+          autoClose: 3000,
+          hideProgressBar: false,
+          type: "error",
+          theme: "dark",
+        });
       });
     }
-  };
+  }
+  
+  
 
   const inputHandler = (e) => {
     switch (e.target.id) {
+      case "firstname":
+        setFirstname(e.target.value);
+        break;
+      case "lastname":
+        setLastname(e.target.value);
+        break;
       case "legajo":
         setLegajo(e.target.value);
         break;
@@ -54,6 +82,9 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
         break;
       case "password":
         setPassword(e.target.value);
+        break;
+      case "confirm-password":
+        setConfirmPassword(e.target.value);
         break;
       case "typeUser":
         if (e.target.value === "alumno") {
@@ -105,6 +136,26 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
               onChange={inputHandler}
             />)}
           </div>
+          {isStudent && (<div className="form-field d-flex align-items-center">
+            <input
+              type="text"
+              name="firstname"
+              id="firstname"
+              value={firstname}
+              placeholder="Nombre"
+              onChange={inputHandler}
+            />
+          </div>)}
+          {isStudent && (<div className="form-field d-flex align-items-center">
+            <input
+              type="text"
+              name="lastname"
+              id="lastname"
+              value={lastname}
+              placeholder="Apellido"
+              onChange={inputHandler}
+            />
+          </div>)}
           <div className="form-field d-flex align-items-center">
             <input
               type="email"
@@ -122,6 +173,16 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
               id="password"
               value={password}
               placeholder="Contraseña"
+              onChange={inputHandler}
+            />
+          </div>
+          <div className="form-field d-flex align-items-center">
+            <input
+              type="password"
+              name="confirm-password"
+              id="confirm-password"
+              value={confirmPassword}
+              placeholder="Confirmar contraseña"
               onChange={inputHandler}
             />
           </div>
