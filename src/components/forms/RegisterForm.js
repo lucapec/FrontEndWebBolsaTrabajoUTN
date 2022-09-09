@@ -14,31 +14,31 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  let passwordRegExp = /^[A-Za-z]\w{7,14}$/;
+  let passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
   const errorsList = () => {
     const errorsList = [];
     if (company === "" && !isStudent) {
-      errorsList.push({ message: "Ingrese la razón social de su empresa"});
+      errorsList.push({ message: "Ingrese la razón social de su empresa" });
     }
     if ((legajo === null) && isStudent) {
-      errorsList.push({ message: "El Legajo debe ser un número"});
+      errorsList.push({ message: "El Legajo debe ser un número" });
     }
     if ((firstname === "" || lastname === "") && isStudent) {
-      errorsList.push({ message: "Ingrese su nombre y apellido"});
+      errorsList.push({ message: "Ingrese su nombre y apellido" });
     }
     if (!String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    )) {
-      errorsList.push({ message: "Ingrese un email válido"});
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      )) {
+      errorsList.push({ message: "Ingrese un email válido" });
     }
     if (!passwordRegExp.test(password)) {
-      errorsList.push({ message: "La contraseña debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número"});
+      errorsList.push({ message: "La contraseña debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula, 1 número y 1 caracter especial" });
     }
     if (password !== confirmPassword) {
-      errorsList.push({ message: "Ambas contraseñas deben coincidir"});
+      errorsList.push({ message: "Ambas contraseñas deben coincidir" });
     }
     return errorsList;
   };
@@ -48,6 +48,7 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
     const errors = errorsList();
     if (errors.length === 0) {
       // Create new user API call
+      registerUser();
       console.log("No hay errores, Llamada API");
     } else {
       errors.forEach(error => {
@@ -61,8 +62,28 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
       });
     }
   }
-  
-  
+
+  const registerUser = () => {
+    if (isStudent) {
+      fetch('https://localhost:7172/api/Register/RegisterStudent', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: {
+          "legajo": legajo,
+          "firstName": firstname,
+          "lastName": lastname,
+          "email": email,
+          "password": password,
+          "confirmPassword": confirmPassword,
+        }
+      }).then(r => r.json()).then(res => {
+        console.log(res);
+      });
+    } else {
+
+    }
+  }
+
 
   const inputHandler = (e) => {
     switch (e.target.id) {
