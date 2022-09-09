@@ -68,19 +68,34 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
       fetch('https://localhost:7172/api/Register/RegisterStudent', {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
-        body: {
-          "legajo": legajo,
-          "firstName": firstname,
-          "lastName": lastname,
-          "email": email,
-          "password": password,
-          "confirmPassword": confirmPassword,
-        }
+        body: JSON.stringify({
+          legajo: legajo,
+          firstname: firstname,
+          lastname: lastname,
+          email: email,
+          password: password,
+          confirmpassword: confirmPassword,
+        })
       }).then(r => r.json()).then(res => {
         console.log(res);
+      }).catch(err => {
+        console.log(err);
       });
     } else {
-
+      fetch('https://localhost:7172/api/Register/RegisterCompany', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({
+          companyname: company,
+          email: email,
+          password: password,
+          confirmpassword: confirmPassword,
+        })
+      }).then(r => r.json()).then(res => {
+        console.log(res);
+      }).catch(err => {
+        console.log(err);
+      });
     }
   }
 
