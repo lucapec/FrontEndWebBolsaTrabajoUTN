@@ -14,28 +14,34 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  let passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  let passwordRegExp =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
   const errorsList = () => {
     const errorsList = [];
     if (company === "" && !isStudent) {
       errorsList.push({ message: "Ingrese la razón social de su empresa" });
     }
-    if ((legajo === null) && isStudent) {
+    if (legajo === null && isStudent) {
       errorsList.push({ message: "El Legajo debe ser un número" });
     }
     if ((firstname === "" || lastname === "") && isStudent) {
       errorsList.push({ message: "Ingrese su nombre y apellido" });
     }
-    if (!String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      )) {
+    if (
+      !String(email)
+        .toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
+    ) {
       errorsList.push({ message: "Ingrese un email válido" });
     }
     if (!passwordRegExp.test(password)) {
-      errorsList.push({ message: "La contraseña debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula, 1 número y 1 caracter especial" });
+      errorsList.push({
+        message:
+          "La contraseña debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula, 1 número y 1 caracter especial",
+      });
     }
     if (password !== confirmPassword) {
       errorsList.push({ message: "Ambas contraseñas deben coincidir" });
@@ -49,9 +55,9 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
     if (errors.length === 0) {
       // Create new user API call
       registerUser();
-      console.log("No hay errores, Llamada API");
     } else {
-      errors.forEach(error => {
+      // Show validation errors as a pop-up notification
+      errors.forEach((error) => {
         toast(error.message, {
           autoClose: 3000,
           hideProgressBar: false,
@@ -61,13 +67,13 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
         });
       });
     }
-  }
+  };
 
   const registerUser = () => {
     if (isStudent) {
-      fetch('https://localhost:7172/api/Register/RegisterStudent', {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
+      fetch("https://localhost:7172/api/Register/RegisterStudent", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
         body: JSON.stringify({
           legajo: legajo,
           firstname: firstname,
@@ -75,30 +81,35 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
           email: email,
           password: password,
           confirmpassword: confirmPassword,
+        }),
+      })
+        .then((r) => r.json())
+        .then((res) => {
+          console.log(res);
         })
-      }).then(r => r.json()).then(res => {
-        console.log(res);
-      }).catch(err => {
-        console.log(err);
-      });
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
-      fetch('https://localhost:7172/api/Register/RegisterCompany', {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
+      fetch("https://localhost:7172/api/Register/RegisterCompany", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
         body: JSON.stringify({
           companyname: company,
           email: email,
           password: password,
           confirmpassword: confirmPassword,
+        }),
+      })
+        .then((r) => r.json())
+        .then((res) => {
+          console.log(res);
         })
-      }).then(r => r.json()).then(res => {
-        console.log(res);
-      }).catch(err => {
-        console.log(err);
-      });
+        .catch((err) => {
+          console.log(err);
+        });
     }
-  }
-
+  };
 
   const inputHandler = (e) => {
     switch (e.target.id) {
@@ -151,48 +162,61 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
         <div className="text-center mt-4 name">{h1Text}</div>
         <form className="pb-3 mt-3">
           <div className="form-field d-flex align-items-center justify-content-center">
-            <select id="typeUser" name="typeUser" select={isStudent} onChange={inputHandler}>
+            <select
+              id="typeUser"
+              name="typeUser"
+              select={isStudent}
+              onChange={inputHandler}
+            >
               <option value="alumno">Soy alumno</option>
               <option value="empresa">Soy empresa</option>
             </select>
           </div>
           <div className="form-field d-flex align-items-center">
-            {isStudent ? (<input
-              type="text"
-              name="legajo"
-              id="legajo"
-              value={legajo}
-              placeholder="Legajo"
-              onChange={inputHandler}
-            />) : (<input
-              type="text"
-              name="company"
-              id="company"
-              value={company}
-              placeholder="Razon Social"
-              onChange={inputHandler}
-            />)}
+            {isStudent ? (
+              <input
+                type="text"
+                name="legajo"
+                id="legajo"
+                value={legajo}
+                placeholder="Legajo"
+                onChange={inputHandler}
+              />
+            ) : (
+              <input
+                type="text"
+                name="company"
+                id="company"
+                value={company}
+                placeholder="Razon Social"
+                onChange={inputHandler}
+              />
+            )}
           </div>
-          {isStudent && (<div className="form-field d-flex align-items-center">
-            <input
-              type="text"
-              name="firstname"
-              id="firstname"
-              value={firstname}
-              placeholder="Nombre"
-              onChange={inputHandler}
-            />
-          </div>)}
-          {isStudent && (<div className="form-field d-flex align-items-center">
-            <input
-              type="text"
-              name="lastname"
-              id="lastname"
-              value={lastname}
-              placeholder="Apellido"
-              onChange={inputHandler}
-            />
-          </div>)}
+          {isStudent && (
+            <div className="form-field d-flex align-items-center">
+              <input
+                type="text"
+                name="firstname"
+                id="firstname"
+                value={firstname}
+                placeholder="Nombre"
+                onChange={inputHandler}
+              />
+            </div>
+          )}
+          {isStudent && (
+            <div className="form-field d-flex align-items-center">
+              <input
+                type="text"
+                name="lastname"
+                id="lastname"
+                value={lastname}
+                placeholder="Apellido"
+                onChange={inputHandler}
+              />
+            </div>
+          )}
           <div className="form-field d-flex align-items-center">
             <input
               type="email"
