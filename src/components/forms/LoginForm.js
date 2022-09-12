@@ -35,11 +35,22 @@ const LoginForm = ({
     e.preventDefault();
     if (emailValidation() && passwordValidation()) {
       if (loginSetup) {
-        // Authenticate user API call
+        fetch("https://localhost:7172/api/Login", {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        })
+          .then((r) => r.json())
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });        
         setLogged(true);
-      } else {
-        // Create new user API call
-      }
     } else {
       toast("Ingrese datos válidos!", {
         autoClose: 3000,
@@ -47,6 +58,7 @@ const LoginForm = ({
       });
     }
   };
+}
 
   const inputHandler = (e) => {
     switch (e.target.id) {
