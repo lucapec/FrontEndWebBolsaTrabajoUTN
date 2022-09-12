@@ -26,13 +26,11 @@ body {
   justify-content: center;
 }
 
-.wrapper-light {
-  background-color: white;
-  box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
-}
-
-.wrapper-light > div {
-  color: #555;
+.wrapper > form {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .wrapper-dark {
@@ -45,12 +43,8 @@ body {
 
 .wrapper-dark .form-field {
   box-shadow: none;
+  width: 50%
 }
-
-.wrapper-light .form-field{
-  box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
-}
-
 
 .wrapper-dark .form-field > input {
   color: white;
@@ -60,16 +54,8 @@ body {
   color: rgba(255, 255, 255, 0.5);
 }
 
-.wrapper-light .form-field > input{
-  color: #666;
-}
-
 .wrapper-dark form > button {
   box-shadow: none;
-}
-
-.wrapper-light form > button {
-  box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
 }
 
 #validation-message {
@@ -107,8 +93,12 @@ body {
   border: none;
   outline: none;
   background: none;
-  font-size: 1.2rem;
+  font-size: 1rem;
   text-align: center;
+}
+
+.wrapper .form-field input:-internat-autofill-selected {
+  background-color: transparent;
 }
 
 .wrapper .form-field {

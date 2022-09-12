@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import LoginContext from "../context/LoginContext";
+import UserContext from "../context/UserContext";
 
 const Logout = () => {
-  const { logged, setLogged } = useContext(LoginContext);
+  const { setUser } = useContext(UserContext);
   return (
     <li className="nav-item">
-      <Link className="nav-link" onClick={() => setLogged(!logged)} to="/login">
+      <Link className="nav-link" onClick={() => setUser(null)} to="/ingreso">
         Cerrar Sesion
       </Link>
     </li>

@@ -6,12 +6,12 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Ofertas from "./pages/Ofertas";
 import Perfil from "./pages/Perfil";
-import { LoginContextProvider } from "./context/LoginContext";
+import { UserContextProvider } from "./context/UserContext";
 
 const App = () => {
   return (
     <>
-      <LoginContextProvider>
+      <UserContextProvider>
         <Navbar />
         <Routes>
           <Route path="/" element={<Navigate replace to="/ingreso" />}></Route>
@@ -20,7 +20,7 @@ const App = () => {
           <Route path="/ofertas" element={<Ofertas />}></Route>
           <Route path="/perfil" element={<Perfil />}></Route>
         </Routes>
-      </LoginContextProvider>
+      </UserContextProvider>
     </>
   );
 };
