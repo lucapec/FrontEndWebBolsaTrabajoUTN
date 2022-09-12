@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import utnLogo from "../../assets/logo-utn.png";
 
 const LoginForm = ({
-  loginSetup,
   h1Text,
   btnText,
   linkToText,
@@ -34,7 +33,6 @@ const LoginForm = ({
   const dataValidation = (e) => {
     e.preventDefault();
     if (emailValidation() && passwordValidation()) {
-      if (loginSetup) {
         fetch("https://localhost:7172/api/Login", {
           method: "POST",
           headers: { "Content-type": "application/json" },
@@ -52,13 +50,22 @@ const LoginForm = ({
           });        
         setLogged(true);
     } else {
-      toast("Ingrese datos válidos!", {
-        autoClose: 3000,
-        hideProgressBar: false,
-      });
+      if (!emailValidation()){
+        toast("Ingrese un email válido!", {
+          autoClose: 3000,
+          hideProgressBar: false,
+        })
+      }
+      else if (!passwordValidation()){
+        toast("Ingrese una contraseña válida!", {
+          autoClose: 3000,
+          hideProgressBar: false,
+         });
+      }
     }
-  };
-}
+  }
+
+
 
   const inputHandler = (e) => {
     switch (e.target.id) {
