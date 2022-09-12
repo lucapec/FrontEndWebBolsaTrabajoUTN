@@ -1,12 +1,13 @@
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
+import { LoginContextProvider } from "./context/LoginContext";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Ofertas from "./pages/Ofertas";
 import Perfil from "./pages/Perfil";
-import { LoginContextProvider } from "./context/LoginContext";
+import DataEmpresa from "./pages/DataEmpresa";
 
 const App = () => {
   return (
@@ -14,11 +15,12 @@ const App = () => {
       <LoginContextProvider>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Navigate replace to="/ingreso" />}></Route>
+          <Route path="*" element={<Navigate replace to="/ingreso" />}></Route>
           <Route path="/ingreso" element={<Login />}></Route>
           <Route path="/registro" element={<Register />}></Route>
           <Route path="/ofertas" element={<Ofertas />}></Route>
           <Route path="/perfil" element={<Perfil />}></Route>
+          <Route path="/empresaReg" element={<DataEmpresa />}></Route>
         </Routes>
       </LoginContextProvider>
     </>
