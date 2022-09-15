@@ -7,7 +7,8 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Ofertas from "./pages/Ofertas";
 import Perfil from "./pages/Perfil";
-import DataEmpresa from "./pages/DataEmpresa";
+import DataEnterprise1 from "./pages/enterpriseRegisterForms/DataEnterprise1";
+import DataEnterprise2 from "./pages/enterpriseRegisterForms/DataEnterprise2";
 
 const App = () => {
   return (
@@ -20,7 +21,8 @@ const App = () => {
           <Route path="/registro" element={<Register />}></Route>
           <Route path="/ofertas" element={<Ofertas />}></Route>
           <Route path="/perfil" element={<Perfil />}></Route>
-          <Route path="/empresaReg" element={<DataEmpresa />}></Route>
+          <Route path="/empresaReg1" element={<DataEnterprise1 />}></Route>
+          <Route path="/empresaReg2" element={<DataEnterprise2 />}></Route>
         </Routes>
       </LoginContextProvider>
     </>

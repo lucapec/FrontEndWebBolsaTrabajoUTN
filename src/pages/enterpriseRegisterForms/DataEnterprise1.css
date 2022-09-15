@@ -1,0 +1,37 @@
+.form {
+    background-color: lightgray;
+    text-align: center;
+    padding-top: 6vh;
+}
+
+.row {
+    padding: 3vh;
+}
+
+.btn{
+    color:white;
+    background-color: #719FED;
+    border-color: black;
+    width: 35vh;
+    margin: 5vh;
+}
+
+h2{
+    font-size: x-large;
+}
+
+input{
+    text-align: center;
+}
+
+.relacion-empresa{
+    margin-right: 15px;
+}
+
+.header{
+    margin: 5vh;
+}
+
+p{
+    font-weight: 400;
+}
