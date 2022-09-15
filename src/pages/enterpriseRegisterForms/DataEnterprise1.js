@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
-import "./DataEnterprise1.css";
-import LoginContext from "../../context/LoginContext";
+import "./DataEnterprise.css";
+import UserContext from "../../context/UserContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const DataEnterprise1 = () => {
-  const { EnterpriseDataHandler } = useContext(LoginContext);
+  const { EnterpriseDataHandler } = useContext(UserContext);
   const navigate = useNavigate();
 
   const [businessName, setBusinessName] = useState();
@@ -15,141 +17,167 @@ const DataEnterprise1 = () => {
   const [webURL, setWebURL] = useState();
   const [legalAdress, setLegalAdress] = useState();
 
-  const businessNameHandler = (e) => {
-    setBusinessName(e.target.value);
-  };
-
-  const postalCodeHandler = (e) => {
-    setPostalcode(e.target.value);
-  };
-
-  const cuitValueHandler = (e) => {
-    setCuit(e.target.value);
-  };
-
-  const telephoneNumberHandler = (e) => {
-    setTelephoneNumber(e.target.value);
-  };
-
-  const sectorHandler = (e) => {
-    setSector(e.target.value);
-  };
-
-  const webURLHandler = (e) => {
-    setWebURL(e.target.value);
-  };
-
-  const legalAdressHandler = (e) => {
-    setLegalAdress(e.target.value);
+  const inputHandler = (e) => {
+    switch (e.target.id) {
+      case "businessName":
+        setBusinessName(e.target.value);
+        break;
+      case "postalCode":
+        setPostalcode(e.target.value);
+        break;
+      case "cuit":
+        setCuit(e.target.value);
+        break;
+      case "telephone":
+        setTelephoneNumber(e.target.value);
+        break;
+      case "sector":
+        setSector(e.target.value);
+        break;
+      case "web":
+        setWebURL(e.target.value);
+        break;
+      case "legalAdress":
+        setLegalAdress(e.target.value);
+        break;
+      default:
+        break;
+    }
   };
 
   const submitHandler = () => {
-    const datos = {
-      businessName: businessName,
-      postalCode: postalCode,
-      cuit: cuit,
-      telephone: telephoneNumber,
-      sector: sector,
-      web: webURL,
-      Adress: legalAdress,
-    };
-
-    EnterpriseDataHandler(datos);
-
-    //navigate("/EmpresaReg2", { replace: true });
+    if (
+      businessName &&
+      postalCode &&
+      cuit &&
+      telephoneNumber &&
+      sector &&
+      legalAdress
+    ) {
+      const datos = {
+        businessName: businessName,
+        postalCode: postalCode,
+        cuit: cuit,
+        telephone: telephoneNumber,
+        sector: sector,
+        web: webURL,
+        Adress: legalAdress,
+      };
+      console.log(datos);
+      EnterpriseDataHandler(datos);
+      //  navigate("/EmpresaReg2", { replace: true });
+    } else {
+      toast("complete todos los campos", {
+        autoClose: 3000,
+        hideProgressBar: false,
+        type: "warning",
+        theme: "dark",
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
   };
 
   return (
-    <form class="form">
-      <div class="header">
-        <h2>Complete los datos de la empresa</h2>
-      </div>
-      <div class="row">
-        <div class="col">
-          <label>Razon social</label>
-          <br />
-          <input
-            className="form-control-sm"
-            type="text"
-            onChange={businessNameHandler}
-            value={businessName}
-          />
+    <>
+      <ToastContainer className="mt-5" />
+      <form class="form">
+        <div class="header">
+          <h2>Complete los datos de la empresa</h2>
         </div>
-        <div class="col">
-          <label>Codigo postal</label>
-          <br />
-          <input
-            className="form-control-sm"
-            type="number"
-            onChange={postalCodeHandler}
-            value={postalCode}
-          />
+        <div class="row">
+          <div class="col">
+            <label>Razon social</label>
+            <br />
+            <input
+              className="form-control-sm"
+              type="text"
+              id="businessName"
+              onChange={inputHandler}
+              value={businessName}
+            />
+          </div>
+          <div class="col">
+            <label>Codigo postal</label>
+            <br />
+            <input
+              className="form-control-sm"
+              type="number"
+              id="postalCode"
+              onChange={inputHandler}
+              value={postalCode}
+            />
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <label>CUIT</label>
-          <br />
-          <input
-            className="form-control-sm"
-            type="number"
-            placeholder="sin guiones"
-            onChange={cuitValueHandler}
-            value={cuit}
-          />
+        <div class="row">
+          <div class="col">
+            <label>CUIT</label>
+            <br />
+            <input
+              className="form-control-sm"
+              type="number"
+              placeholder="sin guiones"
+              id="cuit"
+              onChange={inputHandler}
+              value={cuit}
+            />
+          </div>
+          <div class="col">
+            <label>Telefono</label>
+            <br />
+            <input
+              className="form-control-sm"
+              type="number"
+              id="telephone"
+              placeholder="codigo de area + numero"
+              onChange={inputHandler}
+              value={telephoneNumber}
+            />
+          </div>
         </div>
-        <div class="col">
-          <label>Telefono</label>
-          <br />
-          <input
-            className="form-control-sm"
-            type="number"
-            placeholder="codigo de area + numero"
-            onChange={telephoneNumberHandler}
-            value={telephoneNumber}
-          />
+        <div class="row">
+          <div class="col">
+            <label>Rubro</label>
+            <br />
+            <input
+              className="form-control-sm"
+              type="text"
+              id="sector"
+              onChange={inputHandler}
+              value={sector}
+            />
+          </div>
+          <div class="col">
+            <label>Web (opcional)</label>
+            <br />
+            <input
+              className="form-control-sm"
+              type="text"
+              id="web"
+              onChange={inputHandler}
+              value={webURL}
+            />
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <label>Rubro</label>
+        <div class="row">
+          <div class="col">
+            <label>Domicilio Legal</label>
+            <br />
+            <input
+              className="form-control-sm"
+              type="text"
+              id="legalAdress"
+              onChange={inputHandler}
+              value={legalAdress}
+            />
+          </div>
+          <div class="col"></div>
           <br />
-          <input
-            className="form-control-sm"
-            type="text"
-            onChange={sectorHandler}
-            value={sector}
-          />
         </div>
-        <div class="col">
-          <label>Web (opcional)</label>
-          <br />
-          <input
-            className="form-control-sm"
-            type="text"
-            onChange={webURLHandler}
-            value={webURL}
-          />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <label>Domicilio Legal</label>
-          <br />
-          <input
-            className="form-control-sm"
-            type="text"
-            onChange={legalAdressHandler}
-            value={legalAdress}
-          />
-        </div>
-        <div class="col"></div>
-        <br />
-      </div>
-      <button type="button" class="btn" onClick={submitHandler}>
-        Guardar e Ingresar
-      </button>
-    </form>
+        <button type="button" class="btn" onClick={submitHandler}>
+          Guardar e Ingresar
+        </button>
+      </form>
+    </>
   );
 };
 
