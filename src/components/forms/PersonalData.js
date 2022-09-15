@@ -34,13 +34,21 @@ const PersonalData = () => {
     ) {
       errorsList.push({ message: "Ingrese un email válido" });
     }
+    if (!Number(documentNumber)) {
+      errorsList.push({ message: "El Documento debe ser un numero" });
+    }
+    if (!Number(legajo)) {
+      errorsList.push({ message: "El legajo debe ser un numero" });
+    }
     return errorsList;
   };
 
   const validationRequirements = {
     user: { required: true },
     lastName: { required: true },
+    birthDate: { required: true },
     names: { required: true },
+    cuilOrCuit: { required: true },
     street: { required: true },
     numberStreet: { required: true },
     sex: { required: true },
@@ -67,7 +75,9 @@ const PersonalData = () => {
     const Data = {
       user,
       lastName,
+      birthDate,
       names,
+      cuilOrCuit,
       street,
       numberStreet,
       sex,
@@ -273,7 +283,13 @@ const PersonalData = () => {
                 value={birthDate}
                 placeholder="Fecha de Nacimiento"
                 onChange={inputHandler}
+                onBlur={(e) => {
+                  setErrors(validate(generateObject()));
+                }}
               />
+              {errors?.lastName && (
+                <div className="error"> {errors.lastName} </div>
+              )}
             </div>
             <div className=" col form-field align-items-center">
               <label>Nombres</label>
@@ -303,7 +319,13 @@ const PersonalData = () => {
                 value={cuilOrCuit}
                 placeholder="CUIL o CUIT"
                 onChange={inputHandler}
+                onBlur={(e) => {
+                  setErrors(validate(generateObject()));
+                }}
               />
+              {errors?.cuilOrCuit && (
+                <div className="error"> {errors.cuilOrCuit} </div>
+              )}
             </div>
           </div>
         </div>

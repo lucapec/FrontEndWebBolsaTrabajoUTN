@@ -8,12 +8,12 @@ import Ofertas from "./pages/Ofertas";
 import Perfil from "./pages/Perfil";
 import PersonalData from "./components/forms/PersonalData"
 import UniversityData from "./components/forms/UniversityData"
-import { LoginContextProvider } from "./context/LoginContext";
+import { UserContextProvider } from "./context/UserContext";
 
 const App = () => {
   return (
     <>
-      <LoginContextProvider>
+      <UserContextProvider>
         <Navbar />
         <Routes>
           <Route path="/" element={<Navigate replace to="/ingreso" />}></Route>
@@ -24,7 +24,7 @@ const App = () => {
           <Route path="/datosPersonales" element={<PersonalData/>}></Route>
           <Route path="/datosUniversitarios" element={<UniversityData />}></Route>
         </Routes>
-      </LoginContextProvider>
+      </UserContextProvider>
     </>
   );
 };

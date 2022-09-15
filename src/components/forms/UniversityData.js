@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 import "./UniversityData.css";
 
@@ -13,14 +14,22 @@ const UniversityData = () => {
   const [titleUniversity, setTitleUniversity] = useState("");
   const [errors, setErrors] = useState(null);
 
+  const errorsList = () => {
+    const errorsList = [];
+    if (!(Number(averagesWithDeferrals) && averagesWithoutDeferrals)) {
+      errorsList.push({ message: "El Promedio debe ser un numero entero" });
+    }
+    if (!Number(subjectsApproved)) {
+      errorsList.push({ message: "La Cantidad de Materias debe ser un numero" });
+    }
+    return errorsList;
+  };
+
   const validationRequirements = {
     specialty: { required: true },
-    subjectsApproved: { required: true },
     specialtyPlan: { required: true },
     currentYear: { required: true },
     shiftProgress: { required: true },
-    averagesWithDeferrals: { required: true },
-    averagesWithoutDeferrals: { required: true },
     titleUniversity: { required: true },
   };
 
@@ -39,15 +48,31 @@ const UniversityData = () => {
   const generateObject = () => {
     const Data = {
       specialty,
-      subjectsApproved,
       specialtyPlan,
       currentYear,
       shiftProgress,
-      averagesWithDeferrals,
-      averagesWithoutDeferrals,
       titleUniversity,
     };
     return Data;
+  };
+
+  const dataValidation = (e) => {
+    e.preventDefault();
+    const errors = errorsList();
+    if (errors.length === 0) {
+      // Load Data
+    } else {
+      // Show validation errors as a pop-up notification
+      errors.forEach((error) => {
+        toast(error.message, {
+          autoClose: 3000,
+          hideProgressBar: false,
+          type: "error",
+          theme: "dark",
+          position: toast.POSITION.TOP_LEFT,
+        });
+      });
+    }
   };
 
   const inputHandler = (e) => {
@@ -82,8 +107,9 @@ const UniversityData = () => {
   };
 
   return (
-    <div className="divFormUniversity" >
+    <div className="divFormUniversity">
       <header></header>
+      <ToastContainer className="mt-5" />
       <form className="pb-3 mt-3">
         <div className="title">
           <p>Complete los datos universitarios</p>
@@ -120,13 +146,7 @@ const UniversityData = () => {
                 value={subjectsApproved}
                 placeholder="Materias Aprobadas"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.subjectsApproved && (
-                <div className="error"> {errors.subjectsApproved} </div>
-              )}
             </div>
             <div className=" col form-field align-items-center">
               <label>Plan Especialidad</label>
@@ -203,13 +223,7 @@ const UniversityData = () => {
                 value={averagesWithDeferrals}
                 placeholder="Promedio con Aplazos"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.averagesWithDeferrals && (
-                <div className="error"> {errors.averagesWithDeferrals} </div>
-              )}
             </div>
             <div className=" col form-field align-items-center">
               <label>Promedios sin Aplazos</label>
@@ -222,13 +236,7 @@ const UniversityData = () => {
                 value={averagesWithoutDeferrals}
                 placeholder="Promedios sin Aplazos"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.averagesWithoutDeferrals && (
-                <div className="error"> {errors.averagesWithoutDeferrals} </div>
-              )}
             </div>
             <div className=" col form-field align-items-center">
               <label>Titulo Universitario</label>
@@ -253,7 +261,7 @@ const UniversityData = () => {
         </div>
         <div className="container">
           <div className="col-md-12 text-center">
-            <button id="btn" className="btn">
+            <button onClick={dataValidation} id="btn" className="btn">
               Guardar e ingresar
             </button>
           </div>
