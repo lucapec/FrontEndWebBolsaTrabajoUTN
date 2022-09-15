@@ -6,6 +6,8 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Ofertas from "./pages/Ofertas";
 import Perfil from "./pages/Perfil";
+import PersonalData from "./components/forms/PersonalData"
+import UniversityData from "./components/forms/UniversityData"
 import { LoginContextProvider } from "./context/LoginContext";
 
 const App = () => {
@@ -19,6 +21,8 @@ const App = () => {
           <Route path="/registro" element={<Register />}></Route>
           <Route path="/ofertas" element={<Ofertas />}></Route>
           <Route path="/perfil" element={<Perfil />}></Route>
+          <Route path="/datosPersonales" element={<PersonalData/>}></Route>
+          <Route path="/datosUniversitarios" element={<UniversityData />}></Route>
         </Routes>
       </LoginContextProvider>
     </>
