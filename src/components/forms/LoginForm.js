@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { Link, Navigate } from "react-router-dom";
 import UserContext from "../../context/UserContext";
+import axios from "axios";
 import "./Forms.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,7 +24,7 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
     ) {
       errorsList.push({ message: "Ingrese un email válido" });
     }
-    if (!passwordRegExp.test(password)) {
+    if (passwordRegExp.test(password)) {
       errorsList.push({
         message:
           "La contraseña debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número",
@@ -34,35 +35,33 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
 
   const dataValidation = (e) => {
     e.preventDefault();
-    if (emailValidation() && passwordValidation()) {
-      fetch("https://localhost:7172/api/Login", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
+    const errors = errorsList();
+    if (errors.length === 0) {
+      axios.post('https://localhost:7172/api/authentication/Authenticate',
+      {
+        email: email,
+        password: password,
+      },
+      {
+        headers: {
+          'Content-type': 'application/json',
+        },
       })
-        .then((r) => r.json())
-        .then((res) => {
-          console.log(res);
-        })
+      // r.data = token que viene del back
+        .then((r) => setUser(r.data))
         .catch((err) => {
           console.log(err);
         });
-      setLogged(true);
     } else {
-      if (!emailValidation()) {
-        toast("Ingrese un email válido!", {
+      errors.forEach((error) => {
+        toast(error.message, {
           autoClose: 3000,
           hideProgressBar: false,
+          type: "error",
+          theme: "dark",
+          position: toast.POSITION.TOP_LEFT,
         });
-      } else if (!passwordValidation()) {
-        toast("Ingrese una contraseña válida!", {
-          autoClose: 3000,
-          hideProgressBar: false,
-        });
-      }
+      });
     }
   };
 
@@ -82,8 +81,7 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
   return (
     <>
       <ToastContainer className="mt-5" />
-      {user?.activated && <Navigate replace to="/ofertas" />}
-      {user && !user.activated && <Navigate replace to="/perfil" />}
+      {user && <Navigate replace to="/ofertas" />}
       {left ? (
         <div className="wrapper">
           <figure>
