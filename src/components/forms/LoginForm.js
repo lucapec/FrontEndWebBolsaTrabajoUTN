@@ -6,13 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import utnLogo from "../../assets/logo-utn.png";
 
-const LoginForm = ({
-  h1Text,
-  btnText,
-  linkToText,
-  linkTo,
-  left,
-}) => {
+const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { user, setUser } = useContext(UserContext);
@@ -20,38 +14,57 @@ const LoginForm = ({
 
   const errorsList = () => {
     const errorsList = [];
-    if (!String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    )) {
-      errorsList.push({ message: "Ingrese un email válido"});
+    if (
+      !String(email)
+        .toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
+    ) {
+      errorsList.push({ message: "Ingrese un email válido" });
     }
     if (!passwordRegExp.test(password)) {
-      errorsList.push({ message: "La contraseña debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número"});
+      errorsList.push({
+        message:
+          "La contraseña debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número",
+      });
     }
     return errorsList;
   };
 
   const dataValidation = (e) => {
     e.preventDefault();
-    const errors = errorsList();
-    if (errors.length === 0) {
-      // Create new user API call
-      console.log(setUser);
-      console.log("No hay errores, Llamada API");
+    if (emailValidation() && passwordValidation()) {
+      fetch("https://localhost:7172/api/Login", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      })
+        .then((r) => r.json())
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      setLogged(true);
     } else {
-      errors.forEach(error => {
-        toast(error.message, {
+      if (!emailValidation()) {
+        toast("Ingrese un email válido!", {
           autoClose: 3000,
           hideProgressBar: false,
-          type: "error",
-          theme: "dark",
-          position: toast.POSITION.TOP_RIGHT,
         });
-      });
+      } else if (!passwordValidation()) {
+        toast("Ingrese una contraseña válida!", {
+          autoClose: 3000,
+          hideProgressBar: false,
+        });
+      }
     }
-  }
+  };
 
   const inputHandler = (e) => {
     switch (e.target.id) {
