@@ -12,6 +12,7 @@ const DataEnterprise2 = () => {
   const [position, setPosition] = useState("");
   const [telephoneNumber, setTelephoneNumber] = useState(null);
   const [relWithCompany, setRelWithCompany] = useState(null);
+  const [emailOK, setEmailOK] = useState (false);
 
   const inputHandler = (e) => {
     switch (e.target.id) {
@@ -19,7 +20,7 @@ const DataEnterprise2 = () => {
         setName(e.target.value);
         break;
       case "email":
-        setEmail(e.target.value);
+        setEmail(e.target.value)
         break;
       case "position":
         setPosition(e.target.value);
@@ -36,7 +37,23 @@ const DataEnterprise2 = () => {
   };
 
   const submitHandler = () => {
-    if (name && email && position && telephoneNumber && relWithCompany) {
+    if (email
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      )) {
+        setEmailOK(true);
+      }
+      else {
+        toast("ingrese un email valido", {
+          autoClose: 3000,
+          hideProgressBar: false,
+          type: "error",
+          theme: "dark",
+          position: toast.POSITION.TOP_RIGHT,
+        })  
+      }
+    if (name && emailOK && position && telephoneNumber && relWithCompany) {
       const Datos2 = {
         managerName: name,
         managerEmail: email,
@@ -57,7 +74,7 @@ const DataEnterprise2 = () => {
         type: "info",
         theme: "dark",
         position: toast.POSITION.TOP_RIGHT,
-      });
+        });
     } else {
       toast("complete todos los campos", {
         autoClose: 3000,
