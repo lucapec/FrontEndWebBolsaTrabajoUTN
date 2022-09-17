@@ -1,18 +1,13 @@
 import { useState, useContext } from "react";
 import { Link, Navigate } from "react-router-dom";
 import UserContext from "../../context/UserContext";
+import axios from "axios";
 import "./Forms.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import utnLogo from "../../assets/logo-utn.png";
 
-const LoginForm = ({
-  h1Text,
-  btnText,
-  linkToText,
-  linkTo,
-  left,
-}) => {
+const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { user, setUser } = useContext(UserContext);
@@ -20,15 +15,20 @@ const LoginForm = ({
 
   const errorsList = () => {
     const errorsList = [];
-    if (!String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    )) {
-      errorsList.push({ message: "Ingrese un email válido"});
+    if (
+      !String(email)
+        .toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
+    ) {
+      errorsList.push({ message: "Ingrese un email válido" });
     }
-    if (!passwordRegExp.test(password)) {
-      errorsList.push({ message: "La contraseña debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número"});
+    if (passwordRegExp.test(password)) {
+      errorsList.push({
+        message:
+          "La contraseña debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número",
+      });
     }
     return errorsList;
   };
@@ -37,21 +37,33 @@ const LoginForm = ({
     e.preventDefault();
     const errors = errorsList();
     if (errors.length === 0) {
-      // Create new user API call
-      console.log(setUser);
-      console.log("No hay errores, Llamada API");
+      axios.post('https://localhost:7172/api/authentication/Authenticate',
+      {
+        email: email,
+        password: password,
+      },
+      {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      })
+      // r.data = token que viene del back
+        .then((r) => setUser(r.data))
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
-      errors.forEach(error => {
+      errors.forEach((error) => {
         toast(error.message, {
           autoClose: 3000,
           hideProgressBar: false,
           type: "error",
           theme: "dark",
-          position: toast.POSITION.TOP_RIGHT,
+          position: toast.POSITION.TOP_LEFT,
         });
       });
     }
-  }
+  };
 
   const inputHandler = (e) => {
     switch (e.target.id) {
@@ -69,8 +81,7 @@ const LoginForm = ({
   return (
     <>
       <ToastContainer className="mt-5" />
-      {user?.activated && <Navigate replace to="/ofertas" />}
-      {user && !user.activated && <Navigate replace to="/perfil" />}
+      {user && <Navigate replace to="/ofertas" />}
       {left ? (
         <div className="wrapper">
           <figure>
