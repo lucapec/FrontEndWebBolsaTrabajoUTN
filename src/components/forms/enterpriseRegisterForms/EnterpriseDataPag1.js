@@ -1,14 +1,9 @@
-import { useNavigate } from "react-router-dom";
-import { useState, useContext } from "react";
-import "./DataEnterprise.css";
-import UserContext from "../../context/UserContext";
+import { useState } from "react";
+import "./EnterpriseData.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const DataEnterprise1 = () => {
-  const { EnterpriseDataHandler } = useContext(UserContext);
-  const navigate = useNavigate();
-
+const EnterpriseDataPag1 = ({ setBoolPage2, setData }) => {
   const [businessName, setBusinessName] = useState();
   const [postalCode, setPostalcode] = useState();
   const [cuit, setCuit] = useState();
@@ -55,17 +50,16 @@ const DataEnterprise1 = () => {
       legalAdress
     ) {
       const datos = {
-        businessName: businessName,
+        EnterpriseBusinessName: businessName,
         postalCode: postalCode,
-        cuit: cuit,
-        telephone: telephoneNumber,
-        sector: sector,
-        web: webURL,
-        Adress: legalAdress,
+        EnterpriseCuit: cuit,
+        EnterpriseTelephone: telephoneNumber,
+        EnterpriseSector: sector,
+        EnterpriseWeb: webURL,
+        EnterpriseAdress: legalAdress,
       };
-      console.log(datos);
-      EnterpriseDataHandler(datos);
-      //  navigate("/EmpresaReg2", { replace: true });
+      setData(datos);
+      setBoolPage2(true);
     } else {
       toast("complete todos los campos", {
         autoClose: 3000,
@@ -80,12 +74,12 @@ const DataEnterprise1 = () => {
   return (
     <>
       <ToastContainer className="mt-5" />
-      <form class="form">
-        <div class="header">
+      <form className="form">
+        <div className="header">
           <h2>Complete los datos de la empresa</h2>
         </div>
-        <div class="row">
-          <div class="col">
+        <div className="row">
+          <div className="col">
             <label>Razon social</label>
             <br />
             <input
@@ -96,7 +90,7 @@ const DataEnterprise1 = () => {
               value={businessName}
             />
           </div>
-          <div class="col">
+          <div className="col">
             <label>Codigo postal</label>
             <br />
             <input
@@ -108,8 +102,8 @@ const DataEnterprise1 = () => {
             />
           </div>
         </div>
-        <div class="row">
-          <div class="col">
+        <div className="row">
+          <div className="col">
             <label>CUIT</label>
             <br />
             <input
@@ -121,7 +115,7 @@ const DataEnterprise1 = () => {
               value={cuit}
             />
           </div>
-          <div class="col">
+          <div className="col">
             <label>Telefono</label>
             <br />
             <input
@@ -134,8 +128,8 @@ const DataEnterprise1 = () => {
             />
           </div>
         </div>
-        <div class="row">
-          <div class="col">
+        <div className="row">
+          <div className="col">
             <label>Rubro</label>
             <br />
             <input
@@ -146,7 +140,7 @@ const DataEnterprise1 = () => {
               value={sector}
             />
           </div>
-          <div class="col">
+          <div className="col">
             <label>Web (opcional)</label>
             <br />
             <input
@@ -158,8 +152,8 @@ const DataEnterprise1 = () => {
             />
           </div>
         </div>
-        <div class="row">
-          <div class="col">
+        <div className="row">
+          <div className="col">
             <label>Domicilio Legal</label>
             <br />
             <input
@@ -170,10 +164,10 @@ const DataEnterprise1 = () => {
               value={legalAdress}
             />
           </div>
-          <div class="col"></div>
+          <div className="col"></div>
           <br />
         </div>
-        <button type="button" class="btn" onClick={submitHandler}>
+        <button type="button" className="btn" onClick={submitHandler}>
           Guardar e Ingresar
         </button>
       </form>
@@ -181,4 +175,4 @@ const DataEnterprise1 = () => {
   );
 };
 
-export default DataEnterprise1;
+export default EnterpriseDataPag1;

@@ -1,18 +1,14 @@
-import "./DataEnterprise.css";
+import "./EnterpriseData.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const DataEnterprise2 = () => {
-  const navigate = useNavigate();
-
+const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [position, setPosition] = useState("");
-  const [telephoneNumber, setTelephoneNumber] = useState(null);
-  const [relWithCompany, setRelWithCompany] = useState(null);
-  const [emailOK, setEmailOK] = useState (false);
+  const [telephoneNumber, setTelephoneNumber] = useState();
+  const [relWithCompany, setRelWithCompany] = useState();
 
   const inputHandler = (e) => {
     switch (e.target.id) {
@@ -20,7 +16,7 @@ const DataEnterprise2 = () => {
         setName(e.target.value);
         break;
       case "email":
-        setEmail(e.target.value)
+        setEmail(e.target.value);
         break;
       case "position":
         setPosition(e.target.value);
@@ -37,44 +33,51 @@ const DataEnterprise2 = () => {
   };
 
   const submitHandler = () => {
-    if (email
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      )) {
-        setEmailOK(true);
-      }
-      else {
+    if (name && position && telephoneNumber && relWithCompany) {
+      if (
+        email
+          .toLowerCase()
+          .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          )
+      ) {
+        const datos2 = {
+          ...data,
+          managerName: name,
+          managerEmail: email,
+          managerPosition: position,
+          managerTelephone: telephoneNumber,
+          managerRelWithCompany: relWithCompany,
+        };
+        setData(datos2);
+        setSuccessfulCharge(true);
+
+        toast("Los datos han sido cargados existosamente", {
+          autoClose: 3000,
+          hideProgressBar: false,
+          type: "success",
+          theme: "dark",
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        toast(
+          "Los datos seran validados por administración para su aprobación",
+          {
+            autoClose: 5000,
+            hideProgressBar: false,
+            type: "info",
+            theme: "dark",
+            position: toast.POSITION.TOP_RIGHT,
+          }
+        );
+      } else {
         toast("ingrese un email valido", {
           autoClose: 3000,
           hideProgressBar: false,
           type: "error",
           theme: "dark",
           position: toast.POSITION.TOP_RIGHT,
-        })  
-      }
-    if (name && emailOK && position && telephoneNumber && relWithCompany) {
-      const Datos2 = {
-        managerName: name,
-        managerEmail: email,
-        managerPosition: position,
-        managerTelephone: telephoneNumber,
-        relWithCompany: relWithCompany,
-      };
-      toast("Los datos han sido cargados existosamente", {
-        autoClose: 3000,
-        hideProgressBar: false,
-        type: "success",
-        theme: "dark",
-        position: toast.POSITION.TOP_RIGHT,
-      });
-      toast("Los datos seran validados por administración para su aprobación", {
-        autoClose: 5000,
-        hideProgressBar: false,
-        type: "info",
-        theme: "dark",
-        position: toast.POSITION.TOP_RIGHT,
         });
+      }
     } else {
       toast("complete todos los campos", {
         autoClose: 3000,
@@ -89,12 +92,12 @@ const DataEnterprise2 = () => {
   return (
     <>
       <ToastContainer className="mt-5" />
-      <form class="form">
-        <div class="header">
+      <div className="form">
+        <div className="header">
           <h2>Complete los datos de contacto</h2>
         </div>
-        <div class="row">
-          <div class="col">
+        <div className="row">
+          <div className="col">
             <label>Nombre y apellido</label>
             <br />
             <input
@@ -105,7 +108,7 @@ const DataEnterprise2 = () => {
               value={name}
             />
           </div>
-          <div class="col">
+          <div className="col">
             <label>Email</label>
             <br />
             <input
@@ -117,8 +120,8 @@ const DataEnterprise2 = () => {
             />
           </div>
         </div>
-        <div class="row">
-          <div class="col">
+        <div className="row">
+          <div className="col">
             <label>Puesto / Cargo</label>
             <br />
             <input
@@ -129,13 +132,13 @@ const DataEnterprise2 = () => {
               value={position}
             />
           </div>
-          <div class="col">
+          <div className="col">
             <br />
             <h5>Relacion del Contacto con la Empresa</h5>
           </div>
         </div>
-        <div class="row">
-          <div class="col">
+        <div className="row">
+          <div className="col">
             <label>Telefono</label>
             <br />
             <input
@@ -147,14 +150,14 @@ const DataEnterprise2 = () => {
               value={telephoneNumber}
             />
           </div>
-          <div class="col">
+          <div className="col">
             <form onChange={inputHandler}>
               <p>
                 <input
                   type="radio"
                   name="relacion"
                   id="relacion"
-                  class="form-check-input"
+                  className="form-check-input"
                   value={"en-empresa"}
                 />
                 Trabajo en la empresa solicitante
@@ -164,7 +167,7 @@ const DataEnterprise2 = () => {
                   type="radio"
                   name="relacion"
                   id="relacion"
-                  class="form-check-input"
+                  className="form-check-input"
                   value={"en-consultora"}
                 />
                 Trabajo para una consultora
@@ -173,12 +176,12 @@ const DataEnterprise2 = () => {
           </div>
         </div>
 
-        <button type="button" class="btn" onClick={submitHandler}>
+        <button type="button" className="btn" onClick={submitHandler}>
           Guardar e Ingresar
         </button>
-      </form>
+      </div>
     </>
   );
 };
 
-export default DataEnterprise2;
+export default EnterpriseDataPag2;
