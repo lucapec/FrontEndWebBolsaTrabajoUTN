@@ -3,7 +3,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 import "./PersonalData.css";
 
-const PersonalData = () => {
+const PersonalData = ({ setboolUniversityData, setData }) => {
   const [user, setUser] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -68,7 +68,7 @@ const PersonalData = () => {
     return errorsList;
   };
 
-  const dataPersonal = {
+  const personalData = {
     user,
     lastName,
     email,
@@ -92,7 +92,8 @@ const PersonalData = () => {
     e.preventDefault();
     const errors = errorsList();
     if (errors.length === 0) {
-      // Load Data
+      setData(personalData);
+      setboolUniversityData(true);
     } else {
       errors.forEach((error) => {
         toast(error.message, {

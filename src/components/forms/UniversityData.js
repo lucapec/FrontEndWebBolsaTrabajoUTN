@@ -3,7 +3,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 import "./UniversityData.css";
 
-const UniversityData = () => {
+const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
   const [specialty, setSpecialty] = useState("");
   const [subjectsApproved, setSubjectsApproved] = useState("");
   const [specialtyPlan, setSpecialtyPlan] = useState("");
@@ -25,13 +25,13 @@ const UniversityData = () => {
         averagesWithDeferrals &&
         averagesWithoutDeferrals &&
         titleUniversity
-      ) 
+      )
     ) {
       errorsList.push({ message: "Los campos son obligatiorios" });
     }
-      if (!(Number(averagesWithDeferrals) && averagesWithoutDeferrals)) {
-        errorsList.push({ message: "El Promedio debe ser un numero entero" });
-      }
+    if (!(Number(averagesWithDeferrals) && averagesWithoutDeferrals)) {
+      errorsList.push({ message: "El Promedio debe ser un numero entero" });
+    }
     if (!Number(subjectsApproved)) {
       errorsList.push({
         message: "La Cantidad de Materias debe ser un numero",
@@ -40,11 +40,38 @@ const UniversityData = () => {
     return errorsList;
   };
 
+  const universityData = {
+    ...data,
+    specialty,
+    subjectsApproved,
+    specialtyPlan,
+    currentYear,
+    shiftProgress,
+    averagesWithDeferrals,
+    averagesWithoutDeferrals,
+    titleUniversity,
+  };
+
   const dataValidation = (e) => {
     e.preventDefault();
     const errors = errorsList();
     if (errors.length === 0) {
-      // Load Data
+      setData(universityData);
+      setSuccessfulCharge(true);
+      toast("Los datos han sido cargados existosamente", {
+        autoClose: 3000,
+        hideProgressBar: false,
+        type: "success",
+        theme: "dark",
+        position: toast.POSITION.TOP_LEFT,
+      });
+      toast("Los datos seran validados por administración para su aprobación", {
+        autoClose: 5000,
+        hideProgressBar: false,
+        type: "info",
+        theme: "dark",
+        position: toast.POSITION.TOP_LEFT,
+      });
     } else {
       errors.forEach((error) => {
         toast(error.message, {
