@@ -3,7 +3,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 import "./UniversityData.css";
 
-const UniversityData = () => {
+const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
   const [specialty, setSpecialty] = useState("");
   const [subjectsApproved, setSubjectsApproved] = useState("");
   const [specialtyPlan, setSpecialtyPlan] = useState("");
@@ -12,57 +12,67 @@ const UniversityData = () => {
   const [averagesWithDeferrals, setAveragesWithDeferrals] = useState("");
   const [averagesWithoutDeferrals, setAveragesWithoutDeferrals] = useState("");
   const [titleUniversity, setTitleUniversity] = useState("");
-  const [errors, setErrors] = useState(null);
 
   const errorsList = () => {
     const errorsList = [];
+    if (
+      !(
+        specialty &&
+        subjectsApproved &&
+        specialtyPlan &&
+        currentYear &&
+        shiftProgress &&
+        averagesWithDeferrals &&
+        averagesWithoutDeferrals &&
+        titleUniversity
+      )
+    ) {
+      errorsList.push({ message: "Los campos son obligatiorios" });
+    }
     if (!(Number(averagesWithDeferrals) && averagesWithoutDeferrals)) {
       errorsList.push({ message: "El Promedio debe ser un numero entero" });
     }
     if (!Number(subjectsApproved)) {
-      errorsList.push({ message: "La Cantidad de Materias debe ser un numero" });
+      errorsList.push({
+        message: "La Cantidad de Materias debe ser un numero",
+      });
     }
     return errorsList;
   };
 
-  const validationRequirements = {
-    specialty: { required: true },
-    specialtyPlan: { required: true },
-    currentYear: { required: true },
-    shiftProgress: { required: true },
-    titleUniversity: { required: true },
-  };
-
-  const validate = (Obj) => {
-    let errors = {};
-    if (Obj) {
-      Object.keys(validationRequirements).forEach((key) => {
-        if (validationRequirements[key].required && !Obj[key]) {
-          errors[key] = "El campo es obligatorio.";
-        }
-      });
-    }
-    return errors;
-  };
-
-  const generateObject = () => {
-    const Data = {
-      specialty,
-      specialtyPlan,
-      currentYear,
-      shiftProgress,
-      titleUniversity,
-    };
-    return Data;
+  const universityData = {
+    ...data,
+    specialty,
+    subjectsApproved,
+    specialtyPlan,
+    currentYear,
+    shiftProgress,
+    averagesWithDeferrals,
+    averagesWithoutDeferrals,
+    titleUniversity,
   };
 
   const dataValidation = (e) => {
     e.preventDefault();
     const errors = errorsList();
     if (errors.length === 0) {
-      // Load Data
+      setData(universityData);
+      setSuccessfulCharge(true);
+      toast("Los datos han sido cargados existosamente", {
+        autoClose: 3000,
+        hideProgressBar: false,
+        type: "success",
+        theme: "dark",
+        position: toast.POSITION.TOP_LEFT,
+      });
+      toast("Los datos seran validados por administración para su aprobación", {
+        autoClose: 5000,
+        hideProgressBar: false,
+        type: "info",
+        theme: "dark",
+        position: toast.POSITION.TOP_LEFT,
+      });
     } else {
-      // Show validation errors as a pop-up notification
       errors.forEach((error) => {
         toast(error.message, {
           autoClose: 3000,
@@ -90,16 +100,16 @@ const UniversityData = () => {
         setCurrentYear(e.target.value);
         break;
       case "shiftProgress":
-        if (e.target.value) setShiftProgress(e.target.value);
+        setShiftProgress(e.target.value);
         break;
       case "averagesWithDeferrals":
-        if (e.target.value) setAveragesWithDeferrals(e.target.value);
+        setAveragesWithDeferrals(e.target.value);
         break;
       case "averagesWithoutDeferrals":
-        if (e.target.value) setAveragesWithoutDeferrals(e.target.value);
+        setAveragesWithoutDeferrals(e.target.value);
         break;
       case "titleUniversity":
-        if (e.target.value) setTitleUniversity(e.target.value);
+        setTitleUniversity(e.target.value);
         break;
       default:
         break;
@@ -127,13 +137,7 @@ const UniversityData = () => {
                 value={specialty}
                 placeholder="Especialidad"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.specialty && (
-                <div className="error"> {errors.specialty} </div>
-              )}
             </div>
             <div className=" col form-field align-items-center">
               <label>Cantidad de Materias Aprobadas</label>
@@ -159,13 +163,7 @@ const UniversityData = () => {
                 value={specialtyPlan}
                 placeholder="Plan Especialidad"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.specialtyPlan && (
-                <div className="error"> {errors.specialtyPlan} </div>
-              )}
             </div>
             <div className=" col form-field align-items-center">
               <label>Año que cursa</label>
@@ -178,13 +176,7 @@ const UniversityData = () => {
                 value={currentYear}
                 placeholder="Año que cursa"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.currentYear && (
-                <div className="error"> {errors.currentYear} </div>
-              )}
             </div>
           </div>
         </div>
@@ -199,18 +191,12 @@ const UniversityData = () => {
                 className="form-control-sm"
                 value={shiftProgress}
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               >
                 <option value="predeterminado">Predeterminado</option>
                 <option value="mañana">Mañana</option>
                 <option value="tarde">Tarde</option>
                 <option value="noche">Noche</option>
               </select>
-              {errors?.shiftProgress && (
-                <div className="error"> {errors.shiftProgress} </div>
-              )}
             </div>
             <div className=" col form-field align-items-center">
               <label>Promedio con Aplazos</label>
@@ -249,13 +235,7 @@ const UniversityData = () => {
                 value={titleUniversity}
                 placeholder="Titulo Universitario"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.titleUniversity && (
-                <div className="error"> {errors.titleUniversity} </div>
-              )}
             </div>
           </div>
         </div>

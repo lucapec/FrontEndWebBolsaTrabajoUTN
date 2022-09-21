@@ -3,7 +3,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 import "./PersonalData.css";
 
-const PersonalData = () => {
+const PersonalData = ({ setboolUniversityData, setData }) => {
   const [user, setUser] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -21,7 +21,6 @@ const PersonalData = () => {
   const [province, setProvince] = useState("");
   const [location, setLocation] = useState("");
   const [personalPhone, setPersonalPhone] = useState("");
-  const [errors, setErrors] = useState(null);
 
   const errorsList = () => {
     const errorsList = [];
@@ -34,69 +33,68 @@ const PersonalData = () => {
     ) {
       errorsList.push({ message: "Ingrese un email válido" });
     }
+    if (
+      !(
+        user &&
+        lastName &&
+        email &&
+        documentType &&
+        documentNumber &&
+        legajo &&
+        birthDate &&
+        names &&
+        cuilOrCuit &&
+        street &&
+        numberStreet &&
+        sex &&
+        fileCv &&
+        country &&
+        province &&
+        location &&
+        personalPhone
+      )
+    ) {
+      errorsList.push({ message: "Los campos son oligatorios" });
+    }
     if (!Number(documentNumber)) {
       errorsList.push({ message: "El Documento debe ser un numero" });
     }
     if (!Number(legajo)) {
       errorsList.push({ message: "El legajo debe ser un numero" });
     }
+    if (!Number(birthDate)) {
+      errorsList.push({ message: "La fecha debe ser un numero" });
+    }
     return errorsList;
   };
 
-  const validationRequirements = {
-    user: { required: true },
-    lastName: { required: true },
-    birthDate: { required: true },
-    names: { required: true },
-    cuilOrCuit: { required: true },
-    street: { required: true },
-    numberStreet: { required: true },
-    sex: { required: true },
-    fileCv: { required: true },
-    country: { required: true },
-    province: { required: true },
-    location: { required: true },
-    personalPhone: { required: true },
-  };
-
-  const validate = (Obj) => {
-    let errors = {};
-    if (Obj) {
-      Object.keys(validationRequirements).forEach((key) => {
-        if (validationRequirements[key].required && !Obj[key]) {
-          errors[key] = "El campo es obligatorio.";
-        }
-      });
-    }
-    return errors;
-  };
-
-  const generateObject = () => {
-    const Data = {
-      user,
-      lastName,
-      birthDate,
-      names,
-      cuilOrCuit,
-      street,
-      numberStreet,
-      sex,
-      fileCv,
-      country,
-      province,
-      location,
-      personalPhone,
-    };
-    return Data;
+  const personalData = {
+    user,
+    lastName,
+    email,
+    documentType,
+    documentNumber,
+    legajo,
+    birthDate,
+    names,
+    cuilOrCuit,
+    street,
+    numberStreet,
+    sex,
+    fileCv,
+    country,
+    province,
+    location,
+    personalPhone,
   };
 
   const dataValidation = (e) => {
     e.preventDefault();
     const errors = errorsList();
     if (errors.length === 0) {
-      // Load Data
+      setData(personalData);
+      setboolUniversityData(true);
     } else {
-      // Show validation errors as a pop-up notification
       errors.forEach((error) => {
         toast(error.message, {
           autoClose: 3000,
@@ -188,11 +186,7 @@ const PersonalData = () => {
                 value={user}
                 placeholder="Usuario"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.user && <div className="error"> {errors.user} </div>}
             </div>
             <div className="col form-field align-items-center">
               <label>Apellido</label>
@@ -205,13 +199,7 @@ const PersonalData = () => {
                 value={lastName}
                 placeholder="Apellido"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.lastName && (
-                <div className="error"> {errors.lastName} </div>
-              )}
             </div>
             <div className=" col form-field align-items-center">
               <label>Email</label>
@@ -283,13 +271,7 @@ const PersonalData = () => {
                 value={birthDate}
                 placeholder="Fecha de Nacimiento"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.lastName && (
-                <div className="error"> {errors.lastName} </div>
-              )}
             </div>
             <div className=" col form-field align-items-center">
               <label>Nombres</label>
@@ -302,11 +284,7 @@ const PersonalData = () => {
                 value={names}
                 placeholder="Nombres"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.names && <div className="error"> {errors.names} </div>}
             </div>
             <div className="col form-field align-items-center">
               <label>CUIL o CUIT</label>
@@ -319,13 +297,7 @@ const PersonalData = () => {
                 value={cuilOrCuit}
                 placeholder="CUIL o CUIT"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.cuilOrCuit && (
-                <div className="error"> {errors.cuilOrCuit} </div>
-              )}
             </div>
           </div>
         </div>
@@ -342,11 +314,7 @@ const PersonalData = () => {
                 value={street}
                 placeholder="Calle"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.street && <div className="error"> {errors.street} </div>}
             </div>
             <div className=" col form-field align-items-center">
               <label>Numero de Calle</label>
@@ -359,13 +327,7 @@ const PersonalData = () => {
                 value={numberStreet}
                 placeholder="Numero de Calle"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.numberStreet && (
-                <div className="error"> {errors.numberStreet} </div>
-              )}
             </div>
             <div className=" col form-field align-items-center">
               <label>Sexo</label>
@@ -378,11 +340,7 @@ const PersonalData = () => {
                 value={sex}
                 placeholder="Sexo"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.sex && <div className="error"> {errors.sex} </div>}
             </div>
             <div className=" col form-field align-items-center">
               <label>Archivo CV</label>
@@ -395,11 +353,7 @@ const PersonalData = () => {
                 value={fileCv}
                 placeholder="Archivo CV"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.fileCv && <div className="error"> {errors.fileCv} </div>}
             </div>
           </div>
         </div>
@@ -416,13 +370,7 @@ const PersonalData = () => {
                 value={country}
                 placeholder="Pais"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.country && (
-                <div className="error"> {errors.country} </div>
-              )}
             </div>
             <div className=" col form-field align-items-center">
               <label>Provincia</label>
@@ -435,13 +383,7 @@ const PersonalData = () => {
                 value={province}
                 placeholder="Provincia"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.province && (
-                <div className="error"> {errors.province} </div>
-              )}
             </div>
             <div className=" col form-field align-items-center">
               <label>Localidad</label>
@@ -454,13 +396,7 @@ const PersonalData = () => {
                 value={location}
                 placeholder="Localidad"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.location && (
-                <div className="error"> {errors.location} </div>
-              )}
             </div>
             <div className=" col form-field align-items-center">
               <label>Telefono Particular</label>
@@ -473,13 +409,7 @@ const PersonalData = () => {
                 value={personalPhone}
                 placeholder="Telefono Particular"
                 onChange={inputHandler}
-                onBlur={(e) => {
-                  setErrors(validate(generateObject()));
-                }}
               />
-              {errors?.personalPhone && (
-                <div className="error"> {errors.personalPhone} </div>
-              )}
             </div>
           </div>
         </div>
