@@ -48,7 +48,7 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
         },
       })
       // r.data = token que viene del back
-        .then((r) => setUser(r.data))
+        .then((r) => console.log(r.data))
         .catch((err) => {
           console.log(err);
         });
