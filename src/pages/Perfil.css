@@ -1,0 +1,66 @@
+footer {
+  margin-top: 4%;
+  text-align: center;
+  padding: -0px;
+  background-color: rgb(111, 133, 205);
+  line-height: 1%;
+  height: 16.3vh;
+}
+
+.divFormProfile {
+  background-color: lightgray;
+  height: 90vh;;
+}
+
+.form {
+  margin-top: -1.5%;
+  margin-bottom: -2.4%;
+}
+
+header {
+  background-color: lightgray;
+  height: 5vh;
+}
+
+#divRight {
+  margin-left: 50%;
+  margin-top: 5%;
+  font-size: 90%;
+  color: black;
+}
+
+#divLeft {
+  margin-top: 4.5%;
+  margin-right: -50%;
+}
+
+.divContact {
+  margin-left: -40%;
+}
+
+.divPhone {
+  margin-left: -59%;
+}
+
+.divUniversity {
+  margin-left: -46%;
+}
+
+#btn {
+  background-color: black;
+  color: rgb(255, 255, 255);
+  margin-top: 3%;
+  font-weight: 500;
+}
+
+#btn:hover {
+  background-color: rgb(111, 133, 205);
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+}
+
+.logo {
+  margin-left: 60%;
+  width: 40%;
+  height: 40%;
+}
