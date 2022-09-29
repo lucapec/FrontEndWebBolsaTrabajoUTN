@@ -1,6 +1,6 @@
 import { useState } from "react";
-import PersonalData from "../components/forms/PersonalData";
-import UniversityData from "../components/forms/UniversityData";
+import PersonalData from "../components/forms/studetnRegisterForms/PersonalData";
+import UniversityData from "../components/forms/studetnRegisterForms/UniversityData";
 
 const StudentData = () => {
   const [data, setData] = useState("");
