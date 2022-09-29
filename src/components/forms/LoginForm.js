@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import UserContext from "../../context/UserContext";
 import axios from "axios";
 import "./Forms.css";
@@ -10,7 +10,8 @@ import utnLogo from "../../assets/logo-utn.png";
 const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, setUser } = useContext(UserContext);
+  const { jwt, setJwt } = useContext(UserContext);
+  const navigate = useNavigate();
   let passwordRegExp = /^[A-Za-z]\w{7,14}$/;
 
   const errorsList = () => {
@@ -47,9 +48,24 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
           'Content-type': 'application/json',
         },
       })
-      // r.data = token que viene del back
-        .then((r) => console.log(r.data))
+        .then((r) => {
+          if (r.data.success) {
+            window.sessionStorage.setItem('jwt', r.data.token);
+            setJwt(r.data.token);
+            navigate('/ofertas');
+          } else {
+            window.sessionStorage.removeItem('jwt');
+            toast(r.data.message, {
+              autoClose: 3000,
+              hideProgressBar: false,
+              type: "error",
+              theme: "dark",
+              position: toast.POSITION.TOP_LEFT,
+            });
+          }
+        })
         .catch((err) => {
+          window.sessionStorage.removeItem('jwt');
           console.log(err);
         });
     } else {
@@ -81,7 +97,7 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
   return (
     <>
       <ToastContainer className="mt-5" />
-      {user && <Navigate replace to="/ofertas" />}
+      {jwt && <Navigate replace to="/ofertas" />}
       {left ? (
         <div className="wrapper">
           <figure>

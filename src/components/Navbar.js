@@ -6,7 +6,7 @@ import "./Navbar.css";
 import utnLogo from "../assets/white-utn-logo.png";
 
 const Navbar = () => {
-  const { user } = useContext(UserContext);
+  const { jwt } = useContext(UserContext);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -17,7 +17,7 @@ const Navbar = () => {
         </div>
         <div className="" id="navbarNav">
           <ul className="navbar-nav">
-            {user ? (
+            {jwt ? (
               <li className="nav-item">
                 <Link className="nav-link" to="/ofertas">
                   Ofertas
@@ -30,7 +30,7 @@ const Navbar = () => {
                 </Link>
               </li>
             )}
-            {user ? (
+            {jwt ? (
               <li className="nav-item">
                 <Link className="nav-link" to="/perfil">
                   Perfil
@@ -43,7 +43,7 @@ const Navbar = () => {
                 </Link>
               </li>
             )}
-            {user ? <Logout /> : ""}
+            {jwt ? <Logout /> : ""}
           </ul>
         </div>
       </div>
