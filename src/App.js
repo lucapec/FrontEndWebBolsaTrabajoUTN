@@ -4,7 +4,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import Offers from "./pages/Offers";
+import JobPositions from "./pages/JobPositions";
 import Profile from "./pages/Profile";
 import StudentData from "./pages/StudentData";
 import EnterpriseData from "./pages/EnterpriseData";
@@ -20,7 +20,7 @@ const App = () => {
           <Route path="*" element={<Navigate replace to="/ingreso" />}></Route>
           <Route path="/ingreso" element={<Login />}></Route>
           <Route path="/registro" element={<Register />}></Route>
-          <Route path="/ofertas" element={<Offers />}></Route>
+          <Route path="/ofertas" element={<JobPositions />}></Route>
           <Route path="/perfil" element={<Profile />}></Route>
           <Route path="/datosAlumno" element={<StudentData />}></Route>
           <Route path="/empresaReg" element={<EnterpriseData />}></Route>
