@@ -29,14 +29,6 @@ const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
     ) {
       errorsList.push({ message: "Los campos son obligatiorios" });
     }
-    if (!(Number(averagesWithDeferrals) && averagesWithoutDeferrals)) {
-      errorsList.push({ message: "El Promedio debe ser un numero entero" });
-    }
-    if (!Number(subjectsApproved)) {
-      errorsList.push({
-        message: "La Cantidad de Materias debe ser un numero",
-      });
-    }
     return errorsList;
   };
 
@@ -122,7 +114,7 @@ const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
       <ToastContainer className="mt-5" />
       <form className="pb-3 mt-3">
         <div className="title">
-          <p>Complete los datos universitarios</p>
+          <h2>Complete los datos universitarios</h2>
         </div>
         <div className=" container " id="primary">
           <div className="row row-cols-4">
@@ -143,7 +135,7 @@ const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
               <label>Cantidad de Materias Aprobadas</label>
               <br />
               <input
-                type="text"
+                type="number"
                 name="subjectsApproved"
                 id="subjectsApproved"
                 className="form-control-sm"
@@ -169,7 +161,7 @@ const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
               <label>Año que cursa</label>
               <br />
               <input
-                type="text"
+                type="number"
                 name="currentYear"
                 id="currentYear"
                 className="form-control-sm"
@@ -202,7 +194,7 @@ const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
               <label>Promedio con Aplazos</label>
               <br />
               <input
-                type="text"
+                type="number"
                 name="averagesWithDeferrals"
                 id="averagesWithDeferrals"
                 className="form-control-sm"
@@ -215,7 +207,7 @@ const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
               <label>Promedios sin Aplazos</label>
               <br />
               <input
-                type="text"
+                type="number"
                 name="averagesWithoutDeferrals"
                 id="averagesWithoutDeferrals"
                 className="form-control-sm"

@@ -56,15 +56,6 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
     ) {
       errorsList.push({ message: "Los campos son oligatorios" });
     }
-    if (!Number(documentNumber)) {
-      errorsList.push({ message: "El Documento debe ser un numero" });
-    }
-    if (!Number(legajo)) {
-      errorsList.push({ message: "El legajo debe ser un numero" });
-    }
-    if (!Number(birthDate)) {
-      errorsList.push({ message: "La fecha debe ser un numero" });
-    }
     return errorsList;
   };
 
@@ -171,7 +162,7 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
       <ToastContainer className="mt-5" />
       <form className=" mt-3">
         <div className="title">
-          <p>Complete los datos personales</p>
+          <h2>Complete los datos personales</h2>
         </div>
         <div className=" container ">
           <div className="row row-cols-4">
@@ -234,7 +225,7 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
               </select>
               <br />
               <input
-                type="text"
+                type="number"
                 name="documentNumber"
                 id="documentNumber"
                 className="form-control-sm"
@@ -251,7 +242,7 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
               <label>Legajo</label>
               <br />
               <input
-                type="text"
+                type="number"
                 name="legajo"
                 id="legajo"
                 className="form-control-sm"
@@ -290,12 +281,12 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
               <label>CUIL o CUIT</label>
               <br />
               <input
-                type="text"
+                type="number"
                 name="cuilOrCuit"
                 id="cuilOrCuit"
                 className="form-control-sm"
                 value={cuilOrCuit}
-                placeholder="CUIL o CUIT"
+                placeholder="CUIL o CUIT (Sin guiones) "
                 onChange={inputHandler}
               />
             </div>
@@ -320,7 +311,7 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
               <label>Numero de Calle</label>
               <br />
               <input
-                type="text"
+                type="number"
                 name="numberStreet"
                 id="numberStreet"
                 className="form-control-sm"
@@ -402,7 +393,7 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
               <label>Telefono Particular</label>
               <br />
               <input
-                type="text"
+                type="number"
                 name="personalPhone"
                 id="personalPhone"
                 className="form-control-sm"

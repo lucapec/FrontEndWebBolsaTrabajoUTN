@@ -1,29 +1,26 @@
 .form {
   background-color: lightgray;
   text-align: center;
-  padding-top: 5vh;
-  height: calc(100vh - 56px);
+  padding-top: 5%;
+  height: 103vh;
 }
 
 .row {
-  margin: 40px;
+  margin: 2%;
 }
 
 .btn {
   background-color: black;
   color: rgb(255, 255, 255);
   font-weight: 500;
-  width: 30vh;
+  margin-top: 5%;
+  width: 15%;
 }
 
 .btn:hover {
-  background-color:#719fed;
+  background-color: #719fed;
   color: black;
   font-weight: 500;
-}
-
-h2 {
-  font-size: x-large;
 }
 
 input {
@@ -35,8 +32,8 @@ input {
 }
 
 .header {
-  margin-top: 2vh;
-  margin-bottom: 3vh;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 p {

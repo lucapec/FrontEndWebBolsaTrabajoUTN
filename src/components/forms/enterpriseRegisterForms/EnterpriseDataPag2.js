@@ -57,7 +57,7 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
           hideProgressBar: false,
           type: "success",
           theme: "dark",
-          position: toast.POSITION.TOP_RIGHT,
+          position: toast.POSITION.TOP_LEFT,
         });
         toast(
           "Los datos seran validados por administración para su aprobación",
@@ -66,25 +66,25 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
             hideProgressBar: false,
             type: "info",
             theme: "dark",
-            position: toast.POSITION.TOP_RIGHT,
+            position: toast.POSITION.TOP_LEFT,
           }
         );
       } else {
-        toast("ingrese un email valido", {
+        toast("Ingrese un email valido", {
           autoClose: 3000,
           hideProgressBar: false,
           type: "error",
           theme: "dark",
-          position: toast.POSITION.TOP_RIGHT,
+          position: toast.POSITION.TOP_LEFT,
         });
       }
     } else {
-      toast("complete todos los campos", {
+      toast("Los campos son oligatorios", {
         autoClose: 3000,
         hideProgressBar: false,
         type: "warning",
         theme: "dark",
-        position: toast.POSITION.TOP_RIGHT,
+        position: toast.POSITION.TOP_LEFT,
       });
     }
   };
