@@ -61,12 +61,12 @@ const EnterpriseDataPag1 = ({ setBoolPage2, setData }) => {
       setData(datos);
       setBoolPage2(true);
     } else {
-      toast("complete todos los campos", {
+      toast("Los campos son oligatorios", {
         autoClose: 3000,
         hideProgressBar: false,
         type: "warning",
         theme: "dark",
-        position: toast.POSITION.TOP_RIGHT,
+        position: toast.POSITION.TOP_LEFT,
       });
     }
   };
