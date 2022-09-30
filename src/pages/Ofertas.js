@@ -1,5 +1,5 @@
 import { useEffect, useContext } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import UserContext from "../context/UserContext";
 
 const Ofertas = () => {
@@ -7,15 +7,15 @@ const Ofertas = () => {
 
   useEffect(() => {
     if (jwt) {
-      axios.get('https://localhost:7172/api/JobPosition', {}, {
+      fetch('https://localhost:7172/api/JobPosition', {
+        method: 'GET',
         headers: {
-          'Content-type': 'application/json',
+          'accept': '*/*',
           'Authorization': `Bearer ${jwt}`,
         },
       })
-      .then((res) => {
-        console.log(res);
-      })
+      .then((res) => res.json())
+      .then((res) => console.log(res))
       .catch((err) => {
         console.log(err);
       });
