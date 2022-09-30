@@ -2,9 +2,9 @@ import { useState } from "react";
 
 import utnLogo from "../assets/logo-utn.png";
 
-import "./Perfil.css";
+import "./Profile.css";
 
-const Perfil = () => {
+const Profile = () => {
   const [user, setUser] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -83,8 +83,7 @@ const Perfil = () => {
 
   return (
     <div className="divFormProfile">
-      <header></header>
-      <div className="form" >
+      <div className="form">
         <form className=" mt-3">
           <div className=" container ">
             <div className="row row-cols-4">
@@ -147,7 +146,7 @@ const Perfil = () => {
                 </select>
                 <br />
                 <input
-                  type="text"
+                  type="number"
                   name="documentNumber"
                   id="documentNumber"
                   className="form-control-sm"
@@ -164,7 +163,7 @@ const Perfil = () => {
                 <label>Legajo</label>
                 <br />
                 <input
-                  type="text"
+                  type="number"
                   name="legajo"
                   id="legajo"
                   className="form-control-sm"
@@ -203,12 +202,12 @@ const Perfil = () => {
                 <label>CUIL o CUIT</label>
                 <br />
                 <input
-                  type="text"
+                  type="number"
                   name="cuilOrCuit"
                   id="cuilOrCuit"
                   className="form-control-sm"
                   value={cuilOrCuit}
-                  placeholder="CUIL o CUIT"
+                  placeholder="CUIL o CUIT (Sin guiones)"
                   onChange={inputHandler}
                 />
               </div>
@@ -233,7 +232,7 @@ const Perfil = () => {
                 <label>Numero de Calle</label>
                 <br />
                 <input
-                  type="text"
+                  type="number"
                   name="numberStreet"
                   id="numberStreet"
                   className="form-control-sm"
@@ -315,7 +314,7 @@ const Perfil = () => {
                 <label>Telefono Particular</label>
                 <br />
                 <input
-                  type="text"
+                  type="number"
                   name="personalPhone"
                   id="personalPhone"
                   className="form-control-sm"
@@ -328,13 +327,15 @@ const Perfil = () => {
           </div>
           <div className="container">
             <div className="col-md-12">
-              <button id="btn" className="btn">Editar Perfil</button>
+              <button id="btn" className="btn">
+                Editar Perfil
+              </button>
             </div>
           </div>
         </form>
       </div>
       <footer>
-        <div className="container">
+        <div id="divFooter" className="container">
           <div id="divLeftRight" className="row justify-content-center">
             <div id="divLeft" className="col-4">
               <figure>
@@ -359,4 +360,4 @@ const Perfil = () => {
   );
 };
 
-export default Perfil;
+export default Profile;
