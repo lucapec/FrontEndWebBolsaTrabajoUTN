@@ -86,6 +86,7 @@ const EnterpriseDataPag1 = ({ setBoolPage2, setData }) => {
               className="form-control-sm"
               type="text"
               id="businessName"
+              placeholder="Razon Social"
               onChange={inputHandler}
               value={businessName}
             />
@@ -97,6 +98,7 @@ const EnterpriseDataPag1 = ({ setBoolPage2, setData }) => {
               className="form-control-sm"
               type="number"
               id="postalCode"
+              placeholder="Codigo Postal"
               onChange={inputHandler}
               value={postalCode}
             />
@@ -109,7 +111,7 @@ const EnterpriseDataPag1 = ({ setBoolPage2, setData }) => {
             <input
               className="form-control-sm"
               type="number"
-              placeholder="sin guiones"
+              placeholder=" CUIT (Sin guiones)"
               id="cuit"
               onChange={inputHandler}
               value={cuit}
@@ -136,17 +138,19 @@ const EnterpriseDataPag1 = ({ setBoolPage2, setData }) => {
               className="form-control-sm"
               type="text"
               id="sector"
+              placeholder="Rubro"
               onChange={inputHandler}
               value={sector}
             />
           </div>
           <div className="col">
-            <label>Web (opcional)</label>
+            <label>Web</label>
             <br />
             <input
               className="form-control-sm"
               type="text"
               id="web"
+              placeholder="Web (Opcional)"
               onChange={inputHandler}
               value={webURL}
             />
@@ -160,6 +164,7 @@ const EnterpriseDataPag1 = ({ setBoolPage2, setData }) => {
               className="form-control-sm"
               type="text"
               id="legalAdress"
+              placeholder="Domicilio Legal"
               onChange={inputHandler}
               value={legalAdress}
             />
@@ -168,7 +173,7 @@ const EnterpriseDataPag1 = ({ setBoolPage2, setData }) => {
           <br />
         </div>
         <button type="button" className="btn" onClick={submitHandler}>
-          Guardar e Ingresar
+          Guardar y Continuar
         </button>
       </form>
     </>

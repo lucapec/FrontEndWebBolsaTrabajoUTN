@@ -62,7 +62,7 @@ const CompanyProfile = () => {
   };
 
   return (
-    <div className="divFormProfile">
+    <div className="divFormProfileCompany">
       <div id="form" className="form">
         <form className=" mt-3">
           <div id="divForm" className="container">
@@ -101,6 +101,8 @@ const CompanyProfile = () => {
                   name="cuit"
                   id="cuit"
                   className="form-control-sm"
+                  readOnly
+                  disabled
                   value={cuit}
                   placeholder="CUIT"
                   onChange={inputHandler}
@@ -231,7 +233,7 @@ const CompanyProfile = () => {
                   />
                   Trabajo para la empresa solicitante
                 </p>
-                <div className="divInput">
+                <div className="divInputCompany">
                   <p>
                     <input
                       type="radio"
@@ -255,7 +257,7 @@ const CompanyProfile = () => {
           </div>
         </form>
       </div>
-      <footer>
+      <footer className="footerCompany">
         <div id="divFooter" className="container">
           <div id="divLeftRight" className="row justify-content-center">
             <div id="divLeft" className="col-4">

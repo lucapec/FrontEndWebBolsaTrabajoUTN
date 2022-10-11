@@ -104,6 +104,7 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
               className="form-control-sm"
               type="text"
               id="name"
+              placeholder="Nombre y Apellido"
               onChange={inputHandler}
               value={name}
             />
@@ -115,6 +116,7 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
               className="form-control-sm"
               type="email"
               id="email"
+              placeholder="Email"
               onChange={inputHandler}
               value={email}
             />
@@ -128,6 +130,7 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
               className="form-control-sm"
               type="text"
               id="position"
+              placeholder="Puesto / Cargo"
               onChange={inputHandler}
               value={position}
             />
@@ -162,6 +165,7 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
                 />
                 Trabajo en la empresa solicitante
               </p>
+              <div className="divInput">
               <p>
                 <input
                   type="radio"
@@ -172,6 +176,7 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
                 />
                 Trabajo para una consultora
               </p>
+              </div>
             </form>
           </div>
         </div>
