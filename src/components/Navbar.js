@@ -6,7 +6,7 @@ import "./Navbar.css";
 import utnLogo from "../assets/white-utn-logo.png";
 
 const Navbar = () => {
-  const { jwt } = useContext(UserContext);
+  const { jwt, role } = useContext(UserContext);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -17,37 +17,53 @@ const Navbar = () => {
         </div>
         <div className="" id="navbarNav">
           <ul className="navbar-nav">
-            {jwt ? (
-              <li className="nav-item">
-                <Link className="nav-link" to="/ofertas">
-                  Ofertas
-                </Link>
-              </li>
-            ) : (
-              <li className="nav-item">
-                <Link className="nav-link" to="/ingreso">
-                  Ingresar
-                </Link>
-              </li>
+            {jwt && role === 'Student' && (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/ofertas">
+                    Ofertas laborales
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/perfil">
+                    Perfil
+                  </Link>
+                </li>
+              </>
             )}
-            {jwt ? (
-              <li className="nav-item">
-                <Link className="nav-link" to="/perfil">
-                  Perfil
-                </Link>
-              </li>
-            ) : (
-              <li className="nav-item">
-                <Link className="nav-link" aria-current="page" to="/registro">
-                  Registrarse
-                </Link>
-              </li>
+            {jwt && role === 'Company' && (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/ofertasEmpresa">
+                    Tus Ofertas
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/perfilEmpresa">
+                    Perfil
+                  </Link>
+                </li>
+              </>
+            )}
+            {(jwt === null || role === null) && (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/ingreso">
+                    Ingresar
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" aria-current="page" to="/registro">
+                    Registrarse
+                  </Link>
+                </li>
+              </>
             )}
             {jwt ? <Logout /> : ""}
           </ul>
         </div>
-      </div>
-    </nav>
+      </div >
+    </nav >
   );
 };
 

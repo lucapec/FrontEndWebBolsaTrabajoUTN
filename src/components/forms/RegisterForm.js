@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Forms.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,6 +16,7 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   let passwordRegExp =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const navigate = useNavigate();
 
   const errorsList = () => {
     const errorsList = [];
@@ -85,7 +86,16 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
       })
         .then((r) => r.json())
         .then((res) => {
-          console.log(res);
+          toast('Te has registrado correctamente', {
+            autoClose: 3000,
+            hideProgressBar: false,
+            type: "success",
+            theme: "dark",
+            position: toast.POSITION.TOP_LEFT,
+          });
+          setTimeout(() => {
+            navigate('/ingreso');
+          }, 3000);
         })
         .catch((err) => {
           console.log(err);
@@ -103,7 +113,16 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
       })
         .then((r) => r.json())
         .then((res) => {
-          console.log(res);
+          toast('Te has registrado correctamente', {
+            autoClose: 3000,
+            hideProgressBar: false,
+            type: "success",
+            theme: "dark",
+            position: toast.POSITION.TOP_LEFT,
+          });
+          setTimeout(() => {
+            navigate('/ingreso');
+          }, 3000);
         })
         .catch((err) => {
           console.log(err);
