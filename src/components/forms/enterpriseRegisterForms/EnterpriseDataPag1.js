@@ -50,13 +50,13 @@ const EnterpriseDataPag1 = ({ setBoolPage2, setData }) => {
       legalAdress
     ) {
       const datos = {
-        EnterpriseBusinessName: businessName,
-        postalCode: postalCode,
-        EnterpriseCuit: cuit,
-        EnterpriseTelephone: telephoneNumber,
-        EnterpriseSector: sector,
-        EnterpriseWeb: webURL,
-        EnterpriseAdress: legalAdress,
+        CompanyName: businessName,
+        PostalCode: postalCode,
+        Cuit: cuit,
+        TelephoneNumber: telephoneNumber,
+        Sector: sector,
+        Web: webURL,
+        LegalAdress: legalAdress,
       };
       setData(datos);
       setBoolPage2(true);
@@ -168,7 +168,7 @@ const EnterpriseDataPag1 = ({ setBoolPage2, setData }) => {
           <br />
         </div>
         <button type="button" className="btn" onClick={submitHandler}>
-          Guardar e Ingresar
+          Guardar
         </button>
       </form>
     </>

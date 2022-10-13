@@ -1,19 +1,26 @@
 import "./EnterpriseData.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import UserContext from "../../../context/UserContext";
+
 
 const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
   const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [position, setPosition] = useState("");
   const [telephoneNumber, setTelephoneNumber] = useState();
   const [relWithCompany, setRelWithCompany] = useState();
+  const {jwt} = useContext(UserContext);
 
   const inputHandler = (e) => {
     switch (e.target.id) {
       case "name":
         setName(e.target.value);
+        break;
+      case "lastname":
+        setLastname(e.target.value);
         break;
       case "email":
         setEmail(e.target.value);
@@ -32,8 +39,44 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
     }
   };
 
+    // fetch('https://localhost:7172/api/UsersInfo/Company',{
+    //   method: "GET",
+    //   headers: { "Content-type": "application/json", Authorization:`Bearer ${jwt}`}
+    // })
+    // .then(response => response.json())
+    // .then(data => console.log(data));
+
+    // fetch("https://localhost:7172/api/UsersInfo/ChargeDataCompany", {
+    //   method: "PUT",
+    //   headers: {'Content-type': 'application/json', Authorization:`Bearer ${jwt}`},
+    //   body: JSON.stringify({
+    //     CompanyName: "businessName",
+    //     Cuit: "cuit",
+    //     TelephoneNumber: "telephoneNumber",
+    //     Sector: "sector",
+    //     LegalAdress: "legalAdress",
+    //     PostalCode: "postalCode",
+    //     Web: "webURL",
+    //     RecruiterName: "name",
+    //     RecruiterLastName: "lastname",
+    //     RecruiterPosition: "position",
+    //     RecruiterPhoneNumber: "telephoneNumber",
+    //     RecruiterEmail: "email",
+    //     RecruiterRelWithCompany: 1,
+    //     FirstChargeData: true
+    //   }),
+    // })
+    // .then((r) => r.json())
+    // .then((res) => {
+    //   console.log(res);
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // });  
+
+
   const submitHandler = () => {
-    if (name && position && telephoneNumber && relWithCompany) {
+    if (name && lastname && position && telephoneNumber && relWithCompany) {
       if (
         email
           .toLowerCase()
@@ -43,11 +86,13 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
       ) {
         const datos2 = {
           ...data,
-          managerName: name,
-          managerEmail: email,
-          managerPosition: position,
-          managerTelephone: telephoneNumber,
-          managerRelWithCompany: relWithCompany,
+          RecruiterName: name,
+          RecruiterLastName: lastname,
+          RecruiterEmail: email,
+          RecruiterPosition: position,
+          RecruiterPhoneNumber: telephoneNumber,
+          RecruiterRelWithCompany: relWithCompany,
+          FirstChargeData: true
         };
         setData(datos2);
         setSuccessfulCharge(true);
@@ -98,7 +143,7 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
         </div>
         <div className="row">
           <div className="col">
-            <label>Nombre y apellido</label>
+            <label>Nombres</label>
             <br />
             <input
               className="form-control-sm"
@@ -108,6 +153,19 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
               value={name}
             />
           </div>
+          <div className="col">
+            <label>apellido</label>
+            <br />
+            <input
+              className="form-control-sm"
+              type="text"
+              id="lastname"
+              onChange={inputHandler}
+              value={lastname}
+            />
+          </div>
+        </div>
+        <div className="row">
           <div className="col">
             <label>Email</label>
             <br />
@@ -119,8 +177,6 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
               value={email}
             />
           </div>
-        </div>
-        <div className="row">
           <div className="col">
             <label>Puesto / Cargo</label>
             <br />
@@ -131,10 +187,6 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
               onChange={inputHandler}
               value={position}
             />
-          </div>
-          <div className="col">
-            <br />
-            <h5>Relacion del Contacto con la Empresa</h5>
           </div>
         </div>
         <div className="row">
@@ -151,14 +203,16 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
             />
           </div>
           <div className="col">
+            <label>Relacion con la empresa</label>
             <form onChange={inputHandler}>
+              <br/>
               <p>
                 <input
                   type="radio"
                   name="relacion"
                   id="relacion"
                   className="form-check-input"
-                  value={"en-empresa"}
+                  value={0}
                 />
                 Trabajo en la empresa solicitante
               </p>
@@ -168,16 +222,15 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
                   name="relacion"
                   id="relacion"
                   className="form-check-input"
-                  value={"en-consultora"}
+                  value={1}
                 />
                 Trabajo para una consultora
               </p>
             </form>
           </div>
         </div>
-
         <button type="button" className="btn" onClick={submitHandler}>
-          Guardar e Ingresar
+          Guardar
         </button>
       </div>
     </>
