@@ -49,6 +49,7 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
         .then((r) => {
           if (r.success) {
             window.sessionStorage.setItem('jwt', r.token);
+            window.sessionStorage.setItem('role', r.roles[0]);
             setJwt(r.token);
             setRole(r.roles[0]);
             if (r.roles[0] === "Student") {
@@ -60,6 +61,7 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
             }
           } else {
             window.sessionStorage.removeItem('jwt');
+            window.sessionStorage.removeItem('role');
             toast(r.message, {
               autoClose: 3000,
               hideProgressBar: false,
@@ -71,6 +73,7 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
         })
         .catch((err) => {
           window.sessionStorage.removeItem('jwt');
+          window.sessionStorage.removeItem('role');
           console.log(err);
         });
     } else {
