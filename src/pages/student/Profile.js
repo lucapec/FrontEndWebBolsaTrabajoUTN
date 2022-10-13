@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import utnLogo from "../assets/logo-utn.png";
+import utnLogo from "../../assets/logo-utn.png";
 
 import "./Profile.css";
 
