@@ -4,14 +4,13 @@ import { toast, ToastContainer } from "react-toastify";
 import "./PersonalData.css";
 
 const PersonalData = ({ setboolUniversityData, setData }) => {
-  const [user, setUser] = useState("");
+  const [firstName, setFirstname] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [documentType, setDocumentType] = useState("");
   const [documentNumber, setDocumentNumber] = useState("");
   const [legajo, setLegajo] = useState("");
   const [birthDate, setBirthDate] = useState("");
-  const [names, setNames] = useState("");
   const [cuilOrCuit, setCuilOrCuit] = useState("");
   const [street, setStreet] = useState("");
   const [numberStreet, setNumberStreet] = useState("");
@@ -35,14 +34,13 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
     }
     if (
       !(
-        user &&
+        firstName &&
         lastName &&
         email &&
         documentType &&
         documentNumber &&
         legajo &&
         birthDate &&
-        names &&
         cuilOrCuit &&
         street &&
         numberStreet &&
@@ -60,14 +58,13 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
   };
 
   const personalData = {
-    user,
+    firstName,
     lastName,
     email,
     documentType,
     documentNumber,
     legajo,
     birthDate,
-    names,
     cuilOrCuit,
     street,
     numberStreet,
@@ -100,8 +97,8 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
 
   const inputHandler = (e) => {
     switch (e.target.id) {
-      case "user":
-        setUser(e.target.value);
+      case "firstName":
+        setFirstname(e.target.value);
         break;
       case "lastName":
         setLastName(e.target.value);
@@ -120,9 +117,6 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
         break;
       case "birthDate":
         setBirthDate(e.target.value);
-        break;
-      case "names":
-        setNames(e.target.value);
         break;
       case "cuilOrCuit":
         setCuilOrCuit(e.target.value);
@@ -158,24 +152,25 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
 
   return (
     <div className="divFormPersonal">
-      <header></header>
-      <ToastContainer className="mt-5" />
+    <header></header>
+    <ToastContainer className="mt-5" />
+    <div className="form">
       <form className=" mt-3">
         <div className="title">
           <h2>Complete los datos personales</h2>
         </div>
         <div className=" container ">
           <div className="row row-cols-4">
-            <div className=" col form-field align-items-center ">
-              <label>Usuario</label>
+            <div className="col form-field align-items-center">
+              <label>Nombre</label>
               <br />
               <input
                 type="text"
-                name="user"
-                id="user"
+                name="firstName"
+                id="firstName"
                 className="form-control-sm"
-                value={user}
-                placeholder="Usuario"
+                value={firstName}
+                placeholder="Nombre"
                 onChange={inputHandler}
               />
             </div>
@@ -265,18 +260,19 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
               />
             </div>
             <div className=" col form-field align-items-center">
-              <label>Nombres</label>
+              <label>Telefono Particular</label>
               <br />
               <input
-                type="text"
-                name="names"
-                id="names"
+                type="number"
+                name="personalPhone"
+                id="personalPhone"
                 className="form-control-sm"
-                value={names}
-                placeholder="Nombres"
+                value={personalPhone}
+                placeholder="Telefono Particular"
                 onChange={inputHandler}
               />
             </div>
+
             <div className="col form-field align-items-center">
               <label>CUIL o CUIT</label>
               <br />
@@ -389,19 +385,6 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
                 onChange={inputHandler}
               />
             </div>
-            <div className=" col form-field align-items-center">
-              <label>Telefono Particular</label>
-              <br />
-              <input
-                type="number"
-                name="personalPhone"
-                id="personalPhone"
-                className="form-control-sm"
-                value={personalPhone}
-                placeholder="Telefono Particular"
-                onChange={inputHandler}
-              />
-            </div>
           </div>
         </div>
         <div className="container">
@@ -413,6 +396,7 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
         </div>
       </form>
     </div>
+  </div>
   );
 };
 
