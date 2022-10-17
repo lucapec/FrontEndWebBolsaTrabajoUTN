@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
-import "./EnterpriseData.css";
+import "./CompanyData.css";
 import "react-toastify/dist/ReactToastify.css";
 
 
-const EnterpriseDataPag1 = ({setBoolPage2, UpdateData }) => {
+const CompanyDataPag1 = ({setBoolPage2, UpdateData }) => {
 
   const [businessName, setBusinessName] = useState("");
   const [postalCode, setPostalcode] = useState("");
@@ -173,4 +173,4 @@ const EnterpriseDataPag1 = ({setBoolPage2, UpdateData }) => {
   );
 };
 
-export default EnterpriseDataPag1;
+export default CompanyDataPag1;

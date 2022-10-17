@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
-import EnterpriseDataPag1 from "../components/forms/enterpriseRegisterForms/EnterpriseDataPag1";
-import EnterpriseDataPag2 from "../components/forms/enterpriseRegisterForms/EnterpriseDataPag2";
+import CompanyDataPag1 from "../components/forms/CompanyRegisterForms/CompanyDataPag1";
+import CompanyDataPag2 from "../components/forms/CompanyRegisterForms/CompanyDataPag2";
 import UserContext from "../context/UserContext"
 
-const EnterpriseData = () => {
+const CompanyData = () => {
   const [data, setData] = useState({});
   const [boolPage2, setBoolPage2] = useState(false);
   const [successfulCharge, setSuccessfulCharge] = useState(false);
@@ -29,17 +29,17 @@ const EnterpriseData = () => {
         console.log(err.message);
       });
   }, [data, jwt])
-  
+
 
   return !boolPage2 ? (
     <div>
-      <EnterpriseDataPag1 UpdateData={UpdateData} setBoolPage2={setBoolPage2}  />
+      <CompanyDataPag1 UpdateData={UpdateData} setBoolPage2={setBoolPage2}  />
     </div>
   ) : (
     <div>
-      <EnterpriseDataPag2 UpdateData={UpdateData} setSuccessfulCharge={setSuccessfulCharge} />
+      <CompanyDataPag2 UpdateData={UpdateData} setSuccessfulCharge={setSuccessfulCharge} />
     </div>
   );
 };
 
-export default EnterpriseData;
+export default CompanyData;
