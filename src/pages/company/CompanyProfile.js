@@ -13,6 +13,7 @@ const CompanyProfile = () => {
   const [webURL, setWebURL] = useState();
   const [legalAdress, setLegalAdress] = useState();
   const [nameContact, setNameContact] = useState("");
+  const [lastname, setLastnameContact]= useState();
   const [emailContact, setEmailContact] = useState("");
   const [positionContact, setPositionContact] = useState("");
   const [telephoneNumberContact, setTelephoneNumberContact] = useState();
@@ -44,6 +45,9 @@ const CompanyProfile = () => {
       case "nameContact":
         setNameContact(e.target.value);
         break;
+      case "lastnameContact":
+        setLastnameContact(e.target.value);
+        break;
       case "emailContact":
         setEmailContact(e.target.value);
         break;
@@ -61,12 +65,27 @@ const CompanyProfile = () => {
     }
   };
 
+  const datos = {
+    PostalCode: postalCode,
+    Cuit: cuit,
+    TelephoneNumber: telephoneNumber,
+    Sector: sector,
+    Web: webURL,
+    LegalAdress: legalAdress,
+    RecruiterName: nameContact,
+    RecruiterLastName: lastname,
+    RecruiterEmail: emailContact,
+    RecruiterPosition: positionContact,
+    RecruiterPhoneNumber: telephoneNumber,
+    RecruiterRelWithCompany: relWithCompanyContact
+  }
+
   return (
     <div className="divFormProfile">
       <div id="form" className="form">
         <form className=" mt-3">
           <div id="divForm" className="container">
-            <div id="row" className="row row-cols-4">
+            <div id="row1" className="row row-cols-4">
               <div className=" col form-group align-items-center ">
                 <label>Razon Social</label>
                 <br />
@@ -122,7 +141,7 @@ const CompanyProfile = () => {
             </div>
           </div>
           <div className="container">
-            <div id="row" className="row row-cols-4">
+            <div id="row2" className="row row-cols-4">
               <div className=" col form-group align-items-center ">
                 <label>Rubro</label>
                 <br />
@@ -163,7 +182,7 @@ const CompanyProfile = () => {
                 />
               </div>
               <div className="col form-group align-items-center">
-                <label>Nombre y Apellido del Contacto</label>
+                <label>Nombre del Contacto</label>
                 <br />
                 <input
                   type="text"
@@ -171,29 +190,29 @@ const CompanyProfile = () => {
                   id="nameContact"
                   className="form-control-sm"
                   value={nameContact}
-                  placeholder="Nombre y Apellido"
+                  placeholder="Nombre"
                   onChange={inputHandler}
                 />
               </div>
             </div>
           </div>
           <div className="container">
-            <div id="row" className="row row-cols-4">
-              <div className=" col form-group align-items-center">
-                <label>Email de Contacto</label>
+            <div id="row3" className="row row-cols-4">
+            <div className="col form-group align-items-center">
+                <label>Apellido del Contacto</label>
                 <br />
                 <input
                   type="text"
-                  name="emailContact"
-                  id="emailContact"
+                  name="lastnameContact"
+                  id="lastnameContact"
                   className="form-control-sm"
-                  value={emailContact}
-                  placeholder="Email"
+                  value={nameContact}
+                  placeholder="Apellido"
                   onChange={inputHandler}
                 />
               </div>
               <div className=" col form-group align-items-center">
-                <label>Puesto / Cargo del Contacto</label>
+                <label>Puesto/Cargo del Contacto</label>
                 <br />
                 <input
                   type="text"
@@ -202,6 +221,49 @@ const CompanyProfile = () => {
                   className="form-control-sm"
                   value={positionContact}
                   placeholder="Puesto / Cargo"
+                  onChange={inputHandler}
+                />
+              </div>
+              <div className=" col form-group align-items-center">
+                <label>Relación con la Empresa</label>
+                <br />
+                <p className="p-radio">
+                  <input
+                    type="radio"
+                    name="relacion"
+                    id="relacion"
+                    className="form-check-input"
+                    value={0}
+                  />
+                  Trabajo para la empresa
+                </p>
+                <div className="divInput">
+                  <p className="p-radio">
+                    <input
+                      type="radio"
+                      name="relacion"
+                      id="relacion"
+                      className="form-check-input"
+                      value={1}
+                    />
+                    Trabajo para una consultora
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="container" id="row44">
+            <div id="row4" className="row row-cols-4">
+              <div className=" col form-group align-items-center">
+                <label>Email del Contacto</label>
+                <br />
+                <input
+                  type="text"
+                  name="emailContact"
+                  id="emailContact"
+                  className="form-control-sm"
+                  value={emailContact}
+                  placeholder="Email"
                   onChange={inputHandler}
                 />
               </div>
@@ -217,32 +279,6 @@ const CompanyProfile = () => {
                   placeholder="Telefono"
                   onChange={inputHandler}
                 />
-              </div>
-              <div className=" col form-group align-items-center">
-                <label>Relacion del Contacto con la Empresa</label>
-                <br />
-                <p>
-                  <input
-                    type="radio"
-                    name="relacion"
-                    id="relacion"
-                    className="form-check-input"
-                    value={"en-empresa"}
-                  />
-                  Trabajo para la empresa solicitante
-                </p>
-                <div className="divInput">
-                  <p>
-                    <input
-                      type="radio"
-                      name="relacion"
-                      id="relacion"
-                      className="form-check-input"
-                      value={"en-consultora"}
-                    />
-                    Trabajo para una consultora
-                  </p>
-                </div>
               </div>
             </div>
           </div>
