@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import UserContext from "../../context/UserContext";
-import axios from "axios";
 import "./Forms.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,7 +9,7 @@ import utnLogo from "../../assets/logo-utn.png";
 const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { jwt, setJwt } = useContext(UserContext);
+  const { jwt, setJwt, setRole } = useContext(UserContext);
   const navigate = useNavigate();
   let passwordRegExp = /^[A-Za-z]\w{7,14}$/;
 
@@ -38,24 +37,32 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
     e.preventDefault();
     const errors = errorsList();
     if (errors.length === 0) {
-      axios.post('https://localhost:7172/api/authentication/Authenticate',
-      {
-        email: email,
-        password: password,
-      },
-      {
-        headers: {
-          'Content-type': 'application/json',
-        },
+      fetch('https://localhost:7172/api/Authentication/Authenticate', {
+        method: 'POST',
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
       })
+        .then((r) => r.json())
         .then((r) => {
-          if (r.data.success) {
-            window.sessionStorage.setItem('jwt', r.data.token);
-            setJwt(r.data.token);
-            navigate('/ofertas');
+          if (r.success) {
+            window.sessionStorage.setItem('jwt', r.token);
+            window.sessionStorage.setItem('role', r.roles[0]);
+            setJwt(r.token);
+            setRole(r.roles[0]);
+            if (r.roles[0] === "Student") {
+              navigate('/ofertas');
+            } else if (r.roles[0] === "Company") {
+              navigate('/ofertasEmpresa');
+            } else {
+              navigate('/adminDashboard');
+            }
           } else {
             window.sessionStorage.removeItem('jwt');
-            toast(r.data.message, {
+            window.sessionStorage.removeItem('role');
+            toast(r.message, {
               autoClose: 3000,
               hideProgressBar: false,
               type: "error",
@@ -66,6 +73,7 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
         })
         .catch((err) => {
           window.sessionStorage.removeItem('jwt');
+          window.sessionStorage.removeItem('role');
           console.log(err);
         });
     } else {
