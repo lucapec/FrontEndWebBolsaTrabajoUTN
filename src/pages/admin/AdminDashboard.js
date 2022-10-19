@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import "./AdminDashboard.css";
+import { Row, Col } from 'react-bootstrap';
+import DashboardTable from "./DashboardTable";
 
 const AdminDashboard = () => {
   const [selectedSettings, setSelectedSettings] = useState([
@@ -52,8 +54,12 @@ const AdminDashboard = () => {
           </li>
         </ul>
       </aside>
-      <main className="main">
-
+      <main className="content">
+        <Row>
+          <Col>
+            <DashboardTable url='https://localhost:7172/api/Careers' title="Carreras" />
+          </Col>
+        </Row>
       </main>
     </div>
   )
