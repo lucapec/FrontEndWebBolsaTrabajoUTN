@@ -9,7 +9,9 @@ import Profile from "./pages/Profile";
 import StudentData from "./pages/StudentData";
 import EnterpriseData from "./pages/EnterpriseData";
 import CompanyProfile from "./pages/company/CompanyProfile";
+import CompanyHome from "./pages/company/CompanyHome";
 import { UserContextProvider } from "./context/UserContext";
+
 
 const App = () => {
   return (
@@ -25,6 +27,7 @@ const App = () => {
           <Route path="/datosAlumno" element={<StudentData />}></Route>
           <Route path="/empresaReg" element={<EnterpriseData />}></Route>
           <Route path="/perfilEmpresa" element={<CompanyProfile />}></Route>
+          <Route path="/homeEmpresa" element={<CompanyHome />}></Route>
         </Routes>
       </UserContextProvider>
     </>

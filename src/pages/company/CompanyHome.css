@@ -1,0 +1,49 @@
+.footerCompanyHome {
+  position: absolute;
+  margin-top: 0%;
+  width: 100%;
+  height: 15vh;
+  text-align: center;
+  background-color: rgb(111, 133, 205);
+  line-height: 1%;
+}
+.divFormInternship {
+  margin-top: -15%;
+}
+
+.divFormDependency{
+    margin-top: -15%;
+}
+
+.titleInternship {
+  margin-top: 3%;
+  text-align: center;
+}
+
+#rowInternship {
+  margin: -5%;
+}
+
+.labelInternship {
+  margin-left: 7%;
+  margin-top: -3%;
+  line-height: 1%;
+}
+
+.titleDependency {
+  margin-top: 3%;
+  text-align: center;
+}
+
+#rowDependency {
+  margin: -5%;
+}
+
+.labelDependency {
+  margin-right: 5%;
+  margin-top: -8%;
+}
+
+#workingDay {
+  margin-right: 30%;
+}

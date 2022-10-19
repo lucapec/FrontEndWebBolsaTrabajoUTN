@@ -54,13 +54,6 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
     const errors = errorsList();
     if (errors.length === 0) {
       registerUser();
-      toast("El registro fue exitoso", {
-        autoClose: 3000,
-        hideProgressBar: false,
-        type: "success",
-        theme: "dark",
-        position: toast.POSITION.TOP_LEFT,
-      });
     } else {
       errors.forEach((error) => {
         toast(error.message, {
