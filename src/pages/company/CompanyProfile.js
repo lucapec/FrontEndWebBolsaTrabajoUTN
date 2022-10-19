@@ -17,6 +17,7 @@ const CompanyProfile = () => {
   const [positionContact, setPositionContact] = useState("");
   const [telephoneNumberContact, setTelephoneNumberContact] = useState();
   const [relWithCompanyContact, setRelWithCompanyContact] = useState();
+  console.log(relWithCompanyContact);
 
   const inputHandler = (e) => {
     switch (e.target.id) {
