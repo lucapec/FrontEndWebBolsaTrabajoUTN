@@ -5,7 +5,7 @@ import DashboardTable from "./DashboardTable";
 
 const AdminDashboard = () => {
   const [selectedSettings, setSelectedSettings] = useState([
-    { id: 'carreras', isSelected: false },
+    { id: 'carreras', isSelected: true },
     { id: 'alumnos', isSelected: false },
     { id: 'empresas', isSelected: false },
   ]);
@@ -13,7 +13,7 @@ const AdminDashboard = () => {
     switch (e.target.id) {
       case "carreras":
         setSelectedSettings([
-          {  id: e.target.id, isSelected: true },
+          { id: e.target.id, isSelected: true },
           { id: "alumnos", isSelected: false },
           { id: "empresas", isSelected: false },
         ]);
@@ -56,9 +56,11 @@ const AdminDashboard = () => {
       </aside>
       <main className="content">
         <Row>
-          <Col>
-            <DashboardTable url='https://localhost:7172/api/Careers' title="Carreras" />
-          </Col>
+          {selectedSettings.find((x) => x.id === "carreras").isSelected && (
+            <Col>
+              <DashboardTable url='https://localhost:7172/api/Careers' title="Carreras" />
+            </Col>
+          )}
         </Row>
       </main>
     </div>
