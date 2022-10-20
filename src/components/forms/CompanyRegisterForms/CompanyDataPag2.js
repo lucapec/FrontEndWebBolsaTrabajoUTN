@@ -1,15 +1,19 @@
-import "./CompanyData.css";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
-const CompanyDataPag2 = ({UpdateData, setSuccessfulCharge, onLoad }) => {
+import "react-toastify/dist/ReactToastify.css";
+import "./CompanyData.css";
+
+const CompanyDataPag2 = ({UpdateData, setSuccessfulCharge }) => {
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [position, setPosition] = useState("");
   const [telephoneNumber, setTelephoneNumber] = useState("");
   const [relWithCompany, setRelWithCompany] = useState("");
+
+  const navigate = useNavigate();
   
   const inputHandler = (e) => {
     switch (e.target.id) {
@@ -55,6 +59,9 @@ const CompanyDataPag2 = ({UpdateData, setSuccessfulCharge, onLoad }) => {
         {
           setSuccessfulCharge(true);
           UpdateData(datos2);
+          setTimeout(() => {
+            navigate("/ofertasEmpresa")
+            }, 6000)
           
           toast("Los datos han sido cargados exitosamente", {
             autoClose: 3000,

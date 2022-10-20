@@ -1,23 +1,58 @@
-import { useState } from "react";
-
+import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import UserContext from "../../context/UserContext";
 import utnLogo from "../../assets/logo-utn.png";
+import { ToastContainer, toast } from "react-toastify";
 
+import "react-toastify/dist/ReactToastify.css";
 import "./CompanyProfile.css";
 
 const CompanyProfile = () => {
-  const [businessName, setBusinessName] = useState();
+  const [businessName, setBusinessName] = useState("");
   const [postalCode, setPostalcode] = useState();
   const [cuit, setCuit] = useState();
   const [telephoneNumber, setTelephoneNumber] = useState();
-  const [sector, setSector] = useState();
-  const [webURL, setWebURL] = useState();
-  const [legalAdress, setLegalAdress] = useState();
+  const [sector, setSector] = useState("");
+  const [webURL, setWebURL] = useState("");
+  const [legalAdress, setLegalAdress] = useState("");
   const [nameContact, setNameContact] = useState("");
-  const [lastname, setLastnameContact]= useState();
+  const [lastnameContact, setLastnameContact]= useState();
   const [emailContact, setEmailContact] = useState("");
   const [positionContact, setPositionContact] = useState("");
-  const [telephoneNumberContact, setTelephoneNumberContact] = useState();
+  const [telephoneNumberContact, setTelephoneNumberContact] = useState("");
   const [relWithCompanyContact, setRelWithCompanyContact] = useState();
+  const [companyData, setCompanyData] = useState({});
+
+  const {jwt} = useContext(UserContext);
+  const navigate = useNavigate();
+
+  
+  
+  useEffect(() => {
+    fetch('https://localhost:7172/api/UsersInfo/Company',{
+      method: "GET",
+      headers: { "Content-type": "application/json", Authorization:`Bearer ${jwt}`}
+    })
+    .then(response => response.json())
+    .then(data => setCompanyData(data))
+  }, [jwt])
+
+  useEffect(() => {
+    setBusinessName(companyData.companyName)
+    setPostalcode(companyData.postalCode)
+    setCuit(companyData.cuit)
+    setTelephoneNumber(companyData.telephoneNumber)
+    setSector(companyData.sector)
+    setWebURL(companyData.web)
+    setLegalAdress(companyData.legalAdress)
+    setNameContact(companyData.recruiterName)
+    setLastnameContact(companyData.recruiterLastName)
+    setEmailContact(companyData.recruiterEmail)
+    setPositionContact(companyData.recruiterPosition)
+    setTelephoneNumberContact(companyData.recruiterPhoneNumber)
+    setRelWithCompanyContact(companyData.recruiterRelWithCompany)
+  }, [companyData])
+  
 
   const inputHandler = (e) => {
     switch (e.target.id) {
@@ -30,19 +65,19 @@ const CompanyProfile = () => {
       case "cuit":
         setCuit(e.target.value);
         break;
-      case "telephone":
+      case "telephoneNumber":
         setTelephoneNumber(e.target.value);
         break;
       case "sector":
         setSector(e.target.value);
         break;
-      case "web":
+      case "webURL":
         setWebURL(e.target.value);
         break;
       case "legalAdress":
         setLegalAdress(e.target.value);
         break;
-      case "nameContact":
+        case "nameContact":
         setNameContact(e.target.value);
         break;
       case "lastnameContact":
@@ -65,7 +100,7 @@ const CompanyProfile = () => {
     }
   };
 
-  const datos = {
+  const updateData = {
     PostalCode: postalCode,
     Cuit: cuit,
     TelephoneNumber: telephoneNumber,
@@ -73,14 +108,72 @@ const CompanyProfile = () => {
     Web: webURL,
     LegalAdress: legalAdress,
     RecruiterName: nameContact,
-    RecruiterLastName: lastname,
+    RecruiterLastName: lastnameContact,
     RecruiterEmail: emailContact,
     RecruiterPosition: positionContact,
-    RecruiterPhoneNumber: telephoneNumber,
+    RecruiterPhoneNumber: telephoneNumberContact,
     RecruiterRelWithCompany: relWithCompanyContact
   }
+  
+  const SaveChangesBtn = (e) => {
+    e.preventDefault();
+    if (postalCode && sector && webURL && telephoneNumber && legalAdress && nameContact && lastnameContact && positionContact && telephoneNumberContact && relWithCompanyContact) 
+    {
+      if (emailContact.toLowerCase().match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )) 
+        {
+          fetch("https://localhost:7172/api/UsersInfo/UpdateDataCompany", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${jwt}`,
+            },
+            body: JSON.stringify(updateData),
+          })
+            .then((res) => res.json())
+            .then(
+              toast("Los datos han sido cargados exitosamente", {
+              autoClose: 3000,
+              hideProgressBar: false,
+              type: "success",
+              theme: "dark",
+              position: toast.POSITION.TOP_LEFT,
+            }))
+           .then(setTimeout(() => {
+            navigate("/ofertasEmpresa")
+            }, 4000))
+            .catch((err) => {
+              console.log(err.message);
+            });
+
+          
+      } else 
+      {
+        toast("Ingrese un email valido", {
+          autoClose: 3000,
+          hideProgressBar: false,
+          type: "error",
+          theme: "dark",
+          position: toast.POSITION.TOP_LEFT,
+        });
+      }
+    } else 
+    {
+      console.log("la nueva data:", updateData)
+      toast("Complete todos los campos", {
+        autoClose: 3000,
+        hideProgressBar: false,
+        type: "warning",
+        theme: "dark",
+        position: toast.POSITION.TOP_LEFT,
+      });
+    }    
+  };
 
   return (
+    <>
+    <ToastContainer className="mt-5"/>
     <div className="divFormProfile">
       <div id="form" className="form">
         <form className=" mt-3">
@@ -95,7 +188,19 @@ const CompanyProfile = () => {
                   id="businessName"
                   className="form-control-sm"
                   value={businessName}
-                  placeholder="Razon Social"
+                  onChange={inputHandler}
+                  readOnly
+                />
+              </div>
+              <div className=" col form-group align-items-center">
+                <label>Domicilio Legal</label>
+                <br />
+                <input
+                  type="text"
+                  name="legalAdress"
+                  id="legalAdress"
+                  className="form-control-sm"
+                  value={legalAdress}
                   onChange={inputHandler}
                 />
               </div>
@@ -108,7 +213,37 @@ const CompanyProfile = () => {
                   id="postalCode"
                   className="form-control-sm"
                   value={postalCode}
-                  placeholder="Codigo Postal"
+                  onChange={inputHandler}
+                />
+              </div>             
+              <div className=" col form-group align-items-center">
+                <label>Telefono de la Empresa</label>
+                <br />
+                <input
+                  type="number"
+                  name="telephoneNumber"
+                  id="telephoneNumber"
+                  className="form-control-sm"
+                  value={telephoneNumber}
+                  placeholder="código area + número"
+                  onChange={inputHandler}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="container">
+            <div id="row2" className="row row-cols-4">
+              <div className=" col form-group align-items-center ">
+              </div>
+              <div className=" col form-group align-items-center ">
+                <label>Rubro</label>
+                <br />
+                <input
+                  type="text"
+                  name="sector"
+                  id="sector"
+                  className="form-control-sm"
+                  value={sector}
                   onChange={inputHandler}
                 />
               </div>
@@ -121,38 +256,8 @@ const CompanyProfile = () => {
                   id="cuit"
                   className="form-control-sm"
                   value={cuit}
-                  placeholder="CUIT"
                   onChange={inputHandler}
-                />
-              </div>
-              <div className=" col form-group align-items-center">
-                <label>Telefono de la Empresa</label>
-                <br />
-                <input
-                  type="number"
-                  name="telephoneNumber"
-                  id="telephoneNumber"
-                  className="form-control-sm"
-                  value={telephoneNumber}
-                  placeholder="Telefono"
-                  onChange={inputHandler}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="container">
-            <div id="row2" className="row row-cols-4">
-              <div className=" col form-group align-items-center ">
-                <label>Rubro</label>
-                <br />
-                <input
-                  type="text"
-                  name="sector"
-                  id="sector"
-                  className="form-control-sm"
-                  value={sector}
-                  placeholder="Rubro"
-                  onChange={inputHandler}
+                  readOnly
                 />
               </div>
               <div className=" col form-group align-items-center">
@@ -164,22 +269,14 @@ const CompanyProfile = () => {
                   id="webURL"
                   className="form-control-sm"
                   value={webURL}
-                  placeholder="Web"
                   onChange={inputHandler}
                 />
               </div>
-              <div className=" col form-group align-items-center">
-                <label>Domicilio Legal</label>
-                <br />
-                <input
-                  type="text"
-                  name="legalAdress"
-                  id="legalAdress"
-                  className="form-control-sm"
-                  value={legalAdress}
-                  placeholder="Domicilio Legal"
-                  onChange={inputHandler}
-                />
+            </div>
+          </div>
+          <div className="container">
+            <div id="row3" className="row row-cols-4">
+              <div className=" col form-group align-items-center ">
               </div>
               <div className="col form-group align-items-center">
                 <label>Nombre del Contacto</label>
@@ -190,15 +287,10 @@ const CompanyProfile = () => {
                   id="nameContact"
                   className="form-control-sm"
                   value={nameContact}
-                  placeholder="Nombre"
                   onChange={inputHandler}
                 />
               </div>
-            </div>
-          </div>
-          <div className="container">
-            <div id="row3" className="row row-cols-4">
-            <div className="col form-group align-items-center">
+              <div className="col form-group align-items-center">
                 <label>Apellido del Contacto</label>
                 <br />
                 <input
@@ -206,21 +298,7 @@ const CompanyProfile = () => {
                   name="lastnameContact"
                   id="lastnameContact"
                   className="form-control-sm"
-                  value={nameContact}
-                  placeholder="Apellido"
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className=" col form-group align-items-center">
-                <label>Puesto/Cargo del Contacto</label>
-                <br />
-                <input
-                  type="text"
-                  name="positionContact"
-                  id="positionContact"
-                  className="form-control-sm"
-                  value={positionContact}
-                  placeholder="Puesto / Cargo"
+                  value={lastnameContact}
                   onChange={inputHandler}
                 />
               </div>
@@ -254,16 +332,17 @@ const CompanyProfile = () => {
           </div>
           <div className="container" id="row44">
             <div id="row4" className="row row-cols-4">
+              <div className=" col form-group align-items-center ">
+              </div>
               <div className=" col form-group align-items-center">
-                <label>Email del Contacto</label>
+                <label>Puesto/Cargo del Contacto</label>
                 <br />
                 <input
                   type="text"
-                  name="emailContact"
-                  id="emailContact"
+                  name="positionContact"
+                  id="positionContact"
                   className="form-control-sm"
-                  value={emailContact}
-                  placeholder="Email"
+                  value={positionContact}
                   onChange={inputHandler}
                 />
               </div>
@@ -276,7 +355,19 @@ const CompanyProfile = () => {
                   id="telephoneNumberContact"
                   className="form-control-sm"
                   value={telephoneNumberContact}
-                  placeholder="Telefono"
+                  placeholder="código area + número"
+                  onChange={inputHandler}
+                />
+              </div>
+              <div className=" col form-group align-items-center">
+                <label>Email del Contacto</label>
+                <br />
+                <input
+                  type="text"
+                  name="emailContact"
+                  id="emailContact"
+                  className="form-control-sm"
+                  value={emailContact}
                   onChange={inputHandler}
                 />
               </div>
@@ -284,8 +375,8 @@ const CompanyProfile = () => {
           </div>
           <div className="container">
             <div className="col-md-12">
-              <button id="btnCompany" className="btn">
-                Editar Perfil
+              <button id="btnCompany" className="btn" onClick={SaveChangesBtn}>
+                Guardar Cambios
               </button>
             </div>
           </div>
@@ -314,6 +405,7 @@ const CompanyProfile = () => {
         </div>
       </footer>
     </div>
+    </>
   );
 };
 
