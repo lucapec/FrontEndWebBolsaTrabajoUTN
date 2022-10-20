@@ -176,7 +176,7 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
           </div>
         </div>
 
-        <button type="button" className="btn" onClick={submitHandler}>
+        <button type="button" className="button-enterprise" onClick={submitHandler}>
           Guardar e Ingresar
         </button>
       </div>

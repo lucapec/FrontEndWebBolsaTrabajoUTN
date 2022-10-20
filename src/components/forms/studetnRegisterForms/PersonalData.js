@@ -406,7 +406,7 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
         </div>
         <div className="container">
           <div className="col-md-12 text-center">
-            <button onClick={dataValidation} className="btn">
+            <button onClick={dataValidation} className="button-personal">
               Guardar y continuar
             </button>
           </div>

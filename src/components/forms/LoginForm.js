@@ -140,7 +140,7 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
               onChange={inputHandler}
             />
           </div>
-          <button onClick={dataValidation} className="btn mt-3">
+          <button onClick={dataValidation} className="button mt-3">
             {btnText}
           </button>
         </form>

@@ -167,7 +167,7 @@ const EnterpriseDataPag1 = ({ setBoolPage2, setData }) => {
           <div className="col"></div>
           <br />
         </div>
-        <button type="button" className="btn" onClick={submitHandler}>
+        <button type="button" className="button-enterprise" onClick={submitHandler}>
           Guardar e Ingresar
         </button>
       </form>

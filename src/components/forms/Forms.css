@@ -109,7 +109,7 @@ body {
   color: #555;
 }
 
-.wrapper .btn {
+.wrapper .button {
   width: 250px;
   height: 40px;
   background-color: #719FED;
@@ -122,7 +122,7 @@ body {
   width: 250px;
 }
 
-.wrapper .btn:hover {
+.wrapper .button:hover {
   background-color: #039be5;
 }
 
