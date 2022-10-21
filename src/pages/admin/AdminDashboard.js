@@ -2,6 +2,7 @@ import { useState } from 'react';
 import "./AdminDashboard.css";
 import { Row, Col, Button } from 'react-bootstrap';
 import DashboardTable from "./DashboardTable";
+import { handleUpdateCareer, handleDeleteCareer, handleUpdateStudent, handleUpdateCompany } from "./Handlers";
 
 const AdminDashboard = () => {
   const [deletedOrUpdated, setDeletedOrUpdated] = useState(false);
@@ -36,45 +37,6 @@ const AdminDashboard = () => {
       default:
         break;
     }
-  }
-
-  const handleDeleteRow = (rowValues) => {
-    fetch(`https://localhost:7172/api/Careers/${rowValues.id}`, {
-        method: 'DELETE',
-        headers: { "Content-type": "application/json" },
-      })
-        .then((r) => {
-          if (r.ok) {
-            setDeletedOrUpdated(!deletedOrUpdated);
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-  };
-
-  const handleUpdateRow = (rowValues) => {
-    const { id } = rowValues;
-    const { col2, col3, col4, col5 } = rowValues.row;
-    const updatedCareer = {
-      name: col4,
-      type: col2,
-      abbreviation: col3,
-      totalSubjets: col5,
-    };
-    fetch(`https://localhost:7172/api/Careers?careerId=${id}`, {
-        method: 'PUT',
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify(updatedCareer),
-      })
-        .then((r) => {
-          if (r.ok) {
-            setDeletedOrUpdated(!deletedOrUpdated);
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
   }
 
   return (
@@ -112,20 +74,70 @@ const AdminDashboard = () => {
                         <Button
                           variant="success"
                           color="success"
-                          style={{ margin: '0 5px 0 0'}}
-                          onClick={() => handleUpdateRow(rowValues)}
+                          style={{ margin: '0 5px 0 0' }}
+                          onClick={() => handleUpdateCareer(rowValues, setDeletedOrUpdated, deletedOrUpdated)}
                         >
                           Guardar
                         </Button>
                         <Button
                           variant="danger"
                           color="danger"
-                          style={{ margin: '0 0 0 5px'}}
-                          onClick={() => handleDeleteRow(rowValues)}
+                          style={{ margin: '0 0 0 5px' }}
+                          onClick={() => handleDeleteCareer(rowValues, setDeletedOrUpdated, deletedOrUpdated)}
                         >
                           X
                         </Button>
                       </>
+                    )
+                  }
+                },
+              ]} />
+            </Col>
+          )}
+          {selectedSettings.find((x) => x.id === "alumnos").isSelected && (
+            <Col>
+              <DashboardTable url='https://localhost:7172/api/Careers' deletedOrUpdated={deletedOrUpdated} title="Alumnos" columns={[
+                { field: 'col1', headerName: 'Id', width: 40 },
+                { field: 'col2', headerName: 'Tipo', width: 125, editable: true },
+                { field: 'col3', headerName: 'Abreviación', width: 125, editable: true },
+                { field: 'col4', headerName: 'Nombre', width: 350, editable: true },
+                { field: 'col5', headerName: 'Cant. Materias', width: 125, editable: true },
+                {
+                  field: 'col6', headerName: 'Acciones', width: 150, renderCell: (rowValues) => {
+                    return (
+                      <Button
+                        variant="success"
+                        color="success"
+                        style={{ margin: '0 5px 0 0' }}
+                        onClick={() => handleUpdateStudent(rowValues)}
+                      >
+                        Guardar
+                      </Button>
+                    )
+                  }
+                },
+              ]} />
+            </Col>
+          )}
+          {selectedSettings.find((x) => x.id === "empresas").isSelected && (
+            <Col>
+              <DashboardTable url='https://localhost:7172/api/Careers' deletedOrUpdated={deletedOrUpdated} title="Empresas" columns={[
+                { field: 'col1', headerName: 'Id', width: 40 },
+                { field: 'col2', headerName: 'Tipo', width: 125, editable: true },
+                { field: 'col3', headerName: 'Abreviación', width: 125, editable: true },
+                { field: 'col4', headerName: 'Nombre', width: 350, editable: true },
+                { field: 'col5', headerName: 'Cant. Materias', width: 125, editable: true },
+                {
+                  field: 'col6', headerName: 'Acciones', width: 150, renderCell: (rowValues) => {
+                    return (
+                      <Button
+                        variant="success"
+                        color="success"
+                        style={{ margin: '0 5px 0 0' }}
+                        onClick={() => handleUpdateCompany(rowValues)}
+                      >
+                        Guardar
+                      </Button>
                     )
                   }
                 },
