@@ -119,7 +119,7 @@ const Profile = () => {
                   name="firstName"
                   id="firstName"
                   className="form-control-sm"
-                  disabled
+                  readOnly
                   value={firstName}
                   placeholder="Nombre"
                   onChange={inputHandler}
@@ -133,7 +133,7 @@ const Profile = () => {
                   name="lastName"
                   id="lastName"
                   className="form-control-sm"
-                  disabled
+                  readOnly
                   value={lastName}
                   placeholder="Apellido"
                   onChange={inputHandler}
@@ -147,7 +147,7 @@ const Profile = () => {
                   name="email"
                   id="email"
                   className="form-control-sm"
-                  disabled
+                  readOnly
                   value={email}
                   placeholder="Email"
                   onChange={inputHandler}
@@ -160,7 +160,7 @@ const Profile = () => {
                   id="documentType"
                   name="documentType"
                   className="form-control-sm"
-                  disabled
+                  readOnly
                   value={documentType}
                   onChange={inputHandler}
                 >
@@ -178,7 +178,7 @@ const Profile = () => {
                   name="documentNumber"
                   id="documentNumber"
                   className="form-control-sm"
-                  disabled
+                  readOnly
                   value={documentNumber}
                   placeholder="Numero de Documento"
                   onChange={inputHandler}
@@ -196,7 +196,7 @@ const Profile = () => {
                   name="legajo"
                   id="legajo"
                   className="form-control-sm"
-                  disabled
+                  readOnly
                   value={legajo}
                   placeholder="Legajo"
                   onChange={inputHandler}
@@ -210,7 +210,7 @@ const Profile = () => {
                   name="birthDate"
                   id="birthDate"
                   className="form-control-sm"
-                  disabled
+                  readOnly
                   value={birthDate}
                   placeholder="Fecha de Nacimiento"
                   onChange={inputHandler}
@@ -237,7 +237,7 @@ const Profile = () => {
                   name="cuilOrCuit"
                   id="cuilOrCuit"
                   className="form-control-sm"
-                  disabled
+                  readOnly
                   value={cuilOrCuit}
                   placeholder="CUIL o CUIT (Sin guiones)"
                   onChange={inputHandler}

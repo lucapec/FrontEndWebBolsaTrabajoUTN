@@ -102,7 +102,6 @@ const CompanyProfile = () => {
                   id="cuit"
                   className="form-control-sm"
                   readOnly
-                  disabled
                   value={cuit}
                   placeholder="CUIT"
                   onChange={inputHandler}
@@ -229,7 +228,7 @@ const CompanyProfile = () => {
                     name="relacion"
                     id="relacion"
                     className="form-check-input"
-                    value={"en-empresa"}
+                    value={0}
                   />
                   Trabajo para la empresa solicitante
                 </p>
@@ -240,7 +239,7 @@ const CompanyProfile = () => {
                       name="relacion"
                       id="relacion"
                       className="form-check-input"
-                      value={"en-consultora"}
+                      value={1}
                     />
                     Trabajo para una consultora
                   </p>

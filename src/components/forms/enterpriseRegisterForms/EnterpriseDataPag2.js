@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
   const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [position, setPosition] = useState("");
   const [telephoneNumber, setTelephoneNumber] = useState();
@@ -14,6 +15,9 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
     switch (e.target.id) {
       case "name":
         setName(e.target.value);
+        break;
+      case "lastname":
+        setLastname(e.target.value);
         break;
       case "email":
         setEmail(e.target.value);
@@ -91,24 +95,36 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
 
   return (
     <>
-      <ToastContainer className="mt-5" />
+    <ToastContainer className="mt-5" />
       <div className="form">
         <div className="header">
           <h2>Complete los datos de contacto</h2>
         </div>
         <div className="row">
           <div className="col">
-            <label>Nombre y apellido</label>
+            <label>Nombres</label>
             <br />
             <input
               className="form-control-sm"
               type="text"
               id="name"
-              placeholder="Nombre y Apellido"
               onChange={inputHandler}
               value={name}
             />
           </div>
+          <div className="col">
+            <label>Apellido</label>
+            <br />
+            <input
+              className="form-control-sm"
+              type="text"
+              id="lastname"
+              onChange={inputHandler}
+              value={lastname}
+            />
+          </div>
+        </div>
+        <div className="row">
           <div className="col">
             <label>Email</label>
             <br />
@@ -116,13 +132,10 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
               className="form-control-sm"
               type="email"
               id="email"
-              placeholder="Email"
               onChange={inputHandler}
               value={email}
             />
           </div>
-        </div>
-        <div className="row">
           <div className="col">
             <label>Puesto / Cargo</label>
             <br />
@@ -130,14 +143,9 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
               className="form-control-sm"
               type="text"
               id="position"
-              placeholder="Puesto / Cargo"
               onChange={inputHandler}
               value={position}
             />
-          </div>
-          <div className="col">
-            <br />
-            <h5>Relacion del Contacto con la Empresa</h5>
           </div>
         </div>
         <div className="row">
@@ -154,35 +162,34 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
             />
           </div>
           <div className="col">
+            <label>Relacion con la empresa</label>
             <form onChange={inputHandler}>
+              <br/>
               <p>
                 <input
                   type="radio"
                   name="relacion"
                   id="relacion"
                   className="form-check-input"
-                  value={"en-empresa"}
+                  value={0}
                 />
                 Trabajo en la empresa solicitante
               </p>
-              <div className="divInput">
               <p>
                 <input
                   type="radio"
                   name="relacion"
                   id="relacion"
                   className="form-check-input"
-                  value={"en-consultora"}
+                  value={1}
                 />
                 Trabajo para una consultora
               </p>
-              </div>
             </form>
           </div>
         </div>
-
         <button type="button" className="btn" onClick={submitHandler}>
-          Guardar e Ingresar
+          Guardar
         </button>
       </div>
     </>

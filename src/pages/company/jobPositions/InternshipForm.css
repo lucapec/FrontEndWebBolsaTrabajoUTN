@@ -1,14 +1,22 @@
-/* .titleInternship {
+.titleInternship {
   margin-top: 3%;
   text-align: center;
 }
 
 #rowInternship {
-  margin: -5%;
+  margin: -2%;
 }
 
 .labelInternship {
-  margin-left: 7%;
-  margin-top: -3%;
+  margin-left: 20%;
+  margin-top: -10%;
   line-height: 1%;
-} */
+}
+
+#buttonModal {
+  width: 30%;
+}
+
+#buttonModalCreate {
+  width: 50%;
+}

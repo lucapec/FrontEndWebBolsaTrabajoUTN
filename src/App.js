@@ -11,7 +11,6 @@ import StudentData from "./pages/student/StudentData";
 import EnterpriseData from "./pages/EnterpriseData";
 import CompanyProfile from "./pages/company/CompanyProfile";
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import CompanyHome from "./pages/company/CompanyHome";
 import { UserContextProvider } from "./context/UserContext";
 
 
@@ -31,7 +30,6 @@ const App = () => {
           <Route path="/empresaReg" element={<EnterpriseData />}></Route>
           <Route path="/perfilEmpresa" element={<CompanyProfile />}></Route>
           <Route path="/adminDashboard" element={<AdminDashboard />}></Route>
-          <Route path="/homeEmpresa" element={<CompanyHome />}></Route>
         </Routes>
       </UserContextProvider>
     </>
