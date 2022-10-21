@@ -1,6 +1,5 @@
 import React from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
-import "./App.css";
+import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -11,15 +10,19 @@ import StudentData from "./pages/student/StudentData";
 import CompanyData from "./pages/CompanyData";
 import CompanyProfile from "./pages/company/CompanyProfile";
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import { UserContextProvider } from "./context/UserContext";
+import ReplaceRoute from "./hooks/ReplaceRoute";
+import {UserContextProvider} from "./context/UserContext";
+
+import "./App.css";
+
 
 const App = () => {
+
   return (
     <>
       <UserContextProvider>
         <Navbar />
         <Routes>
-          <Route path="*" element={<Navigate replace to="/ingreso" />}></Route>
           <Route path="/ingreso" element={<Login />}></Route>
           <Route path="/registro" element={<Register />}></Route>
           <Route path="/ofertas" element={<JobPositions />}></Route>
@@ -29,6 +32,8 @@ const App = () => {
           <Route path="/datosEmpresa" element={<CompanyData />}></Route>
           <Route path="/perfilEmpresa" element={<CompanyProfile />}></Route>
           <Route path="/adminDashboard" element={<AdminDashboard />}></Route>
+          <Route path="*" element={<ReplaceRoute />}></Route>
+
         </Routes>
       </UserContextProvider>
     </>
