@@ -61,36 +61,42 @@ const AdminDashboard = () => {
         <Row>
           {selectedSettings.find((x) => x.id === "carreras").isSelected && (
             <Col>
-              <DashboardTable url='https://localhost:7172/api/Careers' deletedOrUpdated={deletedOrUpdated} title="Carreras" columns={[
-                { field: 'col1', headerName: 'Id', width: 40 },
-                { field: 'col2', headerName: 'Tipo', width: 125, editable: true },
-                { field: 'col3', headerName: 'Abreviación', width: 125, editable: true },
-                { field: 'col4', headerName: 'Nombre', width: 350, editable: true },
-                { field: 'col5', headerName: 'Cant. Materias', width: 125, editable: true },
-                {
-                  field: 'col6', headerName: 'Acciones', width: 150, renderCell: (rowValues) => {
-                    return (
-                      <>
-                        <Button
-                          variant="success"
-                          color="success"
-                          style={{ margin: '0 5px 0 0' }}
-                          onClick={() => handleUpdateCareer(rowValues, setDeletedOrUpdated, deletedOrUpdated)}
-                        >
-                          Guardar
-                        </Button>
-                        <Button
-                          variant="danger"
-                          color="danger"
-                          style={{ margin: '0 0 0 5px' }}
-                          onClick={() => handleDeleteCareer(rowValues, setDeletedOrUpdated, deletedOrUpdated)}
-                        >
-                          X
-                        </Button>
-                      </>
-                    )
-                  }
-                },
+              <DashboardTable
+                url='https://localhost:7172/api/Careers'
+                deletedOrUpdated={deletedOrUpdated}
+                title="Carreras"
+                addFunctionality={true}
+                setDeletedOrUpdated={setDeletedOrUpdated}
+                columns={[
+                  { field: 'col1', headerName: 'Id', width: 40 },
+                  { field: 'col2', headerName: 'Tipo', width: 125, editable: true },
+                  { field: 'col3', headerName: 'Abreviación', width: 125, editable: true },
+                  { field: 'col4', headerName: 'Nombre', width: 350, editable: true },
+                  { field: 'col5', headerName: 'Cant. Materias', width: 125, editable: true },
+                  {
+                    field: 'col6', headerName: 'Acciones', width: 150, renderCell: (rowValues) => {
+                      return (
+                        <>
+                          <Button
+                            variant="success"
+                            color="success"
+                            style={{ margin: '0 5px 0 0' }}
+                            onClick={() => handleUpdateCareer(rowValues, setDeletedOrUpdated, deletedOrUpdated)}
+                          >
+                            Guardar
+                          </Button>
+                          <Button
+                            variant="danger"
+                            color="danger"
+                            style={{ margin: '0 0 0 5px' }}
+                            onClick={() => handleDeleteCareer(rowValues, setDeletedOrUpdated, deletedOrUpdated)}
+                          >
+                            X
+                          </Button>
+                        </>
+                      )
+                    }
+                  },
               ]} />
             </Col>
           )}
