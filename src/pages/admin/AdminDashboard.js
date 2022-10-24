@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import "./AdminDashboard.css";
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Button, Form } from 'react-bootstrap';
 import DashboardTable from "./DashboardTable";
 import { handleUpdateCareer, handleDeleteCareer, handleUpdateStudent, handleUpdateCompany } from "./Handlers";
 
@@ -39,6 +39,10 @@ const AdminDashboard = () => {
     }
   }
 
+  const handleCheckbox = (rowValues) => {
+    console.log(rowValues)
+  };
+
   return (
     <div className="layout">
       <aside className="sidebar">
@@ -68,13 +72,13 @@ const AdminDashboard = () => {
                 addFunctionality={true}
                 setDeletedOrUpdated={setDeletedOrUpdated}
                 columns={[
-                  { field: 'col1', headerName: 'Id', width: 40 },
-                  { field: 'col2', headerName: 'Tipo', width: 125, editable: true },
-                  { field: 'col3', headerName: 'Abreviación', width: 125, editable: true },
-                  { field: 'col4', headerName: 'Nombre', width: 350, editable: true },
-                  { field: 'col5', headerName: 'Cant. Materias', width: 125, editable: true },
+                  { field: 'col1', headerName: 'Id', width: 40, editable: false, align: 'center', headerAlign: 'center', },
+                  { field: 'col2', headerName: 'Tipo', width: 125, editable: true, align: 'center', headerAlign: 'center', },
+                  { field: 'col3', headerName: 'Abreviación', width: 125, editable: true, align: 'center', headerAlign: 'center', },
+                  { field: 'col4', headerName: 'Nombre', width: 350, editable: true, align: 'center', headerAlign: 'center', },
+                  { field: 'col5', headerName: 'Cant. Materias', width: 125, editable: true, align: 'center', headerAlign: 'center', },
                   {
-                    field: 'col6', headerName: 'Acciones', width: 150, renderCell: (rowValues) => {
+                    field: 'col6', headerName: 'Acciones', width: 150, align: 'center', headerAlign: 'center', renderCell: (rowValues) => {
                       return (
                         <>
                           <Button
@@ -102,51 +106,79 @@ const AdminDashboard = () => {
           )}
           {selectedSettings.find((x) => x.id === "alumnos").isSelected && (
             <Col>
-              <DashboardTable url='https://localhost:7172/api/Careers' deletedOrUpdated={deletedOrUpdated} title="Alumnos" columns={[
-                { field: 'col1', headerName: 'Id', width: 40 },
-                { field: 'col2', headerName: 'Tipo', width: 125, editable: true },
-                { field: 'col3', headerName: 'Abreviación', width: 125, editable: true },
-                { field: 'col4', headerName: 'Nombre', width: 350, editable: true },
-                { field: 'col5', headerName: 'Cant. Materias', width: 125, editable: true },
-                {
-                  field: 'col6', headerName: 'Acciones', width: 150, renderCell: (rowValues) => {
-                    return (
-                      <Button
-                        variant="success"
-                        color="success"
-                        style={{ margin: '0 5px 0 0' }}
-                        onClick={() => handleUpdateStudent(rowValues)}
-                      >
-                        Guardar
-                      </Button>
-                    )
-                  }
-                },
+              <DashboardTable
+                url='https://localhost:7172/api/UsersInfo/GetAllStudents'
+                deletedOrUpdated={deletedOrUpdated}
+                title="Alumnos"
+                columns={[
+                  { field: 'col1', headerName: 'Legajo', width: 100, editable: false, align: 'center', headerAlign: 'center', },
+                  { field: 'col2', headerName: 'DNI', width: 150, editable: false, align: 'center', headerAlign: 'center', },
+                  { field: 'col3', headerName: 'Nombre', width: 150, editable: false, align: 'center', headerAlign: 'center', },
+                  { field: 'col4', headerName: 'Apellido', width: 150, editable: false, align: 'center', headerAlign: 'center', },
+                  {
+                    field: 'col5', headerName: 'Habilitado', width: 120, editable: true, align: 'center', headerAlign: 'center', renderCell: (rowValues) => {
+                      return (
+                        <Form.Check
+                          inline
+                          name="group1"
+                          type="checkbox"
+                          onClick={() => handleCheckbox(rowValues)}
+                        />
+                      )
+                    }
+                  },
+                  {
+                    field: 'col6', headerName: 'Acciones', width: 150, align: 'center', headerAlign: 'center', renderCell: (rowValues) => {
+                      return (
+                        <Button
+                          variant="success"
+                          color="success"
+                          style={{ margin: '0 5px 0 0' }}
+                          onClick={() => handleUpdateStudent(rowValues)}
+                        >
+                          Guardar
+                        </Button>
+                      )
+                    }
+                  },
               ]} />
             </Col>
           )}
           {selectedSettings.find((x) => x.id === "empresas").isSelected && (
             <Col>
-              <DashboardTable url='https://localhost:7172/api/Careers' deletedOrUpdated={deletedOrUpdated} title="Empresas" columns={[
-                { field: 'col1', headerName: 'Id', width: 40 },
-                { field: 'col2', headerName: 'Tipo', width: 125, editable: true },
-                { field: 'col3', headerName: 'Abreviación', width: 125, editable: true },
-                { field: 'col4', headerName: 'Nombre', width: 350, editable: true },
-                { field: 'col5', headerName: 'Cant. Materias', width: 125, editable: true },
-                {
-                  field: 'col6', headerName: 'Acciones', width: 150, renderCell: (rowValues) => {
-                    return (
-                      <Button
-                        variant="success"
-                        color="success"
-                        style={{ margin: '0 5px 0 0' }}
-                        onClick={() => handleUpdateCompany(rowValues)}
-                      >
-                        Guardar
-                      </Button>
-                    )
-                  }
-                },
+              <DashboardTable
+                url='https://localhost:7172/api/UsersInfo/GetAllCompanies'
+                deletedOrUpdated={deletedOrUpdated}
+                title="Empresas"
+                columns={[
+                  { field: 'col1', headerName: 'Cuit', width: 200, editable: false, align: 'center', headerAlign: 'center', },
+                  { field: 'col2', headerName: 'Razon Social', width: 200, editable: false, align: 'center', headerAlign: 'center', },
+                  {
+                    field: 'col5', headerName: 'Habilitado', width: 120, editable: true, align: 'center', headerAlign: 'center', renderCell: (rowValues) => {
+                      return (
+                        <Form.Check
+                          inline
+                          name="group1"
+                          type="checkbox"
+                          onClick={() => handleCheckbox(rowValues)}
+                        />
+                      )
+                    }
+                  },
+                  {
+                    field: 'col6', headerName: 'Acciones', width: 150, align: 'center', headerAlign: 'center', renderCell: (rowValues) => {
+                      return (
+                        <Button
+                          variant="success"
+                          color="success"
+                          style={{ margin: '0 5px 0 0' }}
+                          onClick={() => handleUpdateCompany(rowValues)}
+                        >
+                          Guardar
+                        </Button>
+                      )
+                    }
+                  },
               ]} />
             </Col>
           )}
