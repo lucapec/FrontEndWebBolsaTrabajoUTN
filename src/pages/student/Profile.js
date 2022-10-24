@@ -1,18 +1,21 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
+import UserContext from "../../context/UserContext";
 import utnLogo from "../../assets/logo-utn.png";
 
 import "./Profile.css";
 
 const Profile = () => {
-  const [firstName, setfirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [documentType, setDocumentType] = useState("");
-  const [documentNumber, setDocumentNumber] = useState("");
-  const [legajo, setLegajo] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const [cuilOrCuit, setCuilOrCuit] = useState("");
+  const [firstName, setfirstName] = useState(""); //
+  const [lastName, setLastName] = useState(""); //
+  const [email, setEmail] = useState(""); //
+  const [documentType, setDocumentType] = useState(""); //
+  const [documentNumber, setDocumentNumber] = useState(""); //
+  const [legajo, setLegajo] = useState(""); //
+  const [birthDate, setBirthDate] = useState(""); //
+  const [cuilOrCuit, setCuilOrCuit] = useState(""); //
   const [street, setStreet] = useState("");
   const [numberStreet, setNumberStreet] = useState("");
   const [sex, setSex] = useState("");
@@ -28,6 +31,36 @@ const Profile = () => {
   const [shiftProgress, setShiftProgress] = useState("");
   const [averagesWithDeferrals, setAveragesWithDeferrals] = useState("");
   const [averagesWithoutDeferrals, setAveragesWithoutDeferrals] = useState("");
+  const [studentData, setStudentData] = useState({});
+
+  const { jwt } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const errorsList = () => {
+    const errorsList = [];
+    if (
+      !(
+        street &&
+        numberStreet &&
+        sex &&
+        fileCv &&
+        country &&
+        province &&
+        location &&
+        personalPhone &&
+        specialty &&
+        subjectsApproved &&
+        specialtyPlan &&
+        currentYear &&
+        shiftProgress &&
+        averagesWithDeferrals &&
+        averagesWithoutDeferrals
+      )
+    ) {
+      errorsList.push({ message: "Los campos deben estar completos" });
+    }
+    return errorsList;
+  };
 
   const inputHandler = (e) => {
     switch (e.target.id) {
@@ -105,8 +138,112 @@ const Profile = () => {
     }
   };
 
+  useEffect(() => {
+    fetch("https://localhost:7172/api/UsersInfo/Student", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setStudentData(data));
+  }, [jwt]);
+
+  useEffect(() => {
+    setfirstName(studentData.firstName);
+    setLastName(studentData.lastName);
+    setEmail(studentData.email);
+    setDocumentType(studentData.documentType);
+    setDocumentNumber(studentData.dni);
+    setLegajo(studentData.legajo);
+    setBirthDate(studentData.birthDate);
+    setCuilOrCuit(studentData.cuil);
+    setStreet(studentData.address);
+    setNumberStreet(studentData.addressNum);
+    setSex(studentData.sex);
+    setFileCv(studentData.curriculum);
+    setCountry(studentData.country);
+    setProvince(studentData.province);
+    setLocation(studentData.city);
+    setPersonalPhone(studentData.personalPhone);
+    setSpecialty(studentData.careerId);
+    setSubjectsApproved(studentData.approvedSubjets);
+    setSpecialtyPlan(studentData.planDeEstudio);
+    setCurrentYear(studentData.currentCareerYear);
+    setShiftProgress(studentData.turn);
+    setAveragesWithDeferrals(studentData.average);
+    setAveragesWithoutDeferrals(studentData.averageWithFails);
+  }, [studentData]);
+
+  const updateData = {
+    street,
+    numberStreet,
+    sex,
+    fileCv,
+    country,
+    province,
+    location,
+    personalPhone,
+    specialty,
+    subjectsApproved,
+    specialtyPlan,
+    currentYear,
+    shiftProgress,
+    averagesWithDeferrals,
+    averagesWithoutDeferrals,
+  };
+
+  const updateDataStudent = () => {
+    fetch("https://localhost:7172/api/UsersInfo/UpdateDataStudent", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
+      body: JSON.stringify(updateData),
+    })
+      .then((res) => res.json())
+      .then(
+        toast("Los cambios han sido guardados exitosamente", {
+          autoClose: 3000,
+          hideProgressBar: false,
+          type: "success",
+          theme: "dark",
+          position: toast.POSITION.TOP_LEFT,
+        })
+      )
+      .then(
+        setTimeout(() => {
+          navigate("/ofertas");
+        }, 4000)
+      )
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  const dataValidation = (e) => {
+    e.preventDefault();
+    const errors = errorsList();
+    if (errors.length === 0) {
+      updateDataStudent();
+    } else {
+      errors.forEach((error) => {
+        toast(error.message, {
+          autoClose: 3000,
+          hideProgressBar: false,
+          type: "error",
+          theme: "dark",
+          position: toast.POSITION.TOP_LEFT,
+        });
+      });
+    }
+  };
+
   return (
     <div className="divFormProfile">
+      <ToastContainer className="mt-5" />
       <div className="form">
         <form className=" mt-3">
           <div className=" container ">
@@ -119,7 +256,7 @@ const Profile = () => {
                   name="firstName"
                   id="firstName"
                   className="form-control-sm"
-                  disabled
+                  readOnly
                   value={firstName}
                   placeholder="Nombre"
                   onChange={inputHandler}
@@ -133,7 +270,7 @@ const Profile = () => {
                   name="lastName"
                   id="lastName"
                   className="form-control-sm"
-                  disabled
+                  readOnly
                   value={lastName}
                   placeholder="Apellido"
                   onChange={inputHandler}
@@ -147,7 +284,7 @@ const Profile = () => {
                   name="email"
                   id="email"
                   className="form-control-sm"
-                  disabled
+                  readOnly
                   value={email}
                   placeholder="Email"
                   onChange={inputHandler}
@@ -160,7 +297,7 @@ const Profile = () => {
                   id="documentType"
                   name="documentType"
                   className="form-control-sm"
-                  disabled
+                  readOnly
                   value={documentType}
                   onChange={inputHandler}
                 >
@@ -178,7 +315,7 @@ const Profile = () => {
                   name="documentNumber"
                   id="documentNumber"
                   className="form-control-sm"
-                  disabled
+                  readOnly
                   value={documentNumber}
                   placeholder="Numero de Documento"
                   onChange={inputHandler}
@@ -196,7 +333,7 @@ const Profile = () => {
                   name="legajo"
                   id="legajo"
                   className="form-control-sm"
-                  disabled
+                  readOnly
                   value={legajo}
                   placeholder="Legajo"
                   onChange={inputHandler}
@@ -206,11 +343,11 @@ const Profile = () => {
                 <label>Fecha de Nacimiento</label>
                 <br />
                 <input
-                  type="text"
+                  type="date"
                   name="birthDate"
                   id="birthDate"
                   className="form-control-sm"
-                  disabled
+                  readOnly
                   value={birthDate}
                   placeholder="Fecha de Nacimiento"
                   onChange={inputHandler}
@@ -237,7 +374,7 @@ const Profile = () => {
                   name="cuilOrCuit"
                   id="cuilOrCuit"
                   className="form-control-sm"
-                  disabled
+                  readOnly
                   value={cuilOrCuit}
                   placeholder="CUIL o CUIT (Sin guiones)"
                   onChange={inputHandler}
@@ -449,8 +586,8 @@ const Profile = () => {
 
           <div className="container">
             <div className="col-md-12">
-              <button id="btn" className="btn">
-                Editar Perfil
+              <button id="btn" className="btn" onClick={dataValidation}>
+                Guardar Cambios
               </button>
             </div>
           </div>

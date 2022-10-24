@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
+import { useNavigate } from "react-router-dom";
+
 import "./UniversityData.css";
 
-const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
+const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
   const [specialty, setSpecialty] = useState("");
   const [subjectsApproved, setSubjectsApproved] = useState("");
   const [specialtyPlan, setSpecialtyPlan] = useState("");
@@ -12,6 +14,8 @@ const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
   const [averagesWithDeferrals, setAveragesWithDeferrals] = useState("");
   const [averagesWithoutDeferrals, setAveragesWithoutDeferrals] = useState("");
   const [titleUniversity, setTitleUniversity] = useState("");
+
+  const navigate = useNavigate();
 
   const errorsList = () => {
     const errorsList = [];
@@ -33,23 +37,26 @@ const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
   };
 
   const universityData = {
-    ...data,
-    specialty,
-    subjectsApproved,
-    specialtyPlan,
-    currentYear,
-    shiftProgress,
-    averagesWithDeferrals,
-    averagesWithoutDeferrals,
+    CareerId: specialty,
+    ApprovedSubjets: subjectsApproved,
+    PlanDeEstudio: specialtyPlan,
+    CurrentCareerYear: currentYear,
+    Turn: shiftProgress,
+    Average: averagesWithDeferrals,
+    AverageWithFails: averagesWithoutDeferrals,
     titleUniversity,
+    FirstChargeData: true,
   };
 
   const dataValidation = (e) => {
     e.preventDefault();
     const errors = errorsList();
     if (errors.length === 0) {
-      setData(universityData);
       setSuccessfulCharge(true);
+      UpdateData(universityData);
+      setTimeout(() => {
+        navigate("/ofertas");
+      }, 3000);
       toast("Los datos han sido cargados existosamente", {
         autoClose: 3000,
         hideProgressBar: false,
