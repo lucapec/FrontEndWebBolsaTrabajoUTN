@@ -11,6 +11,7 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
   const [lastname, setLastname] = useState("");
   const [legajo, setLegajo] = useState(null);
   const [company, setCompany] = useState("");
+  const [cuit, setCuit] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -106,6 +107,7 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({
           companyname: company,
+          cuit: cuit,
           email: email,
           password: password,
           confirmpassword: confirmPassword,
@@ -152,6 +154,9 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
         break;
       case "confirm-password":
         setConfirmPassword(e.target.value);
+        break;
+      case "cuit":
+        setCuit(e.target.value);
         break;
       case "typeUser":
         if (e.target.value === "alumno") {
@@ -212,7 +217,7 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
               />
             )}
           </div>
-          {isStudent && (
+          {isStudent ? (
             <div className="form-field d-flex align-items-center">
               <input
                 type="text"
@@ -220,6 +225,17 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
                 id="firstname"
                 value={firstname}
                 placeholder="Nombre"
+                onChange={inputHandler}
+              />
+            </div>
+          ) : (
+            <div className="form-field d-flex align-items-center">
+              <input
+                type="number"
+                name="cuit"
+                id="cuit"
+                value={cuit}
+                placeholder="Cuit"
                 onChange={inputHandler}
               />
             </div>
