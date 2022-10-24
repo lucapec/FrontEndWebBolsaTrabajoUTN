@@ -1,7 +1,7 @@
 import { Button, Modal, Form } from 'react-bootstrap';
 import { ToastContainer, toast } from "react-toastify";
 
-function AddCareerModal({ setShowModal, visible, form, setForm, setDeletedOrUpdated, deletedOrUpdated }) {
+function AddCareerModal({ url, setShowModal, visible, form, setForm, setDeletedOrUpdated, deletedOrUpdated }) {
     const handleNewCareer = () => {
         if (form.name === '' || form.abbreviation === '' || form.totalSubjets === null || form.totalSubjets <= 0) {
             toast("Ingrese datos válidos", {
@@ -12,7 +12,7 @@ function AddCareerModal({ setShowModal, visible, form, setForm, setDeletedOrUpda
                 position: toast.POSITION.TOP_LEFT,
             });
         } else {
-            fetch('https://localhost:7172/api/Careers', {
+            fetch(url, {
                 method: 'POST',
                 headers: { "Content-type": "application/json" },
                 body: JSON.stringify(form),
