@@ -119,7 +119,7 @@ const AdminDashboard = () => {
                     field: 'col5', headerName: 'Habilitado', width: 120, editable: true, align: 'center', headerAlign: 'center', renderCell: (rowValues) => {
                       return (
                         <Form.Check
-                          inline
+                          className="d-flex justify-content-center"
                           name="group1"
                           type="checkbox"
                           onClick={() => handleCheckbox(rowValues)}
@@ -157,7 +157,7 @@ const AdminDashboard = () => {
                     field: 'col5', headerName: 'Habilitado', width: 120, editable: true, align: 'center', headerAlign: 'center', renderCell: (rowValues) => {
                       return (
                         <Form.Check
-                          inline
+                          className="d-flex justify-content-center"
                           name="group1"
                           type="checkbox"
                           onClick={() => handleCheckbox(rowValues)}

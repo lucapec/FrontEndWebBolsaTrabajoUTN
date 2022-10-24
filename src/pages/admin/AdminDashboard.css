@@ -26,3 +26,7 @@
     color: white;
     transition: all 0.5s;
 }
+
+.form-check-input {
+    margin: 0;
+}
