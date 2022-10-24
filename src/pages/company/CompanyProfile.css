@@ -1,5 +1,5 @@
 #divForm {
-  margin-top: 5%;
+  margin-top: 4.5%;
 }
 
 #row {
@@ -12,4 +12,20 @@
 
 .divInput {
   margin-left: 9%;
+}
+
+#row3 {
+  margin-bottom: 0%;
+}
+
+#row44 {
+  margin-top: 2.8%;
+}
+
+.p-radio{
+  margin-bottom: 1px;
+}
+
+.col-md-12{
+  margin-top: 7%;
 }
