@@ -26,7 +26,7 @@ const DashboardTable = ({ url, title, columns, deletedOrUpdated, addFunctionalit
 
     return (
         <>
-            {addFunctionality && <AddCareerModal setDeletedOrUpdated={setDeletedOrUpdated} deletedOrUpdated={deletedOrUpdated} setShowModal={setShowModal} visible={showModal} form={addCareerForm} setForm={setAddCareerForm} />}
+            {addFunctionality && <AddCareerModal url={url} setDeletedOrUpdated={setDeletedOrUpdated} deletedOrUpdated={deletedOrUpdated} setShowModal={setShowModal} visible={showModal} form={addCareerForm} setForm={setAddCareerForm} />}
             <div className='card p-3' style={{ height: 450, width: 975 }}>
                 <h4>{title}</h4>
                 <DataGrid
