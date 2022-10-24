@@ -35,7 +35,7 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
         .toLowerCase()
         .match(
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        )
+        ) && isStudent
     ) {
       errorsList.push({ message: "Ingrese un email válido" });
     }
@@ -106,11 +106,11 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({
-          companyname: company,
-          cuit: cuit,
+          companyName: company,
+          cuit: parseInt(cuit),
           email: email,
           password: password,
-          confirmpassword: confirmPassword,
+          confirmPassword: confirmPassword,
         }),
       })
         .then((r) => r.json())
