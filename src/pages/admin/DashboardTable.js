@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Button } from "react-bootstrap";
 import AddCareerModal from "./AddCareerModal";
+import UserContext from "../../context/UserContext";
 
 const DashboardTable = ({ url, title, columns, deletedOrUpdated, addFunctionality, setDeletedOrUpdated }) => {
+    const { jwt } = useContext(UserContext);
     const [data, setData] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [addCareerForm, setAddCareerForm] = useState({
@@ -16,7 +18,10 @@ const DashboardTable = ({ url, title, columns, deletedOrUpdated, addFunctionalit
     useEffect(() => {
         fetch(url, {
             method: 'GET',
-            headers: { "Content-type": "application/json" },
+            headers: {
+                "Content-type": "application/json",
+                Authorization: `Bearer ${jwt}`,
+            },
         })
             .then((r) => r.json())
             .then((r) => {
@@ -44,7 +49,7 @@ const DashboardTable = ({ url, title, columns, deletedOrUpdated, addFunctionalit
                     }));
                 }
             });
-    }, [url, deletedOrUpdated, title]);
+    }, [url, deletedOrUpdated, title, jwt]);
 
     return (
         <>
