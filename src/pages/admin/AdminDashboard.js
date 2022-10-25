@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import "./AdminDashboard.css";
 import { Row, Col, Button, Form } from 'react-bootstrap';
 import DashboardTable from "./DashboardTable";
-import { handleUpdateCareer, handleDeleteCareer, handleUpdateStudent, handleUpdateCompany } from "./Handlers";
+import { HandleUpdateCareer, HandleDeleteCareer, ActivateDeactivateUser } from "./Handlers";
+import UserContext from "../../context/UserContext";
 
 const AdminDashboard = () => {
+  const { jwt } = useContext(UserContext);
   const [deletedOrUpdated, setDeletedOrUpdated] = useState(false);
   const [selectedSettings, setSelectedSettings] = useState([
     { id: 'carreras', isSelected: true },
@@ -38,10 +40,6 @@ const AdminDashboard = () => {
         break;
     }
   }
-
-  const handleCheckbox = (rowValues) => {
-    console.log(rowValues)
-  };
 
   return (
     <div className="layout">
@@ -85,7 +83,7 @@ const AdminDashboard = () => {
                             variant="success"
                             color="success"
                             style={{ margin: '0 5px 0 0' }}
-                            onClick={() => handleUpdateCareer(rowValues, setDeletedOrUpdated, deletedOrUpdated)}
+                            onClick={() => HandleUpdateCareer(rowValues, setDeletedOrUpdated, deletedOrUpdated)}
                           >
                             Guardar
                           </Button>
@@ -93,7 +91,7 @@ const AdminDashboard = () => {
                             variant="danger"
                             color="danger"
                             style={{ margin: '0 0 0 5px' }}
-                            onClick={() => handleDeleteCareer(rowValues, setDeletedOrUpdated, deletedOrUpdated)}
+                            onClick={() => HandleDeleteCareer(rowValues, setDeletedOrUpdated, deletedOrUpdated)}
                           >
                             X
                           </Button>
@@ -122,22 +120,11 @@ const AdminDashboard = () => {
                           className="d-flex justify-content-center"
                           name="group1"
                           type="checkbox"
-                          onClick={() => handleCheckbox(rowValues)}
+                          checked={rowValues.row.col5}
+                          onChange={(e) => {
+                            ActivateDeactivateUser(rowValues.id, e.target.checked, selectedSettings.find((x) => x.isSelected === true).id, setDeletedOrUpdated, deletedOrUpdated, jwt);
+                          }}
                         />
-                      )
-                    }
-                  },
-                  {
-                    field: 'col6', headerName: 'Acciones', width: 150, align: 'center', headerAlign: 'center', renderCell: (rowValues) => {
-                      return (
-                        <Button
-                          variant="success"
-                          color="success"
-                          style={{ margin: '0 5px 0 0' }}
-                          onClick={() => handleUpdateStudent(rowValues)}
-                        >
-                          Guardar
-                        </Button>
                       )
                     }
                   },
@@ -154,28 +141,17 @@ const AdminDashboard = () => {
                   { field: 'col1', headerName: 'Cuit', width: 200, editable: false, align: 'center', headerAlign: 'center', },
                   { field: 'col2', headerName: 'Razon Social', width: 200, editable: false, align: 'center', headerAlign: 'center', },
                   {
-                    field: 'col5', headerName: 'Habilitado', width: 120, editable: true, align: 'center', headerAlign: 'center', renderCell: (rowValues) => {
+                    field: 'col3', headerName: 'Habilitado', width: 120, editable: true, align: 'center', headerAlign: 'center', renderCell: (rowValues) => {
                       return (
                         <Form.Check
                           className="d-flex justify-content-center"
                           name="group1"
                           type="checkbox"
-                          onClick={() => handleCheckbox(rowValues)}
+                          checked={rowValues.row.col3}
+                          onChange={(e) => {
+                            ActivateDeactivateUser(rowValues.id, e.target.checked, selectedSettings.find((x) => x.isSelected === true).id, setDeletedOrUpdated, deletedOrUpdated, jwt);
+                          }}
                         />
-                      )
-                    }
-                  },
-                  {
-                    field: 'col6', headerName: 'Acciones', width: 150, align: 'center', headerAlign: 'center', renderCell: (rowValues) => {
-                      return (
-                        <Button
-                          variant="success"
-                          color="success"
-                          style={{ margin: '0 5px 0 0' }}
-                          onClick={() => handleUpdateCompany(rowValues)}
-                        >
-                          Guardar
-                        </Button>
                       )
                     }
                   },
