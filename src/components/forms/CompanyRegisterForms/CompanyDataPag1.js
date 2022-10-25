@@ -1,16 +1,19 @@
 import { useState } from "react";
-import "./EnterpriseData.css";
 import { ToastContainer, toast } from "react-toastify";
+
+import "./CompanyData.css";
 import "react-toastify/dist/ReactToastify.css";
 
-const EnterpriseDataPag1 = ({ setBoolPage2, setData }) => {
-  const [businessName, setBusinessName] = useState();
-  const [postalCode, setPostalcode] = useState();
-  const [cuit, setCuit] = useState();
-  const [telephoneNumber, setTelephoneNumber] = useState();
-  const [sector, setSector] = useState();
-  const [webURL, setWebURL] = useState();
-  const [legalAdress, setLegalAdress] = useState();
+
+const CompanyDataPag1 = ({setBoolPage2, UpdateData }) => {
+
+  const [businessName, setBusinessName] = useState("");
+  const [postalCode, setPostalcode] = useState("");
+  const [cuit, setCuit] = useState("");
+  const [telephoneNumber, setTelephoneNumber] = useState("");
+  const [sector, setSector] = useState("");
+  const [webURL, setWebURL] = useState("");
+  const [legalAdress, setLegalAdress] = useState("");
 
   const inputHandler = (e) => {
     switch (e.target.id) {
@@ -39,27 +42,22 @@ const EnterpriseDataPag1 = ({ setBoolPage2, setData }) => {
         break;
     }
   };
+  
+  const datos = {
+    CompanyName: businessName,
+    PostalCode: postalCode,
+    Cuit: cuit,
+    TelephoneNumber: telephoneNumber,
+    Sector: sector,
+    Web: webURL,
+    LegalAdress: legalAdress,
+  };
 
   const submitHandler = () => {
-    if (
-      businessName &&
-      postalCode &&
-      cuit &&
-      telephoneNumber &&
-      sector &&
-      legalAdress
-    ) {
-      const datos = {
-        EnterpriseBusinessName: businessName,
-        postalCode: postalCode,
-        EnterpriseCuit: cuit,
-        EnterpriseTelephone: telephoneNumber,
-        EnterpriseSector: sector,
-        EnterpriseWeb: webURL,
-        EnterpriseAdress: legalAdress,
-      };
-      setData(datos);
+    if (businessName && postalCode && cuit && telephoneNumber && sector && legalAdress) 
+    {
       setBoolPage2(true);
+      UpdateData(datos);     
     } else {
       toast("Los campos son oligatorios", {
         autoClose: 3000,
@@ -173,11 +171,11 @@ const EnterpriseDataPag1 = ({ setBoolPage2, setData }) => {
           <br />
         </div>
         <button type="button" className="btn" onClick={submitHandler}>
-          Guardar y Continuar
+          Guardar
         </button>
       </form>
     </>
   );
 };
 
-export default EnterpriseDataPag1;
+export default CompanyDataPag1;
