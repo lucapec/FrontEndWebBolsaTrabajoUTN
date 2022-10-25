@@ -207,11 +207,10 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                   value={documentType}
                   onChange={inputHandler}
                 >
-                  <option value={0}>Predeterminado</option>
-                  <option value={1}>Documento Unico</option>
-                  <option value={2}>Libreta Civica</option>
-                  <option value={3}>Libreta de Enrolamiento</option>
-                  <option value={4}>Pasaporte</option>
+                  <option value={0}>Documento Unico</option>
+                  <option value={1}>Libreta Civica</option>
+                  <option value={2}>Libreta de Enrolamiento</option>
+                  <option value={3}>Pasaporte</option>
                 </select>
                 <br />
                 <input
@@ -243,7 +242,7 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                 <label>Fecha de Nacimiento</label>
                 <br />
                 <input
-                  type="text"
+                  type="date"
                   name="birthDate"
                   id="birthDate"
                   className="form-control-sm"

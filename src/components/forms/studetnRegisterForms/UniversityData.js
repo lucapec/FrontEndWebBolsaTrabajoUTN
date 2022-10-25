@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-
 import { useNavigate } from "react-router-dom";
 
 import "./UniversityData.css";
@@ -129,7 +128,6 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
                   id="specialty"
                   className="form-control-sm"
                   value={specialty}
-                  placeholder="Especialidad"
                   onChange={inputHandler}
                 />
               </div>
@@ -142,7 +140,6 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
                   id="subjectsApproved"
                   className="form-control-sm"
                   value={subjectsApproved}
-                  placeholder="Materias Aprobadas"
                   onChange={inputHandler}
                 />
               </div>
@@ -155,7 +152,6 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
                   id="specialtyPlan"
                   className="form-control-sm"
                   value={specialtyPlan}
-                  placeholder="Plan Especialidad"
                   onChange={inputHandler}
                 />
               </div>
@@ -168,7 +164,6 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
                   id="currentYear"
                   className="form-control-sm"
                   value={currentYear}
-                  placeholder="Año que cursa"
                   onChange={inputHandler}
                 />
               </div>
@@ -186,10 +181,9 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
                   value={shiftProgress}
                   onChange={inputHandler}
                 >
-                  <option value={0}>Predeterminado</option>
-                  <option value={1}>Mañana</option>
-                  <option value={2}>Tarde</option>
-                  <option value={3}>Noche</option>
+                  <option value={0}>Mañana</option>
+                  <option value={1}>Tarde</option>
+                  <option value={2}>Noche</option>
                 </select>
               </div>
               <div className=" col form-field align-items-center">
@@ -201,7 +195,6 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
                   id="averagesWithDeferrals"
                   className="form-control-sm"
                   value={averagesWithDeferrals}
-                  placeholder="Promedio con Aplazos"
                   onChange={inputHandler}
                 />
               </div>
@@ -214,7 +207,6 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
                   id="averagesWithoutDeferrals"
                   className="form-control-sm"
                   value={averagesWithoutDeferrals}
-                  placeholder="Promedios sin Aplazos"
                   onChange={inputHandler}
                 />
               </div>

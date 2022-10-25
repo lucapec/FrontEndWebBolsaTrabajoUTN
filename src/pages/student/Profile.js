@@ -1,14 +1,14 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-
+import "react-toastify/dist/ReactToastify.css";
 import UserContext from "../../context/UserContext";
 import utnLogo from "../../assets/logo-utn.png";
 
 import "./Profile.css";
 
 const Profile = () => {
-  const [firstName, setfirstName] = useState("");
+  const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [documentType, setDocumentType] = useState("");
@@ -62,10 +62,48 @@ const Profile = () => {
     return errorsList;
   };
 
+  useEffect(() => {
+    fetch("https://localhost:7172/api/UsersInfo/Student", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setStudentData(data));
+  }, [jwt]);
+
+  useEffect(() => {
+    setFirstName(studentData.firstName);
+    setLastName(studentData.lastName);
+    setEmail(studentData.email);
+    setDocumentType(studentData.documentType);
+    setDocumentNumber(studentData.dni);
+    setLegajo(studentData.legajo);
+    setBirthDate(studentData.birthDate);
+    setCuilOrCuit(studentData.cuil);
+    setStreet(studentData.address);
+    setNumberStreet(studentData.addressNum);
+    setSex(studentData.sex);
+    setFileCv(studentData.curriculum);
+    setCountry(studentData.country);
+    setProvince(studentData.province);
+    setLocation(studentData.city);
+    setPersonalPhone(studentData.phoneNumb);
+    setSpecialty(studentData.careerId);
+    setSubjectsApproved(studentData.approvedSubjets);
+    setSpecialtyPlan(studentData.planDeEstudio);
+    setCurrentYear(studentData.currentCareerYear);
+    setShiftProgress(studentData.turn);
+    setAveragesWithDeferrals(studentData.averageWithFails);
+    setAveragesWithoutDeferrals(studentData.average);
+  }, [studentData]);
+
   const inputHandler = (e) => {
     switch (e.target.id) {
       case "firstName":
-        setfirstName(e.target.value);
+        setFirstName(e.target.value);
         break;
       case "lastName":
         setLastName(e.target.value);
@@ -137,44 +175,6 @@ const Profile = () => {
         break;
     }
   };
-
-  useEffect(() => {
-    fetch("https://localhost:7172/api/UsersInfo/Student", {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${jwt}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => setStudentData(data));
-  }, [jwt]);
-
-  useEffect(() => {
-    setfirstName(studentData.firstName);
-    setLastName(studentData.lastName);
-    setEmail(studentData.email);
-    setDocumentType(studentData.documentType);
-    setDocumentNumber(studentData.dni);
-    setLegajo(studentData.legajo);
-    setBirthDate(studentData.birthDate);
-    setCuilOrCuit(studentData.cuil);
-    setStreet(studentData.address);
-    setNumberStreet(studentData.addressNum);
-    setSex(studentData.sex);
-    setFileCv(studentData.curriculum);
-    setCountry(studentData.country);
-    setProvince(studentData.province);
-    setLocation(studentData.city);
-    setPersonalPhone(studentData.phoneNumb);
-    setSpecialty(studentData.careerId);
-    setSubjectsApproved(studentData.approvedSubjets);
-    setSpecialtyPlan(studentData.planDeEstudio);
-    setCurrentYear(studentData.currentCareerYear);
-    setShiftProgress(studentData.turn);
-    setAveragesWithDeferrals(studentData.averageWithFails);
-    setAveragesWithoutDeferrals(studentData.average);
-  }, [studentData]);
 
   const updateData = {
     Address: street,
@@ -291,17 +291,15 @@ const Profile = () => {
                 <br />
                 <select
                   id="documentType"
-                  name="documentType"
+                  disabled
                   className="form-control-sm"
-                  readOnly
                   value={documentType}
                   onChange={inputHandler}
                 >
-                  <option value={0}>Predeterminado</option>
-                  <option value={1}>Documento Unico</option>
-                  <option value={2}>Libreta Civica</option>
-                  <option value={3}>Libreta de Enrolamiento</option>
-                  <option value={4}>Pasaporte</option>
+                  <option value={0}>Documento Unico</option>
+                  <option value={1}>Libreta Civica</option>
+                  <option value={2}>Libreta de Enrolamiento</option>
+                  <option value={3}>Pasaporte</option>
                 </select>
                 <br />
                 <input
@@ -539,10 +537,9 @@ const Profile = () => {
                   value={shiftProgress}
                   onChange={inputHandler}
                 >
-                  <option value={0}>Predeterminado</option>
-                  <option value={1}>Mañana</option>
-                  <option value={2}>Tarde</option>
-                  <option value={3}>Noche</option>
+                  <option value={0}>Mañana</option>
+                  <option value={1}>Tarde</option>
+                  <option value={2}>Noche</option>
                 </select>
               </div>
             </div>

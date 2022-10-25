@@ -15,7 +15,7 @@ const StudentData = () => {
   };
 
   useEffect(() => {
-    fetch("https://localhost:7172/api/UsersInfo/CreateDataStudent", {
+    fetch('https://localhost:7172/api/UsersInfo/CreateDataStudent', {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
