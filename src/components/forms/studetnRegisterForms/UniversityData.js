@@ -13,7 +13,6 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
   const [shiftProgress, setShiftProgress] = useState("");
   const [averagesWithDeferrals, setAveragesWithDeferrals] = useState("");
   const [averagesWithoutDeferrals, setAveragesWithoutDeferrals] = useState("");
-  const [titleUniversity, setTitleUniversity] = useState("");
 
   const navigate = useNavigate();
 
@@ -27,8 +26,7 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
         currentYear &&
         shiftProgress &&
         averagesWithDeferrals &&
-        averagesWithoutDeferrals &&
-        titleUniversity
+        averagesWithoutDeferrals
       )
     ) {
       errorsList.push({ message: "Los campos son obligatiorios" });
@@ -42,9 +40,8 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
     PlanDeEstudio: specialtyPlan,
     CurrentCareerYear: currentYear,
     Turn: shiftProgress,
-    Average: averagesWithDeferrals,
-    AverageWithFails: averagesWithoutDeferrals,
-    titleUniversity,
+    AverageWithFails: averagesWithDeferrals,
+    Average: averagesWithoutDeferrals,
     FirstChargeData: true,
   };
 
@@ -107,9 +104,6 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
       case "averagesWithoutDeferrals":
         setAveragesWithoutDeferrals(e.target.value);
         break;
-      case "titleUniversity":
-        setTitleUniversity(e.target.value);
-        break;
       default:
         break;
     }
@@ -119,133 +113,122 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
     <div className="divFormUniversity">
       <header></header>
       <ToastContainer className="mt-5" />
-      <form className="pb-3 mt-3">
-        <div className="title">
-          <h2>Complete los datos universitarios</h2>
-        </div>
-        <div className=" container " id="primary">
-          <div className="row row-cols-4">
-            <div className=" col form-field align-items-center">
-              <label>Especialidad</label>
-              <br />
-              <input
-                type="text"
-                name="specialty"
-                id="specialty"
-                className="form-control-sm"
-                value={specialty}
-                placeholder="Especialidad"
-                onChange={inputHandler}
-              />
-            </div>
-            <div className=" col form-field align-items-center">
-              <label>Cantidad de Materias Aprobadas</label>
-              <br />
-              <input
-                type="number"
-                name="subjectsApproved"
-                id="subjectsApproved"
-                className="form-control-sm"
-                value={subjectsApproved}
-                placeholder="Materias Aprobadas"
-                onChange={inputHandler}
-              />
-            </div>
-            <div className=" col form-field align-items-center">
-              <label>Plan Especialidad</label>
-              <br />
-              <input
-                type="text"
-                name="specialtyPlan"
-                id="specialtyPlan"
-                className="form-control-sm"
-                value={specialtyPlan}
-                placeholder="Plan Especialidad"
-                onChange={inputHandler}
-              />
-            </div>
-            <div className=" col form-field align-items-center">
-              <label>Año que cursa</label>
-              <br />
-              <input
-                type="number"
-                name="currentYear"
-                id="currentYear"
-                className="form-control-sm"
-                value={currentYear}
-                placeholder="Año que cursa"
-                onChange={inputHandler}
-              />
+      <div className="form">
+        <form className="pb-3 mt-3">
+          <div className="title">
+            <h2>Complete los datos universitarios</h2>
+          </div>
+          <div className=" container " id="primary">
+            <div className="row row-cols-4">
+              <div className=" col form-field align-items-center">
+                <label>Especialidad</label>
+                <br />
+                <input
+                  type="text"
+                  name="specialty"
+                  id="specialty"
+                  className="form-control-sm"
+                  value={specialty}
+                  placeholder="Especialidad"
+                  onChange={inputHandler}
+                />
+              </div>
+              <div className=" col form-field align-items-center">
+                <label>Cantidad de Materias Aprobadas</label>
+                <br />
+                <input
+                  type="number"
+                  name="subjectsApproved"
+                  id="subjectsApproved"
+                  className="form-control-sm"
+                  value={subjectsApproved}
+                  placeholder="Materias Aprobadas"
+                  onChange={inputHandler}
+                />
+              </div>
+              <div className=" col form-field align-items-center">
+                <label>Plan Especialidad</label>
+                <br />
+                <input
+                  type="text"
+                  name="specialtyPlan"
+                  id="specialtyPlan"
+                  className="form-control-sm"
+                  value={specialtyPlan}
+                  placeholder="Plan Especialidad"
+                  onChange={inputHandler}
+                />
+              </div>
+              <div className=" col form-field align-items-center">
+                <label>Año que cursa</label>
+                <br />
+                <input
+                  type="number"
+                  name="currentYear"
+                  id="currentYear"
+                  className="form-control-sm"
+                  value={currentYear}
+                  placeholder="Año que cursa"
+                  onChange={inputHandler}
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <div className=" container " id="primary">
-          <div className="row row-cols-4">
-            <div className=" col form-field align-items-center">
-              <label>Turno que cursa</label>
-              <br />
-              <select
-                id="shiftProgress"
-                name="shiftProgress"
-                className="form-control-sm"
-                value={shiftProgress}
-                onChange={inputHandler}
-              >
-                <option value="predeterminado">Predeterminado</option>
-                <option value="mañana">Mañana</option>
-                <option value="tarde">Tarde</option>
-                <option value="noche">Noche</option>
-              </select>
-            </div>
-            <div className=" col form-field align-items-center">
-              <label>Promedio con Aplazos</label>
-              <br />
-              <input
-                type="number"
-                name="averagesWithDeferrals"
-                id="averagesWithDeferrals"
-                className="form-control-sm"
-                value={averagesWithDeferrals}
-                placeholder="Promedio con Aplazos"
-                onChange={inputHandler}
-              />
-            </div>
-            <div className=" col form-field align-items-center">
-              <label>Promedios sin Aplazos</label>
-              <br />
-              <input
-                type="number"
-                name="averagesWithoutDeferrals"
-                id="averagesWithoutDeferrals"
-                className="form-control-sm"
-                value={averagesWithoutDeferrals}
-                placeholder="Promedios sin Aplazos"
-                onChange={inputHandler}
-              />
-            </div>
-            <div className=" col form-field align-items-center">
-              <label>Titulo Universitario</label>
-              <br />
-              <input
-                type="text"
-                name="titleUniversity"
-                id="titleUniversity"
-                className="form-control-sm"
-                value={titleUniversity}
-                placeholder="Titulo Universitario"
-                onChange={inputHandler}
-              />
+          <div className=" container " id="primary">
+            <div className="row row-cols-4">
+              <div className=" col form-field align-items-center">
+                <label>Turno que cursa</label>
+                <br />
+                <select
+                  id="shiftProgress"
+                  name="shiftProgress"
+                  className="form-control-sm"
+                  value={shiftProgress}
+                  onChange={inputHandler}
+                >
+                  <option value={0}>Predeterminado</option>
+                  <option value={1}>Mañana</option>
+                  <option value={2}>Tarde</option>
+                  <option value={3}>Noche</option>
+                </select>
+              </div>
+              <div className=" col form-field align-items-center">
+                <label>Promedio con Aplazos</label>
+                <br />
+                <input
+                  type="number"
+                  name="averagesWithDeferrals"
+                  id="averagesWithDeferrals"
+                  className="form-control-sm"
+                  value={averagesWithDeferrals}
+                  placeholder="Promedio con Aplazos"
+                  onChange={inputHandler}
+                />
+              </div>
+              <div className=" col form-field align-items-center">
+                <label>Promedios sin Aplazos</label>
+                <br />
+                <input
+                  type="number"
+                  name="averagesWithoutDeferrals"
+                  id="averagesWithoutDeferrals"
+                  className="form-control-sm"
+                  value={averagesWithoutDeferrals}
+                  placeholder="Promedios sin Aplazos"
+                  onChange={inputHandler}
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="container">
-          <div className="col-md-12 text-center">
-            <button onClick={dataValidation} id="btn" className="btn">
-              Guardar e ingresar
-            </button>
+          <div className="container">
+            <div className="col-md-12 text-center">
+              <button onClick={dataValidation} id="btn" className="btn">
+                Guardar e ingresar
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

@@ -8,14 +8,14 @@ import utnLogo from "../../assets/logo-utn.png";
 import "./Profile.css";
 
 const Profile = () => {
-  const [firstName, setfirstName] = useState(""); //
-  const [lastName, setLastName] = useState(""); //
-  const [email, setEmail] = useState(""); //
-  const [documentType, setDocumentType] = useState(""); //
-  const [documentNumber, setDocumentNumber] = useState(""); //
-  const [legajo, setLegajo] = useState(""); //
-  const [birthDate, setBirthDate] = useState(""); //
-  const [cuilOrCuit, setCuilOrCuit] = useState(""); //
+  const [firstName, setfirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [documentType, setDocumentType] = useState("");
+  const [documentNumber, setDocumentNumber] = useState("");
+  const [legajo, setLegajo] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [cuilOrCuit, setCuilOrCuit] = useState("");
   const [street, setStreet] = useState("");
   const [numberStreet, setNumberStreet] = useState("");
   const [sex, setSex] = useState("");
@@ -166,68 +166,64 @@ const Profile = () => {
     setCountry(studentData.country);
     setProvince(studentData.province);
     setLocation(studentData.city);
-    setPersonalPhone(studentData.personalPhone);
+    setPersonalPhone(studentData.phoneNumb);
     setSpecialty(studentData.careerId);
     setSubjectsApproved(studentData.approvedSubjets);
     setSpecialtyPlan(studentData.planDeEstudio);
     setCurrentYear(studentData.currentCareerYear);
     setShiftProgress(studentData.turn);
-    setAveragesWithDeferrals(studentData.average);
-    setAveragesWithoutDeferrals(studentData.averageWithFails);
+    setAveragesWithDeferrals(studentData.averageWithFails);
+    setAveragesWithoutDeferrals(studentData.average);
   }, [studentData]);
 
   const updateData = {
-    street,
-    numberStreet,
-    sex,
-    fileCv,
-    country,
-    province,
-    location,
-    personalPhone,
-    specialty,
-    subjectsApproved,
-    specialtyPlan,
-    currentYear,
-    shiftProgress,
-    averagesWithDeferrals,
-    averagesWithoutDeferrals,
-  };
-
-  const updateDataStudent = () => {
-    fetch("https://localhost:7172/api/UsersInfo/UpdateDataStudent", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwt}`,
-      },
-      body: JSON.stringify(updateData),
-    })
-      .then((res) => res.json())
-      .then(
-        toast("Los cambios han sido guardados exitosamente", {
-          autoClose: 3000,
-          hideProgressBar: false,
-          type: "success",
-          theme: "dark",
-          position: toast.POSITION.TOP_LEFT,
-        })
-      )
-      .then(
-        setTimeout(() => {
-          navigate("/ofertas");
-        }, 4000)
-      )
-      .catch((err) => {
-        console.log(err.message);
-      });
+    Address: street,
+    AddressNum: numberStreet,
+    Sex: sex,
+    Curriculum: fileCv,
+    Country: country,
+    Province: province,
+    City: location,
+    PhoneNumb: personalPhone,
+    CareerId: specialty,
+    ApprovedSubjets: subjectsApproved,
+    PlanDeEstudio: specialtyPlan,
+    CurrentCareerYear: currentYear,
+    Turn: shiftProgress,
+    AverageWithFails: averagesWithDeferrals,
+    average: averagesWithoutDeferrals,
   };
 
   const dataValidation = (e) => {
     e.preventDefault();
     const errors = errorsList();
     if (errors.length === 0) {
-      updateDataStudent();
+      fetch("https://localhost:7172/api/UsersInfo/UpdateDataStudent", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt}`,
+        },
+        body: JSON.stringify(updateData),
+      })
+        .then((res) => res.json())
+        .then(
+          toast("Los cambios han sido guardados exitosamente", {
+            autoClose: 3000,
+            hideProgressBar: false,
+            type: "success",
+            theme: "dark",
+            position: toast.POSITION.TOP_LEFT,
+          })
+        )
+        .then(
+          setTimeout(() => {
+            navigate("/ofertas");
+          }, 3000)
+        )
+        .catch((err) => {
+          console.log(err.message);
+        });
     } else {
       errors.forEach((error) => {
         toast(error.message, {
@@ -301,13 +297,11 @@ const Profile = () => {
                   value={documentType}
                   onChange={inputHandler}
                 >
-                  <option value="predeterminado">Predeterminado</option>
-                  <option value="documentoUnico">Documento Unico</option>
-                  <option value="libretaCivica">Libreta Civica</option>
-                  <option value="libretaEnrolamiento">
-                    Libreta de Enrolamiento
-                  </option>
-                  <option value="pasaporte">Pasaporte</option>
+                  <option value={0}>Predeterminado</option>
+                  <option value={1}>Documento Unico</option>
+                  <option value={2}>Libreta Civica</option>
+                  <option value={3}>Libreta de Enrolamiento</option>
+                  <option value={4}>Pasaporte</option>
                 </select>
                 <br />
                 <input
@@ -343,7 +337,7 @@ const Profile = () => {
                 <label>Fecha de Nacimiento</label>
                 <br />
                 <input
-                  type="date"
+                  type="text"
                   name="birthDate"
                   id="birthDate"
                   className="form-control-sm"
@@ -545,10 +539,10 @@ const Profile = () => {
                   value={shiftProgress}
                   onChange={inputHandler}
                 >
-                  <option value="predeterminado">Predeterminado</option>
-                  <option value="mañana">Mañana</option>
-                  <option value="tarde">Tarde</option>
-                  <option value="noche">Noche</option>
+                  <option value={0}>Predeterminado</option>
+                  <option value={1}>Mañana</option>
+                  <option value={2}>Tarde</option>
+                  <option value={3}>Noche</option>
                 </select>
               </div>
             </div>

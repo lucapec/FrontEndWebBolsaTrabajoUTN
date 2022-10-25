@@ -58,12 +58,12 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
   };
 
   const personalData = {
-    FirstName :firstName,
+    FirstName: firstName,
     LastName: lastName,
-    email,
+    Email: email,
     DocumentType: documentType,
     Dni: documentNumber,
-    Legajo:legajo,
+    Legajo: legajo,
     BirthDate: birthDate,
     Cuil: cuilOrCuit,
     Address: street,
@@ -170,7 +170,6 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                   id="firstName"
                   className="form-control-sm"
                   value={firstName}
-                  placeholder="Nombre"
                   onChange={inputHandler}
                 />
               </div>
@@ -183,7 +182,6 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                   id="lastName"
                   className="form-control-sm"
                   value={lastName}
-                  placeholder="Apellido"
                   onChange={inputHandler}
                 />
               </div>
@@ -196,7 +194,6 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                   id="email"
                   className="form-control-sm"
                   value={email}
-                  placeholder="Email"
                   onChange={inputHandler}
                 />
               </div>
@@ -210,13 +207,11 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                   value={documentType}
                   onChange={inputHandler}
                 >
-                  <option value="predeterminado">Predeterminado</option>
-                  <option value="documentoUnico">Documento Unico</option>
-                  <option value="libretaCivica">Libreta Civica</option>
-                  <option value="libretaEnrolamiento">
-                    Libreta de Enrolamiento
-                  </option>
-                  <option value="pasaporte">Pasaporte</option>
+                  <option value={0}>Predeterminado</option>
+                  <option value={1}>Documento Unico</option>
+                  <option value={2}>Libreta Civica</option>
+                  <option value={3}>Libreta de Enrolamiento</option>
+                  <option value={4}>Pasaporte</option>
                 </select>
                 <br />
                 <input
@@ -225,7 +220,6 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                   id="documentNumber"
                   className="form-control-sm"
                   value={documentNumber}
-                  placeholder="Numero de Documento"
                   onChange={inputHandler}
                 />
               </div>
@@ -242,7 +236,6 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                   id="legajo"
                   className="form-control-sm"
                   value={legajo}
-                  placeholder="Legajo"
                   onChange={inputHandler}
                 />
               </div>
@@ -250,12 +243,11 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                 <label>Fecha de Nacimiento</label>
                 <br />
                 <input
-                  type="date"
+                  type="text"
                   name="birthDate"
                   id="birthDate"
                   className="form-control-sm"
                   value={birthDate}
-                  placeholder="Fecha de Nacimiento"
                   onChange={inputHandler}
                 />
               </div>
@@ -268,7 +260,6 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                   id="personalPhone"
                   className="form-control-sm"
                   value={personalPhone}
-                  placeholder="Telefono Particular"
                   onChange={inputHandler}
                 />
               </div>
@@ -299,7 +290,6 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                   id="street"
                   className="form-control-sm"
                   value={street}
-                  placeholder="Calle"
                   onChange={inputHandler}
                 />
               </div>
@@ -312,7 +302,6 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                   id="numberStreet"
                   className="form-control-sm"
                   value={numberStreet}
-                  placeholder="Numero de Calle"
                   onChange={inputHandler}
                 />
               </div>
@@ -325,7 +314,6 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                   id="sex"
                   className="form-control-sm"
                   value={sex}
-                  placeholder="Sexo"
                   onChange={inputHandler}
                 />
               </div>
@@ -338,7 +326,6 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                   id="fileCv"
                   className="form-control-sm"
                   value={fileCv}
-                  placeholder="Archivo CV"
                   onChange={inputHandler}
                 />
               </div>
@@ -355,7 +342,6 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                   id="country"
                   className="form-control-sm"
                   value={country}
-                  placeholder="Pais"
                   onChange={inputHandler}
                 />
               </div>
@@ -368,7 +354,6 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                   id="province"
                   className="form-control-sm"
                   value={province}
-                  placeholder="Provincia"
                   onChange={inputHandler}
                 />
               </div>
@@ -381,7 +366,6 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                   id="location"
                   className="form-control-sm"
                   value={location}
-                  placeholder="Localidad"
                   onChange={inputHandler}
                 />
               </div>
