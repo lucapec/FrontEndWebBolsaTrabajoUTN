@@ -16,43 +16,43 @@ const CompanyProfile = () => {
   const [webURL, setWebURL] = useState("");
   const [legalAdress, setLegalAdress] = useState("");
   const [nameContact, setNameContact] = useState("");
-  const [lastnameContact, setLastnameContact]= useState();
+  const [lastnameContact, setLastnameContact] = useState();
   const [emailContact, setEmailContact] = useState("");
   const [positionContact, setPositionContact] = useState("");
   const [telephoneNumberContact, setTelephoneNumberContact] = useState("");
   const [relWithCompanyContact, setRelWithCompanyContact] = useState();
   const [companyData, setCompanyData] = useState({});
 
-  const {jwt} = useContext(UserContext);
+  const { jwt } = useContext(UserContext);
   const navigate = useNavigate();
 
-  
-  
   useEffect(() => {
-    fetch('https://localhost:7172/api/UsersInfo/Company',{
+    fetch("https://localhost:7172/api/UsersInfo/Company", {
       method: "GET",
-      headers: { "Content-type": "application/json", Authorization:`Bearer ${jwt}`}
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
     })
-    .then(response => response.json())
-    .then(data => setCompanyData(data))
-  }, [jwt])
+      .then((response) => response.json())
+      .then((data) => setCompanyData(data));
+  }, [jwt]);
 
   useEffect(() => {
-    setBusinessName(companyData.companyName)
-    setPostalcode(companyData.postalCode)
-    setCuit(companyData.cuit)
-    setTelephoneNumber(companyData.telephoneNumber)
-    setSector(companyData.sector)
-    setWebURL(companyData.web)
-    setLegalAdress(companyData.legalAdress)
-    setNameContact(companyData.recruiterName)
-    setLastnameContact(companyData.recruiterLastName)
-    setEmailContact(companyData.recruiterEmail)
-    setPositionContact(companyData.recruiterPosition)
-    setTelephoneNumberContact(companyData.recruiterPhoneNumber)
-    setRelWithCompanyContact(companyData.recruiterRelWithCompany)
-  }, [companyData])
-  
+    setBusinessName(companyData.companyName);
+    setPostalcode(companyData.postalCode);
+    setCuit(companyData.cuit);
+    setTelephoneNumber(companyData.telephoneNumber);
+    setSector(companyData.sector);
+    setWebURL(companyData.web);
+    setLegalAdress(companyData.legalAdress);
+    setNameContact(companyData.recruiterName);
+    setLastnameContact(companyData.recruiterLastName);
+    setEmailContact(companyData.recruiterEmail);
+    setPositionContact(companyData.recruiterPosition);
+    setTelephoneNumberContact(companyData.recruiterPhoneNumber);
+    setRelWithCompanyContact(companyData.recruiterRelWithCompany);
+  }, [companyData]);
 
   const inputHandler = (e) => {
     switch (e.target.id) {
@@ -77,7 +77,7 @@ const CompanyProfile = () => {
       case "legalAdress":
         setLegalAdress(e.target.value);
         break;
-        case "nameContact":
+      case "nameContact":
         setNameContact(e.target.value);
         break;
       case "lastnameContact":
@@ -112,44 +112,56 @@ const CompanyProfile = () => {
     RecruiterEmail: emailContact,
     RecruiterPosition: positionContact,
     RecruiterPhoneNumber: telephoneNumberContact,
-    RecruiterRelWithCompany: relWithCompanyContact
-  }
-  
+    RecruiterRelWithCompany: relWithCompanyContact,
+  };
+
   const SaveChangesBtn = (e) => {
     e.preventDefault();
-    if (postalCode && sector && webURL && telephoneNumber && legalAdress && nameContact && lastnameContact && positionContact && telephoneNumberContact && relWithCompanyContact) 
-    {
-      if (emailContact.toLowerCase().match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        )) 
-        {
-          fetch("https://localhost:7172/api/UsersInfo/UpdateDataCompany", {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${jwt}`,
-            },
-            body: JSON.stringify(updateData),
-          })
-            .then((res) => res.json())
-            .then(
-              toast("Los datos han sido cargados exitosamente", {
+    if (
+      postalCode &&
+      sector &&
+      telephoneNumber &&
+      legalAdress &&
+      nameContact &&
+      lastnameContact &&
+      positionContact &&
+      telephoneNumberContact &&
+      relWithCompanyContact
+    ) {
+      if (
+        emailContact
+          .toLowerCase()
+          .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          )
+      ) {
+        fetch("https://localhost:7172/api/UsersInfo/UpdateDataCompany", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt}`,
+          },
+          body: JSON.stringify(updateData),
+        })
+          .then((res) => res.json())
+          .then(
+            toast("Los cambios han sido guardados exitosamente", {
               autoClose: 3000,
               hideProgressBar: false,
               type: "success",
               theme: "dark",
               position: toast.POSITION.TOP_LEFT,
-            }))
-           .then(setTimeout(() => {
-            navigate("/ofertasEmpresa")
-            }, 4000))
-            .catch((err) => {
-              console.log(err.message);
-            });
-
-          
-      } else 
-      {
+            })
+          )
+          .then(
+            setTimeout(() => {
+              navigate("/ofertasEmpresa");
+            }, 3000)
+          )
+          .catch((err) => {
+            console.log(err.message);
+          });
+      } else {
         toast("Ingrese un email valido", {
           autoClose: 3000,
           hideProgressBar: false,
@@ -158,9 +170,7 @@ const CompanyProfile = () => {
           position: toast.POSITION.TOP_LEFT,
         });
       }
-    } else 
-    {
-      console.log("la nueva data:", updateData)
+    } else {
       toast("Complete todos los campos", {
         autoClose: 3000,
         hideProgressBar: false,
@@ -168,13 +178,12 @@ const CompanyProfile = () => {
         theme: "dark",
         position: toast.POSITION.TOP_LEFT,
       });
-    }    
+    }
   };
 
   return (
-    <>
-    <ToastContainer className="mt-5"/>
-    <div className="divFormProfile">
+    <div className="divFormProfileCompany">
+      <ToastContainer className="mt-5" />
       <div id="form" className="form">
         <form className=" mt-3">
           <div id="divForm" className="container">
@@ -215,7 +224,7 @@ const CompanyProfile = () => {
                   value={postalCode}
                   onChange={inputHandler}
                 />
-              </div>             
+              </div>
               <div className=" col form-group align-items-center">
                 <label>Telefono de la Empresa</label>
                 <br />
@@ -234,6 +243,18 @@ const CompanyProfile = () => {
           <div className="container">
             <div id="row2" className="row row-cols-4">
               <div className=" col form-group align-items-center ">
+                <div className=" col form-group align-items-center">
+                  <label>Web</label>
+                  <br />
+                  <input
+                    type="text"
+                    name="webURL"
+                    id="webURL"
+                    className="form-control-sm"
+                    value={webURL}
+                    onChange={inputHandler}
+                  />
+                </div>
               </div>
               <div className=" col form-group align-items-center ">
                 <label>Rubro</label>
@@ -261,24 +282,6 @@ const CompanyProfile = () => {
                 />
               </div>
               <div className=" col form-group align-items-center">
-                <label>Web</label>
-                <br />
-                <input
-                  type="text"
-                  name="webURL"
-                  id="webURL"
-                  className="form-control-sm"
-                  value={webURL}
-                  onChange={inputHandler}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="container">
-            <div id="row3" className="row row-cols-4">
-              <div className=" col form-group align-items-center ">
-              </div>
-              <div className="col form-group align-items-center">
                 <label>Nombre del Contacto</label>
                 <br />
                 <input
@@ -290,7 +293,11 @@ const CompanyProfile = () => {
                   onChange={inputHandler}
                 />
               </div>
-              <div className="col form-group align-items-center">
+            </div>
+          </div>
+          <div className="container">
+            <div id="row3" className="row row-cols-4">
+              <div className=" col form-group align-items-center">
                 <label>Apellido del Contacto</label>
                 <br />
                 <input
@@ -299,6 +306,30 @@ const CompanyProfile = () => {
                   id="lastnameContact"
                   className="form-control-sm"
                   value={lastnameContact}
+                  onChange={inputHandler}
+                />
+              </div>
+              <div className=" col form-group align-items-center">
+                <label>Puesto/Cargo del Contacto</label>
+                <br />
+                <input
+                  type="text"
+                  name="positionContact"
+                  id="positionContact"
+                  className="form-control-sm"
+                  value={positionContact}
+                  onChange={inputHandler}
+                />
+              </div>
+              <div className="col form-group align-items-center">
+                <label>Email del Contacto</label>
+                <br />
+                <input
+                  type="text"
+                  name="emailContact"
+                  id="emailContact"
+                  className="form-control-sm"
+                  value={emailContact}
                   onChange={inputHandler}
                 />
               </div>
@@ -332,20 +363,6 @@ const CompanyProfile = () => {
           </div>
           <div className="container" id="row44">
             <div id="row4" className="row row-cols-4">
-              <div className=" col form-group align-items-center ">
-              </div>
-              <div className=" col form-group align-items-center">
-                <label>Puesto/Cargo del Contacto</label>
-                <br />
-                <input
-                  type="text"
-                  name="positionContact"
-                  id="positionContact"
-                  className="form-control-sm"
-                  value={positionContact}
-                  onChange={inputHandler}
-                />
-              </div>
               <div className=" col form-group align-items-center">
                 <label>Telefono de Contacto</label>
                 <br />
@@ -356,18 +373,6 @@ const CompanyProfile = () => {
                   className="form-control-sm"
                   value={telephoneNumberContact}
                   placeholder="código area + número"
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className=" col form-group align-items-center">
-                <label>Email del Contacto</label>
-                <br />
-                <input
-                  type="text"
-                  name="emailContact"
-                  id="emailContact"
-                  className="form-control-sm"
-                  value={emailContact}
                   onChange={inputHandler}
                 />
               </div>
@@ -382,7 +387,7 @@ const CompanyProfile = () => {
           </div>
         </form>
       </div>
-      <footer>
+      <footer className="footerCompany">
         <div id="divFooter" className="container">
           <div id="divLeftRight" className="row justify-content-center">
             <div id="divLeft" className="col-4">
@@ -405,7 +410,6 @@ const CompanyProfile = () => {
         </div>
       </footer>
     </div>
-    </>
   );
 };
 
