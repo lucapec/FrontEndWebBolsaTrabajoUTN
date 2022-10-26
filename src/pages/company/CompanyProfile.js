@@ -3,6 +3,7 @@ import { useState } from "react";
 import utnLogo from "../../assets/logo-utn.png";
 
 import "./CompanyProfile.css";
+import "../../components/forms/Forms.css";
 
 const CompanyProfile = () => {
   const [businessName, setBusinessName] = useState();
@@ -249,7 +250,7 @@ const CompanyProfile = () => {
           </div>
           <div className="container">
             <div className="col-md-12">
-              <button id="btnCompany" className="btn">
+              <button id="btnCompany" className="button">
                 Editar Perfil
               </button>
             </div>

@@ -1,7 +1,8 @@
-import "./EnterpriseData.css";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./EnterpriseData.css";
+import "../../../components/forms/Forms.css";
 
 const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
   const [name, setName] = useState("");
@@ -176,7 +177,7 @@ const EnterpriseDataPag2 = ({ data, setData, setSuccessfulCharge }) => {
           </div>
         </div>
 
-        <button type="button" className="button-enterprise" onClick={submitHandler}>
+        <button type="button" className="button" onClick={submitHandler}>
           Guardar e Ingresar
         </button>
       </div>
