@@ -12,7 +12,6 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
   const [shiftProgress, setShiftProgress] = useState("");
   const [averagesWithDeferrals, setAveragesWithDeferrals] = useState("");
   const [averagesWithoutDeferrals, setAveragesWithoutDeferrals] = useState("");
-
   const navigate = useNavigate();
 
   const errorsList = () => {

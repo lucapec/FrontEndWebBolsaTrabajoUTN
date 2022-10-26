@@ -1,23 +1,23 @@
 #primary {
-  margin-top: 9%;
+  margin-top: 8%;
   text-align: center;
 }
 
 .title {
   text-align: center;
-  margin-top: 2%;
+  margin-top: 4.5%;
   font-size: 120%;
   color: black;
 }
 
 .divFormUniversity {
   background-color: lightgray;
-  height: 94.3vh;
+  
 }
 
 header {
   background-color: lightgray;
-  height: 5vh;
+  height: 0vh;
 }
 
 #btn {

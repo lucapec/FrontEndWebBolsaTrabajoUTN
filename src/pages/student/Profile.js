@@ -150,7 +150,7 @@ const Profile = () => {
       case "personalPhone":
         setPersonalPhone(e.target.value);
         break;
-      case "specialty":
+        case "specialty":
         setSpecialty(e.target.value);
         break;
       case "subjectsApproved":
@@ -244,7 +244,7 @@ const Profile = () => {
         <form className=" mt-3">
           <div className=" container ">
             <div className="row row-cols-4">
-              <div className="col form-group align-items-center">
+            <div className="col form-group align-items-center">
                 <label>Nombre</label>
                 <br />
                 <input
@@ -293,6 +293,7 @@ const Profile = () => {
                   id="documentType"
                   disabled
                   className="form-control-sm"
+                  readOnly
                   value={documentType}
                   onChange={inputHandler}
                 >
@@ -349,9 +350,9 @@ const Profile = () => {
                 <label>Telefono Particular</label>
                 <br />
                 <input
-                  type="number"
-                  name="personalPhone"
-                  id="personalPhone"
+            type="number"
+            name="personalPhone"
+            id="personalPhone"
                   className="form-control-sm"
                   value={personalPhone}
                   placeholder="Telefono Particular"
@@ -574,6 +575,7 @@ const Profile = () => {
               </div>
             </div>
           </div>
+
 
           <div className="container">
             <div className="col-md-12">

@@ -1,0 +1,9 @@
+.footerCompanyHome {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 15vh;
+  text-align: center;
+  background-color: rgb(111, 133, 205);
+  line-height: 1%;
+}

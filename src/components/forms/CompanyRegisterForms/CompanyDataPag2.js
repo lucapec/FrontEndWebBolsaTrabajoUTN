@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "./CompanyData.css";
 
-const CompanyDataPag2 = ({UpdateData, setSuccessfulCharge }) => {
+const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -14,7 +14,7 @@ const CompanyDataPag2 = ({UpdateData, setSuccessfulCharge }) => {
   const [relWithCompany, setRelWithCompany] = useState("");
 
   const navigate = useNavigate();
-  
+
   const inputHandler = (e) => {
     switch (e.target.id) {
       case "name":
@@ -29,17 +29,17 @@ const CompanyDataPag2 = ({UpdateData, setSuccessfulCharge }) => {
       case "position":
         setPosition(e.target.value);
         break;
-        case "telephone":
-          setTelephoneNumber(e.target.value);
+      case "telephone":
+        setTelephoneNumber(e.target.value);
         break;
-        case "relacion":
-          setRelWithCompany(e.target.value);
+      case "relacion":
+        setRelWithCompany(e.target.value);
         break;
       default:
         break;
     }
   };
-          
+
   const datos2 = {
     RecruiterName: name,
     RecruiterLastName: lastname,
@@ -47,41 +47,42 @@ const CompanyDataPag2 = ({UpdateData, setSuccessfulCharge }) => {
     RecruiterPosition: position,
     RecruiterPhoneNumber: telephoneNumber,
     RecruiterRelWithCompany: relWithCompany,
-    FirstChargeData: true
+    FirstChargeData: true,
   };
 
-    const submitHandler = () => {
-    if (name && lastname && position && telephoneNumber && relWithCompany) 
-    {
-      if (email.toLowerCase().match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        )) 
-        {
-          setSuccessfulCharge(true);
-          UpdateData(datos2);
-          setTimeout(() => {
-            navigate("/ofertasEmpresa")
-            }, 6000)
-          
-          toast("Los datos han sido cargados exitosamente", {
-            autoClose: 3000,
+  const submitHandler = () => {
+    if (name && lastname && position && telephoneNumber && relWithCompany) {
+      if (
+        email
+          .toLowerCase()
+          .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          )
+      ) {
+        setSuccessfulCharge(true);
+        UpdateData(datos2);
+        setTimeout(() => {
+          navigate("/ofertasEmpresa");
+        }, 3000);
+
+        toast("Los datos han sido cargados exitosamente", {
+          autoClose: 3000,
+          hideProgressBar: false,
+          type: "success",
+          theme: "dark",
+          position: toast.POSITION.TOP_LEFT,
+        });
+        toast(
+          "Los datos seran validados por administración para su aprobación",
+          {
+            autoClose: 5000,
             hideProgressBar: false,
-            type: "success",
+            type: "info",
             theme: "dark",
             position: toast.POSITION.TOP_LEFT,
-          });
-          toast(
-            "Los datos seran validados por administración para su aprobación",
-            {
-              autoClose: 5000,
-              hideProgressBar: false,
-              type: "info",
-              theme: "dark",
-              position: toast.POSITION.TOP_LEFT,
-            }
-          );
-      } else 
-      {
+          }
+        );
+      } else {
         toast("Ingrese un email valido", {
           autoClose: 3000,
           hideProgressBar: false,
@@ -90,8 +91,7 @@ const CompanyDataPag2 = ({UpdateData, setSuccessfulCharge }) => {
           position: toast.POSITION.TOP_LEFT,
         });
       }
-    } else 
-    {
+    } else {
       toast("Los campos son oligatorios", {
         autoClose: 3000,
         hideProgressBar: false,
@@ -99,9 +99,9 @@ const CompanyDataPag2 = ({UpdateData, setSuccessfulCharge }) => {
         theme: "dark",
         position: toast.POSITION.TOP_LEFT,
       });
-    }    
+    }
   };
-  
+
   return (
     <>
       <ToastContainer className="mt-5" />
@@ -122,7 +122,7 @@ const CompanyDataPag2 = ({UpdateData, setSuccessfulCharge }) => {
             />
           </div>
           <div className="col">
-            <label>apellido</label>
+            <label>Apellido</label>
             <br />
             <input
               className="form-control-sm"
@@ -133,18 +133,8 @@ const CompanyDataPag2 = ({UpdateData, setSuccessfulCharge }) => {
             />
           </div>
         </div>
+
         <div className="row">
-          <div className="col">
-            <label>Email</label>
-            <br />
-            <input
-              className="form-control-sm"
-              type="email"
-              id="email"
-              onChange={inputHandler}
-              value={email}
-            />
-          </div>
           <div className="col">
             <label>Puesto / Cargo</label>
             <br />
@@ -154,6 +144,17 @@ const CompanyDataPag2 = ({UpdateData, setSuccessfulCharge }) => {
               id="position"
               onChange={inputHandler}
               value={position}
+            />
+          </div>
+          <div className="col">
+            <label>Email</label>
+            <br />
+            <input
+              className="form-control-sm"
+              type="email"
+              id="email"
+              onChange={inputHandler}
+              value={email}
             />
           </div>
         </div>
@@ -171,9 +172,9 @@ const CompanyDataPag2 = ({UpdateData, setSuccessfulCharge }) => {
             />
           </div>
           <div className="col">
-            <label>Relacion con la empresa</label>
+            <label>Relacion del contacto con la empresa</label>
             <form onChange={inputHandler}>
-              <br/>
+              <br />
               <p>
                 <input
                   type="radio"
@@ -184,19 +185,22 @@ const CompanyDataPag2 = ({UpdateData, setSuccessfulCharge }) => {
                 />
                 Trabajo en la empresa solicitante
               </p>
-              <p>
-                <input
-                  type="radio"
-                  name="relacion"
-                  id="relacion"
-                  className="form-check-input"
-                  value={1}
-                />
-                Trabajo para una consultora
-              </p>
+              <div className="divInputRadio">
+                <p>
+                  <input
+                    type="radio"
+                    name="relacion"
+                    id="relacion"
+                    className="form-check-input"
+                    value={1}
+                  />
+                  Trabajo para una consultora
+                </p>
+              </div>
             </form>
           </div>
         </div>
+
         <button type="button" className="btn" onClick={submitHandler}>
           Guardar
         </button>

@@ -54,10 +54,8 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
     e.preventDefault();
     const errors = errorsList();
     if (errors.length === 0) {
-      // Create new user API call
       registerUser();
     } else {
-      // Show validation errors as a pop-up notification
       errors.forEach((error) => {
         toast(error.message, {
           autoClose: 3000,
