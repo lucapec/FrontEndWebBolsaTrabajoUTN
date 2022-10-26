@@ -54,7 +54,7 @@ const CompanyDataPag1 = ({setBoolPage2, UpdateData }) => {
   };
 
   const submitHandler = () => {
-    if (businessName && postalCode && webURL && cuit && telephoneNumber && sector && legalAdress) 
+    if (businessName && postalCode && cuit && telephoneNumber && sector && legalAdress) 
     {
       setBoolPage2(true);
       UpdateData(datos);     

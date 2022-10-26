@@ -120,7 +120,6 @@ const CompanyProfile = () => {
     if (
       postalCode &&
       sector &&
-      webURL &&
       telephoneNumber &&
       legalAdress &&
       nameContact &&
@@ -146,7 +145,7 @@ const CompanyProfile = () => {
         })
           .then((res) => res.json())
           .then(
-            toast("Los datos han sido cargados exitosamente", {
+            toast("Los cambios han sido guardados exitosamente", {
               autoClose: 3000,
               hideProgressBar: false,
               type: "success",
@@ -172,7 +171,6 @@ const CompanyProfile = () => {
         });
       }
     } else {
-      console.log("la nueva data:", updateData);
       toast("Complete todos los campos", {
         autoClose: 3000,
         hideProgressBar: false,
@@ -186,7 +184,6 @@ const CompanyProfile = () => {
   return (
     <div className="divFormProfileCompany">
       <ToastContainer className="mt-5" />
-
       <div id="form" className="form">
         <form className=" mt-3">
           <div id="divForm" className="container">
@@ -301,14 +298,14 @@ const CompanyProfile = () => {
           <div className="container">
             <div id="row3" className="row row-cols-4">
               <div className=" col form-group align-items-center">
-                <label>Email del Contacto</label>
+                <label>Apellido del Contacto</label>
                 <br />
                 <input
                   type="text"
-                  name="emailContact"
-                  id="emailContact"
+                  name="lastnameContact"
+                  id="lastnameContact"
                   className="form-control-sm"
-                  value={emailContact}
+                  value={lastnameContact}
                   onChange={inputHandler}
                 />
               </div>
@@ -325,14 +322,14 @@ const CompanyProfile = () => {
                 />
               </div>
               <div className="col form-group align-items-center">
-                <label>Apellido del Contacto</label>
+                <label>Email del Contacto</label>
                 <br />
                 <input
                   type="text"
-                  name="lastnameContact"
-                  id="lastnameContact"
+                  name="emailContact"
+                  id="emailContact"
                   className="form-control-sm"
-                  value={lastnameContact}
+                  value={emailContact}
                   onChange={inputHandler}
                 />
               </div>
