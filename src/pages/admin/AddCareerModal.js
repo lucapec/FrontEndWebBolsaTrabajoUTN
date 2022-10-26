@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { Button, Modal, Form } from 'react-bootstrap';
 import { ToastContainer, toast } from "react-toastify";
+import UserContext from "../../context/UserContext";
 
 function AddCareerModal({ url, setShowModal, visible, form, setForm, setDeletedOrUpdated, deletedOrUpdated }) {
+    const {jwt} = useContext(UserContext);
     const handleNewCareer = () => {
         if (form.name === '' || form.abbreviation === '' || form.totalSubjets === null || form.totalSubjets <= 0) {
             toast("Ingrese datos válidos", {
@@ -14,7 +17,10 @@ function AddCareerModal({ url, setShowModal, visible, form, setForm, setDeletedO
         } else {
             fetch(url, {
                 method: 'POST',
-                headers: { "Content-type": "application/json" },
+                headers: {
+                    "Content-type": "application/json",
+                    Authorization: `Bearer ${jwt}`,
+                },
                 body: JSON.stringify(form),
             })
                 .then((r) => r.json())
