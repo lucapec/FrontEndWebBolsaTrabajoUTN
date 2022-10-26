@@ -196,29 +196,8 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
               <option value="empresa">Soy empresa</option>
             </select>
           </div>
-          <div className="form-field d-flex align-items-center">
-            {isStudent ? (
-              <input
-                type="text"
-                name="legajo"
-                id="legajo"
-                value={legajo}
-                placeholder="Legajo"
-                onChange={inputHandler}
-              />
-            ) : (
-              <input
-                type="text"
-                name="company"
-                id="company"
-                value={company}
-                placeholder="Razon Social"
-                onChange={inputHandler}
-              />
-            )}
-          </div>
           {isStudent ? (
-            <div className="form-field d-flex align-items-center">
+            <div className="form-field d-flex align-items-center justify-content-center">
               <input
                 type="text"
                 name="firstname"
@@ -227,21 +206,6 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
                 placeholder="Nombre"
                 onChange={inputHandler}
               />
-            </div>
-          ) : (
-            <div className="form-field d-flex align-items-center">
-              <input
-                type="number"
-                name="cuit"
-                id="cuit"
-                value={cuit}
-                placeholder="Cuit"
-                onChange={inputHandler}
-              />
-            </div>
-          )}
-          {isStudent && (
-            <div className="form-field d-flex align-items-center">
               <input
                 type="text"
                 name="lastname"
@@ -251,9 +215,39 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
                 onChange={inputHandler}
               />
             </div>
+          ) : (
+            <div className="form-field d-flex align-items-center justify-content-center">
+              <input
+                type="number"
+                name="cuit"
+                id="cuit"
+                value={cuit}
+                placeholder="Cuit"
+                onChange={inputHandler}
+              />
+              <input
+                type="text"
+                name="company"
+                id="company"
+                value={company}
+                placeholder="Razon Social"
+                onChange={inputHandler}
+              />
+            </div>
           )}
-          <div className="form-field d-flex align-items-center">
+          <div className="form-field d-flex align-items-center justify-content-center">
+            {isStudent && (
+              <input
+                type="text"
+                name="legajo"
+                id="legajo"
+                value={legajo}
+                placeholder="Legajo"
+                onChange={inputHandler}
+              />
+            )}
             <input
+              style={{ width: isStudent ? '50%' : '100%' }}
               type="email"
               name="email"
               id="email"
@@ -262,7 +256,7 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
               onChange={inputHandler}
             />
           </div>
-          <div className="form-field d-flex align-items-center">
+          <div className="form-field d-flex align-items-center justify-content-center">
             <input
               type="password"
               name="password"
@@ -271,8 +265,6 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
               placeholder="Contraseña"
               onChange={inputHandler}
             />
-          </div>
-          <div className="form-field d-flex align-items-center">
             <input
               type="password"
               name="confirm-password"
@@ -282,23 +274,24 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
               onChange={inputHandler}
             />
           </div>
-          <button onClick={dataValidation} className="btn mt-3">
+          <button onClick={dataValidation} className="button mt-3">
             {btnText}
           </button>
         </form>
         <div className="text-center fs-6">
           <Link to={linkTo}>{linkToText}</Link>
         </div>
-      </div>
-      {left ? (
-        ""
-      ) : (
-        <div className="wrapper">
-          <figure>
-            <img src={utnLogo} alt="UTN Logo" className="main-logo" />
-          </figure>
-        </div>
-      )}
+      </div >
+      {
+        left ? (
+          ""
+        ) : (
+          <div className="wrapper">
+            <figure>
+              <img src={utnLogo} alt="UTN Logo" className="main-logo" />
+            </figure >
+          </div >
+        )}
     </>
   );
 };

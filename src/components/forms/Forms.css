@@ -27,7 +27,7 @@ body {
 }
 
 .wrapper > form {
-  width: 70%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,15 +43,15 @@ body {
 
 .wrapper-dark .form-field {
   box-shadow: none;
-  width: 50%
+  width: 100%
 }
 
 .wrapper-dark .form-field > input {
-  color: white;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .wrapper-dark .form-field > input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(138, 133, 133, 0.589);
 }
 
 .wrapper-dark form > button {
@@ -88,13 +88,18 @@ body {
 }
 
 .wrapper .form-field input {
-  width: 100%;
+  width: 50%;
   display: block;
   border: none;
   outline: none;
   background: none;
   font-size: 1rem;
   text-align: center;
+  margin: 0 20px;
+  background-color: white;
+  padding: 5px 0;
+  color: rgb(0 0 0);
+  border-radius: 3px;
 }
 
 .wrapper .form-field input:-internat-autofill-selected {

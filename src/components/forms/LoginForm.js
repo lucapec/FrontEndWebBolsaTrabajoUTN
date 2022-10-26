@@ -118,7 +118,7 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
       <div id="wrapper" className="wrapper wrapper-dark">
         <div className="text-center mt-4 name">{h1Text}</div>
         <form className="pb-3 mt-3">
-          <div className="form-field d-flex align-items-center">
+          <div className="form-field d-flex align-items-center justify-content-center">
             <span className="far fa-user"></span>
             <input
               type="email"
@@ -129,7 +129,7 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
               onChange={inputHandler}
             />
           </div>
-          <div className="form-field d-flex align-items-center">
+          <div className="form-field d-flex align-items-center justify-content-center">
             <span className="fas fa-key"></span>
             <input
               type="password"
