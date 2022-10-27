@@ -83,7 +83,7 @@ const AdminDashboard = () => {
                             variant="success"
                             color="success"
                             style={{ margin: '0 5px 0 0' }}
-                            onClick={() => HandleUpdateCareer(rowValues, setDeletedOrUpdated, deletedOrUpdated)}
+                            onClick={() => HandleUpdateCareer(rowValues, setDeletedOrUpdated, deletedOrUpdated, jwt)}
                           >
                             Guardar
                           </Button>
@@ -91,7 +91,7 @@ const AdminDashboard = () => {
                             variant="danger"
                             color="danger"
                             style={{ margin: '0 0 0 5px' }}
-                            onClick={() => HandleDeleteCareer(rowValues, setDeletedOrUpdated, deletedOrUpdated)}
+                            onClick={() => HandleDeleteCareer(rowValues, setDeletedOrUpdated, deletedOrUpdated, jwt)}
                           >
                             X
                           </Button>

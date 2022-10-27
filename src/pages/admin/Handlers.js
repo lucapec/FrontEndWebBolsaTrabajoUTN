@@ -1,7 +1,10 @@
-export const HandleDeleteCareer = (rowValues, setDeletedOrUpdated, deletedOrUpdated) => {
+export const HandleDeleteCareer = (rowValues, setDeletedOrUpdated, deletedOrUpdated, jwt) => {
   fetch(`https://localhost:7172/api/Careers/${rowValues.id}`, {
     method: 'DELETE',
-    headers: { "Content-type": "application/json" },
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${jwt}`,
+  },
   })
     .then((r) => {
       if (r.ok) {
@@ -13,7 +16,7 @@ export const HandleDeleteCareer = (rowValues, setDeletedOrUpdated, deletedOrUpda
     });
 };
 
-export const HandleUpdateCareer = (rowValues, setDeletedOrUpdated, deletedOrUpdated) => {
+export const HandleUpdateCareer = (rowValues, setDeletedOrUpdated, deletedOrUpdated, jwt) => {
   const { id } = rowValues;
   const { col2, col3, col4, col5 } = rowValues.row;
   const updatedCareer = {
@@ -24,7 +27,10 @@ export const HandleUpdateCareer = (rowValues, setDeletedOrUpdated, deletedOrUpda
   };
   fetch(`https://localhost:7172/api/Careers?careerId=${id}`, {
     method: 'PUT',
-    headers: { "Content-type": "application/json" },
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${jwt}`,
+    },
     body: JSON.stringify(updatedCareer),
   })
     .then((r) => {
