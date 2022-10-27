@@ -11,6 +11,7 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
   const [lastname, setLastname] = useState("");
   const [legajo, setLegajo] = useState(null);
   const [company, setCompany] = useState("");
+  const [cuit, setCuit] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -34,7 +35,7 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
         .toLowerCase()
         .match(
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        )
+        ) && isStudent
     ) {
       errorsList.push({ message: "Ingrese un email válido" });
     }
@@ -103,10 +104,11 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({
-          companyname: company,
+          companyName: company,
+          cuit: parseInt(cuit),
           email: email,
           password: password,
-          confirmpassword: confirmPassword,
+          confirmPassword: confirmPassword,
         }),
       })
         .then((r) => r.json())
@@ -151,6 +153,9 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
       case "confirm-password":
         setConfirmPassword(e.target.value);
         break;
+      case "cuit":
+        setCuit(e.target.value);
+        break;
       case "typeUser":
         if (e.target.value === "alumno") {
           setIsStudent(true);
@@ -189,29 +194,8 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
               <option value="empresa">Soy empresa</option>
             </select>
           </div>
-          <div className="form-field d-flex align-items-center">
-            {isStudent ? (
-              <input
-                type="text"
-                name="legajo"
-                id="legajo"
-                value={legajo}
-                placeholder="Legajo"
-                onChange={inputHandler}
-              />
-            ) : (
-              <input
-                type="text"
-                name="company"
-                id="company"
-                value={company}
-                placeholder="Razon Social"
-                onChange={inputHandler}
-              />
-            )}
-          </div>
-          {isStudent && (
-            <div className="form-field d-flex align-items-center">
+          {isStudent ? (
+            <div className="form-field d-flex align-items-center justify-content-center">
               <input
                 type="text"
                 name="firstname"
@@ -220,10 +204,6 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
                 placeholder="Nombre"
                 onChange={inputHandler}
               />
-            </div>
-          )}
-          {isStudent && (
-            <div className="form-field d-flex align-items-center">
               <input
                 type="text"
                 name="lastname"
@@ -233,9 +213,39 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
                 onChange={inputHandler}
               />
             </div>
+          ) : (
+            <div className="form-field d-flex align-items-center justify-content-center">
+              <input
+                type="number"
+                name="cuit"
+                id="cuit"
+                value={cuit}
+                placeholder="Cuit"
+                onChange={inputHandler}
+              />
+              <input
+                type="text"
+                name="company"
+                id="company"
+                value={company}
+                placeholder="Razon Social"
+                onChange={inputHandler}
+              />
+            </div>
           )}
-          <div className="form-field d-flex align-items-center">
+          <div className="form-field d-flex align-items-center justify-content-center">
+            {isStudent && (
+              <input
+                type="text"
+                name="legajo"
+                id="legajo"
+                value={legajo}
+                placeholder="Legajo"
+                onChange={inputHandler}
+              />
+            )}
             <input
+              style={{ width: isStudent ? '50%' : '100%' }}
               type="email"
               name="email"
               id="email"
@@ -244,7 +254,7 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
               onChange={inputHandler}
             />
           </div>
-          <div className="form-field d-flex align-items-center">
+          <div className="form-field d-flex align-items-center justify-content-center">
             <input
               type="password"
               name="password"
@@ -253,8 +263,6 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
               placeholder="Contraseña"
               onChange={inputHandler}
             />
-          </div>
-          <div className="form-field d-flex align-items-center">
             <input
               type="password"
               name="confirm-password"
@@ -264,23 +272,24 @@ const RegisterForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
               onChange={inputHandler}
             />
           </div>
-          <button onClick={dataValidation} className="btn mt-3">
+          <button onClick={dataValidation} className="button mt-3">
             {btnText}
           </button>
         </form>
         <div className="text-center fs-6">
           <Link to={linkTo}>{linkToText}</Link>
         </div>
-      </div>
-      {left ? (
-        ""
-      ) : (
-        <div className="wrapper">
-          <figure>
-            <img src={utnLogo} alt="UTN Logo" className="main-logo" />
-          </figure>
-        </div>
-      )}
+      </div >
+      {
+        left ? (
+          ""
+        ) : (
+          <div className="wrapper">
+            <figure>
+              <img src={utnLogo} alt="UTN Logo" className="main-logo" />
+            </figure >
+          </div >
+        )}
     </>
   );
 };
