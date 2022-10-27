@@ -1,11 +1,14 @@
-import { useState } from "react";
-
+import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import UserContext from "../../context/UserContext";
 import utnLogo from "../../assets/logo-utn.png";
 
 import "./Profile.css";
 
 const Profile = () => {
-  const [firstName, setfirstName] = useState("");
+  const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [documentType, setDocumentType] = useState("");
@@ -28,11 +31,80 @@ const Profile = () => {
   const [shiftProgress, setShiftProgress] = useState("");
   const [averagesWithDeferrals, setAveragesWithDeferrals] = useState("");
   const [averagesWithoutDeferrals, setAveragesWithoutDeferrals] = useState("");
+  const [studentData, setStudentData] = useState({});
+
+  const { jwt } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const errorsList = () => {
+    const errorsList = [];
+    if (
+      !(
+        street &&
+        numberStreet &&
+        sex &&
+        country &&
+        province &&
+        location &&
+        personalPhone &&
+        specialty &&
+        subjectsApproved &&
+        specialtyPlan &&
+        currentYear &&
+        shiftProgress &&
+        averagesWithDeferrals &&
+        averagesWithoutDeferrals
+      )
+    ) {
+      errorsList.push({ message: "Los campos deben estar completos" });
+    }
+    return errorsList;
+  };
+
+  useEffect(() => {
+    fetch("https://localhost:7172/api/UsersInfo/Student", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setStudentData(data);
+      });
+  }, [jwt]);
+
+  useEffect(() => {
+    setFirstName(studentData.firstName);
+    setLastName(studentData.lastName);
+    setEmail(studentData.email);
+    setDocumentType(studentData.documentType);
+    setDocumentNumber(studentData.dni);
+    setLegajo(studentData.legajo);
+    setBirthDate(studentData.birthDate);
+    setCuilOrCuit(studentData.cuil);
+    setStreet(studentData.address);
+    setNumberStreet(studentData.addressNum);
+    setSex(studentData.sex);
+    setFileCv(studentData.curriculum);
+    setCountry(studentData.country);
+    setProvince(studentData.province);
+    setLocation(studentData.city);
+    setPersonalPhone(studentData.phoneNumb);
+    setSpecialty(studentData.careerId);
+    setSubjectsApproved(studentData.approvedSubjets);
+    setSpecialtyPlan(studentData.planDeEstudio);
+    setCurrentYear(studentData.currentCareerYear);
+    setShiftProgress(studentData.turn);
+    setAveragesWithDeferrals(studentData.averageWithFails);
+    setAveragesWithoutDeferrals(studentData.average);
+  }, [studentData]);
 
   const inputHandler = (e) => {
     switch (e.target.id) {
       case "firstName":
-        setfirstName(e.target.value);
+        setFirstName(e.target.value);
         break;
       case "lastName":
         setLastName(e.target.value);
@@ -105,8 +177,71 @@ const Profile = () => {
     }
   };
 
+  const updateData = {
+    Address: street,
+    AddressNum: numberStreet,
+    Email: email,
+    Sex: sex,
+    Curriculum: fileCv,
+    Country: country,
+    Province: province,
+    City: location,
+    PhoneNumb: personalPhone,
+    CareerId: specialty,
+    ApprovedSubjets: subjectsApproved,
+    PlanDeEstudio: specialtyPlan,
+    CurrentCareerYear: currentYear,
+    Turn: shiftProgress,
+    AverageWithFails: averagesWithDeferrals,
+    average: averagesWithoutDeferrals,
+  };
+
+  const dataValidation = (e) => {
+    e.preventDefault();
+    const errors = errorsList();
+    if (errors.length === 0) {
+      fetch("https://localhost:7172/api/UsersInfo/UpdateDataStudent", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt}`,
+        },
+        body: JSON.stringify(updateData),
+      })
+        .then((res) => res.json())
+        .then(
+          toast("Los cambios han sido guardados exitosamente", {
+            autoClose: 3000,
+            hideProgressBar: false,
+            type: "success",
+            theme: "dark",
+            position: toast.POSITION.TOP_LEFT,
+          })
+        )
+        .then(
+          setTimeout(() => {
+            navigate("/ofertas");
+          }, 3000)
+        )
+        .catch((err) => {
+          console.log(err.message);
+        });
+    } else {
+      errors.forEach((error) => {
+        toast(error.message, {
+          autoClose: 3000,
+          hideProgressBar: false,
+          type: "error",
+          theme: "dark",
+          position: toast.POSITION.TOP_LEFT,
+        });
+      });
+    }
+  };
+
   return (
     <div className="divFormProfile">
+      <ToastContainer className="mt-5" />
       <div className="form">
         <form className=" mt-3">
           <div className=" container ">
@@ -158,19 +293,18 @@ const Profile = () => {
                 <br />
                 <select
                   id="documentType"
-                  name="documentType"
                   className="form-control-sm"
                   readOnly
                   value={documentType}
                   onChange={inputHandler}
                 >
-                  <option value="predeterminado">Predeterminado</option>
-                  <option value="documentoUnico">Documento Unico</option>
-                  <option value="libretaCivica">Libreta Civica</option>
-                  <option value="libretaEnrolamiento">
+                  <option value={"Seleccionar"}>Seleccionar</option>
+                  <option value={"DocumentoUnico"}>Documento Unico</option>
+                  <option value={"LibretaCivica"}>Libreta Civica</option>
+                  <option value={"LibretaDeEnrolamiento"}>
                     Libreta de Enrolamiento
                   </option>
-                  <option value="pasaporte">Pasaporte</option>
+                  <option value={"Pasaporte"}>Pasaporte</option>
                 </select>
                 <br />
                 <input
@@ -408,10 +542,10 @@ const Profile = () => {
                   value={shiftProgress}
                   onChange={inputHandler}
                 >
-                  <option value="predeterminado">Predeterminado</option>
-                  <option value="mañana">Mañana</option>
-                  <option value="tarde">Tarde</option>
-                  <option value="noche">Noche</option>
+                  <option value={"Seleccionar"}>Seleccionar</option>
+                  <option value={"Mañana"}>Mañana</option>
+                  <option value={"Tarde"}>Tarde</option>
+                  <option value={"Noche"}>Noche</option>
                 </select>
               </div>
             </div>
@@ -449,8 +583,8 @@ const Profile = () => {
 
           <div className="container">
             <div className="col-md-12">
-              <button id="btn" className="btn">
-                Editar Perfil
+              <button id="btn" className="btn" onClick={dataValidation}>
+                Guardar Cambios
               </button>
             </div>
           </div>

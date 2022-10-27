@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 import "./UniversityData.css";
 
-const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
+const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
   const [specialty, setSpecialty] = useState("");
   const [subjectsApproved, setSubjectsApproved] = useState("");
   const [specialtyPlan, setSpecialtyPlan] = useState("");
@@ -11,6 +12,7 @@ const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
   const [shiftProgress, setShiftProgress] = useState("");
   const [averagesWithDeferrals, setAveragesWithDeferrals] = useState("");
   const [averagesWithoutDeferrals, setAveragesWithoutDeferrals] = useState("");
+  const navigate = useNavigate();
 
   const errorsList = () => {
     const errorsList = [];
@@ -31,22 +33,25 @@ const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
   };
 
   const universityData = {
-    ...data,
-    specialty,
-    subjectsApproved,
-    specialtyPlan,
-    currentYear,
-    shiftProgress,
-    averagesWithDeferrals,
-    averagesWithoutDeferrals,
+    CareerId: specialty,
+    ApprovedSubjets: subjectsApproved,
+    PlanDeEstudio: specialtyPlan,
+    CurrentCareerYear: currentYear,
+    Turn: shiftProgress,
+    AverageWithFails: averagesWithDeferrals,
+    Average: averagesWithoutDeferrals,
+    FirstChargeData: true,
   };
 
   const dataValidation = (e) => {
     e.preventDefault();
     const errors = errorsList();
     if (errors.length === 0) {
-      setData(universityData);
       setSuccessfulCharge(true);
+      UpdateData(universityData);
+      setTimeout(() => {
+        navigate("/ofertas");
+      }, 3000);
       toast("Los datos han sido cargados existosamente", {
         autoClose: 3000,
         hideProgressBar: false,
@@ -122,7 +127,6 @@ const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
                   id="specialty"
                   className="form-control-sm"
                   value={specialty}
-                  placeholder="Especialidad"
                   onChange={inputHandler}
                 />
               </div>
@@ -135,7 +139,6 @@ const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
                   id="subjectsApproved"
                   className="form-control-sm"
                   value={subjectsApproved}
-                  placeholder="Materias Aprobadas"
                   onChange={inputHandler}
                 />
               </div>
@@ -148,7 +151,6 @@ const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
                   id="specialtyPlan"
                   className="form-control-sm"
                   value={specialtyPlan}
-                  placeholder="Plan Especialidad"
                   onChange={inputHandler}
                 />
               </div>
@@ -161,7 +163,6 @@ const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
                   id="currentYear"
                   className="form-control-sm"
                   value={currentYear}
-                  placeholder="Año que cursa"
                   onChange={inputHandler}
                 />
               </div>
@@ -179,10 +180,10 @@ const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
                   value={shiftProgress}
                   onChange={inputHandler}
                 >
-                  <option value="predeterminado">Predeterminado</option>
-                  <option value="mañana">Mañana</option>
-                  <option value="tarde">Tarde</option>
-                  <option value="noche">Noche</option>
+                  <option value={"Seleccionar"}>Seleccionar</option>
+                  <option value={0}>Mañana</option>
+                  <option value={1}>Tarde</option>
+                  <option value={2}>Noche</option>
                 </select>
               </div>
               <div className=" col form-field align-items-center">
@@ -194,7 +195,6 @@ const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
                   id="averagesWithDeferrals"
                   className="form-control-sm"
                   value={averagesWithDeferrals}
-                  placeholder="Promedio con Aplazos"
                   onChange={inputHandler}
                 />
               </div>
@@ -207,7 +207,6 @@ const UniversityData = ({ data, setData, setSuccessfulCharge }) => {
                   id="averagesWithoutDeferrals"
                   className="form-control-sm"
                   value={averagesWithoutDeferrals}
-                  placeholder="Promedios sin Aplazos"
                   onChange={inputHandler}
                 />
               </div>

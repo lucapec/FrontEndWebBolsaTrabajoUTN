@@ -3,6 +3,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 import DependencyRelationshipForm from "./jobPositions/DependencyRelationshipForm";
 import InternshipForm from "./jobPositions/InternshipForm";
+import ModalInternshipForm from "./jobPositions/ModalInternshipForm";
 
 import utnLogo from "../../assets/logo-utn.png";
 
@@ -28,7 +29,6 @@ const CompanyJobPositions = () => {
     }
     if (
       !(
-        emailReceiver &&
         receptionPeriodFrom &&
         receptionPeriodUntil &&
         positionsToFill &&
@@ -165,7 +165,7 @@ const CompanyJobPositions = () => {
             </div>
           </div>
           <div className="container">
-            <div className="col-md-12 text-center" id="buttons">
+            <div className="col-md-12 text-center" id="buttonJob">
               <a
                 onClick={dataValidation}
                 className="btn"
@@ -179,8 +179,13 @@ const CompanyJobPositions = () => {
           </div>
         </form>
       </div>
-      <InternshipForm />
-      <DependencyRelationshipForm />
+      {errorsList().length === 0 ? (
+        <div>
+          <InternshipForm /> <DependencyRelationshipForm />
+        </div>
+      ) : (
+        <ModalInternshipForm />
+      )}
       <footer className="footerCompanyHome">
         <div id="divFooter" className="container">
           <div id="divLeftRight" className="row justify-content-center">

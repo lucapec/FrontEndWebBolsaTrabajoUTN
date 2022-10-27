@@ -3,7 +3,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 import "./PersonalData.css";
 
-const PersonalData = ({ setboolUniversityData, setData }) => {
+const PersonalData = ({ setboolUniversityData, UpdateData }) => {
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -58,30 +58,30 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
   };
 
   const personalData = {
-    firstName,
-    lastName,
-    email,
-    documentType,
-    documentNumber,
-    legajo,
-    birthDate,
-    cuilOrCuit,
-    street,
-    numberStreet,
-    sex,
-    fileCv,
-    country,
-    province,
-    location,
-    personalPhone,
+    FirstName: firstName,
+    LastName: lastName,
+    Email: email,
+    DocumentType: documentType,
+    Dni: documentNumber,
+    Legajo: legajo,
+    BirthDate: birthDate,
+    Cuil: cuilOrCuit,
+    Address: street,
+    AddressNum: numberStreet,
+    Sex: sex,
+    Curriculum: fileCv,
+    Country: country,
+    Province: province,
+    City: location,
+    PhoneNumb: personalPhone,
   };
 
   const dataValidation = (e) => {
     e.preventDefault();
     const errors = errorsList();
     if (errors.length === 0) {
-      setData(personalData);
       setboolUniversityData(true);
+      UpdateData(personalData);
     } else {
       errors.forEach((error) => {
         toast(error.message, {
@@ -170,7 +170,6 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
                   id="firstName"
                   className="form-control-sm"
                   value={firstName}
-                  placeholder="Nombre"
                   onChange={inputHandler}
                 />
               </div>
@@ -183,7 +182,6 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
                   id="lastName"
                   className="form-control-sm"
                   value={lastName}
-                  placeholder="Apellido"
                   onChange={inputHandler}
                 />
               </div>
@@ -196,7 +194,6 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
                   id="email"
                   className="form-control-sm"
                   value={email}
-                  placeholder="Email"
                   onChange={inputHandler}
                 />
               </div>
@@ -210,13 +207,11 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
                   value={documentType}
                   onChange={inputHandler}
                 >
-                  <option value="predeterminado">Predeterminado</option>
-                  <option value="documentoUnico">Documento Unico</option>
-                  <option value="libretaCivica">Libreta Civica</option>
-                  <option value="libretaEnrolamiento">
-                    Libreta de Enrolamiento
-                  </option>
-                  <option value="pasaporte">Pasaporte</option>
+                  <option value={"Seleccionar"}>Seleccionar</option>
+                  <option value={0}>Documento Unico</option>
+                  <option value={1}>Libreta Civica</option>
+                  <option value={2}>Libreta de Enrolamiento</option>
+                  <option value={3}>Pasaporte</option>
                 </select>
                 <br />
                 <input
@@ -225,7 +220,6 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
                   id="documentNumber"
                   className="form-control-sm"
                   value={documentNumber}
-                  placeholder="Numero de Documento"
                   onChange={inputHandler}
                 />
               </div>
@@ -242,7 +236,6 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
                   id="legajo"
                   className="form-control-sm"
                   value={legajo}
-                  placeholder="Legajo"
                   onChange={inputHandler}
                 />
               </div>
@@ -250,12 +243,11 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
                 <label>Fecha de Nacimiento</label>
                 <br />
                 <input
-                  type="text"
+                  type="date"
                   name="birthDate"
                   id="birthDate"
                   className="form-control-sm"
                   value={birthDate}
-                  placeholder="Fecha de Nacimiento"
                   onChange={inputHandler}
                 />
               </div>
@@ -268,7 +260,6 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
                   id="personalPhone"
                   className="form-control-sm"
                   value={personalPhone}
-                  placeholder="Telefono Particular"
                   onChange={inputHandler}
                 />
               </div>
@@ -299,7 +290,6 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
                   id="street"
                   className="form-control-sm"
                   value={street}
-                  placeholder="Calle"
                   onChange={inputHandler}
                 />
               </div>
@@ -312,7 +302,6 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
                   id="numberStreet"
                   className="form-control-sm"
                   value={numberStreet}
-                  placeholder="Numero de Calle"
                   onChange={inputHandler}
                 />
               </div>
@@ -325,7 +314,6 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
                   id="sex"
                   className="form-control-sm"
                   value={sex}
-                  placeholder="Sexo"
                   onChange={inputHandler}
                 />
               </div>
@@ -338,7 +326,6 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
                   id="fileCv"
                   className="form-control-sm"
                   value={fileCv}
-                  placeholder="Archivo CV"
                   onChange={inputHandler}
                 />
               </div>
@@ -355,7 +342,6 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
                   id="country"
                   className="form-control-sm"
                   value={country}
-                  placeholder="Pais"
                   onChange={inputHandler}
                 />
               </div>
@@ -368,7 +354,6 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
                   id="province"
                   className="form-control-sm"
                   value={province}
-                  placeholder="Provincia"
                   onChange={inputHandler}
                 />
               </div>
@@ -381,7 +366,6 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
                   id="location"
                   className="form-control-sm"
                   value={location}
-                  placeholder="Localidad"
                   onChange={inputHandler}
                 />
               </div>
