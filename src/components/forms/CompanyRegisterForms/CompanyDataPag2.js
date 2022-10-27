@@ -32,7 +32,7 @@ const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
       case "telephone":
         setTelephoneNumber(e.target.value);
         break;
-      case "relacion":
+      case "relWithCompany":
         setRelWithCompany(e.target.value);
         break;
       default:
@@ -174,29 +174,17 @@ const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
           <div className="col">
             <label>Relacion del contacto con la empresa</label>
             <form onChange={inputHandler}>
-              <br />
-              <p>
-                <input
-                  type="radio"
-                  name="relacion"
-                  id="relacion"
-                  className="form-check-input"
-                  value={0}
-                />
-                Trabajo en la empresa solicitante
-              </p>
-              <div className="divInputRadio">
-                <p>
-                  <input
-                    type="radio"
-                    name="relacion"
-                    id="relacion"
-                    className="form-check-input"
-                    value={1}
-                  />
-                  Trabajo para una consultora
-                </p>
-              </div>
+              <select
+                id="relWithCompany"
+                className="form-control-sm"
+                name="relWithCompany"
+                value={relWithCompany}
+                onChange={inputHandler}
+              >
+                <option value={"Seleccionar"}>Seleccionar</option>
+                <option value={0}>Trabajo en la empresa</option>
+                <option value={1}>Trabajo en una consultora</option>
+              </select>
             </form>
           </div>
         </div>

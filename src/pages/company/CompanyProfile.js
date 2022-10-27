@@ -20,7 +20,7 @@ const CompanyProfile = () => {
   const [emailContact, setEmailContact] = useState("");
   const [positionContact, setPositionContact] = useState("");
   const [telephoneNumberContact, setTelephoneNumberContact] = useState("");
-  const [relWithCompanyContact, setRelWithCompanyContact] = useState();
+  const [relWithCompanyContact, setRelWithCompanyContact] = useState("");
   const [companyData, setCompanyData] = useState({});
 
   const { jwt } = useContext(UserContext);
@@ -335,29 +335,20 @@ const CompanyProfile = () => {
               </div>
               <div className=" col form-group align-items-center">
                 <label>Relación con la Empresa</label>
-                <br />
-                <p className="p-radio">
-                  <input
-                    type="radio"
-                    name="relacion"
-                    id="relacion"
-                    className="form-check-input"
-                    value={0}
-                  />
-                  Trabajo para la empresa
-                </p>
-                <div className="divInput">
-                  <p className="p-radio">
-                    <input
-                      type="radio"
-                      name="relacion"
-                      id="relacion"
-                      className="form-check-input"
-                      value={1}
-                    />
-                    Trabajo para una consultora
-                  </p>
-                </div>
+           
+                <select
+                  id="relWithCompanyContact"
+                  className="form-control-sm"
+                  name="relWithCompanyContact"
+                  value={relWithCompanyContact}
+                  onChange={inputHandler}
+                >
+                  <option value={"Seleccionar"}>Seleccionar</option>
+                  <option value={"inCompany"}>Trabajo en la empresa</option>
+                  <option value={"outCompany"}>
+                    Trabajo en una consultora
+                  </option>
+                </select>
               </div>
             </div>
           </div>

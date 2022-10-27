@@ -207,6 +207,7 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                   value={documentType}
                   onChange={inputHandler}
                 >
+                  <option value={"Seleccionar"}>Seleccionar</option>
                   <option value={0}>Documento Unico</option>
                   <option value={1}>Libreta Civica</option>
                   <option value={2}>Libreta de Enrolamiento</option>

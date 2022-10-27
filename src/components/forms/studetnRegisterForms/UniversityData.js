@@ -180,6 +180,7 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
                   value={shiftProgress}
                   onChange={inputHandler}
                 >
+                  <option value={"Seleccionar"}>Seleccionar</option>
                   <option value={0}>Mañana</option>
                   <option value={1}>Tarde</option>
                   <option value={2}>Noche</option>

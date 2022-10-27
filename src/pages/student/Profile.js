@@ -43,7 +43,6 @@ const Profile = () => {
         street &&
         numberStreet &&
         sex &&
-        fileCv &&
         country &&
         province &&
         location &&
@@ -71,7 +70,9 @@ const Profile = () => {
       },
     })
       .then((response) => response.json())
-      .then((data) => setStudentData(data));
+      .then((data) => {
+        setStudentData(data);
+      });
   }, [jwt]);
 
   useEffect(() => {
@@ -150,7 +151,7 @@ const Profile = () => {
       case "personalPhone":
         setPersonalPhone(e.target.value);
         break;
-        case "specialty":
+      case "specialty":
         setSpecialty(e.target.value);
         break;
       case "subjectsApproved":
@@ -179,6 +180,7 @@ const Profile = () => {
   const updateData = {
     Address: street,
     AddressNum: numberStreet,
+    Email: email,
     Sex: sex,
     Curriculum: fileCv,
     Country: country,
@@ -244,7 +246,7 @@ const Profile = () => {
         <form className=" mt-3">
           <div className=" container ">
             <div className="row row-cols-4">
-            <div className="col form-group align-items-center">
+              <div className="col form-group align-items-center">
                 <label>Nombre</label>
                 <br />
                 <input
@@ -291,16 +293,18 @@ const Profile = () => {
                 <br />
                 <select
                   id="documentType"
-                  disabled
                   className="form-control-sm"
                   readOnly
                   value={documentType}
                   onChange={inputHandler}
                 >
-                  <option value={0}>Documento Unico</option>
-                  <option value={1}>Libreta Civica</option>
-                  <option value={2}>Libreta de Enrolamiento</option>
-                  <option value={3}>Pasaporte</option>
+                  <option value={"Seleccionar"}>Seleccionar</option>
+                  <option value={"DocumentoUnico"}>Documento Unico</option>
+                  <option value={"LibretaCivica"}>Libreta Civica</option>
+                  <option value={"LibretaDeEnrolamiento"}>
+                    Libreta de Enrolamiento
+                  </option>
+                  <option value={"Pasaporte"}>Pasaporte</option>
                 </select>
                 <br />
                 <input
@@ -350,9 +354,9 @@ const Profile = () => {
                 <label>Telefono Particular</label>
                 <br />
                 <input
-            type="number"
-            name="personalPhone"
-            id="personalPhone"
+                  type="number"
+                  name="personalPhone"
+                  id="personalPhone"
                   className="form-control-sm"
                   value={personalPhone}
                   placeholder="Telefono Particular"
@@ -538,9 +542,10 @@ const Profile = () => {
                   value={shiftProgress}
                   onChange={inputHandler}
                 >
-                  <option value={0}>Mañana</option>
-                  <option value={1}>Tarde</option>
-                  <option value={2}>Noche</option>
+                  <option value={"Seleccionar"}>Seleccionar</option>
+                  <option value={"Mañana"}>Mañana</option>
+                  <option value={"Tarde"}>Tarde</option>
+                  <option value={"Noche"}>Noche</option>
                 </select>
               </div>
             </div>
@@ -575,7 +580,6 @@ const Profile = () => {
               </div>
             </div>
           </div>
-
 
           <div className="container">
             <div className="col-md-12">
