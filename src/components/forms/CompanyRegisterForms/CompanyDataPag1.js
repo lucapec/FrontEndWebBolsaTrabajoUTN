@@ -84,6 +84,7 @@ const CompanyDataPag1 = ({setBoolPage2, UpdateData }) => {
               className="form-control-sm"
               type="text"
               id="businessName"
+              placeholder="Razon Social"
               onChange={inputHandler}
               value={businessName}
             />
@@ -95,6 +96,7 @@ const CompanyDataPag1 = ({setBoolPage2, UpdateData }) => {
               className="form-control-sm"
               type="number"
               id="postalCode"
+              placeholder="Codigo Postal"
               onChange={inputHandler}
               value={postalCode}
             />
@@ -107,7 +109,7 @@ const CompanyDataPag1 = ({setBoolPage2, UpdateData }) => {
             <input
               className="form-control-sm"
               type="number"
-              placeholder="sin guiones"
+              placeholder=" CUIT (Sin guiones)"
               id="cuit"
               onChange={inputHandler}
               value={cuit}
@@ -134,17 +136,19 @@ const CompanyDataPag1 = ({setBoolPage2, UpdateData }) => {
               className="form-control-sm"
               type="text"
               id="sector"
+              placeholder="Rubro"
               onChange={inputHandler}
               value={sector}
             />
           </div>
           <div className="col">
-            <label>Web (opcional)</label>
+            <label>Web</label>
             <br />
             <input
               className="form-control-sm"
               type="text"
               id="web"
+              placeholder="Web (Opcional)"
               onChange={inputHandler}
               value={webURL}
             />
@@ -158,6 +162,7 @@ const CompanyDataPag1 = ({setBoolPage2, UpdateData }) => {
               className="form-control-sm"
               type="text"
               id="legalAdress"
+              placeholder="Domicilio Legal"
               onChange={inputHandler}
               value={legalAdress}
             />

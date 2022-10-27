@@ -35,7 +35,7 @@ const Navbar = () => {
               <>
                 <li className="nav-item">
                   <Link className="nav-link" to="/ofertasEmpresa">
-                    Tus Ofertas
+                    Crear Ofertas
                   </Link>
                 </li>
                 <li className="nav-item">

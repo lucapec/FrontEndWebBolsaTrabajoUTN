@@ -4,14 +4,13 @@ import { toast, ToastContainer } from "react-toastify";
 import "./PersonalData.css";
 
 const PersonalData = ({ setboolUniversityData, setData }) => {
-  const [user, setUser] = useState("");
+  const [firstName, setFirstname] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [documentType, setDocumentType] = useState("");
   const [documentNumber, setDocumentNumber] = useState("");
   const [legajo, setLegajo] = useState("");
   const [birthDate, setBirthDate] = useState("");
-  const [names, setNames] = useState("");
   const [cuilOrCuit, setCuilOrCuit] = useState("");
   const [street, setStreet] = useState("");
   const [numberStreet, setNumberStreet] = useState("");
@@ -35,14 +34,13 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
     }
     if (
       !(
-        user &&
+        firstName &&
         lastName &&
         email &&
         documentType &&
         documentNumber &&
         legajo &&
         birthDate &&
-        names &&
         cuilOrCuit &&
         street &&
         numberStreet &&
@@ -60,14 +58,13 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
   };
 
   const personalData = {
-    user,
+    firstName,
     lastName,
     email,
     documentType,
     documentNumber,
     legajo,
     birthDate,
-    names,
     cuilOrCuit,
     street,
     numberStreet,
@@ -100,8 +97,8 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
 
   const inputHandler = (e) => {
     switch (e.target.id) {
-      case "user":
-        setUser(e.target.value);
+      case "firstName":
+        setFirstname(e.target.value);
         break;
       case "lastName":
         setLastName(e.target.value);
@@ -120,9 +117,6 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
         break;
       case "birthDate":
         setBirthDate(e.target.value);
-        break;
-      case "names":
-        setNames(e.target.value);
         break;
       case "cuilOrCuit":
         setCuilOrCuit(e.target.value);
@@ -160,258 +154,248 @@ const PersonalData = ({ setboolUniversityData, setData }) => {
     <div className="divFormPersonal">
       <header></header>
       <ToastContainer className="mt-5" />
-      <form className=" mt-3">
-        <div className="title">
-          <h2>Complete los datos personales</h2>
-        </div>
-        <div className=" container ">
-          <div className="row row-cols-4">
-            <div className=" col form-field align-items-center ">
-              <label>Usuario</label>
-              <br />
-              <input
-                type="text"
-                name="user"
-                id="user"
-                className="form-control-sm"
-                value={user}
-                placeholder="Usuario"
-                onChange={inputHandler}
-              />
-            </div>
-            <div className="col form-field align-items-center">
-              <label>Apellido</label>
-              <br />
-              <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                className="form-control-sm"
-                value={lastName}
-                placeholder="Apellido"
-                onChange={inputHandler}
-              />
-            </div>
-            <div className=" col form-field align-items-center">
-              <label>Email</label>
-              <br />
-              <input
-                type="text"
-                name="email"
-                id="email"
-                className="form-control-sm"
-                value={email}
-                placeholder="Email"
-                onChange={inputHandler}
-              />
-            </div>
-            <div className=" col form-field align-items-center">
-              <label>Tipo y Nro Documento</label>
-              <br />
-              <select
-                id="documentType"
-                className="form-control-sm"
-                name="documentType"
-                value={documentType}
-                onChange={inputHandler}
-              >
-                <option value="predeterminado">Predeterminado</option>
-                <option value="documentoUnico">Documento Unico</option>
-                <option value="libretaCivica">Libreta Civica</option>
-                <option value="libretaEnrolamiento">
-                  Libreta de Enrolamiento
-                </option>
-                <option value="pasaporte">Pasaporte</option>
-              </select>
-              <br />
-              <input
-                type="number"
-                name="documentNumber"
-                id="documentNumber"
-                className="form-control-sm"
-                value={documentNumber}
-                placeholder="Numero de Documento"
-                onChange={inputHandler}
-              />
+      <div className="form">
+        <form className=" mt-3">
+          <div className="title">
+            <h2>Complete los datos personales</h2>
+          </div>
+          <div className=" container ">
+            <div className="row row-cols-4">
+              <div className="col form-field align-items-center">
+                <label>Nombre</label>
+                <br />
+                <input
+                  type="text"
+                  name="firstName"
+                  id="firstName"
+                  className="form-control-sm"
+                  value={firstName}
+                  placeholder="Nombre"
+                  onChange={inputHandler}
+                />
+              </div>
+              <div className="col form-field align-items-center">
+                <label>Apellido</label>
+                <br />
+                <input
+                  type="text"
+                  name="lastName"
+                  id="lastName"
+                  className="form-control-sm"
+                  value={lastName}
+                  placeholder="Apellido"
+                  onChange={inputHandler}
+                />
+              </div>
+              <div className=" col form-field align-items-center">
+                <label>Email</label>
+                <br />
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  className="form-control-sm"
+                  value={email}
+                  placeholder="Email"
+                  onChange={inputHandler}
+                />
+              </div>
+              <div className=" col form-field align-items-center">
+                <label>Tipo y Nro Documento</label>
+                <br />
+                <select
+                  id="documentType"
+                  className="form-control-sm"
+                  name="documentType"
+                  value={documentType}
+                  onChange={inputHandler}
+                >
+                  <option value="predeterminado">Predeterminado</option>
+                  <option value="documentoUnico">Documento Unico</option>
+                  <option value="libretaCivica">Libreta Civica</option>
+                  <option value="libretaEnrolamiento">
+                    Libreta de Enrolamiento
+                  </option>
+                  <option value="pasaporte">Pasaporte</option>
+                </select>
+                <br />
+                <input
+                  type="number"
+                  name="documentNumber"
+                  id="documentNumber"
+                  className="form-control-sm"
+                  value={documentNumber}
+                  placeholder="Numero de Documento"
+                  onChange={inputHandler}
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="container">
-          <div className="row row-cols-4">
-            <div className=" col form-field align-items-center ">
-              <label>Legajo</label>
-              <br />
-              <input
-                type="number"
-                name="legajo"
-                id="legajo"
-                className="form-control-sm"
-                value={legajo}
-                placeholder="Legajo"
-                onChange={inputHandler}
-              />
-            </div>
-            <div className=" col form-field align-items-center">
-              <label>Fecha de Nacimiento</label>
-              <br />
-              <input
-                type="text"
-                name="birthDate"
-                id="birthDate"
-                className="form-control-sm"
-                value={birthDate}
-                placeholder="Fecha de Nacimiento"
-                onChange={inputHandler}
-              />
-            </div>
-            <div className=" col form-field align-items-center">
-              <label>Nombres</label>
-              <br />
-              <input
-                type="text"
-                name="names"
-                id="names"
-                className="form-control-sm"
-                value={names}
-                placeholder="Nombres"
-                onChange={inputHandler}
-              />
-            </div>
-            <div className="col form-field align-items-center">
-              <label>CUIL o CUIT</label>
-              <br />
-              <input
-                type="number"
-                name="cuilOrCuit"
-                id="cuilOrCuit"
-                className="form-control-sm"
-                value={cuilOrCuit}
-                placeholder="CUIL o CUIT (Sin guiones) "
-                onChange={inputHandler}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="container">
-          <div className="row row-cols-4">
-            <div className=" col form-field align-items-center">
-              <label>Calle</label>
-              <br />
-              <input
-                type="text"
-                name="street"
-                id="street"
-                className="form-control-sm"
-                value={street}
-                placeholder="Calle"
-                onChange={inputHandler}
-              />
-            </div>
-            <div className=" col form-field align-items-center">
-              <label>Numero de Calle</label>
-              <br />
-              <input
-                type="number"
-                name="numberStreet"
-                id="numberStreet"
-                className="form-control-sm"
-                value={numberStreet}
-                placeholder="Numero de Calle"
-                onChange={inputHandler}
-              />
-            </div>
-            <div className=" col form-field align-items-center">
-              <label>Sexo</label>
-              <br />
-              <input
-                type="text"
-                name="sex"
-                id="sex"
-                className="form-control-sm"
-                value={sex}
-                placeholder="Sexo"
-                onChange={inputHandler}
-              />
-            </div>
-            <div className=" col form-field align-items-center">
-              <label>Archivo CV</label>
-              <br />
-              <input
-                type="file"
-                name="fileCv"
-                id="fileCv"
-                className="form-control-sm"
-                value={fileCv}
-                placeholder="Archivo CV"
-                onChange={inputHandler}
-              />
+          <div className="container">
+            <div className="row row-cols-4">
+              <div className=" col form-field align-items-center ">
+                <label>Legajo</label>
+                <br />
+                <input
+                  type="number"
+                  name="legajo"
+                  id="legajo"
+                  className="form-control-sm"
+                  value={legajo}
+                  placeholder="Legajo"
+                  onChange={inputHandler}
+                />
+              </div>
+              <div className=" col form-field align-items-center">
+                <label>Fecha de Nacimiento</label>
+                <br />
+                <input
+                  type="text"
+                  name="birthDate"
+                  id="birthDate"
+                  className="form-control-sm"
+                  value={birthDate}
+                  placeholder="Fecha de Nacimiento"
+                  onChange={inputHandler}
+                />
+              </div>
+              <div className=" col form-field align-items-center">
+                <label>Telefono Particular</label>
+                <br />
+                <input
+                  type="number"
+                  name="personalPhone"
+                  id="personalPhone"
+                  className="form-control-sm"
+                  value={personalPhone}
+                  placeholder="Telefono Particular"
+                  onChange={inputHandler}
+                />
+              </div>
+
+              <div className="col form-field align-items-center">
+                <label>CUIL o CUIT</label>
+                <br />
+                <input
+                  type="number"
+                  name="cuilOrCuit"
+                  id="cuilOrCuit"
+                  className="form-control-sm"
+                  value={cuilOrCuit}
+                  placeholder="CUIL o CUIT (Sin guiones) "
+                  onChange={inputHandler}
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="container">
-          <div className="row row-cols-4">
-            <div className=" col form-field align-items-center">
-              <label>Pais</label>
-              <br />
-              <input
-                type="text"
-                name="country"
-                id="country"
-                className="form-control-sm"
-                value={country}
-                placeholder="Pais"
-                onChange={inputHandler}
-              />
-            </div>
-            <div className=" col form-field align-items-center">
-              <label>Provincia</label>
-              <br />
-              <input
-                type="text"
-                name="province"
-                id="province"
-                className="form-control-sm"
-                value={province}
-                placeholder="Provincia"
-                onChange={inputHandler}
-              />
-            </div>
-            <div className=" col form-field align-items-center">
-              <label>Localidad</label>
-              <br />
-              <input
-                type="text"
-                name="location"
-                id="location"
-                className="form-control-sm"
-                value={location}
-                placeholder="Localidad"
-                onChange={inputHandler}
-              />
-            </div>
-            <div className=" col form-field align-items-center">
-              <label>Telefono Particular</label>
-              <br />
-              <input
-                type="number"
-                name="personalPhone"
-                id="personalPhone"
-                className="form-control-sm"
-                value={personalPhone}
-                placeholder="Telefono Particular"
-                onChange={inputHandler}
-              />
+          <div className="container">
+            <div className="row row-cols-4">
+              <div className=" col form-field align-items-center">
+                <label>Calle</label>
+                <br />
+                <input
+                  type="text"
+                  name="street"
+                  id="street"
+                  className="form-control-sm"
+                  value={street}
+                  placeholder="Calle"
+                  onChange={inputHandler}
+                />
+              </div>
+              <div className=" col form-field align-items-center">
+                <label>Numero de Calle</label>
+                <br />
+                <input
+                  type="number"
+                  name="numberStreet"
+                  id="numberStreet"
+                  className="form-control-sm"
+                  value={numberStreet}
+                  placeholder="Numero de Calle"
+                  onChange={inputHandler}
+                />
+              </div>
+              <div className=" col form-field align-items-center">
+                <label>Sexo</label>
+                <br />
+                <input
+                  type="text"
+                  name="sex"
+                  id="sex"
+                  className="form-control-sm"
+                  value={sex}
+                  placeholder="Sexo"
+                  onChange={inputHandler}
+                />
+              </div>
+              <div className=" col form-field align-items-center">
+                <label>Archivo CV</label>
+                <br />
+                <input
+                  type="file"
+                  name="fileCv"
+                  id="fileCv"
+                  className="form-control-sm"
+                  value={fileCv}
+                  placeholder="Archivo CV"
+                  onChange={inputHandler}
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="container">
-          <div className="col-md-12 text-center">
-            <button onClick={dataValidation} className="button-personal">
-              Guardar y continuar
-            </button>
+          <div className="container">
+            <div className="row row-cols-4">
+              <div className=" col form-field align-items-center">
+                <label>Pais</label>
+                <br />
+                <input
+                  type="text"
+                  name="country"
+                  id="country"
+                  className="form-control-sm"
+                  value={country}
+                  placeholder="Pais"
+                  onChange={inputHandler}
+                />
+              </div>
+              <div className=" col form-field align-items-center">
+                <label>Provincia</label>
+                <br />
+                <input
+                  type="text"
+                  name="province"
+                  id="province"
+                  className="form-control-sm"
+                  value={province}
+                  placeholder="Provincia"
+                  onChange={inputHandler}
+                />
+              </div>
+              <div className=" col form-field align-items-center">
+                <label>Localidad</label>
+                <br />
+                <input
+                  type="text"
+                  name="location"
+                  id="location"
+                  className="form-control-sm"
+                  value={location}
+                  placeholder="Localidad"
+                  onChange={inputHandler}
+                />
+              </div>
+            </div>
           </div>
-        </div>
-      </form>
+          <div className="container">
+            <div className="col-md-12 text-center">
+              <button onClick={dataValidation} className="btn">
+                Guardar y continuar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
