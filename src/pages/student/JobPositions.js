@@ -4,6 +4,7 @@ import "./JobPositions.css";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import { ToastContainer, toast } from "react-toastify";
 
 const JobPositions = () => {
   const { jwt } = useContext(UserContext);
@@ -58,6 +59,32 @@ const JobPositions = () => {
     }
   }
 
+const applyJobPosition = () => {
+  console.log(selectedJobPosition.id);
+  fetch('https://localhost:7172/api/JobApply/CreateJobApply', {
+    method: 'PUT',
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${jwt}`,
+    },
+    body: JSON.stringify({
+      JobPositionId: parseInt(selectedJobPosition.id),
+    }),
+  })
+    .then((res) => res.json())
+    .then((r) => {
+      toast('Has aplicado correctamente', {
+        autoClose: 3000,
+        hideProgressBar: false,
+        type: "success",
+        theme: "dark",
+        position: toast.POSITION.TOP_LEFT,
+    })})
+    .catch((err) => {
+      console.log(err.message)
+  })
+}
+
 
   return (
     <div className="container-fluid main">
@@ -86,7 +113,7 @@ const JobPositions = () => {
               <CardContent>
                 <Typography variant="body" component="div" style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <h2>{selectedJobPosition && selectedJobPosition.jobTitle}</h2>
-                  <input className="apply-button" type="submit" value='Aplicar' />
+                  <input className="apply-button" type="submit" value='Aplicar' onClick={applyJobPosition}/>
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                   {selectedJobPosition && selectedJobPosition.location}
