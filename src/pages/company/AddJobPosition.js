@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
-import DependencyRelationshipForm from "./jobPositions/DependencyRelationshipForm";
-import InternshipForm from "./jobPositions/InternshipForm";
-import ModalInternshipForm from "./jobPositions/ModalInternshipForm";
+import DependencyRelationshipForm from "./addJobPosition/DependencyRelationshipForm";
+import InternshipForm from "./addJobPosition/InternshipForm";
+import ModalInternshipForm from "./addJobPosition/ModalInternshipForm";
 
 import utnLogo from "../../assets/logo-utn.png";
 
