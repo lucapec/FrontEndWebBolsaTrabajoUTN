@@ -97,23 +97,43 @@ const JobPositions = () => {
             })}
           </ul>
           <div className="details">
-            <Card key={selectedJobPosition && selectedJobPosition.id} variant="outlined">
-              <CardContent>
-                <Typography variant="body" component="div" style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <h2>{selectedJobPosition && selectedJobPosition.jobTitle}</h2>
-                  <input className="apply-button" type="submit" value='Aplicar' />
-                </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  {selectedJobPosition && selectedJobPosition.location}
-                </Typography>
-                <Typography variant="body2">
-                  {selectedJobPosition && selectedJobPosition.jobDescription}
-                </Typography>
-                <Typography variant="body2">
-                  {selectedJobPosition && date.getDate(selectedJobPosition.createdDate)}
-                </Typography>
-              </CardContent>
-            </Card>
+            {role === "Student" && (
+              <Card key={selectedJobPosition && selectedJobPosition.id} variant="outlined">
+                <CardContent>
+                  <Typography variant="body" component="div" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <h2>{selectedJobPosition && selectedJobPosition.jobTitle}</h2>
+                    <input className="apply-button" type="submit" value='Aplicar' />
+                  </Typography>
+                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    {selectedJobPosition && selectedJobPosition.location}
+                  </Typography>
+                  <Typography variant="body2">
+                    {selectedJobPosition && selectedJobPosition.jobDescription}
+                  </Typography>
+                  <Typography variant="body2">
+                    {selectedJobPosition && date.getDate(selectedJobPosition.createdDate)}
+                  </Typography>
+                </CardContent>
+              </Card>
+            )}
+            {role === "Company" && (
+              <Card key={selectedJobPosition && selectedJobPosition.id} variant="outlined">
+                <CardContent>
+                  <Typography variant="body" component="div" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <h2>{selectedJobPosition && `Lista de postulantes para ${selectedJobPosition.jobTitle}`}</h2>
+                  </Typography>
+                  <ul className="list">
+                    {selectedJobPosition.studentsWhoApplied && selectedJobPosition.studentsWhoApplied.map((student) => {
+                      return <Card className="card" key={student.id} variant="outlined">
+                        <CardContent>
+                          {student.firstName}
+                        </CardContent>
+                      </Card>
+                    })}
+                  </ul>
+                </CardContent>
+              </Card>
+            )}
           </div>
         </div>
       </div>
