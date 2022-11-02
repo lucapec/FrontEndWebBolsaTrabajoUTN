@@ -55,7 +55,7 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
             if (r.roles[0] === "Student") {
               navigate('/ofertas');
             } else if (r.roles[0] === "Company") {
-              navigate('/ofertasEmpresa');
+              navigate('/crearOferta');
             } else {
               navigate('/adminDashboard');
             }

@@ -11,7 +11,7 @@ const ReplaceRoute = () => {
         if (role === "Student") {
           return <Navigate to="/ofertas" replace="true" />
         } else if (role === "Company") {
-          return <Navigate to="/ofertasEmpresa" replace="true" />
+          return <Navigate to="/crearOferta" replace="true" />
         }else{
           return <Navigate to="/adminDashboard" replace="true" />
         }    

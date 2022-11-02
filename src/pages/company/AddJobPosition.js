@@ -7,9 +7,9 @@ import ModalInternshipForm from "./jobPositions/ModalInternshipForm";
 
 import utnLogo from "../../assets/logo-utn.png";
 
-import "./CompanyJobPositions.css";
+import "./AddJobPosition.css";
 
-const CompanyJobPositions = () => {
+const AddJobPosition = () => {
   const [emailReceiver, setEmailReceiver] = useState("");
   const [receptionPeriodFrom, setReceptionPeriodFrom] = useState("");
   const [receptionPeriodUntil, setReceptionPeriodUntil] = useState("");
@@ -212,4 +212,4 @@ const CompanyJobPositions = () => {
   );
 };
 
-export default CompanyJobPositions;
+export default AddJobPosition;

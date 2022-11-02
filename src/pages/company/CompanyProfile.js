@@ -156,7 +156,7 @@ const CompanyProfile = () => {
           )
           .then(
             setTimeout(() => {
-              navigate("/ofertasEmpresa");
+              navigate("/crearOferta");
             }, 3000)
           )
           .catch((err) => {

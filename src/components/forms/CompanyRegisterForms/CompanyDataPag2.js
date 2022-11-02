@@ -62,7 +62,7 @@ const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
         setSuccessfulCharge(true);
         UpdateData(datos2);
         setTimeout(() => {
-          navigate("/ofertasEmpresa");
+          navigate("/crearOferta");
         }, 3000);
 
         toast("Los datos han sido cargados exitosamente", {
