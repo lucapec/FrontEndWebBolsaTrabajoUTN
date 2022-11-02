@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext, useCallback, useRef } from 'react';
-import UserContext from "../../context/UserContext";
 import "./JobPositions.css";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import UserContext from "../../context/UserContext";
 
 const JobPositions = () => {
-  const { jwt } = useContext(UserContext);
+  const { jwt, role } = useContext(UserContext);
   const [jobPositions, setJobPositions] = useState([]);
   const [selectedJobPosition, setSelectedJobPosition] = useState({});
   const [searchText, setSearchText] = useState('');
@@ -15,20 +15,36 @@ const JobPositions = () => {
   const date = new Date();
 
   useEffect(() => {
-    fetch('https://localhost:7172/api/JobPosition/GetAllJobPositions', {
-      method: 'GET',
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${jwt}`,
-      },
-    })
-      .then((r) => r.json())
-      .then((r) => {
-        if (r.success) {
-          setJobPositions(r.data);
-        }
-      });
-  }, [jwt]);
+    if (role === "Student") {
+      fetch('https://localhost:7172/api/JobPosition/GetAllJobPositions', {
+        method: 'GET',
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${jwt}`,
+        },
+      })
+        .then((r) => r.json())
+        .then((r) => {
+          if (r.success) {
+            setJobPositions(r.data);
+          }
+        });
+    } else if (role === "Company") {
+      fetch('https://localhost:7172/api/JobPosition/GetCompanyJobPositions', {
+        method: 'GET',
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${jwt}`,
+        },
+      })
+        .then((r) => r.json())
+        .then((r) => {
+          if (r.success) {
+            setJobPositions(r.data);
+          }
+        });
+    }
+  }, [jwt, role]);
 
   const onSelectJobPosition = useCallback(
     (id) => {
@@ -39,7 +55,6 @@ const JobPositions = () => {
 
   useEffect(() => {
     if (!firstEnter.current && jobPositions.length !== 0) {
-      console.log(jobPositions);
       setSelectedJobPosition(jobPositions[0]);
       firstEnter.current = true;
     }
@@ -71,7 +86,7 @@ const JobPositions = () => {
             {jobPositions && jobPositions.filter((jobPosition) => {
               return jobPosition.jobTitle.includes(searchText);
             }).map((jobPosition) => {
-              return <Card className="card" key={jobPosition.id} onClick={() => onSelectJobPosition(jobPosition.id)} variant="outlined" style={{ border: jobPosition.id === selectedJobPosition.id ? '1px solid black' : 'none'}}>
+              return <Card className="card" key={jobPosition.id} onClick={() => onSelectJobPosition(jobPosition.id)} variant="outlined" style={{ border: jobPosition.id === selectedJobPosition.id ? '1px solid black' : 'none' }}>
                 <CardContent>
                   {jobPosition.jobTitle}
                   <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
