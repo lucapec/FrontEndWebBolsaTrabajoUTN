@@ -1,16 +1,13 @@
 import React, { useState, useEffect, useContext, useCallback, useRef } from 'react';
 import "./JobPositions.css";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
 import UserContext from "../../context/UserContext";
+import utnLogo from "../../assets/logo-utn.png";
 
 const JobPositions = () => {
   const { jwt, role } = useContext(UserContext);
   const [jobPositions, setJobPositions] = useState([]);
   const [selectedJobPosition, setSelectedJobPosition] = useState({});
   const [searchText, setSearchText] = useState('');
-  const [skillsText, setSkillsText] = useState('');
   let firstEnter = useRef(false);
   const date = new Date();
 
@@ -56,6 +53,7 @@ const JobPositions = () => {
   useEffect(() => {
     if (!firstEnter.current && jobPositions.length !== 0) {
       setSelectedJobPosition(jobPositions[0]);
+      console.log(jobPositions);
       firstEnter.current = true;
     }
   }, [jobPositions, selectedJobPosition, setSelectedJobPosition]);
@@ -64,9 +62,6 @@ const JobPositions = () => {
     switch (e.target.id) {
       case 'search-text':
         setSearchText(e.target.value);
-        break;
-      case 'skills-text':
-        setSkillsText(e.target.value);
         break;
       default:
         break;
@@ -77,66 +72,81 @@ const JobPositions = () => {
   return (
     <div className="container-fluid main">
       <div className="main-card">
-        <div className="search">
-          <input value={searchText} onChange={handleInput} id="search-text" className="search-filter job-position-filter" type="text" name="job-position-filter" placeholder='Buscar ofertas' />
-          <input value={skillsText} onChange={handleInput} id="skills-text" className="search-filter skills-filter" type="text" name="skills-filter" placeholder='Habilidades' />
-        </div>
         <div className="job-positions">
           <ul className="list">
-            {jobPositions && jobPositions.filter((jobPosition) => {
-              return jobPosition.jobTitle.includes(searchText);
-            }).map((jobPosition) => {
-              return <Card className="card" key={jobPosition.id} onClick={() => onSelectJobPosition(jobPosition.id)} variant="outlined" style={{ border: jobPosition.id === selectedJobPosition.id ? '1px solid black' : 'none' }}>
-                <CardContent>
-                  {jobPosition.jobTitle}
-                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    {jobPosition.location}
-                  </Typography>
-                </CardContent>
-              </Card>
-            })}
+            <h3>Ofertas laborales</h3>
+            <div className="search">
+              <input value={searchText} onChange={handleInput} id="search-text" className="search-filter job-position-filter" type="text" name="job-position-filter" placeholder='Buscar ofertas...' />
+              <span className="icon-search"></span>
+            </div>
+            <div className="scrollable-jobPositions">
+              {jobPositions && jobPositions.filter((jobPosition) => {
+                return jobPosition.jobTitle.includes(searchText) || jobPosition.location.includes(searchText) || jobPosition.company.companyName.includes(searchText);
+              }).map((jobPosition) => {
+                return <div className="list-item" key={jobPosition.id} onClick={() => onSelectJobPosition(jobPosition.id)} style={{ backgroundColor: jobPosition.id === selectedJobPosition.id ? '#E2F0FE' : 'white' }}>
+                  <h5>{jobPosition.jobTitle}</h5>
+                  <div className="list-item__text">
+                    Empresa: {jobPosition.company.companyName}
+                  </div>
+                  <div className="list-item__text">
+                    Ubicación: {jobPosition.location}
+                  </div>
+                </div>
+              })}
+            </div>
           </ul>
           <div className="details">
             {role === "Student" && (
-              <Card key={selectedJobPosition && selectedJobPosition.id} variant="outlined">
-                <CardContent>
-                  <Typography variant="body" component="div" style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <h2>{selectedJobPosition && selectedJobPosition.jobTitle}</h2>
-                    <input className="apply-button" type="submit" value='Aplicar' />
-                  </Typography>
-                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {selectedJobPosition && selectedJobPosition.location}
-                  </Typography>
-                  <Typography variant="body2">
-                    {selectedJobPosition && selectedJobPosition.jobDescription}
-                  </Typography>
-                  <Typography variant="body2">
-                    {selectedJobPosition && date.getDate(selectedJobPosition.createdDate)}
-                  </Typography>
-                </CardContent>
-              </Card>
+              <div className="companyDetail" key={selectedJobPosition && selectedJobPosition.id}>
+                <div>
+                  <h2>{selectedJobPosition && selectedJobPosition.jobTitle}</h2>
+                  <input className="apply-button" type="submit" value='Aplicar' />
+                </div>
+                <div>
+                  {selectedJobPosition && selectedJobPosition.location}
+                </div>
+                <div>
+                  {selectedJobPosition && selectedJobPosition.jobDescription}
+                </div>
+              </div>
             )}
             {role === "Company" && (
-              <Card key={selectedJobPosition && selectedJobPosition.id} variant="outlined">
-                <CardContent>
-                  <Typography variant="body" component="div" style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <h2>{selectedJobPosition && `Lista de postulantes para ${selectedJobPosition.jobTitle}`}</h2>
-                  </Typography>
+              <div key={selectedJobPosition && selectedJobPosition.id} variant="outlined">
+                <div>
+                  <h3>{selectedJobPosition && `Postulantes para "${selectedJobPosition.jobTitle}"`}</h3>
                   <ul className="list">
                     {selectedJobPosition.studentsWhoApplied && selectedJobPosition.studentsWhoApplied.map((student) => {
-                      return <Card className="card" key={student.id} variant="outlined">
-                        <CardContent>
-                          {student.firstName}
-                        </CardContent>
-                      </Card>
+                      return <div key={student.id}>{student.firstName}</div>
                     })}
                   </ul>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             )}
           </div>
         </div>
       </div>
+      <footer className="footerCompany">
+        <div id="divFooter" className="container">
+          <div id="divLeftRight" className="row justify-content-center">
+            <div id="divLeft" className="col-4">
+              <figure>
+                <img src={utnLogo} alt="UTN Logo" className="logo" />
+              </figure>
+            </div>
+            <div id="divRight" className="col-4">
+              <div className="divUniversity">
+                <p>FACULTAD REGIONAL ROSARIO</p>
+              </div>
+              <div className="divContact">
+                <p> Localidad: Zeballos 1341 - Rosario</p>
+              </div>
+              <div className="divPhone">
+                <p>Telefono: 0341-4481871</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
