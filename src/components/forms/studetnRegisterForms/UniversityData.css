@@ -12,12 +12,12 @@
 
 .divFormUniversity {
   background-color: lightgray;
-  
+  height: calc(120vh - 55px);
 }
 
 header {
   background-color: lightgray;
-  height: 0vh;
+  height: 1vh;
 }
 
 #btn {

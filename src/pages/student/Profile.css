@@ -8,9 +8,18 @@
   line-height: 1%;
 }
 
+header {
+  background-color: lightgray;
+  height: 0vh;
+}
+
 .divFormProfile {
   background-color: lightgray;
-  height: calc(125vh - 55px);
+  height: calc(210vh - 10px);
+}
+
+.formProfile {
+  margin-left: 15%;
 }
 
 .form {

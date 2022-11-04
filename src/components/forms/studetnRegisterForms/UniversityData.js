@@ -2,6 +2,8 @@ import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
+import utnLogo from "../../../assets/logo-utn.png";
+
 import "./UniversityData.css";
 
 const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
@@ -111,116 +113,183 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
     <div className="divFormUniversity">
       <header></header>
       <ToastContainer className="mt-5" />
-      <div className="form">
-        <form className="pb-3 mt-3">
-          <div className="title">
-            <h2>Complete los datos universitarios</h2>
-          </div>
-          <div className=" container " id="primary">
-            <div className="row row-cols-4">
-              <div className=" col form-field align-items-center">
-                <label>Especialidad</label>
-                <br />
-                <input
-                  type="text"
-                  name="specialty"
-                  id="specialty"
-                  className="form-control-sm"
-                  value={specialty}
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className=" col form-field align-items-center">
-                <label>Cantidad de Materias Aprobadas</label>
-                <br />
-                <input
-                  type="number"
-                  name="subjectsApproved"
-                  id="subjectsApproved"
-                  className="form-control-sm"
-                  value={subjectsApproved}
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className=" col form-field align-items-center">
-                <label>Plan Especialidad</label>
-                <br />
-                <input
-                  type="text"
-                  name="specialtyPlan"
-                  id="specialtyPlan"
-                  className="form-control-sm"
-                  value={specialtyPlan}
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className=" col form-field align-items-center">
-                <label>Año que cursa</label>
-                <br />
-                <input
-                  type="number"
-                  name="currentYear"
-                  id="currentYear"
-                  className="form-control-sm"
-                  value={currentYear}
-                  onChange={inputHandler}
-                />
+      <div className="container">
+        <div class="row">
+          <div class="col-md-11">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-13">
+                    <h3>Editar Perfil</h3>
+                    <hr />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <form className="formProfile">
+                      <div class="form-group row">
+                        <label for="specialty" class="col-4 col-form-label">
+                          Especialidad
+                        </label>
+                        <div class="col-6">
+                          <input
+                            type="text"
+                            name="specialty"
+                            id="specialty"
+                            class="form-control here"
+                            placeholder="Especialidad"
+                            value={specialty}
+                            onChange={inputHandler}
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label
+                          for="subjectsApproved"
+                          class="col-4 col-form-label"
+                        >
+                          Cantidad de materias aprobadas
+                        </label>
+                        <div class="col-6">
+                          <input
+                            type="number"
+                            name="subjectsApproved"
+                            id="subjectsApproved"
+                            class="form-control here"
+                            placeholder="Materias Aprobadas"
+                            value={subjectsApproved}
+                            onChange={inputHandler}
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="specialtyPlan" class="col-4 col-form-label">
+                          Plan Especialidad
+                        </label>
+                        <div class="col-6">
+                          <input
+                            type="text"
+                            name="specialtyPlan"
+                            id="specialtyPlan"
+                            class="form-control here"
+                            placeholder="Plan Especialidad"
+                            value={specialtyPlan}
+                            onChange={inputHandler}
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="currentYear" class="col-4 col-form-label">
+                          Año que Cursa
+                        </label>
+                        <div class="col-6">
+                          <input
+                            type="number"
+                            name="currentYear"
+                            id="currentYear"
+                            class="form-control here"
+                            placeholder="Año que Cursa"
+                            value={currentYear}
+                            onChange={inputHandler}
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="shiftProgress" class="col-4 col-form-label">
+                          Turno que cursa
+                        </label>
+                        <div class="col-6">
+                          <select
+                            id="shiftProgress"
+                            name="shiftProgress"
+                            class="form-control here"
+                            placeholder="Turno que cursa"
+                            value={shiftProgress}
+                            onChange={inputHandler}
+                          >
+                            <option value={"Seleccionar"}>Seleccionar</option>
+                            <option value={0}>Mañana</option>
+                            <option value={1}>Tarde</option>
+                            <option value={2}>Noche</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label
+                          for="averagesWithDeferrals"
+                          class="col-4 col-form-label"
+                        >
+                          Promedio con Aplazos
+                        </label>
+                        <div class="col-6">
+                          <input
+                            type="number"
+                            name="averagesWithDeferrals"
+                            id="averagesWithDeferrals"
+                            class="form-control here"
+                            placeholder="Promedio con Aplazos"
+                            value={averagesWithDeferrals}
+                            onChange={inputHandler}
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label
+                          for="averagesWithoutDeferrals"
+                          class="col-4 col-form-label"
+                        >
+                          Promedio sin Aplazos
+                        </label>
+                        <div class="col-6">
+                          <input
+                            type="number"
+                            name="averagesWithoutDeferrals"
+                            id="averagesWithoutDeferrals"
+                            class="form-control here"
+                            placeholder="Promedio sin Aplazos"
+                            value={averagesWithoutDeferrals}
+                            onChange={inputHandler}
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="offset col-md-10 mt-5 ">
+                          <button onClick={dataValidation} className="btn">
+                            Guardar e Ingresar
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div className=" container " id="primary">
-            <div className="row row-cols-4">
-              <div className=" col form-field align-items-center">
-                <label>Turno que cursa</label>
-                <br />
-                <select
-                  id="shiftProgress"
-                  name="shiftProgress"
-                  className="form-control-sm"
-                  value={shiftProgress}
-                  onChange={inputHandler}
-                >
-                  <option value={"Seleccionar"}>Seleccionar</option>
-                  <option value={0}>Mañana</option>
-                  <option value={1}>Tarde</option>
-                  <option value={2}>Noche</option>
-                </select>
-              </div>
-              <div className=" col form-field align-items-center">
-                <label>Promedio con Aplazos</label>
-                <br />
-                <input
-                  type="number"
-                  name="averagesWithDeferrals"
-                  id="averagesWithDeferrals"
-                  className="form-control-sm"
-                  value={averagesWithDeferrals}
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className=" col form-field align-items-center">
-                <label>Promedios sin Aplazos</label>
-                <br />
-                <input
-                  type="number"
-                  name="averagesWithoutDeferrals"
-                  id="averagesWithoutDeferrals"
-                  className="form-control-sm"
-                  value={averagesWithoutDeferrals}
-                  onChange={inputHandler}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="container">
-            <div className="col-md-12 text-center">
-              <button onClick={dataValidation} id="btn" className="btn">
-                Guardar e ingresar
-              </button>
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
+      <footer className="footerStudent">
+        <div id="divFooter" className="container">
+          <div id="divLeftRight" className="row justify-content-center">
+            <div id="divLeft" className="col-4">
+              <figure>
+                <img src={utnLogo} alt="UTN Logo" className="logo" />
+              </figure>
+            </div>
+            <div id="divRight" className="col-4">
+              <div className="divUniversity">
+                <p>FACULTAD REGIONAL ROSARIO</p>
+              </div>
+              <div className="divContact">
+                <p> Localidad: Zeballos 1341 - Rosario</p>
+              </div>
+              <div className="divPhone">
+                <p>Telefono: 0341-4481871</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

@@ -12,12 +12,12 @@
 
 .divFormPersonal {
   background-color: lightgray;
-  height: 94.3vh;
+  height: calc(170vh - 55px);
 }
 
 header {
   background-color: lightgray;
-  height: 5vh;
+  height: 1vh;
 }
 
 .btn {
