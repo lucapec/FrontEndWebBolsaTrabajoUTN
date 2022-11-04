@@ -9,7 +9,6 @@ const JobPositions = () => {
   const [selectedJobPosition, setSelectedJobPosition] = useState({});
   const [searchText, setSearchText] = useState('');
   let firstEnter = useRef(false);
-  const date = new Date();
 
   useEffect(() => {
     if (role === "Student") {
