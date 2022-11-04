@@ -96,8 +96,8 @@ const JobPositions = () => {
           </ul>
           <div className="details">
             {role === "Student" && (
-              <div className="companyDetail" key={selectedJobPosition && selectedJobPosition.id}>
-                <div>
+              <div className="card-detail" key={selectedJobPosition && selectedJobPosition.id}>
+                <div className="card-detail__title">
                   <h2>{selectedJobPosition && selectedJobPosition.jobTitle}</h2>
                   <input className="apply-button" type="submit" value='Aplicar' />
                 </div>
@@ -110,14 +110,14 @@ const JobPositions = () => {
               </div>
             )}
             {role === "Company" && (
-              <div key={selectedJobPosition && selectedJobPosition.id} variant="outlined">
+              <div className="card-detail" key={selectedJobPosition && selectedJobPosition.id}>
                 <div>
-                  <h3>{selectedJobPosition && `Postulantes para "${selectedJobPosition.jobTitle}"`}</h3>
-                  <ul className="list">
-                    {selectedJobPosition.studentsWhoApplied && selectedJobPosition.studentsWhoApplied.map((student) => {
-                      return <div key={student.id}>{student.firstName}</div>
-                    })}
-                  </ul>
+                  <h2>{selectedJobPosition && selectedJobPosition.jobTitle}</h2>
+                </div>
+                <div>
+                  {selectedJobPosition.studentsWhoApplied && selectedJobPosition.studentsWhoApplied.map((student) => {
+                    return <div key={student.id}>{student.firstName}</div>
+                  })}
                 </div>
               </div>
             )}
