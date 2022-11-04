@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { toast } from "react-toastify";
-
+import UserContext from "../../../context/UserContext";
 import "./DependencyRelationshipForm.css";
 
 const DependencyRelationshipForm = () => {
+  const { jwt } = useContext(UserContext);
   const [workingDay, setWorkingDay] = useState("");
   const [careers, setCareers] = useState("");
   const [jobTitle, setJobTitle] = useState("");
@@ -24,14 +25,16 @@ const DependencyRelationshipForm = () => {
     if (errors.length === 0) {
       fetch("https://localhost:7172/api/JobPosition/AddJobPosition", {
       method: "POST",
-      headers: {"Content-type": "aplication/json"},
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${jwt}`
+      },
       body: JSON.stringify({
         jobTitle: jobTitle,
         jobDescription: description,
         location: placeWork,
       }),
     })
-      .then((r) => r.json())
       .then((res) => {
         toast("La oferta ha sido creada exitosamente", {
           autoClose: 3000,
