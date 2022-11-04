@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, useCallback, useRef } from 'react';
+// import { Link } from 'react-router-dom';
 import "./JobPositions.css";
 import UserContext from "../../context/UserContext";
 import utnLogo from "../../assets/logo-utn.png";
@@ -73,7 +74,7 @@ const JobPositions = () => {
       <div className="main-card">
         <div className="job-positions">
           <ul className="list">
-            <h3>Ofertas laborales</h3>
+            <h3>{role === "Student" ? "Ofertas laborales" : "Mis Ofertas"}</h3>
             <div className="search">
               <input value={searchText} onChange={handleInput} id="search-text" className="search-filter job-position-filter" type="text" name="job-position-filter" placeholder='Buscar ofertas...' />
               <span className="icon-search"></span>
@@ -84,12 +85,16 @@ const JobPositions = () => {
               }).map((jobPosition) => {
                 return <div className="list-item" key={jobPosition.id} onClick={() => onSelectJobPosition(jobPosition.id)} style={{ backgroundColor: jobPosition.id === selectedJobPosition.id ? '#E2F0FE' : 'white' }}>
                   <h5>{jobPosition.jobTitle}</h5>
-                  <div className="list-item__text">
-                    Empresa: {jobPosition.company.companyName}
-                  </div>
-                  <div className="list-item__text">
-                    Ubicación: {jobPosition.location}
-                  </div>
+                  {role === "Student" && (
+                    <>
+                      <div className="list-item__text">
+                        Empresa: {jobPosition.company.companyName}
+                      </div>
+                      <div className="list-item__text">
+                        Ubicación: {jobPosition.location}
+                      </div>
+                    </>
+                  )}
                 </div>
               })}
             </div>
@@ -101,23 +106,36 @@ const JobPositions = () => {
                   <h2>{selectedJobPosition && selectedJobPosition.jobTitle}</h2>
                   <input className="apply-button" type="submit" value='Aplicar' />
                 </div>
-                <div>
-                  {selectedJobPosition && selectedJobPosition.location}
-                </div>
-                <div>
-                  {selectedJobPosition && selectedJobPosition.jobDescription}
+                <div className="card-detail__body">
+                  <div className="location">
+                    <span class="icon-location2"></span>
+                    <p>{selectedJobPosition && selectedJobPosition.location}</p>
+                  </div>
+                  <div className="type">
+                    <p>{selectedJobPosition && selectedJobPosition.jobDescription}</p>
+                  </div>
                 </div>
               </div>
             )}
             {role === "Company" && (
               <div className="card-detail" key={selectedJobPosition && selectedJobPosition.id}>
-                <div>
-                  <h2>{selectedJobPosition && selectedJobPosition.jobTitle}</h2>
+                <div className="card-detail__title">
+                  <h2>{selectedJobPosition && `Postulantes para ${selectedJobPosition.jobTitle}`}</h2>
                 </div>
-                <div>
-                  {selectedJobPosition.studentsWhoApplied && selectedJobPosition.studentsWhoApplied.map((student) => {
-                    return <div key={student.id}>{student.firstName}</div>
-                  })}
+                <div className="card-detail__body">
+                  <ul className="students-list">
+                    {selectedJobPosition.studentsWhoApplied && selectedJobPosition.studentsWhoApplied.length > 0 ? selectedJobPosition.studentsWhoApplied.map((student) => {
+                      console.log(student);
+                      return <li key={student.id} className="student-detail">
+                        <div className="name"><div className="text">{student.firstName} {student.lastName}</div><span className="icon icon-linkedin"><div className="tooltiptext">Linkedin</div></span><span className="icon icon-github"><div className="tooltiptext">Github</div></span><span className="icon icon-cloud-download"><div className="tooltiptext">Descargar CV</div></span></div>
+                        <div className="mail">{student.email}</div>
+                      </li>
+                    }) : (
+                      <div>
+                        Ningún estudiante ha postulado a esta oferta laboral
+                      </div>
+                    )}
+                  </ul>
                 </div>
               </div>
             )}
