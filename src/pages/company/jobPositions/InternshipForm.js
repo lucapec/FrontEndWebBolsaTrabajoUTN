@@ -8,6 +8,9 @@ const InternshipForm = () => {
   const [tentativeStartDate, setTentativeStartDate] = useState("");
   const [durationInternship, setDurationInternship] = useState("");
   const [descriptionInternship, setDescriptionInternship] = useState("");
+  const [titleIntership, setTitleIntership] = useState("");
+  const [locationIntership, setLocationIntership] = useState("");
+
 
   const errorsList = () => {
     const errorsList = [];
@@ -16,7 +19,9 @@ const InternshipForm = () => {
         agreementSigned &&
         tentativeStartDate &&
         durationInternship &&
-        descriptionInternship
+        descriptionInternship &&
+        titleIntership &&
+        locationIntership
       )
     ) {
       errorsList.push({ message: "Los campos son oligatorios" });
@@ -32,9 +37,9 @@ const InternshipForm = () => {
         method: "POST",
         headers: {"Content-type": "aplication/json"},
         body: JSON.stringify({
-          //jobTitle: ,
+          jobTitle: titleIntership,
           jobDescription: descriptionInternship,
-          //location: ,
+          location: locationIntership,
       }),
     })
       .then((r) => r.json())
@@ -74,6 +79,10 @@ const InternshipForm = () => {
       case "descriptionInternship":
         setDescriptionInternship(e.target.value);
         break;
+      case "titleIntership":
+        setTitleIntership(e.target.value);
+      case "locationIntership":
+        setLocationIntership(e.target.value);
       default:
         break;
     }
@@ -167,8 +176,34 @@ const InternshipForm = () => {
                         onChange={inputHandler}
                       />
                     </div>
+                    <div className="col form-field align-items-center">
+                      <label>Nombre del Puesto</label>
+                      <br/>
+                      <input
+                        type="textarea"
+                        name="titleInternship"
+                        id="titleInternship"
+                        className="form-control-sm"
+                        value={titleIntership}
+                        placeholder="Nombre del Puesto"
+                        onChange={inputHandler}
+                      />
+                    </div>
+                    <div className="col form-field align-items-center">
+                      <label>Lugar de Traabajo</label>
+                      <br/>
+                      <input
+                        type="textarea"
+                        name="locationInternship"
+                        id="locationInternship"
+                        className="form-control-sm"
+                        value={locationIntership}
+                        placeholder="Lugar de Trabajo"
+                        onChange={inputHandler}
+                      />
+                    </div>
                     <div className=" col form-field align-items-center">
-                      <label>Descripcion</label>
+                      <label>Descripción</label>
                       <br />
                       <textarea
                         type="textarea"
@@ -176,7 +211,7 @@ const InternshipForm = () => {
                         id="descriptionInternship"
                         className="form-control-sm"
                         value={descriptionInternship}
-                        placeholder="Descripcion"
+                        placeholder="Descripción"
                         onChange={inputHandler}
                       />
                     </div>
