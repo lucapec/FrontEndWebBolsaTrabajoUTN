@@ -39,7 +39,7 @@
     flex-direction: column;
 }
 
-.list > h3 {
+.list>h3 {
     font-size: 1.6rem;
     font-weight: 600;
     margin: 20px 0;
@@ -59,22 +59,22 @@
     justify-content: space-between;
 }
 
-.card-detail__title > h2 {
+.card-detail__title>h2 {
     font-size: 1.4rem;
     font-weight: 700;
     color: #719FED;
 }
 
-.card-detail__body > .location {
+.card-detail__body>.location {
     display: flex;
     align-items: center;
 }
 
-.card-detail__body > .location > p {
+.card-detail__body>.location>p {
     margin: 0;
 }
 
-.card-detail__body > div > span {
+.card-detail__body>div>span {
     margin-right: 10px;
 }
 
@@ -147,22 +147,22 @@
     margin-bottom: 10px;
 }
 
-.student-detail > .name {
+.student-detail>.name {
     font-size: 1rem;
 }
 
-.name > .text {
+.name>.text {
     display: inline;
     margin-right: 10px;
 }
 
-.name > span {
+.name> .icon-container >.icon {
     margin: 0 8px;
-    color:#40B3FF;
+    color: #40B3FF;
     cursor: pointer;
 }
 
-.student-detail > .mail {
+.student-detail>.mail {
     font-size: .8rem;
 }
 
@@ -171,27 +171,28 @@
     padding: 0;
 }
 
-.icon {
+.icon-container {
     position: relative;
     display: inline-block;
-  }
-  
-  .icon .tooltiptext {
+}
+
+
+.tooltiptext {
     visibility: hidden;
     width: 80px;
     font-size: 0.6rem;
-    background-color: #ccc;
-    color: #fff;
+    background-color: rgba(255, 255, 255, 0.418);
+    color: rgb(0, 0, 0);
     text-align: center;
     padding: 5px 0;
     border-radius: 6px;
-   
+
     position: absolute;
     top: -10px;
     right: -85px;
     z-index: 1;
-  }
-  
-  .icon:hover .tooltiptext {
+}
+
+.icon-container:hover .tooltiptext {
     visibility: visible;
-  }
+}

@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useContext, useCallback, useRef } from 'react';
 // import { Link } from 'react-router-dom';
-import { Modal, Button } from 'react-bootstrap'; 
+import { Modal, Button } from 'react-bootstrap';
 import "./JobPositions.css";
 import UserContext from "../../context/UserContext";
 import utnLogo from "../../assets/logo-utn.png";
 import { toast, ToastContainer } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faLinkedin, faGithubSquare } from '@fortawesome/free-brands-svg-icons';
 
 const JobPositions = () => {
   const { jwt, role } = useContext(UserContext);
@@ -90,6 +93,14 @@ const JobPositions = () => {
             autoClose: 3000,
             hideProgressBar: false,
             type: "success",
+            theme: "dark",
+            position: toast.POSITION.TOP_LEFT,
+          });
+        } else {
+          toast(r.message, {
+            autoClose: 3000,
+            hideProgressBar: false,
+            type: "warning",
             theme: "dark",
             position: toast.POSITION.TOP_LEFT,
           });
@@ -183,7 +194,21 @@ const JobPositions = () => {
                       {selectedJobPosition.studentsWhoApplied && selectedJobPosition.studentsWhoApplied.length > 0 ? selectedJobPosition.studentsWhoApplied.map((student) => {
                         console.log(student);
                         return <li key={student.id} className="student-detail">
-                          <div className="name"><div className="text">{student.firstName} {student.lastName}</div><span className="icon icon-linkedin"><div className="tooltiptext">Linkedin</div></span><span className="icon icon-github"><div className="tooltiptext">Github</div></span><span className="icon icon-cloud-download"><div className="tooltiptext">Descargar CV</div></span></div>
+                          <div className="name">
+                            <div className="text">{student.firstName} {student.lastName}</div>
+                            <div className="icon-container">
+                              <FontAwesomeIcon className="icon" icon={faLinkedin} />
+                              <div className="tooltiptext">Linkedin</div>
+                            </div>
+                            <div className="icon-container">
+                              <FontAwesomeIcon className="icon" icon={faGithubSquare} />
+                              <div className="tooltiptext">Github</div>
+                            </div>
+                            <div className="icon-container">
+                              <FontAwesomeIcon className="icon" icon={faDownload} />
+                              <div className="tooltiptext">Descargar CV</div>
+                            </div>
+                          </div>
                           <div className="mail">{student.email}</div>
                         </li>
                       }) : (
