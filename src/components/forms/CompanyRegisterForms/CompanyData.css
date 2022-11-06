@@ -9,6 +9,16 @@
   margin: 2%;
 }
 
+header {
+  background-color: lightgray;
+  height: 1vh;
+}
+
+.divFormCompanyData {
+  background-color: lightgray;
+  height: calc(125vh - 60px);
+}
+
 .button-enterprise {
   background-color: black;
   color: rgb(255, 255, 255);
@@ -41,5 +51,5 @@ p {
 }
 
 .divInput {
-  margin-right: 4.5%
+  margin-right: 4.5%;
 }

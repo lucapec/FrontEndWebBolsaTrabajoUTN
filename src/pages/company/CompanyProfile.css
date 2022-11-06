@@ -15,8 +15,14 @@
   line-height: 1%;
 }
 
+header {
+  background-color: lightgray;
+  height: 1vh;
+}
+
 .divFormProfileCompany {
-  height: calc(100vh - 20px);
+  background-color: lightgray;
+  height: calc(160vh - 55px);
 }
 
 #row {
@@ -32,7 +38,7 @@
 }
 
 .divInputRadio {
-  margin-right: 4.5%;
+  margin-right: 8%;
 }
 
 #row3 {

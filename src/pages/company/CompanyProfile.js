@@ -184,202 +184,254 @@ const CompanyProfile = () => {
 
   return (
     <div className="divFormProfileCompany">
-      <ToastContainer className="mt-5" />
-      <div id="form" className="form">
-        <form className=" mt-3">
-          <div id="divForm" className="container">
-            <div id="row1" className="row row-cols-4">
-              <div className=" col form-group align-items-center ">
-                <label>Razon Social</label>
-                <br />
-                <input
-                  type="text"
-                  name="businessName"
-                  id="businessName"
-                  className="form-control-sm"
-                  value={businessName}
-                  onChange={inputHandler}
-                  readOnly
-                />
-              </div>
-              <div className=" col form-group align-items-center">
-                <label>Domicilio Legal</label>
-                <br />
-                <input
-                  type="text"
-                  name="legalAdress"
-                  id="legalAdress"
-                  className="form-control-sm"
-                  value={legalAdress}
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className="col form-group align-items-center">
-                <label>Codigo Postal</label>
-                <br />
-                <input
-                  type="number"
-                  name="postalCode"
-                  id="postalCode"
-                  className="form-control-sm"
-                  value={postalCode}
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className=" col form-group align-items-center">
-                <label>Telefono de la Empresa</label>
-                <br />
-                <input
-                  type="number"
-                  name="telephoneNumber"
-                  id="telephoneNumber"
-                  className="form-control-sm"
-                  value={telephoneNumber}
-                  placeholder="código area + número"
-                  onChange={inputHandler}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="container">
-            <div id="row2" className="row row-cols-4">
-              <div className=" col form-group align-items-center ">
-                <div className=" col form-group align-items-center">
-                  <label>Web</label>
-                  <br />
-                  <input
-                    type="text"
-                    name="webURL"
-                    id="webURL"
-                    className="form-control-sm"
-                    value={webURL}
-                    onChange={inputHandler}
-                  />
+      <header></header>
+      <div className="container">
+        <ToastContainer className="mt-5" />
+        <div class="row">
+          <div class="col-md-11">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-13">
+                    <h3>Editar Perfil</h3>
+                    <hr />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <form className="formProfile">
+                      <div class="form-group row">
+                        <label for="businessName" class="col-4 col-form-label">
+                          Razon Social
+                        </label>
+                        <div class="col-6">
+                          <input
+                            className="form-control here"
+                            placeholder="Razon Social"
+                            readOnly
+                            type="text"
+                            id="businessName"
+                            onChange={inputHandler}
+                            value={businessName}
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="postalCode" class="col-4 col-form-label">
+                          Codigo Postal
+                        </label>
+                        <div class="col-6">
+                          <input
+                            className="form-control here"
+                            placeholder="Codigo Postal"
+                            type="number"
+                            id="postalCode"
+                            onChange={inputHandler}
+                            value={postalCode}
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="cuit" class="col-4 col-form-label">
+                          CUIT
+                        </label>
+                        <div class="col-6">
+                          <input
+                            className="form-control here"
+                            type="number"
+                            placeholder="CUIT (Sin guiones)"
+                            readOnly
+                            id="cuit"
+                            onChange={inputHandler}
+                            value={cuit}
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label
+                          for="telephoneNumber"
+                          class="col-4 col-form-label"
+                        >
+                          Telefono
+                        </label>
+                        <div class="col-6">
+                          <input
+                            className="form-control here"
+                            type="number"
+                            id="telephoneNumber"
+                            placeholder="Codigo de area + numero"
+                            onChange={inputHandler}
+                            value={telephoneNumber}
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="sector" class="col-4 col-form-label">
+                          Rubro
+                        </label>
+                        <div class="col-6">
+                          <input
+                            className="form-control here"
+                            placeholder="Rubro"
+                            type="text"
+                            id="sector"
+                            onChange={inputHandler}
+                            value={sector}
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="legalAdress" class="col-4 col-form-label">
+                          Domicilio Legal
+                        </label>
+                        <div class="col-6">
+                          <input
+                            className="form-control here"
+                            placeholder="Domicilio Legal"
+                            type="text"
+                            id="legalAdress"
+                            onChange={inputHandler}
+                            value={legalAdress}
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="webURL" class="col-4 col-form-label">
+                          Web (opcional)
+                        </label>
+                        <div class="col-6">
+                          <input
+                            className="form-control here"
+                            placeholder="Web"
+                            type="text"
+                            id="webURL"
+                            onChange={inputHandler}
+                            value={webURL}
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="nameContact" class="col-4 col-form-label">
+                          Nombres del Contacto
+                        </label>
+                        <div class="col-6">
+                          <input
+                            className="form-control here"
+                            placeholder="Nombres del Contacto"
+                            type="text"
+                            id="nameContact"
+                            onChange={inputHandler}
+                            value={nameContact}
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label
+                          for="lastnameContact"
+                          class="col-4 col-form-label"
+                        >
+                          Apellido del Contacto
+                        </label>
+                        <div class="col-6">
+                          <input
+                            className="form-control here"
+                            placeholder="Apellido del Contacto"
+                            type="text"
+                            id="lastnameContact"
+                            onChange={inputHandler}
+                            value={lastnameContact}
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="emailContact" class="col-4 col-form-label">
+                          Email de Contacto
+                        </label>
+                        <div class="col-6">
+                          <input
+                            className="form-control here"
+                            placeholder="Email"
+                            type="email"
+                            id="emailContact"
+                            onChange={inputHandler}
+                            value={emailContact}
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label
+                          for="positionContact"
+                          class="col-4 col-form-label"
+                        >
+                          Puesto / Cargo del Contacto
+                        </label>
+                        <div class="col-6">
+                          <input
+                            className="form-control here"
+                            placeholder="Puesto / Cargo"
+                            type="text"
+                            id="positionContact"
+                            onChange={inputHandler}
+                            value={positionContact}
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label
+                          for="telephoneNumberContact"
+                          class="col-4 col-form-label"
+                        >
+                          Telefono del Contacto
+                        </label>
+                        <div class="col-6">
+                          <input
+                            className="form-control here"
+                            type="number"
+                            placeholder="Codigo de area + número"
+                            id="telephoneNumberContact"
+                            onChange={inputHandler}
+                            value={telephoneNumberContact}
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="relacion" class="col-4 col-form-label">
+                          Relacion con la Empresa
+                        </label>
+                        <div class="col-6">
+                          <select
+                            id="relWithCompanyContact"
+                            className="form-control here"
+                            name="relWithCompanyContact"
+                            value={relWithCompanyContact}
+                            onChange={inputHandler}
+                          >
+                            <option value={"Seleccionar"}>Seleccionar</option>
+                            <option value={"inCompany"}>
+                              Trabajo en la empresa
+                            </option>
+                            <option value={"outCompany"}>
+                              Trabajo en una consultora
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="btn-saveChanges offset mt-5 md-10">
+                          <button onClick={SaveChangesBtn} className="btn">
+                            Guardar Cambios
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
-              <div className=" col form-group align-items-center ">
-                <label>Rubro</label>
-                <br />
-                <input
-                  type="text"
-                  name="sector"
-                  id="sector"
-                  className="form-control-sm"
-                  value={sector}
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className=" col form-group align-items-center">
-                <label>CUIT</label>
-                <br />
-                <input
-                  type="number"
-                  name="cuit"
-                  id="cuit"
-                  className="form-control-sm"
-                  value={cuit}
-                  onChange={inputHandler}
-                  readOnly
-                />
-              </div>
-              <div className=" col form-group align-items-center">
-                <label>Nombre del Contacto</label>
-                <br />
-                <input
-                  type="text"
-                  name="nameContact"
-                  id="nameContact"
-                  className="form-control-sm"
-                  value={nameContact}
-                  onChange={inputHandler}
-                />
-              </div>
             </div>
           </div>
-          <div className="container">
-            <div id="row3" className="row row-cols-4">
-              <div className=" col form-group align-items-center">
-                <label>Apellido del Contacto</label>
-                <br />
-                <input
-                  type="text"
-                  name="lastnameContact"
-                  id="lastnameContact"
-                  className="form-control-sm"
-                  value={lastnameContact}
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className=" col form-group align-items-center">
-                <label>Puesto/Cargo del Contacto</label>
-                <br />
-                <input
-                  type="text"
-                  name="positionContact"
-                  id="positionContact"
-                  className="form-control-sm"
-                  value={positionContact}
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className="col form-group align-items-center">
-                <label>Email del Contacto</label>
-                <br />
-                <input
-                  type="text"
-                  name="emailContact"
-                  id="emailContact"
-                  className="form-control-sm"
-                  value={emailContact}
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className=" col form-group align-items-center">
-                <label>Relación con la Empresa</label>
-           
-                <select
-                  id="relWithCompanyContact"
-                  className="form-control-sm"
-                  name="relWithCompanyContact"
-                  value={relWithCompanyContact}
-                  onChange={inputHandler}
-                >
-                  <option value={"Seleccionar"}>Seleccionar</option>
-                  <option value={"inCompany"}>Trabajo en la empresa</option>
-                  <option value={"outCompany"}>
-                    Trabajo en una consultora
-                  </option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div className="container" id="row44">
-            <div id="row4" className="row row-cols-4">
-              <div className=" col form-group align-items-center">
-                <label>Telefono de Contacto</label>
-                <br />
-                <input
-                  type="number"
-                  name="telephoneNumberContact"
-                  id="telephoneNumberContact"
-                  className="form-control-sm"
-                  value={telephoneNumberContact}
-                  placeholder="código area + número"
-                  onChange={inputHandler}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="container">
-            <div className="col-md-12">
-              <button id="btnCompany" className="btn" onClick={SaveChangesBtn}>
-                Guardar Cambios
-              </button>
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
-      <footer className="footerCompany">
+      <footer className="footerStudent">
         <div id="divFooter" className="container">
           <div id="divLeftRight" className="row justify-content-center">
             <div id="divLeft" className="col-4">

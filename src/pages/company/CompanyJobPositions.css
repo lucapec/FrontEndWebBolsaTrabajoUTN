@@ -8,6 +8,8 @@
   line-height: 1%;
 }
 
-#buttonJob{
-  margin-top: -4%;
+.divFormJobPositions {
+  background-color: lightgray;
+  height: calc(110vh - 55px);
 }
+
