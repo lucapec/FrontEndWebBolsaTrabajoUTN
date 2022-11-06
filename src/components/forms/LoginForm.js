@@ -9,7 +9,7 @@ import utnLogo from "../../assets/logo-utn.png";
 const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { jwt, setJwt, setRole } = useContext(UserContext);
+  const { jwt, setJwt, setRole, setActive } = useContext(UserContext);
   const navigate = useNavigate();
   let passwordRegExp = /^[A-Za-z]\w{7,14}$/;
 
@@ -50,14 +50,26 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
           if (r.success) {
             window.sessionStorage.setItem('jwt', r.token);
             window.sessionStorage.setItem('role', r.roles[0]);
+            window.sessionStorage.setItem('active', r.activeAccount);
             setJwt(r.token);
             setRole(r.roles[0]);
-            if (r.roles[0] === "Student") {
-              navigate('/ofertas');
-            } else if (r.roles[0] === "Company") {
-              navigate('/crearOferta');
+            setActive(r.activeAccount);
+            if (r.firstChargeData) {
+              if (r.roles[0] === "Student") {
+                navigate('/ofertas');
+              } else if (r.roles[0] === "Company") {
+                navigate('/misOfertas');
+              } else {
+                navigate('/adminDashboard');
+              }
             } else {
-              navigate('/adminDashboard');
+              if (r.roles[0] === "Student") {
+                navigate('/datosAlumno');
+              } else if (r.roles[0] === "Company") {
+                navigate('/datosEmpresa');
+              } else {
+                navigate('/adminDashboard');
+              }
             }
           } else {
             window.sessionStorage.removeItem('jwt');

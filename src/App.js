@@ -27,9 +27,9 @@ const App = () => {
           <Route path="/registro" element={<Register />}></Route>
           <Route path="/ofertas" element={<JobPositions />}></Route>
           <Route path="/crearOferta" element={<AddJobPosition />}></Route>
-          <Route path="/perfil" element={<Profile />}></Route>
           <Route path="/datosAlumno" element={<StudentData />}></Route>
           <Route path="/datosEmpresa" element={<CompanyData />}></Route>
+          <Route path="/perfil" element={<Profile />}></Route>
           <Route path="/perfilEmpresa" element={<CompanyProfile />}></Route>
           <Route path="/adminDashboard" element={<AdminDashboard />}></Route>
           <Route path="*" element={<ReplaceRoute />}></Route>

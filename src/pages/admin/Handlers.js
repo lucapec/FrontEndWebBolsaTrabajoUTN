@@ -4,7 +4,7 @@ export const HandleDeleteCareer = (rowValues, setDeletedOrUpdated, deletedOrUpda
     headers: {
       "Content-type": "application/json",
       Authorization: `Bearer ${jwt}`,
-  },
+    },
   })
     .then((r) => {
       if (r.ok) {
@@ -43,45 +43,25 @@ export const HandleUpdateCareer = (rowValues, setDeletedOrUpdated, deletedOrUpda
     });
 };
 
-export const ActivateDeactivateUser = (userId, activate, userRole, setDeletedOrUpdated, deletedOrUpdated, jwt) => {
+export const ActivateDeactivateUser = (userId, activate, setDeletedOrUpdated, deletedOrUpdated, jwt) => {
   const updateRequest = {
     userId: userId,
     activate: activate,
-    isStudent: userRole === "alumnos" ? true : false,
   };
-  if (userRole === "alumnos") {
-    fetch("https://localhost:7172/api/UsersInfo/ActivateDeactivateAccount", {
-      method: 'PUT',
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${jwt}`,
-      },
-      body: JSON.stringify(updateRequest),
+  fetch("https://localhost:7172/api/UsersInfo/ActivateDeactivateAccount", {
+    method: 'PUT',
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${jwt}`,
+    },
+    body: JSON.stringify(updateRequest),
+  })
+    .then((r) => {
+      if (r.ok) {
+        setDeletedOrUpdated(!deletedOrUpdated);
+      }
     })
-      .then((r) => {
-        if (r.ok) {
-          setDeletedOrUpdated(!deletedOrUpdated);
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  } else if (userRole === "empresas") {
-    fetch("https://localhost:7172/api/UsersInfo/ActivateDeactivateAccount", {
-      method: 'PUT',
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${jwt}`,
-      },
-      body: JSON.stringify(updateRequest),
-    })
-      .then((r) => {
-        if (r.ok) {
-          setDeletedOrUpdated(!deletedOrUpdated);
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
+    .catch((e) => {
+      console.log(e);
+    });
 };
