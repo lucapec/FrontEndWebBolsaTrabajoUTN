@@ -404,7 +404,7 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
               </div>
             </div>
           </div>
-        </div>
+          </div>
       </div>
       <footer className="footerStudent">
         <div id="divFooter" className="container">
