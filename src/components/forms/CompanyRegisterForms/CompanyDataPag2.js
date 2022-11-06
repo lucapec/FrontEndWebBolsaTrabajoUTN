@@ -230,6 +230,8 @@ const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
             </div>
           </div>
         </div>
+
+       
       </div>
       <footer className="footerStudent">
         <div id="divFooter" className="container">

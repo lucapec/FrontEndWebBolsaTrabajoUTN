@@ -229,8 +229,8 @@ const CompanyDataPag1 = ({ setBoolPage2, UpdateData }) => {
             </div>
           </div>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
   );
 };
 

@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { toast } from "react-toastify";
+import UserContext from "../../../context/UserContext";
+
 
 import "./InternshipForm.css";
 
 const InternshipForm = () => {
+  const { jwt } = useContext(UserContext);
   const [agreementSigned, setAgreementSigned] = useState("");
   const [tentativeStartDate, setTentativeStartDate] = useState("");
   const [durationInternship, setDurationInternship] = useState("");
   const [descriptionInternship, setDescriptionInternship] = useState("");
+  const [titleInternship, setTitleInternship] = useState("");
+  const [locationInternship, setLocationInternship] = useState("");
+
 
   const errorsList = () => {
     const errorsList = [];
@@ -16,7 +22,9 @@ const InternshipForm = () => {
         agreementSigned &&
         tentativeStartDate &&
         durationInternship &&
-        descriptionInternship
+        descriptionInternship &&
+        titleInternship &&
+        locationInternship
       )
     ) {
       errorsList.push({ message: "Los campos son oligatorios" });
@@ -28,13 +36,28 @@ const InternshipForm = () => {
     e.preventDefault();
     const errors = errorsList();
     if (errors.length === 0) {
-      toast("La oferta ha sido creada exitosamente", {
-        autoClose: 3000,
-        hideProgressBar: false,
-        type: "success",
-        theme: "dark",
-        position: toast.POSITION.TOP_LEFT,
-      });
+      fetch("https://localhost:7172/api/JobPosition/AddJobPosition", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        Authorization: `Bearer ${jwt}`
+      },
+        body: JSON.stringify({
+          jobTitle: titleInternship,
+          jobDescription: descriptionInternship,
+          location: locationInternship,
+      }),
+    })
+      .then((res) => {
+        toast("La oferta ha sido creada exitosamente", {
+          autoClose: 3000,
+          hideProgressBar: false,
+          type: "success",
+          theme: "dark",
+          position: toast.POSITION.TOP_LEFT,
+      })
+      })
+      .catch((error) => console.log(error))
     } else {
       errors.forEach((error) => {
         toast(error.message, {
@@ -49,6 +72,7 @@ const InternshipForm = () => {
   };
 
   const inputHandler = (e) => {
+    console.log(e.target.id);
     switch (e.target.id) {
       case "agreementSigned":
         setAgreementSigned(e.target.value);
@@ -61,6 +85,12 @@ const InternshipForm = () => {
         break;
       case "descriptionInternship":
         setDescriptionInternship(e.target.value);
+        break;
+      case "titleInternship":
+        setTitleInternship(e.target.value);
+        break;
+      case "locationInternship":
+        setLocationInternship(e.target.value);
         break;
       default:
         break;
@@ -128,7 +158,7 @@ const InternshipForm = () => {
                     <div className=" col form-field align-items-center">
                       <label>Fecha Tentativa de Inicio</label>
                       <br />
-                      <input
+                      <textarea
                         type="date"
                         name="tentativeStartDate"
                         id="tentativeStartDate"
@@ -155,8 +185,34 @@ const InternshipForm = () => {
                         onChange={inputHandler}
                       />
                     </div>
+                    <div className="col form-field align-items-center">
+                      <label>Nombre del Puesto</label>
+                      <br/>
+                      <textarea
+                        type="textarea"
+                        name="titleInternship"
+                        id="titleInternship"
+                        className="form-control-sm"
+                        value={titleInternship}
+                        placeholder="Nombre del Puesto"
+                        onChange={inputHandler}
+                      />
+                    </div>
+                    <div className="col form-field align-items-center">
+                      <label>Lugar de Traabajo</label>
+                      <br/>
+                      <input
+                        type="textarea"
+                        name="locationInternship"
+                        id="locationInternship"
+                        className="form-control-sm"
+                        value={locationInternship}
+                        placeholder="Lugar de Trabajo"
+                        onChange={inputHandler}
+                      />
+                    </div>
                     <div className=" col form-field align-items-center">
-                      <label>Descripcion</label>
+                      <label>Descripción</label>
                       <br />
                       <textarea
                         type="textarea"
@@ -164,7 +220,7 @@ const InternshipForm = () => {
                         id="descriptionInternship"
                         className="form-control-sm"
                         value={descriptionInternship}
-                        placeholder="Descripcion"
+                        placeholder="Descripción"
                         onChange={inputHandler}
                       />
                     </div>
