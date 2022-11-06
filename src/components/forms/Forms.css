@@ -102,6 +102,10 @@ body {
   border-radius: 3px;
 }
 
+.wrapper .form-field > .login-input {
+  width: 60%;
+}
+
 .wrapper .form-field input:-internat-autofill-selected {
   background-color: transparent;
 }

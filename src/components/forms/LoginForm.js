@@ -121,6 +121,7 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
           <div className="form-field d-flex align-items-center justify-content-center">
             <span className="far fa-user"></span>
             <input
+              className="login-input"
               type="email"
               name="email"
               id="email"
@@ -132,6 +133,7 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
           <div className="form-field d-flex align-items-center justify-content-center">
             <span className="fas fa-key"></span>
             <input
+              className="login-input"
               type="password"
               name="password"
               id="password"

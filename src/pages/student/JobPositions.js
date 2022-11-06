@@ -12,7 +12,7 @@ import { faLinkedin, faGithubSquare } from '@fortawesome/free-brands-svg-icons';
 const JobPositions = () => {
   const { jwt, role } = useContext(UserContext);
   const [jobPositions, setJobPositions] = useState([]);
-  const [selectedJobPosition, setSelectedJobPosition] = useState({});
+  const [selectedJobPosition, setSelectedJobPosition] = useState(null);
   const [searchText, setSearchText] = useState('');
   const [modalShow, setModalShow] = useState(false);
   let firstEnter = useRef(false);
@@ -187,12 +187,11 @@ const JobPositions = () => {
               {role === "Company" && (
                 <div className="card-detail" key={selectedJobPosition && selectedJobPosition.id}>
                   <div className="card-detail__title">
-                    <h2>{selectedJobPosition && `Postulantes para ${selectedJobPosition.jobTitle}`}</h2>
+                    <h2>{selectedJobPosition !== null && selectedJobPosition.jobTitle !== undefined ? `Postulantes para ${selectedJobPosition.jobTitle}` : null}</h2>
                   </div>
                   <div className="card-detail__body">
                     <ul className="students-list">
                       {selectedJobPosition.studentsWhoApplied && selectedJobPosition.studentsWhoApplied.length > 0 ? selectedJobPosition.studentsWhoApplied.map((student) => {
-                        console.log(student);
                         return <li key={student.id} className="student-detail">
                           <div className="name">
                             <div className="text">{student.firstName} {student.lastName}</div>
