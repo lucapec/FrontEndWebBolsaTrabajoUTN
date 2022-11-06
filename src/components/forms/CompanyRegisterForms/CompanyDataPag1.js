@@ -170,7 +170,7 @@ const CompanyDataPag1 = ({setBoolPage2, UpdateData }) => {
           <div className="col"></div>
           <br />
         </div>
-        <button type="button" className="btn" onClick={submitHandler}>
+        <button type="button" className="boton" onClick={submitHandler}>
           Guardar
         </button>
       </form>
