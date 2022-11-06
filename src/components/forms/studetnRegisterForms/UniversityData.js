@@ -114,95 +114,92 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
       <header></header>
       <ToastContainer className="mt-5" />
       <div className="container">
-        <div class="row">
-          <div class="col-md-11">
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-13">
-                    <h3>Editar Perfil</h3>
+        <div className="row">
+          <div className="col-md-11">
+            <div className="card">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-13">
+                    <h3>Complete los datos universitarios</h3>
                     <hr />
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-md-12">
+                <div className="row">
+                  <div className="col-md-12">
                     <form className="formProfile">
-                      <div class="form-group row">
-                        <label for="specialty" class="col-4 col-form-label">
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">
                           Especialidad
                         </label>
-                        <div class="col-6">
+                        <div className="col-6">
                           <input
                             type="text"
                             name="specialty"
                             id="specialty"
-                            class="form-control here"
+                            className="form-control here"
                             placeholder="Especialidad"
                             value={specialty}
                             onChange={inputHandler}
                           />
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label
-                          for="subjectsApproved"
-                          class="col-4 col-form-label"
-                        >
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">
                           Cantidad de materias aprobadas
                         </label>
-                        <div class="col-6">
+                        <div className="col-6">
                           <input
                             type="number"
                             name="subjectsApproved"
                             id="subjectsApproved"
-                            class="form-control here"
+                            className="form-control here"
                             placeholder="Materias Aprobadas"
                             value={subjectsApproved}
                             onChange={inputHandler}
                           />
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="specialtyPlan" class="col-4 col-form-label">
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">
                           Plan Especialidad
                         </label>
-                        <div class="col-6">
+                        <div className="col-6">
                           <input
                             type="text"
                             name="specialtyPlan"
                             id="specialtyPlan"
-                            class="form-control here"
+                            className="form-control here"
                             placeholder="Plan Especialidad"
                             value={specialtyPlan}
                             onChange={inputHandler}
                           />
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="currentYear" class="col-4 col-form-label">
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">
                           Año que Cursa
                         </label>
-                        <div class="col-6">
+                        <div className="col-6">
                           <input
                             type="number"
                             name="currentYear"
                             id="currentYear"
-                            class="form-control here"
+                            className="form-control here"
                             placeholder="Año que Cursa"
                             value={currentYear}
                             onChange={inputHandler}
                           />
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="shiftProgress" class="col-4 col-form-label">
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">
                           Turno que cursa
                         </label>
-                        <div class="col-6">
+                        <div className="col-6">
                           <select
                             id="shiftProgress"
                             name="shiftProgress"
-                            class="form-control here"
+                            className="form-control here"
                             placeholder="Turno que cursa"
                             value={shiftProgress}
                             onChange={inputHandler}
@@ -214,47 +211,40 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
                           </select>
                         </div>
                       </div>
-
-                      <div class="form-group row">
-                        <label
-                          for="averagesWithDeferrals"
-                          class="col-4 col-form-label"
-                        >
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">
                           Promedio con Aplazos
                         </label>
-                        <div class="col-6">
+                        <div className="col-6">
                           <input
                             type="number"
                             name="averagesWithDeferrals"
                             id="averagesWithDeferrals"
-                            class="form-control here"
+                            className="form-control here"
                             placeholder="Promedio con Aplazos"
                             value={averagesWithDeferrals}
                             onChange={inputHandler}
                           />
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label
-                          for="averagesWithoutDeferrals"
-                          class="col-4 col-form-label"
-                        >
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">
                           Promedio sin Aplazos
                         </label>
-                        <div class="col-6">
+                        <div className="col-6">
                           <input
                             type="number"
                             name="averagesWithoutDeferrals"
                             id="averagesWithoutDeferrals"
-                            class="form-control here"
+                            className="form-control here"
                             placeholder="Promedio sin Aplazos"
                             value={averagesWithoutDeferrals}
                             onChange={inputHandler}
                           />
                         </div>
                       </div>
-                      <div class="form-group">
-                        <div class="offset col-md-10 mt-5 ">
+                      <div className="form-group">
+                        <div className="offset col-md-10 mt-5 ">
                           <button onClick={dataValidation} className="btn">
                             Guardar e Ingresar
                           </button>

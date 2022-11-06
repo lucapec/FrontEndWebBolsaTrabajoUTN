@@ -6,14 +6,13 @@ import utnLogo from "../../../assets/logo-utn.png";
 import "./PersonalData.css";
 
 const PersonalData = ({ setboolUniversityData, UpdateData }) => {
-  const [firstName, setFirstname] = useState("");
-  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [documentType, setDocumentType] = useState("");
   const [documentNumber, setDocumentNumber] = useState("");
-  const [legajo, setLegajo] = useState("");
   const [birthDate, setBirthDate] = useState("");
   const [cuilOrCuit, setCuilOrCuit] = useState("");
+  const [githubURL, setGithubURL] = useState("");
+  const [linkedinURL, setLinkedinURL] = useState("");
   const [street, setStreet] = useState("");
   const [numberStreet, setNumberStreet] = useState("");
   const [sex, setSex] = useState("");
@@ -36,14 +35,13 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
     }
     if (
       !(
-        firstName &&
-        lastName &&
         email &&
         documentType &&
         documentNumber &&
-        legajo &&
         birthDate &&
         cuilOrCuit &&
+        githubURL &&
+        linkedinURL &&
         street &&
         numberStreet &&
         sex &&
@@ -60,14 +58,13 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
   };
 
   const personalData = {
-    FirstName: firstName,
-    LastName: lastName,
     Email: email,
     DocumentType: documentType,
     Dni: documentNumber,
-    Legajo: legajo,
     BirthDate: birthDate,
     Cuil: cuilOrCuit,
+    GithubProfileURL: githubURL,
+    LinkedinProfileURL: linkedinURL,
     Address: street,
     AddressNum: numberStreet,
     Sex: sex,
@@ -99,12 +96,6 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
 
   const inputHandler = (e) => {
     switch (e.target.id) {
-      case "firstName":
-        setFirstname(e.target.value);
-        break;
-      case "lastName":
-        setLastName(e.target.value);
-        break;
       case "email":
         setEmail(e.target.value);
         break;
@@ -114,14 +105,17 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
       case "documentNumber":
         setDocumentNumber(e.target.value);
         break;
-      case "legajo":
-        setLegajo(e.target.value);
-        break;
       case "birthDate":
         setBirthDate(e.target.value);
         break;
       case "cuilOrCuit":
         setCuilOrCuit(e.target.value);
+        break;
+      case "githubURL":
+        setGithubURL(e.target.value);
+        break;
+      case "linkedinURL":
+        setLinkedinURL(e.target.value);
         break;
       case "street":
         setStreet(e.target.value);
@@ -157,76 +151,42 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
       <header></header>
       <ToastContainer className="mt-5" />
       <div className="container">
-        <div class="row">
-          <div class="col-md-11">
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-13">
+        <div className="row">
+          <div className="col-md-11">
+            <div className="card">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-13">
                     <h3>Complete los datos personales</h3>
                     <hr />
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-md-12">
+                <div className="row">
+                  <div className="col-md-12">
                     <form className="formProfile">
-                      <div class="form-group row">
-                        <label for="firstName" class="col-4 col-form-label">
-                          Nombre
-                        </label>
-                        <div class="col-6">
-                          <input
-                            type="text"
-                            name="firstName"
-                            id="firstName"
-                            class="form-control here"
-                            placeholder="Nombre"
-                            value={firstName}
-                            onChange={inputHandler}
-                          />
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="lastName" class="col-4 col-form-label">
-                          Apellido
-                        </label>
-                        <div class="col-6">
-                          <input
-                            type="text"
-                            name="lastName"
-                            id="lastName"
-                            class="form-control here"
-                            placeholder="Apellido"
-                            value={lastName}
-                            onChange={inputHandler}
-                          />
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="email" class="col-4 col-form-label">
-                          Email
-                        </label>
-                        <div class="col-6">
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">Email</label>
+                        <div className="col-6">
                           <input
                             type="text"
                             name="email"
                             id="email"
-                            class="form-control here"
+                            className="form-control here"
                             placeholder="Email"
                             value={email}
                             onChange={inputHandler}
                           />
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="select" class="col-4 col-form-label">
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">
                           Tipo y Numero de Documento
                         </label>
-                        <div class="col-6">
+                        <div className="col-6">
                           <select
                             id="documentType"
                             name="documentType"
-                            class="form-control here"
+                            className="form-control here"
                             value={documentType}
                             onChange={inputHandler}
                           >
@@ -240,189 +200,199 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                             type="number"
                             name="documentNumber"
                             id="documentNumber"
-                            class="form-control here"
+                            className="form-control here"
                             placeholder="Numero de Documento"
                             value={documentNumber}
                             onChange={inputHandler}
                           />
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="legajo" class="col-4 col-form-label">
-                          Legajo
-                        </label>
-                        <div class="col-6">
-                          <input
-                            type="number"
-                            name="legajo"
-                            id="legajo"
-                            class="form-control here"
-                            placeholder="Legajo"
-                            value={legajo}
-                            onChange={inputHandler}
-                          />
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="birthDate" class="col-4 col-form-label">
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">
                           Fecha de Nacimiento
                         </label>
-                        <div class="col-6">
+                        <div className="col-6">
                           <input
                             type="date"
                             name="birthDate"
                             id="birthDate"
-                            class="form-control here"
+                            className="form-control here"
                             value={birthDate}
                             onChange={inputHandler}
                           />
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="website" class="col-4 col-form-label">
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">
                           Numero de Telefono
                         </label>
-                        <div class="col-6">
+                        <div className="col-6">
                           <input
                             type="number"
                             name="personalPhone"
                             id="personalPhone"
-                            class="form-control here"
+                            className="form-control here"
                             placeholder="Numero de Telefono"
                             value={personalPhone}
                             onChange={inputHandler}
                           />
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="cuilOrCuit" class="col-4 col-form-label">
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">
                           CUIL O CUIT
                         </label>
-                        <div class="col-6">
+                        <div className="col-6">
                           <input
                             type="number"
                             name="cuilOrCuit"
                             id="cuilOrCuit"
-                            class="form-control here"
+                            className="form-control here"
                             value={cuilOrCuit}
                             placeholder="CUIL o CUIT (Sin guiones) "
                             onChange={inputHandler}
                           />
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="street" class="col-4 col-form-label">
-                          Calle
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">
+                          URL Perfil Linkedin
                         </label>
-                        <div class="col-6">
+                        <div className="col-6">
+                          <input
+                            type="text"
+                            name="linkedinURL"
+                            id="linkedinURL"
+                            className="form-control here"
+                            placeholder="URL Perfil Linkedin"
+                            value={linkedinURL}
+                            onChange={inputHandler}
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">
+                          URL Perfil Github
+                        </label>
+                        <div className="col-6">
+                          <input
+                            type="text"
+                            name="githubURL"
+                            id="githubURL"
+                            className="form-control here"
+                            placeholder="URL Perfil Github"
+                            value={githubURL}
+                            onChange={inputHandler}
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">Calle</label>
+                        <div className="col-6">
                           <input
                             type="text"
                             name="street"
                             id="street"
-                            class="form-control here"
+                            className="form-control here"
                             placeholder="Calle"
                             value={street}
                             onChange={inputHandler}
                           />
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="numberStreet" class="col-4 col-form-label">
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">
                           Numero de Calle
                         </label>
-                        <div class="col-6">
+                        <div className="col-6">
                           <input
                             type="number"
                             name="numberStreet"
                             id="numberStreet"
-                            class="form-control here"
+                            className="form-control here"
                             placeholder="Numero de Calle"
                             value={numberStreet}
                             onChange={inputHandler}
                           />
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="sex" class="col-4 col-form-label">
-                          Sexo
-                        </label>
-                        <div class="col-6">
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">Sexo</label>
+                        <div className="col-6">
                           <input
                             type="text"
                             name="sex"
                             id="sex"
-                            class="form-control here"
+                            className="form-control here"
                             placeholder="Sexo"
                             value={sex}
                             onChange={inputHandler}
                           />
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="fileCv" class="col-4 col-form-label">
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">
                           Archivo CV
                         </label>
-                        <div class="col-6">
+                        <div className="col-6">
                           <input
                             type="file"
                             name="fileCv"
                             id="fileCv"
-                            class="form-control here"
+                            className="form-control here"
                             value={fileCv}
                             onChange={inputHandler}
                           />
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="country" class="col-4 col-form-label">
-                          Pais
-                        </label>
-                        <div class="col-6">
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">Pais</label>
+                        <div className="col-6">
                           <input
                             type="text"
                             name="country"
                             id="country"
-                            class="form-control here"
+                            className="form-control here"
                             placeholder="Pais"
                             value={country}
                             onChange={inputHandler}
                           />
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="country" class="col-4 col-form-label">
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">
                           Provincia
                         </label>
-                        <div class="col-6">
+                        <div className="col-6">
                           <input
                             type="text"
                             name="province"
                             id="province"
-                            class="form-control here"
+                            className="form-control here"
                             placeholder="Provincia"
                             value={province}
                             onChange={inputHandler}
                           />
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="country" class="col-4 col-form-label">
+                      <div className="form-group row">
+                        <label className="col-4 col-form-label">
                           Localidad
                         </label>
-                        <div class="col-6">
+                        <div className="col-6">
                           <input
                             type="text"
                             name="location"
                             id="location"
-                            class="form-control here"
+                            className="form-control here"
                             placeholder="Localidad"
                             value={location}
                             onChange={inputHandler}
                           />
                         </div>
                       </div>
-                      <div class="form-group">
-                        <div class="offset col-md-10 mt-5">
+                      <div className="form-group">
+                        <div className="offset col-md-10 mt-5">
                           <button onClick={dataValidation} className="btn">
                             Guardar y Continuar
                           </button>
