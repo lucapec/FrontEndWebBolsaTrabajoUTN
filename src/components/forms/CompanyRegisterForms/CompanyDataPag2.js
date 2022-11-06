@@ -189,7 +189,7 @@ const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
           </div>
         </div>
 
-        <button type="button" className="btn" onClick={submitHandler}>
+        <button type="button" className="boton" onClick={submitHandler}>
           Guardar
         </button>
       </div>

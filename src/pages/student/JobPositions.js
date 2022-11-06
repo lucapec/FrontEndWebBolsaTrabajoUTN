@@ -2,8 +2,10 @@ import React, { useState, useEffect, useContext, useCallback, useRef } from 'rea
 import UserContext from "../../context/UserContext";
 import "./JobPositions.css";
 import Card from '@mui/material/Card';
+import { Modal, Button } from 'react-bootstrap';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import { ToastContainer, toast } from "react-toastify";
 
 const JobPositions = () => {
   const { jwt } = useContext(UserContext);
@@ -11,6 +13,7 @@ const JobPositions = () => {
   const [selectedJobPosition, setSelectedJobPosition] = useState({});
   const [searchText, setSearchText] = useState('');
   const [skillsText, setSkillsText] = useState('');
+  const [modalShow, setModalShow] = useState(false);
   let firstEnter = useRef(false);
   const date = new Date();
 
@@ -58,51 +61,105 @@ const JobPositions = () => {
     }
   }
 
+  const applyJobPosition = () => {
+    setModalShow(false);
+    fetch('https://localhost:7172/api/JobApply/CreateJobApply', {
+      method: 'POST',
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
+      body: JSON.stringify({
+        jobPositionId: selectedJobPosition.id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((r) => {
+        if (r.success) {
+          toast(r.message, {
+            autoClose: 3000,
+            hideProgressBar: false,
+            type: "success",
+            theme: "dark",
+            position: toast.POSITION.TOP_LEFT,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
+  }
+
 
   return (
-    <div className="container-fluid main">
-      <div className="main-card">
-        <div className="search">
-          <input value={searchText} onChange={handleInput} id="search-text" className="search-filter job-position-filter" type="text" name="job-position-filter" placeholder='Buscar ofertas' />
-          <input value={skillsText} onChange={handleInput} id="skills-text" className="search-filter skills-filter" type="text" name="skills-filter" placeholder='Habilidades' />
-        </div>
-        <div className="job-positions">
-          <ul className="list">
-            {jobPositions && jobPositions.filter((jobPosition) => {
-              return jobPosition.jobTitle.includes(searchText);
-            }).map((jobPosition) => {
-              return <Card className="card" key={jobPosition.id} onClick={() => onSelectJobPosition(jobPosition.id)} variant="outlined" style={{ border: jobPosition.id === selectedJobPosition.id ? '1px solid black' : 'none'}}>
+    <>
+      <Modal
+        onHide={() => setModalShow(false)}
+        show={modalShow}
+        size="md"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Esta seguro que desea aplicar a "{selectedJobPosition.jobTitle}"?
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            Si desea continuar con la postulacion pulse "Aplicar", en caso contrario pulse "Cancelar".
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={() => setModalShow(false)}>Cancelar</Button>
+          <Button variant="success" onClick={applyJobPosition}>Aplicar</Button>
+        </Modal.Footer>
+      </Modal>
+      <div className="container-fluid main">
+        <ToastContainer></ToastContainer>
+        <div className="main-card">
+          <div className="search">
+            <input value={searchText} onChange={handleInput} id="search-text" className="search-filter job-position-filter" type="text" name="job-position-filter" placeholder='Buscar ofertas' />
+            <input value={skillsText} onChange={handleInput} id="skills-text" className="search-filter skills-filter" type="text" name="skills-filter" placeholder='Habilidades' />
+          </div>
+          <div className="job-positions">
+            <ul className="list">
+              {jobPositions && jobPositions.filter((jobPosition) => {
+                return jobPosition.jobTitle.includes(searchText);
+              }).map((jobPosition) => {
+                return <Card className="card" key={jobPosition.id} onClick={() => onSelectJobPosition(jobPosition.id)} variant="outlined" style={{ border: jobPosition.id === selectedJobPosition.id ? '1px solid black' : 'none' }}>
+                  <CardContent>
+                    {jobPosition.jobTitle}
+                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                      {jobPosition.location}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              })}
+            </ul>
+            <div className="details">
+              <Card key={selectedJobPosition && selectedJobPosition.id} variant="outlined">
                 <CardContent>
-                  {jobPosition.jobTitle}
-                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    {jobPosition.location}
+                  <Typography variant="body" component="div" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <h2>{selectedJobPosition && selectedJobPosition.jobTitle}</h2>
+                    <input className="apply-button" type="submit" value='Aplicar' onClick={() => setModalShow(true)} />
+                  </Typography>
+                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    {selectedJobPosition && selectedJobPosition.location}
+                  </Typography>
+                  <Typography variant="body2">
+                    {selectedJobPosition && selectedJobPosition.jobDescription}
+                  </Typography>
+                  <Typography variant="body2">
+                    {selectedJobPosition && date.getDate(selectedJobPosition.createdDate)}
                   </Typography>
                 </CardContent>
               </Card>
-            })}
-          </ul>
-          <div className="details">
-            <Card key={selectedJobPosition && selectedJobPosition.id} variant="outlined">
-              <CardContent>
-                <Typography variant="body" component="div" style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <h2>{selectedJobPosition && selectedJobPosition.jobTitle}</h2>
-                  <input className="apply-button" type="submit" value='Aplicar' />
-                </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  {selectedJobPosition && selectedJobPosition.location}
-                </Typography>
-                <Typography variant="body2">
-                  {selectedJobPosition && selectedJobPosition.jobDescription}
-                </Typography>
-                <Typography variant="body2">
-                  {selectedJobPosition && date.getDate(selectedJobPosition.createdDate)}
-                </Typography>
-              </CardContent>
-            </Card>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
