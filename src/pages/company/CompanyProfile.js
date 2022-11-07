@@ -184,202 +184,209 @@ const CompanyProfile = () => {
 
   return (
     <div className="divFormProfileCompany">
+      <header></header>
       <ToastContainer className="mt-5" />
-      <div id="form" className="form">
-        <form className=" mt-3">
-          <div id="divForm" className="container">
-            <div id="row1" className="row row-cols-4">
-              <div className=" col form-group align-items-center ">
-                <label>Razon Social</label>
-                <br />
-                <input
-                  type="text"
-                  name="businessName"
-                  id="businessName"
-                  className="form-control-sm"
-                  value={businessName}
-                  onChange={inputHandler}
-                  readOnly
-                />
-              </div>
-              <div className=" col form-group align-items-center">
-                <label>Domicilio Legal</label>
-                <br />
-                <input
-                  type="text"
-                  name="legalAdress"
-                  id="legalAdress"
-                  className="form-control-sm"
-                  value={legalAdress}
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className="col form-group align-items-center">
-                <label>Codigo Postal</label>
-                <br />
-                <input
-                  type="number"
-                  name="postalCode"
-                  id="postalCode"
-                  className="form-control-sm"
-                  value={postalCode}
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className=" col form-group align-items-center">
-                <label>Telefono de la Empresa</label>
-                <br />
-                <input
-                  type="number"
-                  name="telephoneNumber"
-                  id="telephoneNumber"
-                  className="form-control-sm"
-                  value={telephoneNumber}
-                  placeholder="código area + número"
-                  onChange={inputHandler}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="container">
-            <div id="row2" className="row row-cols-4">
-              <div className=" col form-group align-items-center ">
-                <div className=" col form-group align-items-center">
-                  <label>Web</label>
-                  <br />
-                  <input
-                    type="text"
-                    name="webURL"
-                    id="webURL"
-                    className="form-control-sm"
-                    value={webURL}
-                    onChange={inputHandler}
-                  />
+      <div className="container">
+        <div className="row">
+          <div className="col-md-11">
+            <div className="card">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-13">
+                    <h3>Editar Perfil</h3>
+                    <hr />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-12">
+                    <form className="formCompanyData">
+                      <div className="row row-cols-2">
+                        <div className="col">
+                          <label>Razon Social</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              readOnly
+                              type="text"
+                              id="businessName"
+                              onChange={inputHandler}
+                              value={businessName}
+                            />
+                          </div>
+                        </div>
+                        <div className="col">
+                          <label>Codigo Postal</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="number"
+                              id="postalCode"
+                              onChange={inputHandler}
+                              value={postalCode}
+                            />
+                          </div>
+                        </div>
+                        <div className="col mt-4">
+                          <label>CUIT</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="number"
+                              placeholder="(Sin guiones)"
+                              readOnly
+                              id="cuit"
+                              onChange={inputHandler}
+                              value={cuit}
+                            />
+                          </div>
+                        </div>
+                        <div className="col mt-4">
+                          <label>Telefono</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="number"
+                              id="telephoneNumber"
+                              placeholder="Codigo de area + numero"
+                              onChange={inputHandler}
+                              value={telephoneNumber}
+                            />
+                          </div>
+                        </div>
+                        <div className="col mt-4">
+                          <label>Rubro</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="text"
+                              id="sector"
+                              onChange={inputHandler}
+                              value={sector}
+                            />
+                          </div>
+                        </div>
+                        <div className="col mt-4">
+                          <label>Domicilio Legal</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="text"
+                              id="legalAdress"
+                              onChange={inputHandler}
+                              value={legalAdress}
+                            />
+                          </div>
+                        </div>
+                        <div className="col mt-4">
+                          <label>Web (opcional)</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="text"
+                              id="webURL"
+                              onChange={inputHandler}
+                              value={webURL}
+                            />
+                          </div>
+                        </div>
+                        <div className="col mt-4">
+                          <label>Nombres del Contacto</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="text"
+                              id="nameContact"
+                              onChange={inputHandler}
+                              value={nameContact}
+                            />
+                          </div>
+                        </div>
+                        <div className="col mt-4">
+                          <label>Apellido del Contacto</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="text"
+                              id="lastnameContact"
+                              onChange={inputHandler}
+                              value={lastnameContact}
+                            />
+                          </div>
+                        </div>
+                        <div className="col mt-4">
+                          <label>Email de Contacto</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="email"
+                              id="emailContact"
+                              onChange={inputHandler}
+                              value={emailContact}
+                            />
+                          </div>
+                        </div>
+                        <div className="col mt-4">
+                          <label>Puesto / Cargo del Contacto</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="text"
+                              id="positionContact"
+                              onChange={inputHandler}
+                              value={positionContact}
+                            />
+                          </div>
+                        </div>
+                        <div className="col mt-4">
+                          <label>Telefono del Contacto</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="number"
+                              placeholder="Codigo de area + número"
+                              id="telephoneNumberContact"
+                              onChange={inputHandler}
+                              value={telephoneNumberContact}
+                            />
+                          </div>
+                        </div>
+                        <div className="col mt-4">
+                          <label>Relacion con la Empresa</label>
+                          <div>
+                            <select
+                              id="relWithCompanyContact"
+                              className="form-control here"
+                              name="relWithCompanyContact"
+                              value={relWithCompanyContact}
+                              onChange={inputHandler}
+                            >
+                              <option value={"Seleccionar"}>Seleccionar</option>
+                              <option value={"inCompany"}>
+                                Trabajo en la empresa
+                              </option>
+                              <option value={"outCompany"}>
+                                Trabajo en una consultora
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                        <div className="col-12">
+                          <div className=" mt-5">
+                            <button onClick={SaveChangesBtn} className="btn">
+                              Guardar Cambios
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
-              <div className=" col form-group align-items-center ">
-                <label>Rubro</label>
-                <br />
-                <input
-                  type="text"
-                  name="sector"
-                  id="sector"
-                  className="form-control-sm"
-                  value={sector}
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className=" col form-group align-items-center">
-                <label>CUIT</label>
-                <br />
-                <input
-                  type="number"
-                  name="cuit"
-                  id="cuit"
-                  className="form-control-sm"
-                  value={cuit}
-                  onChange={inputHandler}
-                  readOnly
-                />
-              </div>
-              <div className=" col form-group align-items-center">
-                <label>Nombre del Contacto</label>
-                <br />
-                <input
-                  type="text"
-                  name="nameContact"
-                  id="nameContact"
-                  className="form-control-sm"
-                  value={nameContact}
-                  onChange={inputHandler}
-                />
-              </div>
             </div>
           </div>
-          <div className="container">
-            <div id="row3" className="row row-cols-4">
-              <div className=" col form-group align-items-center">
-                <label>Apellido del Contacto</label>
-                <br />
-                <input
-                  type="text"
-                  name="lastnameContact"
-                  id="lastnameContact"
-                  className="form-control-sm"
-                  value={lastnameContact}
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className=" col form-group align-items-center">
-                <label>Puesto/Cargo del Contacto</label>
-                <br />
-                <input
-                  type="text"
-                  name="positionContact"
-                  id="positionContact"
-                  className="form-control-sm"
-                  value={positionContact}
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className="col form-group align-items-center">
-                <label>Email del Contacto</label>
-                <br />
-                <input
-                  type="text"
-                  name="emailContact"
-                  id="emailContact"
-                  className="form-control-sm"
-                  value={emailContact}
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className=" col form-group align-items-center">
-                <label>Relación con la Empresa</label>
-           
-                <select
-                  id="relWithCompanyContact"
-                  className="form-control-sm"
-                  name="relWithCompanyContact"
-                  value={relWithCompanyContact}
-                  onChange={inputHandler}
-                >
-                  <option value={"Seleccionar"}>Seleccionar</option>
-                  <option value={"inCompany"}>Trabajo en la empresa</option>
-                  <option value={"outCompany"}>
-                    Trabajo en una consultora
-                  </option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div className="container" id="row44">
-            <div id="row4" className="row row-cols-4">
-              <div className=" col form-group align-items-center">
-                <label>Telefono de Contacto</label>
-                <br />
-                <input
-                  type="number"
-                  name="telephoneNumberContact"
-                  id="telephoneNumberContact"
-                  className="form-control-sm"
-                  value={telephoneNumberContact}
-                  placeholder="código area + número"
-                  onChange={inputHandler}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="container">
-            <div className="col-md-12">
-              <button id="btnCompany" className="btn" onClick={SaveChangesBtn}>
-                Guardar Cambios
-              </button>
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
-      <footer className="footerCompany">
+      <footer className="footerStudent">
         <div id="divFooter" className="container">
           <div id="divLeftRight" className="row justify-content-center">
             <div id="divLeft" className="col-4">
