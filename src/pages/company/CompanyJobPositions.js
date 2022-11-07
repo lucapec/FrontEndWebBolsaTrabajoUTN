@@ -82,7 +82,6 @@ const CompanyJobPositions = () => {
     <div className="divFormJobPositions">
       <header></header>
       <ToastContainer className="mt-5" />
-
       <div className="container">
         <div className="row">
           <div className="col-md-11">
@@ -96,102 +95,90 @@ const CompanyJobPositions = () => {
                 </div>
                 <div className="row">
                   <div className="col-md-12">
-                    <form className="formProfile">
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          E-mail receptor de los CVs
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="email"
-                            name="emailReceiver"
-                            id="emailReceiver"
-                            className="form-control here"
-                            value={emailReceiver}
-                            placeholder="E-mail receptor de CVs"
-                            onChange={inputHandler}
-                          />
+                    <form className="formCompanyData">
+                      <div className="row row-cols-2">
+                        <div className="col">
+                          <label>E-mail receptor de los CVs</label>
+                          <div>
+                            <input
+                              type="email"
+                              name="emailReceiver"
+                              id="emailReceiver"
+                              className="form-control here"
+                              value={emailReceiver}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Periodo recepcion de CVs desde:
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="date"
-                            name="receptionPeriodFrom"
-                            id="receptionPeriodFrom"
-                            className="form-control here"
-                            value={receptionPeriodFrom}
-                            placeholder="Periodo desde"
-                            onChange={inputHandler}
-                          />
+                        <div className="col">
+                          <label>Periodo recepcion de CVs desde:</label>
+                          <div>
+                            <input
+                              type="date"
+                              name="receptionPeriodFrom"
+                              id="receptionPeriodFrom"
+                              className="form-control here"
+                              value={receptionPeriodFrom}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Periodo recepcion de CVs hasta:
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="date"
-                            name="receptionPeriodUntil"
-                            id="receptionPeriodUntil"
-                            className="form-control here"
-                            value={receptionPeriodUntil}
-                            placeholder="Periodo hasta"
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Periodo recepcion de CVs hasta:</label>
+                          <div>
+                            <input
+                              type="date"
+                              name="receptionPeriodUntil"
+                              id="receptionPeriodUntil"
+                              className="form-control here"
+                              value={receptionPeriodUntil}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Cantidad de Puestos a cubrir
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="text"
-                            name="positionsToFill"
-                            id="positionsToFill"
-                            className="form-control here"
-                            value={positionsToFill}
-                            placeholder="Puestos a cubrir"
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Cantidad de Puestos a cubrir</label>
+                          <div>
+                            <input
+                              type="text"
+                              name="positionsToFill"
+                              id="positionsToFill"
+                              className="form-control here"
+                              value={positionsToFill}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Tipo de Busqueda
-                        </label>
-                        <div className="col-6">
-                          <select
-                            id="typeSearch"
-                            name="typeSearch"
-                            className="form-control here"
-                            value={typeSearch}
-                            onChange={inputHandler}
-                          >
-                            <option value={"Seleccionar"}>Seleccionar</option>
-                            <option value={"Pasantia"}>Pasantia</option>
-                            <option value={"RelacionDependencia"}>
-                              En relacion de dependencia
-                            </option>
-                          </select>
+                        <div className="col mt-4">
+                          <label>Tipo de Busqueda</label>
+                          <div>
+                            <select
+                              id="typeSearch"
+                              name="typeSearch"
+                              className="form-control here"
+                              value={typeSearch}
+                              onChange={inputHandler}
+                            >
+                              <option value={"Seleccionar"}>Seleccionar</option>
+                              <option value={"Pasantia"}>Pasantia</option>
+                              <option value={"RelacionDependencia"}>
+                                En relacion de dependencia
+                              </option>
+                            </select>
+                          </div>
                         </div>
-                      </div>
-                      <div className="container">
-                        <div className="col-md-12 text-center">
-                          <a
-                            onClick={dataValidation}
-                            className="btn"
-                            data-bs-toggle="modal"
-                            href="#exampleModalToggle"
-                            role="button"
-                          >
-                            Crear ofertas
-                          </a>
+                        <div className="col-12">
+                          <div className="mt-5">
+                            <a
+                              onClick={dataValidation}
+                              className="btn"
+                              data-bs-toggle="modal"
+                              href="#exampleModalToggle"
+                              role="button"
+                            >
+                              Crear ofertas
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </form>

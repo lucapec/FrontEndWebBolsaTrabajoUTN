@@ -7,7 +7,6 @@ import "./CompanyData.css";
 import "react-toastify/dist/ReactToastify.css";
 
 const CompanyDataPag1 = ({ setBoolPage2, UpdateData }) => {
-  const [businessName, setBusinessName] = useState("");
   const [postalCode, setPostalcode] = useState("");
   const [cuit, setCuit] = useState("");
   const [telephoneNumber, setTelephoneNumber] = useState("");
@@ -17,9 +16,6 @@ const CompanyDataPag1 = ({ setBoolPage2, UpdateData }) => {
 
   const inputHandler = (e) => {
     switch (e.target.id) {
-      case "businessName":
-        setBusinessName(e.target.value);
-        break;
       case "postalCode":
         setPostalcode(e.target.value);
         break;
@@ -44,7 +40,6 @@ const CompanyDataPag1 = ({ setBoolPage2, UpdateData }) => {
   };
 
   const datos = {
-    CompanyName: businessName,
     PostalCode: postalCode,
     Cuit: cuit,
     TelephoneNumber: telephoneNumber,
@@ -56,7 +51,6 @@ const CompanyDataPag1 = ({ setBoolPage2, UpdateData }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (
-      businessName &&
       postalCode &&
       cuit &&
       telephoneNumber &&
@@ -93,111 +87,88 @@ const CompanyDataPag1 = ({ setBoolPage2, UpdateData }) => {
                 </div>
                 <div className="row">
                   <div className="col-md-12">
-                    <form className="formProfile">
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Razon Social
-                        </label>
-                        <div className="col-6">
-                          <input
-                            className="form-control here"
-                            placeholder="Razon Social"
-                            type="text"
-                            id="businessName"
-                            onChange={inputHandler}
-                            value={businessName}
-                          />
+                    <form className="formCompanyData">
+                      <div class="row row-cols-2">
+                        <div className="col">
+                          <label>Codigo Postal</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="number"
+                              id="postalCode"
+                              onChange={inputHandler}
+                              value={postalCode}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Codigo Postal
-                        </label>
-                        <div className="col-6">
-                          <input
-                            className="form-control here"
-                            placeholder="Codigo Postal"
-                            type="number"
-                            id="postalCode"
-                            onChange={inputHandler}
-                            value={postalCode}
-                          />
+                        <div className="col">
+                          <label>CUIT</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="number"
+                              placeholder="(Sin guiones)"
+                              id="cuit"
+                              onChange={inputHandler}
+                              value={cuit}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">CUIT</label>
-                        <div className="col-6">
-                          <input
-                            className="form-control here"
-                            type="number"
-                            placeholder="CUIT (Sin guiones)"
-                            id="cuit"
-                            onChange={inputHandler}
-                            value={cuit}
-                          />
+                        <div className="col mt-4">
+                          <label>Telefono</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="number"
+                              id="telephoneNumber"
+                              placeholder="Codigo de area + numero"
+                              onChange={inputHandler}
+                              value={telephoneNumber}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">Telefono</label>
-                        <div className="col-6">
-                          <input
-                            className="form-control here"
-                            type="number"
-                            id="telephoneNumber"
-                            placeholder="Codigo de area + numero"
-                            onChange={inputHandler}
-                            value={telephoneNumber}
-                          />
+                        <div className="col mt-4">
+                          <label>Rubro</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="text"
+                              id="sector"
+                              onChange={inputHandler}
+                              value={sector}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">Rubro</label>
-                        <div className="col-6">
-                          <input
-                            className="form-control here"
-                            placeholder="Rubro"
-                            type="text"
-                            id="sector"
-                            onChange={inputHandler}
-                            value={sector}
-                          />
+                        <div className="col mt-4">
+                          <label>Domicilio Legal</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="text"
+                              id="legalAdress"
+                              onChange={inputHandler}
+                              value={legalAdress}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Domicilio Legal
-                        </label>
-                        <div className="col-6">
-                          <input
-                            className="form-control here"
-                            placeholder="Domicilio Legal"
-                            type="text"
-                            id="legalAdress"
-                            onChange={inputHandler}
-                            value={legalAdress}
-                          />
+                        <div className="col mt-4">
+                          <label>Web (opcional)</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="text"
+                              id="webURL"
+                              onChange={inputHandler}
+                              value={webURL}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Web (opcional)
-                        </label>
-                        <div className="col-6">
-                          <input
-                            className="form-control here"
-                            placeholder="Web"
-                            type="text"
-                            id="webURL"
-                            onChange={inputHandler}
-                            value={webURL}
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="offset mt-5 md-10">
-                          <button onClick={submitHandler} className="btn">
-                            Guardar y Continuar
-                          </button>
+                        <div className="col-12">
+                          <div className="mt-5">
+                            <button onClick={submitHandler} className="btn">
+                              Guardar y Continuar
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </form>

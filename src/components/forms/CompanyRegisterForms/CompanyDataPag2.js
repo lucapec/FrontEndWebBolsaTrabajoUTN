@@ -122,105 +122,93 @@ const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
                 </div>
                 <div className="row">
                   <div className="col-md-12">
-                    <form className="formProfile">
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Nombres del Contacto
-                        </label>
-                        <div className="col-6">
-                          <input
-                            className="form-control here"
-                            placeholder="Nombres del Contacto"
-                            type="text"
-                            id="name"
-                            onChange={inputHandler}
-                            value={name}
-                          />
+                    <form className="formCompanyData">
+                      <div class="row row-cols-2">
+                        <div className="col">
+                          <label>Nombres del Contacto</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="text"
+                              id="name"
+                              onChange={inputHandler}
+                              value={name}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Apellido del Contacto
-                        </label>
-                        <div className="col-6">
-                          <input
-                            className="form-control here"
-                            placeholder="Apellido del Contacto"
-                            type="text"
-                            id="lastname"
-                            onChange={inputHandler}
-                            value={lastname}
-                          />
+                        <div className="col">
+                          <label>Apellido del Contacto</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="text"
+                              id="lastname"
+                              onChange={inputHandler}
+                              value={lastname}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Email de Contacto
-                        </label>
-                        <div className="col-6">
-                          <input
-                            className="form-control here"
-                            placeholder="Email"
-                            type="email"
-                            id="email"
-                            onChange={inputHandler}
-                            value={email}
-                          />
+                        <div className="col mt-4">
+                          <label>Email de Contacto</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="email"
+                              id="email"
+                              onChange={inputHandler}
+                              value={email}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Puesto / Cargo del Contacto
-                        </label>
-                        <div className="col-6">
-                          <input
-                            className="form-control here"
-                            placeholder="Puesto / Cargo"
-                            type="text"
-                            id="position"
-                            onChange={inputHandler}
-                            value={position}
-                          />
+                        <div className="col mt-4">
+                          <label>Puesto / Cargo del Contacto</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="text"
+                              id="position"
+                              onChange={inputHandler}
+                              value={position}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Telefono del Contacto
-                        </label>
-                        <div className="col-6">
-                          <input
-                            className="form-control here"
-                            type="number"
-                            placeholder="Codigo de area + número"
-                            id="telephoneNumber"
-                            onChange={inputHandler}
-                            value={telephoneNumber}
-                          />
+                        <div className="col mt-4">
+                          <label>Telefono del Contacto</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="number"
+                              placeholder="Codigo de area + número"
+                              id="telephoneNumber"
+                              onChange={inputHandler}
+                              value={telephoneNumber}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Relacion con la Empresa
-                        </label>
-                        <div className="col-6">
-                          <select
-                            id="relWithCompany"
-                            className="form-control here"
-                            name="relWithCompany"
-                            value={relWithCompany}
-                            onChange={inputHandler}
-                          >
-                            <option value={"Seleccionar"}>Seleccionar</option>
-                            <option value={0}>Trabajo en la empresa</option>
-                            <option value={1}>Trabajo en una consultora</option>
-                          </select>
+                        <div className="col mt-4">
+                          <label>Relacion con la Empresa</label>
+                          <div>
+                            <select
+                              id="relWithCompany"
+                              className="form-control here"
+                              name="relWithCompany"
+                              value={relWithCompany}
+                              onChange={inputHandler}
+                            >
+                              <option value={"Seleccionar"}>Seleccionar</option>
+                              <option value={0}>Trabajo en la empresa</option>
+                              <option value={1}>
+                                Trabajo en una consultora
+                              </option>
+                            </select>
+                          </div>
                         </div>
-                      </div>
-                      <div>
-                        <div className="offset mt-5 md-10">
-                          <button onClick={submitHandler} className="btn">
-                            Guardar e Ingresar
-                          </button>
+                        <div className="col-12">
+                          <div className="mt-5">
+                            <button onClick={submitHandler} className="btn">
+                              Guardar e Ingresar
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </form>
@@ -230,8 +218,6 @@ const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
             </div>
           </div>
         </div>
-
-       
       </div>
       <footer className="footerStudent">
         <div id="divFooter" className="container">

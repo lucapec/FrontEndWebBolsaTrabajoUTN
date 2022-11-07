@@ -22,7 +22,7 @@ header {
 
 .divFormProfileCompany {
   background-color: lightgray;
-  height: calc(160vh - 55px);
+  height: calc(140vh - 55px);
 }
 
 #row {
