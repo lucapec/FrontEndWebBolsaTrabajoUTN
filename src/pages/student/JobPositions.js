@@ -138,7 +138,7 @@ const JobPositions = () => {
               })}
             </ul>
             <div className="details">
-              <Card key={selectedJobPosition && selectedJobPosition.id} variant="outlined">
+              <Card className='card' key={selectedJobPosition && selectedJobPosition.id} variant="outlined">
                 <CardContent>
                   <Typography variant="body" component="div" style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <h2>{selectedJobPosition && selectedJobPosition.jobTitle}</h2>

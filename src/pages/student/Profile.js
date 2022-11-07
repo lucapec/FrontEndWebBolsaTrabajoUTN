@@ -339,6 +339,7 @@ const Profile = () => {
                               <option value={"Pasaporte"}>Pasaporte</option>
                             </select>
                             <input
+                              readOnly
                               type="number"
                               name="documentNumber"
                               id="documentNumber"
