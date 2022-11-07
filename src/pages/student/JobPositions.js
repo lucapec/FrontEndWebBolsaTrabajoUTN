@@ -191,7 +191,7 @@ const JobPositions = () => {
                   </div>
                   <div className="card-detail__body">
                     <ul className="students-list">
-                      {selectedJobPosition.studentsWhoApplied && selectedJobPosition.studentsWhoApplied.length > 0 ? selectedJobPosition.studentsWhoApplied.map((student) => {
+                      {selectedJobPosition !== null && selectedJobPosition.studentsWhoApplied && selectedJobPosition.studentsWhoApplied.length > 0 ? selectedJobPosition.studentsWhoApplied.map((student) => {
                         return <li key={student.id} className="student-detail">
                           <div className="name">
                             <div className="text">{student.firstName} {student.lastName}</div>
