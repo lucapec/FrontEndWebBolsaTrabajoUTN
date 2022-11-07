@@ -10,7 +10,7 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin, faGithubSquare } from '@fortawesome/free-brands-svg-icons';
 
 const JobPositions = () => {
-  const { jwt, role } = useContext(UserContext);
+  const { jwt, role, active } = useContext(UserContext);
   const [jobPositions, setJobPositions] = useState([]);
   const [selectedJobPosition, setSelectedJobPosition] = useState(null);
   const [searchText, setSearchText] = useState('');
@@ -169,13 +169,29 @@ const JobPositions = () => {
             <div className="details">
               {role === "Student" && (
                 <div className="card-detail" key={selectedJobPosition !== null && selectedJobPosition.id}>
-                  <div className="card-detail__title">
+                  <div className="card-detail__title" style={{ justifyContent: selectedJobPosition !== null && selectedJobPosition.id ? "space-between" : "center"}}>
                     <h2>{selectedJobPosition !== null && selectedJobPosition.jobTitle}</h2>
-                    <input className="apply-button" type="submit" value='Aplicar' onClick={() => setModalShow(true)} />
+                    {selectedJobPosition !== null && selectedJobPosition.id ? (
+                      <input className="apply-button" type="submit" value='Aplicar' onClick={() => {
+                        if (active) {
+                          setModalShow(true);
+                        } else {
+                          toast("Para aplicar debés esperar a que un administrador habilite tu cuenta", {
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            type: "warning",
+                            theme: "dark",
+                            position: toast.POSITION.TOP_LEFT,
+                          });
+                        }
+                      }} />
+                    ) : (
+                      <div>No hay ofertas laborales disponibles</div>
+                    )}
                   </div>
                   <div className="card-detail__body">
                     <div className="location">
-                      <span class="icon-location2"></span>
+                      <span className="icon-location2"></span>
                       <p>{selectedJobPosition && selectedJobPosition.location}</p>
                     </div>
                     <div className="type">

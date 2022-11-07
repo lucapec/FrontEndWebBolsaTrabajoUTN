@@ -56,7 +56,6 @@
 
 .card-detail__title {
     display: flex;
-    justify-content: space-between;
 }
 
 .card-detail__title>h2 {
