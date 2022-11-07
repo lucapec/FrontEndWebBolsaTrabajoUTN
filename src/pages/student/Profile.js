@@ -271,409 +271,357 @@ const Profile = () => {
                 <div className="row">
                   <div className="col-md-12 ">
                     <form className="formProfile">
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">Nombre</label>
-                        <div className="col-6">
-                          <input
-                            type="text"
-                            name="firstName"
-                            id="firstName"
-                            className="form-control here"
-                            placeholder="Nombre"
-                            readOnly
-                            value={firstName}
-                            onChange={inputHandler}
-                          />
+                      <div className="form-group row row-cols-2">
+                        <div className="col">
+                          <label>Nombre</label>
+                          <div>
+                            <input
+                              type="text"
+                              name="firstName"
+                              id="firstName"
+                              className="form-control here"
+                              readOnly
+                              value={firstName}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">Apellido</label>
-                        <div className="col-6">
-                          <input
-                            type="text"
-                            name="lastName"
-                            id="lastName"
-                            className="form-control here"
-                            placeholder="Apellido"
-                            readOnly
-                            value={lastName}
-                            onChange={inputHandler}
-                          />
+                        <div className="col">
+                          <label>Apellido</label>
+                          <div>
+                            <input
+                              type="text"
+                              name="lastName"
+                              id="lastName"
+                              className="form-control here"
+                              placeholder="Apellido"
+                              readOnly
+                              value={lastName}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">Email</label>
-                        <div className="col-6">
-                          <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            className="form-control here"
-                            placeholder="Email"
-                            readOnly
-                            value={email}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Email</label>
+                          <div>
+                            <input
+                              type="text"
+                              name="email"
+                              id="email"
+                              className="form-control here"
+                              readOnly
+                              value={email}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Tipo y Numero de Documento
-                        </label>
-                        <div className="col-6">
-                          <select
-                            id="documentType"
-                            name="documentType"
-                            className="form-control here"
-                            readOnly
-                            value={documentType}
-                            onChange={inputHandler}
-                          >
-                            <option value={"Seleccionar"}>Seleccionar</option>
-                            <option value={"DocumentoUnico"}>
-                              Documento Unico
-                            </option>
-                            <option value={"LibretaCivica"}>
-                              Libreta Civica
-                            </option>
-                            <option value={"LibretaDeEnrolamiento"}>
-                              Libreta de Enrolamiento
-                            </option>
-                            <option value={"Pasaporte"}>Pasaporte</option>
-                          </select>
-                          <input
-                            type="number"
-                            name="documentNumber"
-                            id="documentNumber"
-                            className="form-control here"
-                            placeholder="Numero de Documento"
-                            value={documentNumber}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Tipo y Numero de Documento</label>
+                          <div>
+                            <select
+                              id="documentType"
+                              name="documentType"
+                              className="form-control here"
+                              readOnly
+                              value={documentType}
+                              onChange={inputHandler}
+                            >
+                              <option value={"Seleccionar"}>Seleccionar</option>
+                              <option value={"DocumentoUnico"}>
+                                Documento Unico
+                              </option>
+                              <option value={"LibretaCivica"}>
+                                Libreta Civica
+                              </option>
+                              <option value={"LibretaDeEnrolamiento"}>
+                                Libreta de Enrolamiento
+                              </option>
+                              <option value={"Pasaporte"}>Pasaporte</option>
+                            </select>
+                            <input
+                              type="number"
+                              name="documentNumber"
+                              id="documentNumber"
+                              className="form-control here"
+                              value={documentNumber}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">Legajo</label>
-                        <div className="col-6">
-                          <input
-                            type="number"
-                            name="legajo"
-                            id="legajo"
-                            className="form-control here"
-                            placeholder="Legajo"
-                            readOnly
-                            value={legajo}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Legajo</label>
+                          <div>
+                            <input
+                              type="number"
+                              name="legajo"
+                              id="legajo"
+                              className="form-control here"
+                              readOnly
+                              value={legajo}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Fecha de Nacimiento
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="text"
-                            name="birthDate"
-                            id="birthDate"
-                            className="form-control here"
-                            readOnly
-                            value={birthDate}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Fecha de Nacimiento</label>
+                          <div>
+                            <input
+                              type="text"
+                              name="birthDate"
+                              id="birthDate"
+                              className="form-control here"
+                              readOnly
+                              value={birthDate}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Numero de Telefono
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="number"
-                            name="personalPhone"
-                            id="personalPhone"
-                            className="form-control here"
-                            placeholder="Numero de Telefono"
-                            value={personalPhone}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Numero de Telefono</label>
+                          <div>
+                            <input
+                              type="number"
+                              name="personalPhone"
+                              id="personalPhone"
+                              className="form-control here"
+                              value={personalPhone}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          CUIL O CUIT
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="number"
-                            name="cuilOrCuit"
-                            id="cuilOrCuit"
-                            className="form-control here"
-                            readOnly
-                            value={cuilOrCuit}
-                            placeholder="CUIL o CUIT (Sin guiones) "
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>CUIL O CUIT</label>
+                          <div>
+                            <input
+                              type="number"
+                              name="cuilOrCuit"
+                              id="cuilOrCuit"
+                              className="form-control here"
+                              readOnly
+                              value={cuilOrCuit}
+                              placeholder="(Sin guiones)"
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          URL Perfil Linkedin
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="text"
-                            name="linkedinURL"
-                            id="linkedinURL"
-                            className="form-control here"
-                            placeholder="URL Perfil Linkedin"
-                            value={linkedinURL}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>URL Perfil Linkedin</label>
+                          <div>
+                            <input
+                              type="text"
+                              name="linkedinURL"
+                              id="linkedinURL"
+                              className="form-control here"
+                              value={linkedinURL}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          URL Perfil Github
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="text"
-                            name="githubURL"
-                            id="githubURL"
-                            className="form-control here"
-                            placeholder="URL Perfil Github"
-                            value={githubURL}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>URL Perfil Github</label>
+                          <div>
+                            <input
+                              type="text"
+                              name="githubURL"
+                              id="githubURL"
+                              className="form-control here"
+                              value={githubURL}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">Calle</label>
-                        <div className="col-6">
-                          <input
-                            type="text"
-                            name="street"
-                            id="street"
-                            className="form-control here"
-                            placeholder="Calle"
-                            value={street}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Calle</label>
+                          <div>
+                            <input
+                              type="text"
+                              name="street"
+                              id="street"
+                              className="form-control here"
+                              value={street}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Numero de Calle
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="number"
-                            name="numberStreet"
-                            id="numberStreet"
-                            className="form-control here"
-                            placeholder="Numero de Calle"
-                            value={numberStreet}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Numero de Calle</label>
+                          <div>
+                            <input
+                              type="number"
+                              name="numberStreet"
+                              id="numberStreet"
+                              className="form-control here"
+                              value={numberStreet}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">Sexo</label>
-                        <div className="col-6">
-                          <input
-                            type="text"
-                            name="sex"
-                            id="sex"
-                            className="form-control here"
-                            placeholder="Sexo"
-                            value={sex}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Sexo</label>
+                          <div>
+                            <input
+                              type="text"
+                              name="sex"
+                              id="sex"
+                              className="form-control here"
+                              value={sex}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Archivo CV
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="file"
-                            name="fileCv"
-                            id="fileCv"
-                            className="form-control here"
-                            value={fileCv}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Archivo CV</label>
+                          <div>
+                            <input
+                              type="file"
+                              name="fileCv"
+                              id="fileCv"
+                              className="form-control here"
+                              value={fileCv}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">Pais</label>
-                        <div className="col-6">
-                          <input
-                            type="text"
-                            name="country"
-                            id="country"
-                            className="form-control here"
-                            placeholder="Pais"
-                            value={country}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Pais</label>
+                          <div>
+                            <input
+                              type="text"
+                              name="country"
+                              id="country"
+                              className="form-control here"
+                              value={country}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Provincia
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="text"
-                            name="province"
-                            id="province"
-                            className="form-control here"
-                            placeholder="Provincia"
-                            value={province}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Provincia</label>
+                          <div>
+                            <input
+                              type="text"
+                              name="province"
+                              id="province"
+                              className="form-control here"
+                              value={province}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Localidad
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="text"
-                            name="location"
-                            id="location"
-                            className="form-control here"
-                            placeholder="Localidad"
-                            value={location}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Localidad</label>
+                          <div>
+                            <input
+                              type="text"
+                              name="location"
+                              id="location"
+                              className="form-control here"
+                              value={location}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Especialidad
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="text"
-                            name="specialty"
-                            id="specialty"
-                            className="form-control here"
-                            placeholder="Especialidad"
-                            value={specialty}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Especialidad</label>
+                          <div>
+                            <input
+                              type="text"
+                              name="specialty"
+                              id="specialty"
+                              className="form-control here"
+                              value={specialty}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Cantidad de materias aprobadas
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="number"
-                            name="subjectsApproved"
-                            id="subjectsApproved"
-                            className="form-control here"
-                            placeholder="Materias Aprobadas"
-                            value={subjectsApproved}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Cantidad de materias aprobadas</label>
+                          <div>
+                            <input
+                              type="number"
+                              name="subjectsApproved"
+                              id="subjectsApproved"
+                              className="form-control here"
+                              value={subjectsApproved}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Plan Especialidad
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="text"
-                            name="specialtyPlan"
-                            id="specialtyPlan"
-                            className="form-control here"
-                            placeholder="Plan Especialidad"
-                            value={specialtyPlan}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Plan Especialidad</label>
+                          <div>
+                            <input
+                              type="text"
+                              name="specialtyPlan"
+                              id="specialtyPlan"
+                              className="form-control here"
+                              value={specialtyPlan}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Año que Cursa
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="number"
-                            name="currentYear"
-                            id="currentYear"
-                            className="form-control here"
-                            placeholder="Año que Cursa"
-                            value={currentYear}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Año que Cursa</label>
+                          <div>
+                            <input
+                              type="number"
+                              name="currentYear"
+                              id="currentYear"
+                              className="form-control here"
+                              value={currentYear}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Turno que cursa
-                        </label>
-                        <div className="col-6">
-                          <select
-                            id="shiftProgress"
-                            name="shiftProgress"
-                            className="form-control here"
-                            placeholder="Turno que cursa"
-                            value={shiftProgress}
-                            onChange={inputHandler}
-                          >
-                            <option value={"Seleccionar"}>Seleccionar</option>
-                            <option value={"Mañana"}>Mañana</option>
-                            <option value={"Tarde"}>Tarde</option>
-                            <option value={"Noche"}>Noche</option>
-                          </select>
+                        <div className="col mt-4">
+                          <label>Turno que cursa</label>
+                          <div>
+                            <select
+                              id="shiftProgress"
+                              name="shiftProgress"
+                              className="form-control here"
+                              value={shiftProgress}
+                              onChange={inputHandler}
+                            >
+                              <option value={"Seleccionar"}>Seleccionar</option>
+                              <option value={"Mañana"}>Mañana</option>
+                              <option value={"Tarde"}>Tarde</option>
+                              <option value={"Noche"}>Noche</option>
+                            </select>
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Promedio con Aplazos
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="number"
-                            name="averagesWithDeferrals"
-                            id="averagesWithDeferrals"
-                            className="form-control here"
-                            placeholder="Promedio con Aplazos"
-                            value={averagesWithDeferrals}
-                            onChange={inputHandler}
-                          />
+                        <div className="coll mt-4">
+                          <label>Promedio con Aplazos</label>
+                          <div>
+                            <input
+                              type="number"
+                              name="averagesWithDeferrals"
+                              id="averagesWithDeferrals"
+                              className="form-control here"
+                              value={averagesWithDeferrals}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Promedio sin Aplazos
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="number"
-                            name="averagesWithoutDeferrals"
-                            id="averagesWithoutDeferrals"
-                            className="form-control here"
-                            placeholder="Promedio sin Aplazos"
-                            value={averagesWithoutDeferrals}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Promedio sin Aplazos</label>
+                          <div>
+                            <input
+                              type="number"
+                              name="averagesWithoutDeferrals"
+                              id="averagesWithoutDeferrals"
+                              className="form-control here"
+                              value={averagesWithoutDeferrals}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group">
-                        <div className="offset col-md-10 mt-5">
-                          <button onClick={dataValidation} className="btn">
-                            Guardar Cambios
-                          </button>
+                        <div className="col-11">
+                          <div className="mt-5">
+                            <button onClick={dataValidation} className="btn">
+                              Guardar Cambios
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </form>

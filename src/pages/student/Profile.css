@@ -15,11 +15,12 @@ header {
 
 .divFormProfile {
   background-color: lightgray;
-  height: calc(225vh - 10px);
+  height: calc(195vh - 10px);
 }
 
 .formProfile {
-  margin-left: 15%;
+  margin-top: -6%;
+  margin-left: 5%;
 }
 
 .form {

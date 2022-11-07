@@ -127,127 +127,109 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
                 <div className="row">
                   <div className="col-md-12">
                     <form className="formProfile">
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Especialidad
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="text"
-                            name="specialty"
-                            id="specialty"
-                            className="form-control here"
-                            placeholder="Especialidad"
-                            value={specialty}
-                            onChange={inputHandler}
-                          />
+                      <div className="form-group row row-cols-2">
+                        <div className="col">
+                          <label>Especialidad</label>
+                          <div>
+                            <input
+                              type="text"
+                              name="specialty"
+                              id="specialty"
+                              className="form-control here"
+                              value={specialty}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Cantidad de materias aprobadas
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="number"
-                            name="subjectsApproved"
-                            id="subjectsApproved"
-                            className="form-control here"
-                            placeholder="Materias Aprobadas"
-                            value={subjectsApproved}
-                            onChange={inputHandler}
-                          />
+                        <div className="col">
+                          <label>Cantidad de materias aprobadas</label>
+                          <div>
+                            <input
+                              type="number"
+                              name="subjectsApproved"
+                              id="subjectsApproved"
+                              className="form-control here"
+                              value={subjectsApproved}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Plan Especialidad
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="text"
-                            name="specialtyPlan"
-                            id="specialtyPlan"
-                            className="form-control here"
-                            placeholder="Plan Especialidad"
-                            value={specialtyPlan}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Plan Especialidad</label>
+                          <div>
+                            <input
+                              type="text"
+                              name="specialtyPlan"
+                              id="specialtyPlan"
+                              className="form-control here"
+                              value={specialtyPlan}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Año que Cursa
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="number"
-                            name="currentYear"
-                            id="currentYear"
-                            className="form-control here"
-                            placeholder="Año que Cursa"
-                            value={currentYear}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Año que Cursa</label>
+                          <div>
+                            <input
+                              type="number"
+                              name="currentYear"
+                              id="currentYear"
+                              className="form-control here"
+                              value={currentYear}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Turno que cursa
-                        </label>
-                        <div className="col-6">
-                          <select
-                            id="shiftProgress"
-                            name="shiftProgress"
-                            className="form-control here"
-                            placeholder="Turno que cursa"
-                            value={shiftProgress}
-                            onChange={inputHandler}
-                          >
-                            <option value={"Seleccionar"}>Seleccionar</option>
-                            <option value={0}>Mañana</option>
-                            <option value={1}>Tarde</option>
-                            <option value={2}>Noche</option>
-                          </select>
+                        <div className="col mt-4">
+                          <label>Turno que cursa</label>
+                          <div>
+                            <select
+                              id="shiftProgress"
+                              name="shiftProgress"
+                              className="form-control here"
+                              placeholder="Turno que cursa"
+                              value={shiftProgress}
+                              onChange={inputHandler}
+                            >
+                              <option value={"Seleccionar"}>Seleccionar</option>
+                              <option value={0}>Mañana</option>
+                              <option value={1}>Tarde</option>
+                              <option value={2}>Noche</option>
+                            </select>
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Promedio con Aplazos
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="number"
-                            name="averagesWithDeferrals"
-                            id="averagesWithDeferrals"
-                            className="form-control here"
-                            placeholder="Promedio con Aplazos"
-                            value={averagesWithDeferrals}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Promedio con Aplazos</label>
+                          <div>
+                            <input
+                              type="number"
+                              name="averagesWithDeferrals"
+                              id="averagesWithDeferrals"
+                              className="form-control here"
+                              value={averagesWithDeferrals}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group row">
-                        <label className="col-4 col-form-label">
-                          Promedio sin Aplazos
-                        </label>
-                        <div className="col-6">
-                          <input
-                            type="number"
-                            name="averagesWithoutDeferrals"
-                            id="averagesWithoutDeferrals"
-                            className="form-control here"
-                            placeholder="Promedio sin Aplazos"
-                            value={averagesWithoutDeferrals}
-                            onChange={inputHandler}
-                          />
+                        <div className="col mt-4">
+                          <label>Promedio sin Aplazos</label>
+                          <div>
+                            <input
+                              type="number"
+                              name="averagesWithoutDeferrals"
+                              id="averagesWithoutDeferrals"
+                              className="form-control here"
+                              value={averagesWithoutDeferrals}
+                              onChange={inputHandler}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="form-group">
-                        <div className="offset col-md-10 mt-5 ">
-                          <button onClick={dataValidation} className="btn">
-                            Guardar e Ingresar
-                          </button>
+                        <div className="col-11">
+                          <div className="mt-5 ">
+                            <button onClick={dataValidation} className="btn">
+                              Guardar e Ingresar
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </form>
@@ -256,7 +238,7 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
               </div>
             </div>
           </div>
-          </div>
+        </div>
       </div>
       <footer className="footerStudent">
         <div id="divFooter" className="container">
