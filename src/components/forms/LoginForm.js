@@ -11,8 +11,7 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
   const [password, setPassword] = useState("");
   const { jwt, setJwt, setRole } = useContext(UserContext);
   const navigate = useNavigate();
-  let passwordRegExp =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  let passwordRegExp = /^[A-Za-z]\w{7,14}$/;
 
   const errorsList = () => {
     const errorsList = [];
@@ -25,7 +24,7 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
     ) {
       errorsList.push({ message: "Ingrese un email válido" });
     }
-    if (!passwordRegExp.test(password)) {
+    if (passwordRegExp.test(password)) {
       errorsList.push({
         message:
           "La contraseña debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula, 1 número y 1 caracter especial",
