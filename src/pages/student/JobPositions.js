@@ -123,7 +123,7 @@ const JobPositions = () => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Esta seguro que desea aplicar a "{selectedJobPosition.jobTitle}"?
+            Esta seguro que desea aplicar a "{selectedJobPosition !== null && selectedJobPosition.jobTitle}"?
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -150,7 +150,7 @@ const JobPositions = () => {
                 {jobPositions && jobPositions.filter((jobPosition) => {
                   return jobPosition.jobTitle.includes(searchText) || jobPosition.location.includes(searchText) || jobPosition.company.companyName.includes(searchText);
                 }).map((jobPosition) => {
-                  return <div className="list-item" key={jobPosition.id} onClick={() => onSelectJobPosition(jobPosition.id)} style={{ backgroundColor: jobPosition.id === selectedJobPosition.id ? '#E2F0FE' : 'white' }}>
+                  return <div className="list-item" key={jobPosition.id} onClick={() => onSelectJobPosition(jobPosition.id)} style={{ backgroundColor: selectedJobPosition !== null && jobPosition.id === selectedJobPosition.id ? '#E2F0FE' : 'white' }}>
                     <h5>{jobPosition.jobTitle}</h5>
                     {role === "Student" && (
                       <>
@@ -168,9 +168,9 @@ const JobPositions = () => {
             </ul>
             <div className="details">
               {role === "Student" && (
-                <div className="card-detail" key={selectedJobPosition && selectedJobPosition.id}>
+                <div className="card-detail" key={selectedJobPosition !== null && selectedJobPosition.id}>
                   <div className="card-detail__title">
-                    <h2>{selectedJobPosition && selectedJobPosition.jobTitle}</h2>
+                    <h2>{selectedJobPosition !== null && selectedJobPosition.jobTitle}</h2>
                     <input className="apply-button" type="submit" value='Aplicar' onClick={() => setModalShow(true)} />
                   </div>
                   <div className="card-detail__body">
@@ -185,7 +185,7 @@ const JobPositions = () => {
                 </div>
               )}
               {role === "Company" && (
-                <div className="card-detail" key={selectedJobPosition && selectedJobPosition.id}>
+                <div className="card-detail" key={selectedJobPosition !== null && selectedJobPosition.id}>
                   <div className="card-detail__title">
                     <h2>{selectedJobPosition !== null && selectedJobPosition.jobTitle !== undefined ? `Postulantes para ${selectedJobPosition.jobTitle}` : null}</h2>
                   </div>
