@@ -127,8 +127,8 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
                 <div className="row">
                   <div className="col-md-12">
                     <form className="formProfile">
-                      <div className="form-group row row-cols-2">
-                        <div className="col">
+                      <div className="form-group row row-cols-3">
+                        <div className="col mt-4">
                           <label>Especialidad</label>
                           <div>
                             <input
@@ -141,8 +141,8 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
                             />
                           </div>
                         </div>
-                        <div className="col">
-                          <label>Cantidad de materias aprobadas</label>
+                        <div className="col mt-4">
+                          <label>Materias aprobadas</label>
                           <div>
                             <input
                               type="number"
@@ -240,7 +240,7 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
           </div>
         </div>
       </div>
-      <footer className="footerStudent">
+      <footer className="footerStudentUniversity">
         <div id="divFooter" className="container">
           <div id="divLeftRight" className="row justify-content-center">
             <div id="divLeft" className="col-4">

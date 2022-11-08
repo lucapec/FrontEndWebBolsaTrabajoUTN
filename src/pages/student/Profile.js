@@ -271,8 +271,8 @@ const Profile = () => {
                 <div className="row">
                   <div className="col-md-12 ">
                     <form className="formProfile">
-                      <div className="form-group row row-cols-2">
-                        <div className="col">
+                      <div className="form-group row row-cols-4">
+                        <div className="col mt-5">
                           <label>Nombre</label>
                           <div>
                             <input
@@ -286,7 +286,7 @@ const Profile = () => {
                             />
                           </div>
                         </div>
-                        <div className="col">
+                        <div className="col mt-5">
                           <label>Apellido</label>
                           <div>
                             <input
@@ -301,7 +301,7 @@ const Profile = () => {
                             />
                           </div>
                         </div>
-                        <div className="col mt-4">
+                        <div className="col mt-5">
                           <label>Email</label>
                           <div>
                             <input
@@ -536,7 +536,7 @@ const Profile = () => {
                           </div>
                         </div>
                         <div className="col mt-4">
-                          <label>Cantidad de materias aprobadas</label>
+                          <label>Materias aprobadas</label>
                           <div>
                             <input
                               type="number"
@@ -633,7 +633,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <footer className="footerStudent">
+      <footer className="footerStudentProfile">
         <div id="divFooter" className="container">
           <div id="divLeftRight" className="row justify-content-center">
             <div id="divLeft" className="col-4">

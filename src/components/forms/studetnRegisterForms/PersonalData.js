@@ -164,8 +164,8 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                 <div className="row">
                   <div className="col-md-12">
                     <form className="formProfile">
-                      <div className="form-group row row-cols-2">
-                        <div className="col">
+                      <div className="form-group row row-cols-4">
+                        <div className="col mt-4">
                           <label>Email</label>
                           <div>
                             <input
@@ -377,7 +377,7 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
           </div>
         </div>
       </div>
-      <footer className="footerStudent">
+      <footer className="footerStudentPersonal">
         <div id="divFooter" className="container">
           <div id="divLeftRight" className="row justify-content-center">
             <div id="divLeft" className="col-4">

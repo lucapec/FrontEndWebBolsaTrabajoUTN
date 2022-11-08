@@ -88,7 +88,7 @@ const CompanyDataPag1 = ({ setBoolPage2, UpdateData }) => {
                 <div className="row">
                   <div className="col-md-12">
                     <form className="formCompanyData">
-                      <div class="row row-cols-2">
+                      <div class="row row-cols-3">
                         <div className="col">
                           <label>Codigo Postal</label>
                           <div>
@@ -114,7 +114,7 @@ const CompanyDataPag1 = ({ setBoolPage2, UpdateData }) => {
                             />
                           </div>
                         </div>
-                        <div className="col mt-4">
+                        <div className="col">
                           <label>Telefono</label>
                           <div>
                             <input
@@ -179,7 +179,7 @@ const CompanyDataPag1 = ({ setBoolPage2, UpdateData }) => {
           </div>
         </div>
       </div>
-      <footer className="footerStudent">
+      <footer className="footerStudentUniversity">
         <div id="divFooter" className="container">
           <div id="divLeftRight" className="row justify-content-center">
             <div id="divLeft" className="col-4">

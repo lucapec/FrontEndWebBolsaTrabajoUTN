@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import utnLogo from "../../../assets/logo-utn.png";
 
 import "react-toastify/dist/ReactToastify.css";
-import "./CompanyData.css";
+import "./CompanyDataPag2.css";
 
 const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
   const [name, setName] = useState("");
@@ -106,7 +106,7 @@ const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
   };
 
   return (
-    <div className="divFormCompanyData">
+    <div className="divFormCompanyDataPag2">
       <header></header>
       <div className="container">
         <ToastContainer className="mt-5" />
@@ -123,7 +123,7 @@ const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
                 <div className="row">
                   <div className="col-md-12">
                     <form className="formCompanyData">
-                      <div class="row row-cols-2">
+                      <div class="row row-cols-3">
                         <div className="col">
                           <label>Nombres del Contacto</label>
                           <div>
@@ -148,7 +148,7 @@ const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
                             />
                           </div>
                         </div>
-                        <div className="col mt-4">
+                        <div className="col">
                           <label>Email de Contacto</label>
                           <div>
                             <input
@@ -219,7 +219,7 @@ const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
           </div>
         </div>
       </div>
-      <footer className="footerStudent">
+      <footer className="footerStudentUniversity">
         <div id="divFooter" className="container">
           <div id="divLeftRight" className="row justify-content-center">
             <div id="divLeft" className="col-4">
