@@ -18,7 +18,7 @@ const AddJobPosition = () => {
   const [careerId, setCareerId] = useState(null);
   const [workDay, setWorkDay] = useState(0);
   const [jobType, setJobType] = useState(0);
-  const [frameworkAgreement, setFrameworkAgreement] = useState(null);
+  const [frameworkAgreement, setFrameworkAgreement] = useState(false);
 
   useEffect(() => {
     fetch("https://localhost:7172/api/Careers/", {
@@ -30,7 +30,6 @@ const AddJobPosition = () => {
     })
       .then((r) => r.json())
       .then((res) => {
-        console.log(res);
         setCareers(res);
       })
       .catch((err) => {
@@ -38,8 +37,7 @@ const AddJobPosition = () => {
       });
   }, [jwt]);
 
-  const createJobPosition = (e) => {
-    e.preventDefault();
+  const createJobPosition = () => {
     fetch("https://localhost:7172/api/JobPosition/AddJobPosition", {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -98,7 +96,7 @@ const AddJobPosition = () => {
         setLocation(e.target.value);
         break;
       case "positionsToCover":
-        setPositionsToCover(e.target.value);
+        setPositionsToCover(parseInt(e.target.value));
         break;
       case "startDate":
         setStartDate(e.target.value);
@@ -107,13 +105,13 @@ const AddJobPosition = () => {
         setEndDate(e.target.value);
         break;
       case "careerId":
-        setCareerId(e.target.value);
+        setCareerId(parseInt(e.target.value));
         break;
       case "workDay":
-        setWorkDay(e.target.value);
+        setWorkDay(parseInt(e.target.value));
         break;
       case "frameworkAgreement":
-        setFrameworkAgreement(e.target.value);
+        setFrameworkAgreement(e.target.checked);
         break;
       default:
         break;
@@ -170,7 +168,7 @@ const AddJobPosition = () => {
                 type="text"
                 name="endDate"
                 id="endDate"
-                value={startDate}
+                value={endDate}
                 placeholder="Fecha de fin"
                 onChange={inputHandler}
               />
@@ -192,7 +190,7 @@ const AddJobPosition = () => {
               select={careerId}
               onChange={inputHandler}
             >
-              <option value="Elija una carrera">Carrera</option>
+              <option value={null}>Carrera</option>
               {careers.map((career) => {
                 return <option key={career.id} value={career.id}>{career.name}</option>
               })}
@@ -232,7 +230,7 @@ const AddJobPosition = () => {
           {jobType === 0 && (
             <div className="form-field d-flex align-items-center justify-content-start" style={{ margin: '0 0 15px 0'}}>
               <label htmlFor="frameworkAgreement">¿Tiene un convenio marco firmado por la UTN?</label>
-              <input type="checkbox" name="frameworkAgreement" id="frameworkAgreement" value={frameworkAgreement} />
+              <input type="checkbox" name="frameworkAgreement" id="frameworkAgreement" value={frameworkAgreement} onChange={inputHandler} />
             </div>
           )}
           <button onClick={createJobPosition} className="button mt-3">
