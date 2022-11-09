@@ -1,5 +1,4 @@
 .main {
-<<<<<<< HEAD
     height: calc(100vh - 56px);
     display: flex;
     justify-content: center;
@@ -15,28 +14,6 @@
     height: 70%;
     background-color: white;
     margin-top: 50px;
-=======
-  height: calc(100vh - 56px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.main-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 65%;
-  height: 65%;
-  background-color: white;
-  padding: 20px;
-}
-
-.divJobPositions{
-  margin-top: -5%;
-  background-color: lightgray;
-  height: calc(90vh - 15px);
->>>>>>> master
 }
 
 .search {
@@ -47,7 +24,6 @@
 }
 
 .job-positions {
-<<<<<<< HEAD
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -123,30 +99,6 @@
 
 .search-filter:focus {
     outline: none;
-=======
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-  padding: 20px 0;
-}
-
-.list {
-  padding: 0px 10px 0 0;
-  width: 45%;
-  overflow-y: auto;
-}
-
-.details {
-  width: 53.5%;
-}
-
-.search-filter {
-  width: 50%;
-  padding: 0 10px;
-  text-align: left;
-  margin: 0 10px;
->>>>>>> master
 }
 
 .apply-button {
@@ -161,7 +113,6 @@
   opacity: 0.95;
 }
 
-<<<<<<< HEAD
 .list-item {
     border-left: 1px solid #ccc;
     border-radius: 0;
@@ -244,12 +195,3 @@
 .icon-container:hover .tooltiptext {
     visibility: visible;
 }
-=======
-.card {
-  margin: 5px 0;
-}
-
-.card:hover {
-  cursor: pointer;
-}
->>>>>>> master

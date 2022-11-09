@@ -48,7 +48,6 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
         .then((r) => r.json())
         .then((r) => {
           if (r.success) {
-<<<<<<< HEAD
             window.sessionStorage.setItem('jwt', r.token);
             window.sessionStorage.setItem('role', r.roles[0]);
             window.sessionStorage.setItem('active', r.activeAccount);
@@ -71,18 +70,6 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
               } else {
                 navigate('/adminDashboard');
               }
-=======
-            window.sessionStorage.setItem("jwt", r.token);
-            window.sessionStorage.setItem("role", r.roles[0]);
-            setJwt(r.token);
-            setRole(r.roles[0]);
-            if (r.roles[0] === "Student") {
-              navigate("/ofertas");
-            } else if (r.roles[0] === "Company") {
-              navigate("/ofertasEmpresa");
-            } else {
-              navigate("/adminDashboard");
->>>>>>> master
             }
           } else {
             window.sessionStorage.removeItem("jwt");
