@@ -200,7 +200,7 @@ const CompanyProfile = () => {
                 <div className="row">
                   <div className="col-md-12">
                     <form className="formCompanyData">
-                      <div className="row row-cols-2">
+                      <div className="row row-cols-3">
                         <div className="col">
                           <label>Razon Social</label>
                           <div>
@@ -226,7 +226,7 @@ const CompanyProfile = () => {
                             />
                           </div>
                         </div>
-                        <div className="col mt-4">
+                        <div className="col">
                           <label>CUIT</label>
                           <div>
                             <input
@@ -386,7 +386,7 @@ const CompanyProfile = () => {
           </div>
         </div>
       </div>
-      <footer className="footerStudent">
+      <footer className="footerCompany">
         <div id="divFooter" className="container">
           <div id="divLeftRight" className="row justify-content-center">
             <div id="divLeft" className="col-4">

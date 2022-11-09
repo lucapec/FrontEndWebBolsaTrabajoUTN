@@ -6,6 +6,7 @@ import { Modal, Button } from 'react-bootstrap';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { ToastContainer, toast } from "react-toastify";
+import utnLogo from "../../assets/logo-utn.png";
 
 const JobPositions = () => {
   const { jwt } = useContext(UserContext);
@@ -92,7 +93,7 @@ const JobPositions = () => {
 
 
   return (
-    <>
+    <div className='divJobPositions'>
       <Modal
         onHide={() => setModalShow(false)}
         show={modalShow}
@@ -138,7 +139,7 @@ const JobPositions = () => {
               })}
             </ul>
             <div className="details">
-              <Card key={selectedJobPosition && selectedJobPosition.id} variant="outlined">
+              <Card className='card' key={selectedJobPosition && selectedJobPosition.id} variant="outlined">
                 <CardContent>
                   <Typography variant="body" component="div" style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <h2>{selectedJobPosition && selectedJobPosition.jobTitle}</h2>
@@ -159,7 +160,29 @@ const JobPositions = () => {
           </div>
         </div>
       </div>
-    </>
+      <footer className="footerStudentUniversity">
+        <div id="divFooter" className="container">
+          <div id="divLeftRight" className="row justify-content-center">
+            <div id="divLeft" className="col-4">
+              <figure>
+                <img src={utnLogo} alt="UTN Logo" className="logo" />
+              </figure>
+            </div>
+            <div id="divRight" className="col-4">
+              <div className="divUniversity">
+                <p>FACULTAD REGIONAL ROSARIO</p>
+              </div>
+              <div className="divContact">
+                <p> Localidad: Zeballos 1341 - Rosario</p>
+              </div>
+              <div className="divPhone">
+                <p>Telefono: 0341-4481871</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   )
 }
 

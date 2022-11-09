@@ -11,13 +11,24 @@
 }
 
 .divFormUniversity {
+  margin-top: -1%;
   background-color: lightgray;
-  
+  height: calc(90vh - 50px);
 }
 
 header {
   background-color: lightgray;
-  height: 0vh;
+  height: 1vh;
+}
+
+.footerStudentUniversity{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 15vh;
+  text-align: center;
+  background-color: rgb(111, 133, 205);
+  line-height: 1%;
 }
 
 #btn {

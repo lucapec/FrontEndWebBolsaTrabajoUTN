@@ -1,5 +1,5 @@
 .formCompanyData {
-  margin-top: -6%;
+  margin-top: -8%;
 }
 
 .row {
@@ -13,7 +13,7 @@ header {
 
 .divFormCompanyData {
   background-color: lightgray;
-  height: calc(110vh - 60px);
+  height: calc(85vh - 50px);
 }
 
 .button-enterprise {

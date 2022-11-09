@@ -196,7 +196,7 @@ const CompanyJobPositions = () => {
           </div>
         </div>
       </div>
-      <footer className="footerStudent">
+      <footer className="footerStudentUniversity">
         <div id="divFooter" className="container">
           <div id="divLeftRight" className="row justify-content-center">
             <div id="divLeft" className="col-4">
