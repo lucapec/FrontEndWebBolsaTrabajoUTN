@@ -1,13 +1,65 @@
-.footerCompanyHome {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 15vh;
-  text-align: center;
-  background-color: #719FED;
-  line-height: 1%;
+.wrapper-addJobPosition {
+  min-height: 50% !important;
+  height: 70%;
+  width: 35%;
+  background-color: white;
+  margin-top: 40px;
 }
 
-#buttonJob{
-  margin-top: -4%;
+.wrapper-addJobPosition > h3 {
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+.wrapper-addJobPosition > form {
+  width: 80%;
+}
+
+.wrapper-addJobPosition > form > .form-field {
+  width: 100%;
+  margin: 15px 0;
+}
+
+.wrapper-addJobPosition > form > .form-field > input {
+  background-color: rgba(204, 204, 204, 0.411);
+  margin: 0 5px;
+}
+
+.wrapper-addJobPosition > form > .form-field > input[type="checkbox"] {
+  width: auto;
+}
+
+.wrapper-addJobPosition > form > .form-field > select {
+  width: 50%;
+  height: 35px;
+  margin: 0 5px;
+}
+
+.wrapper-addJobPosition > form > .form-field > label {
+  margin: 0 5px;
+}
+
+.wrapper-addJobPosition > form > .form-field > textarea {
+  background-color: rgba(204, 204, 204, 0.411);
+  width: 100%;
+  margin: 0 5px;
+  padding: 5px;
+  height: 100px;
+  border: none;
+}
+
+.wrapper-addJobPosition > form > .form-field > .form-check {
+  width: 100%;
+  margin: 0 5px;
+  padding: 0;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.wrapper-addJobPosition > form > .form-field > * {
+  font-size: 14px;
+}
+
+.wrapper-addJobPosition > form > button {
+  border: none;
 }

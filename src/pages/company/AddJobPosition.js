@@ -1,77 +1,119 @@
-import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
-
-import DependencyRelationshipForm from "./addJobPosition/DependencyRelationshipForm";
-import InternshipForm from "./addJobPosition/InternshipForm";
-import ModalInternshipForm from "./addJobPosition/ModalInternshipForm";
-
-import utnLogo from "../../assets/logo-utn.png";
-
+import { useState, useEffect, useContext } from "react";
+import "../../components/forms/Forms.css";
 import "./AddJobPosition.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import utnLogo from "../../assets/logo-utn.png";
+import UserContext from "../../context/UserContext";
 
 const AddJobPosition = () => {
-  const [emailReceiver, setEmailReceiver] = useState("");
-  const [receptionPeriodFrom, setReceptionPeriodFrom] = useState("");
-  const [receptionPeriodUntil, setReceptionPeriodUntil] = useState("");
-  const [positionsToFill, setPositionsToFill] = useState("");
-  const [typeSearch, setTypeSearch] = useState("");
+  const { jwt } = useContext(UserContext);
+  const [careers, setCareers] = useState([]);
+  const [jobTitle, setJobTitle] = useState("");
+  const [jobDescription, setJobDescription] = useState("");
+  const [location, setLocation] = useState("");
+  const [positionsToCover, setPositionsToCover] = useState(null);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [careerId, setCareerId] = useState(null);
+  const [workDay, setWorkDay] = useState(0);
+  const [jobType, setJobType] = useState(0);
+  const [frameworkAgreement, setFrameworkAgreement] = useState(null);
 
-  const errorsList = () => {
-    const errorsList = [];
-    if (
-      !String(emailReceiver)
-        .toLowerCase()
-        .match(
-          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        )
-    ) {
-      errorsList.push({ message: "Ingrese un email válido" });
-    }
-    if (
-      !(
-        receptionPeriodFrom &&
-        receptionPeriodUntil &&
-        positionsToFill &&
-        typeSearch
-      )
-    ) {
-      errorsList.push({ message: "Los campos son oligatorios" });
-    }
-    return errorsList;
-  };
-
-  const dataValidation = (e) => {
-    e.preventDefault();
-    const errors = errorsList();
-    if (errors.length !== 0) {
-      errors.forEach((error) => {
-        toast(error.message, {
-          autoClose: 3000,
-          hideProgressBar: false,
-          type: "error",
-          theme: "dark",
-          position: toast.POSITION.TOP_LEFT,
-        });
+  useEffect(() => {
+    fetch("https://localhost:7172/api/Careers/", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${jwt}`
+      },
+    })
+      .then((r) => r.json())
+      .then((res) => {
+        console.log(res);
+        setCareers(res);
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    }
+  }, [jwt]);
+
+  const createJobPosition = (e) => {
+    e.preventDefault();
+    fetch("https://localhost:7172/api/JobPosition/AddJobPosition", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({
+        jobTitle,
+        jobDescription,
+        location: location,
+        careerId,
+        positionsToCover,
+        frameworkAgreement,
+        startDate,
+        endDate,
+        jobType,
+        workDay,
+      }),
+    })
+      .then((r) => r.json())
+      .then((res) => {
+        if (res.success) {
+          toast(res.message, {
+            autoClose: 3000,
+            hideProgressBar: false,
+            type: "success",
+            theme: "dark",
+            position: toast.POSITION.TOP_LEFT,
+          });
+        } else {
+          toast(res.message, {
+            autoClose: 3000,
+            hideProgressBar: false,
+            type: "warning",
+            theme: "dark",
+            position: toast.POSITION.TOP_LEFT,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const inputHandler = (e) => {
     switch (e.target.id) {
-      case "emailReceiver":
-        setEmailReceiver(e.target.value);
+      case "jobType":
+        console.log(e.target.value);
+        console.log(e.target.id);
+        setJobType(parseInt(e.target.value));
         break;
-      case "receptionPeriodFrom":
-        setReceptionPeriodFrom(e.target.value);
+      case "jobTitle":
+        setJobTitle(e.target.value);
         break;
-      case "receptionPeriodUntil":
-        setReceptionPeriodUntil(e.target.value);
+      case "jobDescription":
+        setJobDescription(e.target.value);
         break;
-      case "positionsToFill":
-        setPositionsToFill(e.target.value);
+      case "location":
+        setLocation(e.target.value);
         break;
-      case "typeSearch":
-        setTypeSearch(e.target.value);
+      case "positionsToCover":
+        setPositionsToCover(e.target.value);
+        break;
+      case "startDate":
+        setStartDate(e.target.value);
+        break;
+      case "endDate":
+        setEndDate(e.target.value);
+        break;
+      case "careerId":
+        setCareerId(e.target.value);
+        break;
+      case "workDay":
+        setWorkDay(e.target.value);
+        break;
+      case "frameworkAgreement":
+        setFrameworkAgreement(e.target.value);
         break;
       default:
         break;
@@ -79,114 +121,126 @@ const AddJobPosition = () => {
   };
 
   return (
-    <div className="divFormUniversity">
-      <header></header>
+    <div className="container-fluid main">
       <ToastContainer className="mt-5" />
-      <div className="form">
-        <form className="pb-3 mt-3">
-          <div className="title">
-            <h2>Complete los datos de la oferta</h2>
+      <div id="wrapper" className="wrapper wrapper-addJobPosition">
+        <h3>Crear oferta laboral</h3>
+        <form>
+          <div className="form-field d-flex flex-column align-items-center justify-content-center">
+            <label htmlFor="jobType" className="my-1">Tipo de contrato</label>
+            <select
+              id="jobType"
+              name="jobType"
+              select={jobType}
+              onChange={inputHandler}
+            >
+              <option id={0} value={0}>Pasantía</option>
+              <option id={1} value={1}>Relación de Dependencia</option>
+            </select>
           </div>
-          <div className=" container " id="primary">
-            <div className="row row-cols-3">
-              <div className=" col form-field align-items-center">
-                <label>E-mail receptor de los CVs</label>
-                <br />
-                <input
-                  type="email"
-                  name="emailReceiver"
-                  id="emailReceiver"
-                  className="form-control-sm"
-                  value={emailReceiver}
-                  placeholder="E-mail receptor de CVs"
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className=" col form-field align-items-center">
-                <label>Periodo recepcion de CVs desde:</label>
-                <br />
-                <input
-                  type="date"
-                  name="receptionPeriodFrom"
-                  id="receptionPeriodFrom"
-                  className="form-control-sm"
-                  value={receptionPeriodFrom}
-                  placeholder="Periodo desde"
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className=" col form-field align-items-center">
-                <label>Periodo recepcion de CVs hasta:</label>
-                <br />
-                <input
-                  type="date"
-                  name="receptionPeriodUntil"
-                  id="receptionPeriodUntil"
-                  className="form-control-sm"
-                  value={receptionPeriodUntil}
-                  placeholder="Periodo hasta"
-                  onChange={inputHandler}
-                />
-              </div>
-            </div>
+          <div className="form-field d-flex align-items-center justify-content-center">
+            <input
+              type="text"
+              name="jobTitle"
+              id="jobTitle"
+              value={jobTitle}
+              placeholder="Título del puesto"
+              onChange={inputHandler}
+            />
+            <input
+              type="text"
+              name="location"
+              id="location"
+              value={location}
+              placeholder="Lugar de trabajo"
+              onChange={inputHandler}
+            />
           </div>
-          <div className=" container " id="primary">
-            <div className="row row-cols-3">
-              <div className=" col form-field align-items-center">
-                <label>Cantidad de Puestos a cubrir</label>
-                <br />
-                <input
-                  type="number"
-                  name="positionsToFill"
-                  id="positionsToFill"
-                  className="form-control-sm"
-                  value={positionsToFill}
-                  placeholder="Puestos a cubrir"
-                  onChange={inputHandler}
-                />
-              </div>
-              <div className=" col form-field align-items-center">
-                <label>Tipo de Busqueda</label>
-                <br />
-                <select
-                  id="typeSearch"
-                  name="typeSearch"
-                  className="form-control-sm"
-                  value={typeSearch}
-                  onChange={inputHandler}
-                >
-                  <option value="predeterminado">Predeterminado</option>
-                  <option value="pasantia">Pasantia</option>
-                  <option value="relacionDependencia">
-                    En relacion de dependencia
-                  </option>
-                </select>
-              </div>
-            </div>
+          <div className="form-field d-flex align-items-center justify-content-center">
+            <input
+              type="text"
+              name="startDate"
+              id="startDate"
+              value={startDate}
+              placeholder="Fecha de inicio"
+              onChange={inputHandler}
+            />
+            {jobType === 0 ? (
+              <input
+                type="text"
+                name="endDate"
+                id="endDate"
+                value={startDate}
+                placeholder="Fecha de fin"
+                onChange={inputHandler}
+              />
+            ) : (
+              <input
+                type="number"
+                name="positionsToCover"
+                id="positionsToCover"
+                value={positionsToCover}
+                placeholder="Posiciones a cubrir"
+                onChange={inputHandler}
+              />
+            )}
           </div>
-          <div className="container">
-            <div className="col-md-12 text-center" id="buttonJob">
-              <a
-                onClick={dataValidation}
-                className="btn"
-                data-bs-toggle="modal"
-                href="#exampleModalToggle"
-                role="button"
+          <div className="form-field d-flex align-items-center justify-content-center">
+            <select
+              id="careerId"
+              name="careerId"
+              select={careerId}
+              onChange={inputHandler}
+            >
+              <option value="Elija una carrera">Carrera</option>
+              {careers.map((career) => {
+                return <option key={career.id} value={career.id}>{career.name}</option>
+              })}
+            </select>
+            {jobType === 0 ? (
+              <input
+                type="number"
+                name="positionsToCover"
+                id="positionsToCover"
+                value={positionsToCover}
+                placeholder="Posiciones a cubrir"
+                onChange={inputHandler}
+              />
+            ) : (
+              <select
+                id="workDay"
+                name="workDay"
+                select={workDay}
+                onChange={inputHandler}
               >
-                Crear ofertas
-              </a>
-            </div>
+                <option value="Elija una carrera">Jornada laboral</option>
+                <option value={0}>Tiempo completo</option>
+                <option value={1}>Tiempo parcial</option>
+              </select>
+            )}
           </div>
+          <div className="form-field frameworkAgreement">
+            <textarea
+              type="text"
+              name="jobDescription"
+              id="jobDescription"
+              value={jobDescription}
+              placeholder="Descripción del puesto"
+              onChange={inputHandler}
+            />
+          </div>
+          {jobType === 0 && (
+            <div className="form-field d-flex align-items-center justify-content-start" style={{ margin: '0 0 15px 0'}}>
+              <label htmlFor="frameworkAgreement">¿Tiene un convenio marco firmado por la UTN?</label>
+              <input type="checkbox" name="frameworkAgreement" id="frameworkAgreement" value={frameworkAgreement} />
+            </div>
+          )}
+          <button onClick={createJobPosition} className="button mt-3">
+            Agregar
+          </button>
         </form>
       </div>
-      {errorsList().length === 0 ? (
-        <div>
-          <InternshipForm /> <DependencyRelationshipForm />
-        </div>
-      ) : (
-        <ModalInternshipForm />
-      )}
-      <footer className="footerCompanyHome">
+      <footer className="footerCompany">
         <div id="divFooter" className="container">
           <div id="divLeftRight" className="row justify-content-center">
             <div id="divLeft" className="col-4">

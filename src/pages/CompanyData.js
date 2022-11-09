@@ -9,6 +9,7 @@ const CompanyData = () => {
   const [successfulCharge, setSuccessfulCharge] = useState(false);
   const {jwt} = useContext(UserContext);
 
+  console.log(successfulCharge);
 
   const UpdateData= (datos) =>{
     const _datos = {...data, ...datos}
