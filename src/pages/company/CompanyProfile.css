@@ -11,14 +11,22 @@
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
+.colmd12 {
+  margin-top: 0!important;
+}
+
 .footerCompany {
   position: absolute;
-  margin-top: 3%;
   width: 100%;
   height: 15vh;
+  top: 85vh;
   text-align: center;
   background-color: #719FED;
   line-height: 1%;
+}
+
+.containProfile {
+  margin-top: -20px!important;
 }
 
 header {
@@ -27,9 +35,8 @@ header {
 }
 
 .divFormProfileCompany {
-  margin-top: -2%;
   background-color: lightgray;
-  height: calc(110vh - 55px);
+  height: calc(100vh - 56px);
 }
 
 #row {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -11,13 +11,15 @@ import CompanyData from "./pages/CompanyData";
 import CompanyProfile from "./pages/company/CompanyProfile";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import ReplaceRoute from "./hooks/ReplaceRoute";
-import {UserContextProvider} from "./context/UserContext";
-
+import { UserContextProvider } from "./context/UserContext";
+import utnLogo from "./assets/logo-utn.png";
 import "./App.css";
 
 
 
 const App = () => {
+  const location = useLocation();
+  console.log();
   return (
     <>
       <UserContextProvider>
@@ -33,8 +35,33 @@ const App = () => {
           <Route path="/perfilEmpresa" element={<CompanyProfile />}></Route>
           <Route path="/adminDashboard" element={<AdminDashboard />}></Route>
           <Route path="*" element={<ReplaceRoute />}></Route>
-
         </Routes>
+        {location.pathname === '/ingreso' || location.pathname === '/registro' || location.pathname === '/adminDashboard' ? (
+          null
+        ) : (
+          <footer className="footerCompany">
+            <div id="divFooter" className="container">
+              <div id="divLeftRight" className="row justify-content-center">
+                <div id="divLeft" className="col-4">
+                  <figure>
+                    <img src={utnLogo} alt="UTN Logo" className="logo" />
+                  </figure>
+                </div>
+                <div id="divRight" className="col-4">
+                  <div className="divUniversity">
+                    <p>FACULTAD REGIONAL ROSARIO</p>
+                  </div>
+                  <div className="divContact">
+                    <p> Localidad: Zeballos 1341 - Rosario</p>
+                  </div>
+                  <div className="divPhone">
+                    <p>Telefono: 0341-4481871</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </footer>
+        )}
       </UserContextProvider>
     </>
   );

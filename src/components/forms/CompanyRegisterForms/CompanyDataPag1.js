@@ -1,8 +1,5 @@
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-
-import utnLogo from "../../../assets/logo-utn.png";
-
 import "./CompanyData.css";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -76,7 +73,7 @@ const CompanyDataPag1 = ({ setBoolPage2, UpdateData }) => {
       <div className="container">
         <ToastContainer className="mt-5" />
         <div className="row">
-          <div className="col-md-11">
+          <div className="col-md-12">
             <div className="card">
               <div className="card-body">
                 <div className="row">
@@ -179,28 +176,6 @@ const CompanyDataPag1 = ({ setBoolPage2, UpdateData }) => {
           </div>
         </div>
       </div>
-      <footer className="footerStudentUniversity">
-        <div id="divFooter" className="container">
-          <div id="divLeftRight" className="row justify-content-center">
-            <div id="divLeft" className="col-4">
-              <figure>
-                <img src={utnLogo} alt="UTN Logo" className="logo" />
-              </figure>
-            </div>
-            <div id="divRight" className="col-4">
-              <div className="divUniversity">
-                <p>FACULTAD REGIONAL ROSARIO</p>
-              </div>
-              <div className="divContact">
-                <p> Localidad: Zeballos 1341 - Rosario</p>
-              </div>
-              <div className="divPhone">
-                <p>Telefono: 0341-4481871</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

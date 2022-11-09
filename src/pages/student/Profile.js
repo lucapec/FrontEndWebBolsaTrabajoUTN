@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UserContext from "../../context/UserContext";
-import utnLogo from "../../assets/logo-utn.png";
-
 import "./Profile.css";
 
 const Profile = () => {
@@ -257,14 +255,14 @@ const Profile = () => {
     <div className="divFormProfile">
       <header></header>
       <ToastContainer className="mt-5" />
-      <div className="container">
+      <div className="container containProfile2">
         <div className="row">
-          <div className="col-md-11">
+          <div className="col-md-12 nomargin">
             <div className="card">
               <div className="card-body">
                 <div className="row">
                   <div className="col-md-13">
-                    <h3>Editar Perfil</h3>
+                    <h3 className="editarPerfilTitle">Editar Perfil</h3>
                     <hr />
                   </div>
                 </div>
@@ -633,28 +631,6 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <footer className="footerStudentProfile">
-        <div id="divFooter" className="container">
-          <div id="divLeftRight" className="row justify-content-center">
-            <div id="divLeft" className="col-4">
-              <figure>
-                <img src={utnLogo} alt="UTN Logo" className="logo" />
-              </figure>
-            </div>
-            <div id="divRight" className="col-4">
-              <div className="divUniversity">
-                <p>FACULTAD REGIONAL ROSARIO</p>
-              </div>
-              <div className="divContact">
-                <p> Localidad: Zeballos 1341 - Rosario</p>
-              </div>
-              <div className="divPhone">
-                <p>Telefono: 0341-4481871</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
