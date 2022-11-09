@@ -113,7 +113,7 @@ const JobPositions = () => {
 
 
   return (
-    <>
+    <div className='divJobPositions'>
       <Modal
         onHide={() => setModalShow(false)}
         show={modalShow}
@@ -261,7 +261,29 @@ const JobPositions = () => {
           </div>
         </footer>
       </div>
-    </>
+      <footer className="footerStudentUniversity">
+        <div id="divFooter" className="container">
+          <div id="divLeftRight" className="row justify-content-center">
+            <div id="divLeft" className="col-4">
+              <figure>
+                <img src={utnLogo} alt="UTN Logo" className="logo" />
+              </figure>
+            </div>
+            <div id="divRight" className="col-4">
+              <div className="divUniversity">
+                <p>FACULTAD REGIONAL ROSARIO</p>
+              </div>
+              <div className="divContact">
+                <p> Localidad: Zeballos 1341 - Rosario</p>
+              </div>
+              <div className="divPhone">
+                <p>Telefono: 0341-4481871</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   )
 }
 

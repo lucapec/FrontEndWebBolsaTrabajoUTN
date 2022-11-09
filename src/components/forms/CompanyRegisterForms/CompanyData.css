@@ -1,12 +1,19 @@
-.form {
-  background-color: lightgray;
-  text-align: center;
-  padding-top: 5%;
-  height: 103vh;
+.formCompanyData {
+  margin-top: -8%;
 }
 
 .row {
   margin: 2%;
+}
+
+header {
+  background-color: lightgray;
+  height: 1vh;
+}
+
+.divFormCompanyData {
+  background-color: lightgray;
+  height: calc(85vh - 50px);
 }
 
 .button-enterprise {
@@ -41,5 +48,5 @@ p {
 }
 
 .divInput {
-  margin-right: 4.5%
+  margin-right: 4.5%;
 }

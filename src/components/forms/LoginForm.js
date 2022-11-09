@@ -27,7 +27,7 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
     if (passwordRegExp.test(password)) {
       errorsList.push({
         message:
-          "La contraseña debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula y 1 número",
+          "La contraseña debe contener al menos 8 caracteres, 1 mayúscula, 1 minúscula, 1 número y 1 caracter especial",
       });
     }
     return errorsList;
@@ -37,8 +37,8 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
     e.preventDefault();
     const errors = errorsList();
     if (errors.length === 0) {
-      fetch('https://localhost:7172/api/Authentication/Authenticate', {
-        method: 'POST',
+      fetch("https://localhost:7172/api/Authentication/Authenticate", {
+        method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({
           email: email,
@@ -48,6 +48,7 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
         .then((r) => r.json())
         .then((r) => {
           if (r.success) {
+<<<<<<< HEAD
             window.sessionStorage.setItem('jwt', r.token);
             window.sessionStorage.setItem('role', r.roles[0]);
             window.sessionStorage.setItem('active', r.activeAccount);
@@ -70,10 +71,22 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
               } else {
                 navigate('/adminDashboard');
               }
+=======
+            window.sessionStorage.setItem("jwt", r.token);
+            window.sessionStorage.setItem("role", r.roles[0]);
+            setJwt(r.token);
+            setRole(r.roles[0]);
+            if (r.roles[0] === "Student") {
+              navigate("/ofertas");
+            } else if (r.roles[0] === "Company") {
+              navigate("/ofertasEmpresa");
+            } else {
+              navigate("/adminDashboard");
+>>>>>>> master
             }
           } else {
-            window.sessionStorage.removeItem('jwt');
-            window.sessionStorage.removeItem('role');
+            window.sessionStorage.removeItem("jwt");
+            window.sessionStorage.removeItem("role");
             toast(r.message, {
               autoClose: 3000,
               hideProgressBar: false,
@@ -84,8 +97,8 @@ const LoginForm = ({ h1Text, btnText, linkToText, linkTo, left }) => {
           }
         })
         .catch((err) => {
-          window.sessionStorage.removeItem('jwt');
-          window.sessionStorage.removeItem('role');
+          window.sessionStorage.removeItem("jwt");
+          window.sessionStorage.removeItem("role");
           console.log(err);
         });
     } else {

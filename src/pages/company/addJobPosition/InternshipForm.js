@@ -2,7 +2,6 @@ import { useState, useContext } from "react";
 import { toast } from "react-toastify";
 import UserContext from "../../../context/UserContext";
 
-
 import "./InternshipForm.css";
 
 const InternshipForm = () => {
@@ -13,7 +12,6 @@ const InternshipForm = () => {
   const [descriptionInternship, setDescriptionInternship] = useState("");
   const [titleInternship, setTitleInternship] = useState("");
   const [locationInternship, setLocationInternship] = useState("");
-
 
   const errorsList = () => {
     const errorsList = [];
@@ -40,24 +38,24 @@ const InternshipForm = () => {
         method: "POST",
         headers: {
           "Content-type": "application/json",
-        Authorization: `Bearer ${jwt}`
-      },
+          Authorization: `Bearer ${jwt}`,
+        },
         body: JSON.stringify({
           jobTitle: titleInternship,
           jobDescription: descriptionInternship,
           location: locationInternship,
-      }),
-    })
-      .then((res) => {
-        toast("La oferta ha sido creada exitosamente", {
-          autoClose: 3000,
-          hideProgressBar: false,
-          type: "success",
-          theme: "dark",
-          position: toast.POSITION.TOP_LEFT,
+        }),
       })
-      })
-      .catch((error) => console.log(error))
+        .then((res) => {
+          toast("La oferta ha sido creada exitosamente", {
+            autoClose: 3000,
+            hideProgressBar: false,
+            type: "success",
+            theme: "dark",
+            position: toast.POSITION.TOP_LEFT,
+          });
+        })
+        .catch((error) => console.log(error));
     } else {
       errors.forEach((error) => {
         toast(error.message, {
@@ -158,7 +156,7 @@ const InternshipForm = () => {
                     <div className=" col form-field align-items-center">
                       <label>Fecha Tentativa de Inicio</label>
                       <br />
-                      <textarea
+                      <input
                         type="date"
                         name="tentativeStartDate"
                         id="tentativeStartDate"
@@ -173,7 +171,7 @@ const InternshipForm = () => {
                 <div className=" container " id="primary">
                   <div className="row row-cols-2" id="rowInternship">
                     <div className=" col form-field align-items-center">
-                      <label>Duracion de la Pasantia</label>
+                      <label>Duracion de Pasantia</label>
                       <br />
                       <input
                         type="text"
@@ -187,9 +185,9 @@ const InternshipForm = () => {
                     </div>
                     <div className="col form-field align-items-center">
                       <label>Nombre del Puesto</label>
-                      <br/>
-                      <textarea
-                        type="textarea"
+                      <br />
+                      <input
+                        type="text"
                         name="titleInternship"
                         id="titleInternship"
                         className="form-control-sm"
@@ -198,9 +196,13 @@ const InternshipForm = () => {
                         onChange={inputHandler}
                       />
                     </div>
+                  </div>
+                </div>
+                <div className=" container " id="primary">
+                  <div className="row row-cols-2" id="rowInternship">
                     <div className="col form-field align-items-center">
-                      <label>Lugar de Traabajo</label>
-                      <br/>
+                      <label>Lugar de Trabajo</label>
+                      <br />
                       <input
                         type="textarea"
                         name="locationInternship"
@@ -220,7 +222,6 @@ const InternshipForm = () => {
                         id="descriptionInternship"
                         className="form-control-sm"
                         value={descriptionInternship}
-                        placeholder="Descripción"
                         onChange={inputHandler}
                       />
                     </div>

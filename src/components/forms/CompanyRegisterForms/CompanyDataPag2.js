@@ -2,8 +2,10 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
+import utnLogo from "../../../assets/logo-utn.png";
+
 import "react-toastify/dist/ReactToastify.css";
-import "./CompanyData.css";
+import "./CompanyDataPag2.css";
 
 const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
   const [name, setName] = useState("");
@@ -29,7 +31,7 @@ const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
       case "position":
         setPosition(e.target.value);
         break;
-      case "telephone":
+      case "telephoneNumber":
         setTelephoneNumber(e.target.value);
         break;
       case "relWithCompany":
@@ -50,7 +52,8 @@ const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
     FirstChargeData: true,
   };
 
-  const submitHandler = () => {
+  const submitHandler = (e) => {
+    e.preventDefault();
     if (name && lastname && position && telephoneNumber && relWithCompany) {
       if (
         email
@@ -103,97 +106,142 @@ const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
   };
 
   return (
-    <>
-      <ToastContainer className="mt-5" />
-      <div className="form">
-        <div className="header">
-          <h2>Complete los datos de contacto</h2>
-        </div>
+    <div className="divFormCompanyDataPag2">
+      <header></header>
+      <div className="container">
+        <ToastContainer className="mt-5" />
         <div className="row">
-          <div className="col">
-            <label>Nombres</label>
-            <br />
-            <input
-              className="form-control-sm"
-              type="text"
-              id="name"
-              onChange={inputHandler}
-              value={name}
-            />
-          </div>
-          <div className="col">
-            <label>Apellido</label>
-            <br />
-            <input
-              className="form-control-sm"
-              type="text"
-              id="lastname"
-              onChange={inputHandler}
-              value={lastname}
-            />
+          <div className="col-md-11">
+            <div className="card">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-13">
+                    <h3>Complete los datos de contacto</h3>
+                    <hr />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-12">
+                    <form className="formCompanyData">
+                      <div class="row row-cols-3">
+                        <div className="col">
+                          <label>Nombres del Contacto</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="text"
+                              id="name"
+                              onChange={inputHandler}
+                              value={name}
+                            />
+                          </div>
+                        </div>
+                        <div className="col">
+                          <label>Apellido del Contacto</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="text"
+                              id="lastname"
+                              onChange={inputHandler}
+                              value={lastname}
+                            />
+                          </div>
+                        </div>
+                        <div className="col">
+                          <label>Email de Contacto</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="email"
+                              id="email"
+                              onChange={inputHandler}
+                              value={email}
+                            />
+                          </div>
+                        </div>
+                        <div className="col mt-4">
+                          <label>Puesto / Cargo del Contacto</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="text"
+                              id="position"
+                              onChange={inputHandler}
+                              value={position}
+                            />
+                          </div>
+                        </div>
+                        <div className="col mt-4">
+                          <label>Telefono del Contacto</label>
+                          <div>
+                            <input
+                              className="form-control here"
+                              type="number"
+                              placeholder="Codigo de area + número"
+                              id="telephoneNumber"
+                              onChange={inputHandler}
+                              value={telephoneNumber}
+                            />
+                          </div>
+                        </div>
+                        <div className="col mt-4">
+                          <label>Relacion con la Empresa</label>
+                          <div>
+                            <select
+                              id="relWithCompany"
+                              className="form-control here"
+                              name="relWithCompany"
+                              value={relWithCompany}
+                              onChange={inputHandler}
+                            >
+                              <option value={"Seleccionar"}>Seleccionar</option>
+                              <option value={0}>Trabajo en la empresa</option>
+                              <option value={1}>
+                                Trabajo en una consultora
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                        <div className="col-12">
+                          <div className="mt-5">
+                            <button onClick={submitHandler} className="btn">
+                              Guardar e Ingresar
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div className="row">
-          <div className="col">
-            <label>Puesto / Cargo</label>
-            <br />
-            <input
-              className="form-control-sm"
-              type="text"
-              id="position"
-              onChange={inputHandler}
-              value={position}
-            />
-          </div>
-          <div className="col">
-            <label>Email</label>
-            <br />
-            <input
-              className="form-control-sm"
-              type="email"
-              id="email"
-              onChange={inputHandler}
-              value={email}
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <label>Telefono</label>
-            <br />
-            <input
-              className="form-control-sm"
-              type="number"
-              placeholder="código de area + número"
-              id="telephone"
-              onChange={inputHandler}
-              value={telephoneNumber}
-            />
-          </div>
-          <div className="col">
-            <label>Relacion del contacto con la empresa</label>
-            <form onChange={inputHandler}>
-              <select
-                id="relWithCompany"
-                className="form-control-sm"
-                name="relWithCompany"
-                value={relWithCompany}
-                onChange={inputHandler}
-              >
-                <option value={"Seleccionar"}>Seleccionar</option>
-                <option value={0}>Trabajo en la empresa</option>
-                <option value={1}>Trabajo en una consultora</option>
-              </select>
-            </form>
-          </div>
-        </div>
-
-        <button type="button" className="boton" onClick={submitHandler}>
-          Guardar
-        </button>
       </div>
-    </>
+      <footer className="footerStudentUniversity">
+        <div id="divFooter" className="container">
+          <div id="divLeftRight" className="row justify-content-center">
+            <div id="divLeft" className="col-4">
+              <figure>
+                <img src={utnLogo} alt="UTN Logo" className="logo" />
+              </figure>
+            </div>
+            <div id="divRight" className="col-4">
+              <div className="divUniversity">
+                <p>FACULTAD REGIONAL ROSARIO</p>
+              </div>
+              <div className="divContact">
+                <p> Localidad: Zeballos 1341 - Rosario</p>
+              </div>
+              <div className="divPhone">
+                <p>Telefono: 0341-4481871</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 };
 
