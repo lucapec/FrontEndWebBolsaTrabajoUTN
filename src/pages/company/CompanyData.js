@@ -6,8 +6,7 @@ import UserContext from "../../context/UserContext";
 const CompanyData = () => {
   const [data, setData] = useState({});
   const [boolPage2, setBoolPage2] = useState(false);
-  const [successfulCharge, setSuccessfulCharge] = useState(false);
-  const { jwt } = useContext(UserContext);
+  const {jwt} = useContext(UserContext);
 
   const UpdateData = (datos) => {
     const _datos = { ...data, ...datos };
@@ -35,10 +34,7 @@ const CompanyData = () => {
     </div>
   ) : (
     <div>
-      <CompanyDataPag2
-        UpdateData={UpdateData}
-        setSuccessfulCharge={setSuccessfulCharge}
-      />
+      <CompanyDataPag2 UpdateData={UpdateData} />
     </div>
   );
 };
