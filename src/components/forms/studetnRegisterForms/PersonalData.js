@@ -2,6 +2,7 @@ import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
 import utnLogo from "../../../assets/logo-utn.png";
+import CvComponent from "./CvComponent";
 
 import "./PersonalData.css";
 
@@ -16,12 +17,12 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
   const [street, setStreet] = useState("");
   const [numberStreet, setNumberStreet] = useState("");
   const [sex, setSex] = useState("");
-  const [fileCv, setFileCv] = useState("");
   const [country, setCountry] = useState("");
   const [province, setProvince] = useState("");
   const [location, setLocation] = useState("");
   const [personalPhone, setPersonalPhone] = useState("");
 
+ 
   const errorsList = () => {
     const errorsList = [];
     if (
@@ -45,7 +46,6 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
         street &&
         numberStreet &&
         sex &&
-        fileCv &&
         country &&
         province &&
         location &&
@@ -68,7 +68,6 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
     Address: street,
     AddressNum: numberStreet,
     Sex: sex,
-    Curriculum: fileCv,
     Country: country,
     Province: province,
     City: location,
@@ -125,9 +124,6 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
         break;
       case "sex":
         setSex(e.target.value);
-        break;
-      case "fileCv":
-        setFileCv(e.target.value);
         break;
       case "country":
         setCountry(e.target.value);
@@ -309,19 +305,7 @@ const PersonalData = ({ setboolUniversityData, UpdateData }) => {
                             />
                           </div>
                         </div>
-                        <div className="col mt-4">
-                          <label>Archivo CV</label>
-                          <div>
-                            <input
-                              type="file"
-                              name="fileCv"
-                              id="fileCv"
-                              className="form-control here"
-                              value={fileCv}
-                              onChange={inputHandler}
-                            />
-                          </div>
-                        </div>
+                        <CvComponent />
                         <div className="col mt-4">
                           <label>Pais</label>
                           <div>
