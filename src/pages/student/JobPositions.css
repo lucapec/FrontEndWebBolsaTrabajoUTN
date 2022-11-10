@@ -54,6 +54,14 @@
     padding: 20px;
 }
 
+.card-detail {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    padding-right: 15px;
+}
+
 .card-detail__title {
     display: flex;
 }
@@ -64,13 +72,22 @@
     color: #719FED;
 }
 
-.card-detail__body>.location {
-    display: flex;
-    align-items: center;
+.card-detail__body {
+    flex-grow: 1;
 }
 
-.card-detail__body>.location>p {
+.card-detail__body>.feature {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.card-detail__body>.feature>p {
     margin: 0;
+}
+
+.description {
+    margin-top: 15px;
 }
 
 .card-detail__body>div>span {

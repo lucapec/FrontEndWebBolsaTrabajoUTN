@@ -4,7 +4,7 @@ import "./JobPositions.css";
 import UserContext from "../../context/UserContext";
 import { toast, ToastContainer } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faLocationDot, faBriefcase, faBusinessTime, faCalendarDays, faPerson } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin, faGithubSquare } from '@fortawesome/free-brands-svg-icons';
 
 const JobPositions = () => {
@@ -213,11 +213,36 @@ const JobPositions = () => {
                     )}
                   </div>
                   <div className="card-detail__body">
-                    <div className="location">
-                      <span className="icon-location2"></span>
-                      <p>{selectedJobPosition && selectedJobPosition.location}</p>
+                    <div className="feature">
+                      <FontAwesomeIcon icon={faLocationDot} />
+                      <p className="mx-2">{selectedJobPosition && `Lugar de trabajo: ${selectedJobPosition.location}`}</p>
                     </div>
-                    <div className="type">
+                    <div className="feature">
+                      <FontAwesomeIcon icon={faBriefcase} />
+                      <p className="mx-2">{selectedJobPosition && selectedJobPosition.jobType === 0 ? "Tipo: Pasantía" : "Tipo: Relación de dependencia"}</p>
+                    </div>
+                    {selectedJobPosition && selectedJobPosition.jobType === 1 && (
+                      <div className="feature">
+                        <FontAwesomeIcon icon={faBusinessTime} />
+                        <p className="mx-2">{selectedJobPosition && selectedJobPosition.workDay === 0 ? "Jornada laboral: Tiempo completa" : "Jornada laboral: Tiempo parcial"}</p>
+                      </div>
+                    )}
+                    {selectedJobPosition && selectedJobPosition.jobType === 0 ? (
+                      <div className="feature">
+                        <FontAwesomeIcon icon={faCalendarDays} />
+                        <p className="mx-2">{selectedJobPosition && `Desde ${selectedJobPosition.startDate.substring(0, 10).split("-").reverse().join("-")} Hasta ${selectedJobPosition.endDate.substring(0, 10).split("-").reverse().join("-")}`}</p>
+                      </div>
+                    ) : (
+                      <div className="feature">
+                        <FontAwesomeIcon icon={faCalendarDays} />
+                        <p className="mx-2">{selectedJobPosition && `Fecha de inicio: ${selectedJobPosition.startDate.substring(0, 10).split("-").reverse().join("-")}`}</p>
+                      </div>
+                    )}
+                    <div className="feature">
+                        <FontAwesomeIcon icon={faPerson} />
+                        <p className="mx-2">{selectedJobPosition && `${selectedJobPosition.positionsToCover} puesto${selectedJobPosition.positionsToCover === 1 ? "" : "s"} disponible${selectedJobPosition.positionsToCover === 1 ? "" : "s"}`}</p>
+                      </div>
+                    <div className="description">
                       <p>{selectedJobPosition && selectedJobPosition.jobDescription}</p>
                     </div>
                   </div>
