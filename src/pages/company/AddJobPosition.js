@@ -13,13 +13,17 @@ const AddJobPosition = () => {
   const [jobDescription, setJobDescription] = useState("");
   const [location, setLocation] = useState("");
   const [positionsToCover, setPositionsToCover] = useState(null);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [startDate, setStartDate] = useState("0000-00-00");
+  const [endDate, setEndDate] = useState("0000-00-00");
   const [careerId, setCareerId] = useState(null);
-  const [workDay, setWorkDay] = useState(0);
-  const [jobType, setJobType] = useState(0);
+  const [workDay, setWorkDay] = useState(null);
+  const [jobType, setJobType] = useState(null);
   const [frameworkAgreement, setFrameworkAgreement] = useState(false);
   const [showModalDescription, setShowModalDescription] = useState(false);
+
+  const validation = () => {
+    return positionsToCover === null || startDate === "0000-00-00" || (endDate === "0000-00-00" && jobType === 0) || careerId === null || workDay === null || jobType === null;
+  }
 
   useEffect(() => {
     fetch("https://localhost:7172/api/Careers/", {
@@ -40,49 +44,59 @@ const AddJobPosition = () => {
 
   const createJobPosition = (e) => {
     e.preventDefault();
-    fetch("https://localhost:7172/api/JobPosition/AddJobPosition", {
-      method: 'POST',
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${jwt}`,
-      },
-      body: JSON.stringify({
-        jobTitle: jobTitle,
-        jobDescription: jobDescription,
-        location: location,
-        careerId: careerId,
-        positionsToCover: positionsToCover,
-        frameworkAgreement: frameworkAgreement,
-        startDate: startDate,
-        endDate: endDate,
-        jobType: jobType,
-        workDay: workDay,
-        activeAccount: active,
-      }),
-    })
-      .then((r) => r.json())
-      .then((res) => {
-        if (res.success) {
-          toast(res.message, {
-            autoClose: 3000,
-            hideProgressBar: false,
-            type: "success",
-            theme: "dark",
-            position: toast.POSITION.TOP_LEFT,
-          });
-        } else {
-          toast(res.message, {
-            autoClose: 3000,
-            hideProgressBar: false,
-            type: "warning",
-            theme: "dark",
-            position: toast.POSITION.TOP_LEFT,
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
+    if (validation()) {
+      toast("Ingrese los datos correctamente", {
+        autoClose: 3000,
+        hideProgressBar: false,
+        type: "warning",
+        theme: "dark",
+        position: toast.POSITION.TOP_LEFT,
       });
+    } else {
+      fetch("https://localhost:7172/api/JobPosition/AddJobPosition", {
+        method: 'POST',
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${jwt}`,
+        },
+        body: JSON.stringify({
+          jobTitle: jobTitle,
+          jobDescription: jobDescription,
+          location: location,
+          careerId: careerId,
+          positionsToCover: positionsToCover,
+          frameworkAgreement: frameworkAgreement,
+          startDate: startDate,
+          endDate: jobType === 0 ? endDate : startDate,
+          jobType: jobType,
+          workDay: workDay,
+          activeAccount: active,
+        }),
+      })
+        .then((r) => r.json())
+        .then((res) => {
+          if (res.success) {
+            toast(res.message, {
+              autoClose: 3000,
+              hideProgressBar: false,
+              type: "success",
+              theme: "dark",
+              position: toast.POSITION.TOP_LEFT,
+            });
+          } else {
+            toast(res.message, {
+              autoClose: 3000,
+              hideProgressBar: false,
+              type: "warning",
+              theme: "dark",
+              position: toast.POSITION.TOP_LEFT,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const inputHandler = (e) => {
