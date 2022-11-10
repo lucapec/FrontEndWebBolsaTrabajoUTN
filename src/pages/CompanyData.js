@@ -29,7 +29,7 @@ const CompanyData = () => {
       .catch((err) => {
         console.log(err.message);
       });
-  }, [data, jwt])
+  }, [data, jwt]);
 
 
   return !boolPage2 ? (

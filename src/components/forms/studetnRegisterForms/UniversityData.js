@@ -223,7 +223,7 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
                         </div>
                         <div className="col-11">
                           <div className="mt-5 ">
-                            <button onClick={dataValidation} className="btn">
+                            <button onClick={dataValidation} className="button">
                               Guardar e Ingresar
                             </button>
                           </div>

@@ -50,3 +50,7 @@ p {
 .divInput {
   margin-right: 4.5%;
 }
+
+.companyData {
+  width: 75%!important;
+}

@@ -108,7 +108,7 @@ const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
       <div className="container">
         <ToastContainer className="mt-5" />
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-12 companyData">
             <div className="card">
               <div className="card-body">
                 <div className="row">
@@ -202,7 +202,7 @@ const CompanyDataPag2 = ({ UpdateData, setSuccessfulCharge }) => {
                         </div>
                         <div className="col-12">
                           <div className="mt-5">
-                            <button onClick={submitHandler} className="btn">
+                            <button onClick={submitHandler} className="button">
                               Guardar e Ingresar
                             </button>
                           </div>

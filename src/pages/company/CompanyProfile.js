@@ -186,7 +186,7 @@ const CompanyProfile = () => {
       <header></header>
       <ToastContainer className="mt-5" />
       <div className="container containProfile">
-        <div className="row">
+        <div className="row mt-5">
           <div className="col-md-12 colmd12">
             <div className="card">
               <div className="card-body">

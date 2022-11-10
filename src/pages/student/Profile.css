@@ -111,6 +111,7 @@ hr {
   margin-top: 0!important;
 }
 
-/* .containProfile2 {
-  width: 95%;
-} */
+.col-md-13 > h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
