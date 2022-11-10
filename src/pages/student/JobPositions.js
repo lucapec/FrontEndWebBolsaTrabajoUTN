@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext, useCallback, useRef } from 'react';
-// import { Link } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
 import "./JobPositions.css";
 import UserContext from "../../context/UserContext";
@@ -110,6 +109,31 @@ const JobPositions = () => {
       })
   }
 
+  const downloadCV = (studentId) => {
+    fetch(`https://localhost:7172/api/UsersInfo/${studentId}`, {
+      method: 'GET',
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((r) => {
+        if (!r.success) {
+          toast(r.message, {
+            autoClose: 3000,
+            hideProgressBar: false,
+            type: "warning",
+            theme: "dark",
+            position: toast.POSITION.TOP_LEFT,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
+  }
+
 
   return (
     <div className='divJobPositions'>
@@ -168,7 +192,7 @@ const JobPositions = () => {
             <div className="details">
               {role === "Student" && (
                 <div className="card-detail" key={selectedJobPosition !== null && selectedJobPosition.id}>
-                  <div className="card-detail__title" style={{ justifyContent: selectedJobPosition !== null && selectedJobPosition.id ? "space-between" : "center"}}>
+                  <div className="card-detail__title" style={{ justifyContent: selectedJobPosition !== null && selectedJobPosition.id ? "space-between" : "center" }}>
                     <h2>{selectedJobPosition !== null && selectedJobPosition.jobTitle}</h2>
                     {selectedJobPosition !== null && selectedJobPosition.id ? (
                       <input className="apply-button" type="submit" value='Aplicar' onClick={() => {
@@ -211,15 +235,21 @@ const JobPositions = () => {
                           <div className="name">
                             <div className="text">{student.firstName} {student.lastName}</div>
                             <div className="icon-container">
-                              <FontAwesomeIcon className="icon" icon={faLinkedin} />
+                              <a href={`https://${student.linkedinProfileURL}`} rel="noreferrer" target="_blank">
+                                <FontAwesomeIcon className="icon" icon={faLinkedin} />
+                              </a>
                               <div className="tooltiptext">Linkedin</div>
                             </div>
                             <div className="icon-container">
-                              <FontAwesomeIcon className="icon" icon={faGithubSquare} />
+                              <a href={`http://${student.githubProfileURL}`} rel="noreferrer" target="_blank">
+                                <FontAwesomeIcon className="icon" icon={faGithubSquare} />
+                              </a>
                               <div className="tooltiptext">Github</div>
                             </div>
                             <div className="icon-container">
-                              <FontAwesomeIcon className="icon" icon={faDownload} />
+                              <div onClick={() => downloadCV(student.id)}>
+                                <FontAwesomeIcon className="icon" icon={faDownload} />
+                              </div>
                               <div className="tooltiptext">Descargar CV</div>
                             </div>
                           </div>

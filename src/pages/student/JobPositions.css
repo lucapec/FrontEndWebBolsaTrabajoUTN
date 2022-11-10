@@ -155,7 +155,8 @@
     margin-right: 10px;
 }
 
-.name> .icon-container >.icon {
+.name> .icon-container > a > .icon,
+.name> .icon-container > div > .icon {
     margin: 0 8px;
     color: #40B3FF;
     cursor: pointer;
