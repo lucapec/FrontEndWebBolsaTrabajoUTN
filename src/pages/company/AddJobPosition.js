@@ -17,7 +17,7 @@ const AddJobPosition = () => {
   const [endDate, setEndDate] = useState("0000-00-00");
   const [careerId, setCareerId] = useState(null);
   const [workDay, setWorkDay] = useState(null);
-  const [jobType, setJobType] = useState(null);
+  const [jobType, setJobType] = useState(0);
   const [frameworkAgreement, setFrameworkAgreement] = useState(false);
   const [showModalDescription, setShowModalDescription] = useState(false);
 
