@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -14,6 +14,7 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
   const [shiftProgress, setShiftProgress] = useState("");
   const [averagesWithDeferrals, setAveragesWithDeferrals] = useState("");
   const [averagesWithoutDeferrals, setAveragesWithoutDeferrals] = useState("");
+  const [dataCareer, setDataCareer] = useState([]);
   const navigate = useNavigate();
 
   const errorsList = () => {
@@ -33,6 +34,19 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
     }
     return errorsList;
   };
+
+  useEffect(() => {
+    fetch("https://localhost:7172/api/Careers", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((r) => r.json())
+      .then((form) => {
+        setDataCareer(form);
+      });
+  }, []);
 
   const universityData = {
     CareerId: specialty,
@@ -131,14 +145,21 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
                         <div className="col mt-4">
                           <label>Especialidad</label>
                           <div>
-                            <input
-                              type="text"
+                            <select
+                              type="number"
                               name="specialty"
                               id="specialty"
                               className="form-control here"
                               value={specialty}
                               onChange={inputHandler}
-                            />
+                            >
+                              <option value={"Seleccionar"}>Seleccionar</option>
+                              {dataCareer.map((career) => (
+                                <option key={career.id} value={career.id}>
+                                  {career.name}
+                                </option>
+                              ))}
+                            </select>
                           </div>
                         </div>
                         <div className="col mt-4">

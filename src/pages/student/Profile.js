@@ -34,6 +34,7 @@ const Profile = () => {
   const [averagesWithDeferrals, setAveragesWithDeferrals] = useState("");
   const [averagesWithoutDeferrals, setAveragesWithoutDeferrals] = useState("");
   const [studentData, setStudentData] = useState({});
+  const [dataCareer, setDataCareer] = useState([]);
 
   const { jwt } = useContext(UserContext);
   const navigate = useNavigate();
@@ -64,6 +65,19 @@ const Profile = () => {
     }
     return errorsList;
   };
+
+  useEffect(() => {
+    fetch("https://localhost:7172/api/Careers", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((r) => r.json())
+      .then((form) => {
+        setDataCareer(form);
+      });
+  }, []);
 
   useEffect(() => {
     fetch("https://localhost:7172/api/UsersInfo/Student", {
@@ -508,14 +522,21 @@ const Profile = () => {
                         <div className="col mt-4">
                           <label>Especialidad</label>
                           <div>
-                            <input
-                              type="text"
+                            <select
+                              type="number"
                               name="specialty"
                               id="specialty"
                               className="form-control here"
                               value={specialty}
                               onChange={inputHandler}
-                            />
+                            >
+                              <option value={"Seleccionar"}>Seleccionar</option>
+                              {dataCareer.map((career) => (
+                                <option key={career.id} value={career.id}>
+                                  {career.name}
+                                </option>
+                              ))}
+                            </select>
                           </div>
                         </div>
                         <div className="col mt-4">
