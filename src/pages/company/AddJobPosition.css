@@ -4,7 +4,7 @@
   width: 35%;
   background-color: white;
   margin-top: 40px;
-  box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px, rgb(10 37 64 / 35%) 0px -2px 0px 0px inset;;
+  box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px, rgb(10 37 64 / 35%) 0px -2px 0px 0px inset;
 }
 
 .wrapper-addJobPosition > h3 {
@@ -63,4 +63,50 @@
 
 .wrapper-addJobPosition > form > button {
   border: none;
+}
+
+.descriptionModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 55%;
+  width: 20%;
+  position: absolute;
+  left: 80%;
+  top: 15%;
+  background-color: white;
+  padding: 10px;
+  box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px, rgb(10 37 64 / 35%) 0px -2px 0px 0px inset;
+  transform: translate(100%);
+  transition: .5s all ease-in-out;
+}
+
+.descriptionModal > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.descriptionModal > div > h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0!important;
+}
+
+.descriptionModal > textarea {
+  padding: 5px 10px;
+  font-size: 12px;
+  height: 500px;
+}
+
+.descriptionModal > textarea:focus {
+  outline: none;
+}
+
+.descriptionModal > div > button {
+  outline: none;
+  border: none;
+  color: red;
+  cursor: pointer;
 }

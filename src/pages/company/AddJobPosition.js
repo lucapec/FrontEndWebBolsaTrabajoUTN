@@ -4,6 +4,7 @@ import "./AddJobPosition.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UserContext from "../../context/UserContext";
+import ModalDescription from "./addJobPosition/ModalDescription";
 
 const AddJobPosition = () => {
   const { jwt } = useContext(UserContext);
@@ -18,6 +19,7 @@ const AddJobPosition = () => {
   const [workDay, setWorkDay] = useState(0);
   const [jobType, setJobType] = useState(0);
   const [frameworkAgreement, setFrameworkAgreement] = useState(false);
+  const [showModalDescription, setShowModalDescription] = useState(false);
 
   useEffect(() => {
     fetch("https://localhost:7172/api/Careers/", {
@@ -36,7 +38,8 @@ const AddJobPosition = () => {
       });
   }, [jwt]);
 
-  const createJobPosition = () => {
+  const createJobPosition = (e) => {
+    e.preventDefault();
     fetch("https://localhost:7172/api/JobPosition/AddJobPosition", {
       method: "POST",
       headers: { "Content-type": "application/json" },
@@ -117,9 +120,15 @@ const AddJobPosition = () => {
     }
   };
 
+  const showModal = (e) => {
+    e.preventDefault();
+    setShowModalDescription(true);
+  }
+
   return (
     <div className="container-fluid main">
       <ToastContainer className="mt-5" />
+      <ModalDescription value={jobDescription} inputHandler={inputHandler} show={showModalDescription} setShowModalDescription={setShowModalDescription} />
       <div id="wrapper" className="wrapper wrapper-addJobPosition">
         <h3>Crear oferta laboral</h3>
         <form>
@@ -155,16 +164,17 @@ const AddJobPosition = () => {
           </div>
           <div className="form-field d-flex align-items-center justify-content-center">
             <input
-              type="text"
+              type="date"
               name="startDate"
               id="startDate"
+              className="form-control-sm"
               value={startDate}
               placeholder="Fecha de inicio"
               onChange={inputHandler}
             />
             {jobType === 0 ? (
               <input
-                type="text"
+                type="date"
                 name="endDate"
                 id="endDate"
                 value={endDate}
@@ -216,24 +226,17 @@ const AddJobPosition = () => {
               </select>
             )}
           </div>
-          <div className="form-field frameworkAgreement">
-            <textarea
-              type="text"
-              name="jobDescription"
-              id="jobDescription"
-              value={jobDescription}
-              placeholder="Descripción del puesto"
-              onChange={inputHandler}
-            />
-          </div>
           {jobType === 0 && (
-            <div className="form-field d-flex align-items-center justify-content-start" style={{ margin: '0 0 15px 0'}}>
+            <div className="form-field d-flex align-items-center justify-content-start" style={{ margin: '0 0 15px 0' }}>
               <label htmlFor="frameworkAgreement">¿Tiene un convenio marco firmado por la UTN?</label>
               <input type="checkbox" name="frameworkAgreement" id="frameworkAgreement" value={frameworkAgreement} onChange={inputHandler} />
             </div>
           )}
           <button onClick={createJobPosition} className="button mt-3">
-            Agregar
+            Agregar oferta
+          </button>
+          <button onClick={showModal} className="button mt-3">
+            Mostrar descripción
           </button>
         </form>
       </div>
