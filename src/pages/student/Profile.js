@@ -6,6 +6,7 @@ import UserContext from "../../context/UserContext";
 import utnLogo from "../../assets/logo-utn.png";
 
 import "./Profile.css";
+import CvComponent from "../../components/forms/studetnRegisterForms/CvComponent";
 
 const Profile = () => {
   const [firstName, setFirstName] = useState("");
@@ -21,7 +22,6 @@ const Profile = () => {
   const [street, setStreet] = useState("");
   const [numberStreet, setNumberStreet] = useState("");
   const [sex, setSex] = useState("");
-  const [fileCv, setFileCv] = useState("");
   const [country, setCountry] = useState("");
   const [province, setProvince] = useState("");
   const [location, setLocation] = useState("");
@@ -93,7 +93,6 @@ const Profile = () => {
     setStreet(studentData.address);
     setNumberStreet(studentData.addressNum);
     setSex(studentData.sex);
-    setFileCv(studentData.curriculum);
     setCountry(studentData.country);
     setProvince(studentData.province);
     setLocation(studentData.city);
@@ -148,9 +147,6 @@ const Profile = () => {
       case "sex":
         setSex(e.target.value);
         break;
-      case "fileCv":
-        setFileCv(e.target.value);
-        break;
       case "country":
         setCountry(e.target.value);
         break;
@@ -196,7 +192,6 @@ const Profile = () => {
     AddressNum: numberStreet,
     Email: email,
     Sex: sex,
-    Curriculum: fileCv,
     Country: country,
     Province: province,
     City: location,
@@ -470,19 +465,7 @@ const Profile = () => {
                             />
                           </div>
                         </div>
-                        <div className="col mt-4">
-                          <label>Archivo CV</label>
-                          <div>
-                            <input
-                              type="file"
-                              name="fileCv"
-                              id="fileCv"
-                              className="form-control here"
-                              value={fileCv}
-                              onChange={inputHandler}
-                            />
-                          </div>
-                        </div>
+                        <CvComponent />
                         <div className="col mt-4">
                           <label>Pais</label>
                           <div>

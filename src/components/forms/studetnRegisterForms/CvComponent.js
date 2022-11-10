@@ -6,17 +6,23 @@ const CvComponent = () =>
     const {jwt} = useContext(UserContext);
 
     const inputHandler = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+
+        formData.append("File", e.target.files[0])
+
         fetch("https://localhost:7172/api/UsersInfo/UploadCV", {
           method: "POST",
+          body: formData,
           headers: {
-            "Content-Type": "multipart/form-data",
+            // "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${jwt}`,
           },
-          body: JSON.stringify(e.target.files[0]),
         })
-          .then((res) => res.json())
+          .then((res) => {console.log("Success: ", res)})
           .catch((err) => {
-            console.log(err.message);
+            console.log("Error: ",err.message);
           });
     }    
 
