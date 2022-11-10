@@ -163,29 +163,37 @@ const AddJobPosition = () => {
             />
           </div>
           <div className="form-field d-flex align-items-center justify-content-center">
-            <input
-              type="date"
-              name="startDate"
-              id="startDate"
-              className="form-control-sm"
-              value={startDate}
-              placeholder="Fecha de inicio"
-              onChange={inputHandler}
-            />
-            {jobType === 0 ? (
+            <div className="w-50 d-flex flex-column justify-content-center align-items-center mx-1">
+              <label htmlFor="startDate">Fecha de inicio</label>
               <input
                 type="date"
-                name="endDate"
-                id="endDate"
-                value={endDate}
-                placeholder="Fecha de fin"
+                name="startDate"
+                id="startDate"
+                className="w-100"
+                value={startDate}
+                placeholder="Fecha de inicio"
                 onChange={inputHandler}
               />
+            </div>
+            {jobType === 0 ? (
+              <div className="w-50 d-flex flex-column justify-content-center align-items-center mx-1">
+                <label htmlFor="endDate">Fecha de fin</label>
+                <input
+                  type="date"
+                  name="endDate"
+                  id="endDate"
+                  value={endDate}
+                  className="w-100"
+                  placeholder="Fecha de fin"
+                  onChange={inputHandler}
+                />
+              </div>
             ) : (
               <input
                 type="number"
                 name="positionsToCover"
                 id="positionsToCover"
+                className={jobType === 0 ? "positionsToCoverWhenInternship" : "positionsToCoverWhenEmployment"}
                 value={positionsToCover}
                 placeholder="Posiciones a cubrir"
                 onChange={inputHandler}
@@ -232,12 +240,14 @@ const AddJobPosition = () => {
               <input type="checkbox" name="frameworkAgreement" id="frameworkAgreement" value={frameworkAgreement} onChange={inputHandler} />
             </div>
           )}
-          <button onClick={createJobPosition} className="button mt-3">
-            Agregar oferta
-          </button>
-          <button onClick={showModal} className="button mt-3">
-            Mostrar descripción
-          </button>
+          <div className="form-field d-flex justify-content-center align-items-center">
+            <button onClick={showModal} className="description-button button mt-3">
+              Mostrar descripción
+            </button>
+            <button onClick={createJobPosition} className="button mt-3">
+              Agregar oferta
+            </button>
+          </div>
         </form>
       </div>
     </div>

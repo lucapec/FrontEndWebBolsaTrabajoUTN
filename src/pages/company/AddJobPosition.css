@@ -26,6 +26,11 @@
   margin: 0 5px;
 }
 
+.wrapper-addJobPosition > form > .form-field > div > input {
+  background-color: rgba(204, 204, 204, 0.411);
+  margin: 0 5px;
+}
+
 .wrapper-addJobPosition > form > .form-field > input[type="checkbox"] {
   width: auto;
 }
@@ -109,4 +114,27 @@
   border: none;
   color: red;
   cursor: pointer;
+}
+
+.form-field > button {
+  margin: 0 10px;
+}
+
+.description-button {
+  background-color: rgb(61, 177, 161);
+}
+
+.description-button:hover {
+  background-color: rgb(61, 177, 161)!important;
+  opacity: 0.9!important;
+}
+
+.positionsToCoverWhenInternship {
+  height: 34px;
+  margin-top: 20px;
+}
+
+.positionsToCoverWhenEmployment {
+  height: 34px;
+  margin-top: 20px!important;
 }
