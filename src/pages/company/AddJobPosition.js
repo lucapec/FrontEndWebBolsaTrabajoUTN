@@ -7,7 +7,7 @@ import UserContext from "../../context/UserContext";
 import ModalDescription from "./addJobPosition/ModalDescription";
 
 const AddJobPosition = () => {
-  const { jwt } = useContext(UserContext);
+  const { jwt, active } = useContext(UserContext);
   const [careers, setCareers] = useState([]);
   const [jobTitle, setJobTitle] = useState("");
   const [jobDescription, setJobDescription] = useState("");
@@ -41,19 +41,23 @@ const AddJobPosition = () => {
   const createJobPosition = (e) => {
     e.preventDefault();
     fetch("https://localhost:7172/api/JobPosition/AddJobPosition", {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
+      method: 'POST',
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
       body: JSON.stringify({
-        jobTitle,
-        jobDescription,
+        jobTitle: jobTitle,
+        jobDescription: jobDescription,
         location: location,
-        careerId,
-        positionsToCover,
-        frameworkAgreement,
-        startDate,
-        endDate,
-        jobType,
-        workDay,
+        careerId: careerId,
+        positionsToCover: positionsToCover,
+        frameworkAgreement: frameworkAgreement,
+        startDate: startDate,
+        endDate: endDate,
+        jobType: jobType,
+        workDay: workDay,
+        activeAccount: active,
       }),
     })
       .then((r) => r.json())
