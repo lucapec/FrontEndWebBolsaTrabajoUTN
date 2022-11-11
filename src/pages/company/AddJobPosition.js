@@ -16,13 +16,13 @@ const AddJobPosition = () => {
   const [startDate, setStartDate] = useState("0000-00-00");
   const [endDate, setEndDate] = useState("0000-00-00");
   const [careerId, setCareerId] = useState(null);
-  const [workDay, setWorkDay] = useState(null);
+  const [workDay, setWorkDay] = useState(0);
   const [jobType, setJobType] = useState(0);
   const [frameworkAgreement, setFrameworkAgreement] = useState(false);
   const [showModalDescription, setShowModalDescription] = useState(false);
 
   const validation = () => {
-    return positionsToCover === null || startDate === "0000-00-00" || (endDate === "0000-00-00" && jobType === 0) || careerId === null || workDay === null || jobType === null;
+    return positionsToCover === null || startDate === "0000-00-00" || (endDate === "0000-00-00" && jobType === 0) || careerId === null || (workDay === null && jobType === 1) || jobType === null;
   }
 
   useEffect(() => {
@@ -246,7 +246,7 @@ const AddJobPosition = () => {
                 select={workDay}
                 onChange={inputHandler}
               >
-                <option value="Elija una carrera">Jornada laboral</option>
+                <option value={0}>Jornada laboral</option>
                 <option value={0}>Tiempo completo</option>
                 <option value={1}>Tiempo parcial</option>
               </select>
