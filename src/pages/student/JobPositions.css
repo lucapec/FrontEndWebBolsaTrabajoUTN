@@ -49,6 +49,10 @@
     overflow-y: scroll;
 }
 
+.scrollable-JobApplies {
+    overflow-y: scroll;
+}
+
 .details {
     width: 60%;
     padding: 20px;
