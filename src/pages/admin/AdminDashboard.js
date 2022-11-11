@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import "./AdminDashboard.css";
 import { Row, Col, Button, Form } from 'react-bootstrap';
 import DashboardTable from "./DashboardTable";
-import { HandleUpdateCareer, HandleDeleteCareer, ActivateDeactivateUser } from "./Handlers";
+import { HandleUpdateCareer, HandleDeleteCareer, HandleDeleteSkill, ActivateDeactivateUser } from "./Handlers";
 import UserContext from "../../context/UserContext";
 
 const AdminDashboard = () => {
@@ -10,6 +10,7 @@ const AdminDashboard = () => {
   const [deletedOrUpdated, setDeletedOrUpdated] = useState(false);
   const [selectedSettings, setSelectedSettings] = useState([
     { id: 'carreras', isSelected: true },
+    { id: 'habilidades', isSelected: false },
     { id: 'alumnos', isSelected: false },
     { id: 'empresas', isSelected: false },
   ]);
@@ -20,6 +21,15 @@ const AdminDashboard = () => {
           { id: e.target.id, isSelected: true },
           { id: "alumnos", isSelected: false },
           { id: "empresas", isSelected: false },
+          { id: "habilidades", isSelected: false },
+        ]);
+        break;
+      case "habilidades":
+        setSelectedSettings([
+          { id: e.target.id, isSelected: true },
+          { id: "carreras", isSelected: false },
+          { id: "alumnos", isSelected: false },
+          { id: "empresas", isSelected: false },
         ]);
         break;
       case "alumnos":
@@ -27,11 +37,13 @@ const AdminDashboard = () => {
           { id: "carreras", isSelected: false },
           { id: e.target.id, isSelected: true },
           { id: "empresas", isSelected: false },
+          { id: "habilidades", isSelected: false },
         ]);
         break;
       case "empresas":
         setSelectedSettings([
           { id: "carreras", isSelected: false },
+          { id: "habilidades", isSelected: false },
           { id: "alumnos", isSelected: false },
           { id: e.target.id, isSelected: true },
         ]);
@@ -50,6 +62,9 @@ const AdminDashboard = () => {
         <ul className="p-0 list-style-none">
           <li>
             <button style={{ backgroundColor: selectedSettings.find(b => b.id === "carreras").isSelected ? '#719FED' : '#212529' }} onClick={handleSidebarButton} id="carreras" className="w-100 border-0 rounded-0 sidebar-button">Carreras</button>
+          </li>
+          <li>
+            <button style={{ backgroundColor: selectedSettings.find(b => b.id === "habilidades").isSelected ? '#719FED' : '#212529' }} onClick={handleSidebarButton} id="habilidades" className="w-100 border-0 rounded-0 sidebar-button">Habilidades</button>
           </li>
           <li>
             <button style={{ backgroundColor: selectedSettings.find(b => b.id === "alumnos").isSelected ? '#719FED' : '#212529' }} onClick={handleSidebarButton} id="alumnos" className="w-100 border-0 rounded-0 sidebar-button">Alumnos</button>
@@ -99,7 +114,37 @@ const AdminDashboard = () => {
                       )
                     }
                   },
-              ]} />
+                ]} />
+            </Col>
+          )}
+          {selectedSettings.find((x) => x.id === "habilidades").isSelected && (
+            <Col>
+              <DashboardTable
+                url='https://localhost:7172/api/Skills'
+                deletedOrUpdated={deletedOrUpdated}
+                title="Habilidades"
+                addFunctionality={true}
+                setDeletedOrUpdated={setDeletedOrUpdated}
+                columns={[
+                  { field: 'col1', headerName: 'Id', width: 40, editable: false, align: 'center', headerAlign: 'center', },
+                  { field: 'col2', headerName: 'Nombre', width: 125, editable: true, align: 'center', headerAlign: 'center', },
+                  {
+                    field: 'col3', headerName: 'Acciones', width: 150, align: 'center', headerAlign: 'center', renderCell: (rowValues) => {
+                      return (
+                        <>
+                          <Button
+                            variant="danger"
+                            color="danger"
+                            style={{ margin: '0 0 0 5px' }}
+                            onClick={() => HandleDeleteSkill(rowValues, setDeletedOrUpdated, deletedOrUpdated, jwt)}
+                          >
+                            X
+                          </Button>
+                        </>
+                      )
+                    }
+                  },
+                ]} />
             </Col>
           )}
           {selectedSettings.find((x) => x.id === "alumnos").isSelected && (
@@ -128,7 +173,7 @@ const AdminDashboard = () => {
                       )
                     }
                   },
-              ]} />
+                ]} />
             </Col>
           )}
           {selectedSettings.find((x) => x.id === "empresas").isSelected && (
@@ -155,7 +200,7 @@ const AdminDashboard = () => {
                       )
                     }
                   },
-              ]} />
+                ]} />
             </Col>
           )}
         </Row>

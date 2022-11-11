@@ -78,7 +78,7 @@ function AddCareerModal({ url, setShowModal, visible, form, setForm, setDeletedO
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="careerName">
                             <Form.Label>Nombre</Form.Label>
-                            <Form.Control onChange={(e) => setForm({ ...form, name: e.target.value })} type="email" placeholder="Ingrese el nombre de la carrera" />
+                            <Form.Control onChange={(e) => setForm({ ...form, name: e.target.value })} type="text" placeholder="Ingrese el nombre de la carrera" />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="totalSubjets">
                             <Form.Label>Cantidad de materias</Form.Label>
