@@ -34,8 +34,13 @@ const Navbar = () => {
             {jwt && role === 'Company' && (
               <>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/ofertasEmpresa">
-                    Crear Ofertas
+                  <Link className="nav-link" to="/ofertas">
+                    Mis Ofertas
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/crearOferta">
+                    Crear Oferta
                   </Link>
                 </li>
                 <li className="nav-item">

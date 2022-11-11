@@ -42,3 +42,7 @@ header {
   color: rgb(255, 255, 255);
   font-weight: 500;
 }
+
+.moreMargin {
+  margin: 50px!important;
+}

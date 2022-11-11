@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../context/UserContext";
-import utnLogo from "../../assets/logo-utn.png";
 import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -156,7 +155,7 @@ const CompanyProfile = () => {
           )
           .then(
             setTimeout(() => {
-              navigate("/ofertasEmpresa");
+              navigate("/crearOferta");
             }, 3000)
           )
           .catch((err) => {
@@ -186,9 +185,9 @@ const CompanyProfile = () => {
     <div className="divFormProfileCompany">
       <header></header>
       <ToastContainer className="mt-5" />
-      <div className="container">
-        <div className="row">
-          <div className="col-md-11">
+      <div className="container containProfile">
+        <div className="row mt-5">
+          <div className="col-md-12 colmd12">
             <div className="card">
               <div className="card-body">
                 <div className="row">
@@ -386,28 +385,6 @@ const CompanyProfile = () => {
           </div>
         </div>
       </div>
-      <footer className="footerCompany">
-        <div id="divFooter" className="container">
-          <div id="divLeftRight" className="row justify-content-center">
-            <div id="divLeft" className="col-4">
-              <figure>
-                <img src={utnLogo} alt="UTN Logo" className="logo" />
-              </figure>
-            </div>
-            <div id="divRight" className="col-4">
-              <div className="divUniversity">
-                <p>FACULTAD REGIONAL ROSARIO</p>
-              </div>
-              <div className="divContact">
-                <p> Localidad: Zeballos 1341 - Rosario</p>
-              </div>
-              <div className="divPhone">
-                <p>Telefono: 0341-4481871</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

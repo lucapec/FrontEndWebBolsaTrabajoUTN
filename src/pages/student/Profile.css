@@ -3,6 +3,19 @@ header {
   height: 0vh;
 }
 
+.containProfile {
+  display: flex;
+  justify-content: center;
+}
+
+.containProfile > div {
+  width: 80%;
+}
+
+hr {
+  margin: 0.5rem 0!important;
+}
+
 .main-card {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
@@ -10,16 +23,24 @@ header {
 }
 
 .card {
-  margin-left: 5%;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  font-size: 14px;
+}
+
+.card-body {
+  padding: 0!important;
+}
+
+.editarPerfilTitle {
+  font-size: 20px;
 }
 
 .divFormProfile {
   margin-top: -3%;
   background-color: lightgray;
-  height: calc(125vh - 52px);
+  height: calc(100vh - 56px);
 }
 
 .formProfile {
@@ -84,4 +105,13 @@ header {
   margin-left: 60%;
   width: 40%;
   height: 40%;
+}
+
+.nomargin {
+  margin-top: 0!important;
+}
+
+.col-md-13 > h3 {
+  font-size: 20px;
+  font-weight: 600;
 }

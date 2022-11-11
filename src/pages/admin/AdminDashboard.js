@@ -122,7 +122,7 @@ const AdminDashboard = () => {
                           type="checkbox"
                           checked={rowValues.row.col5}
                           onChange={(e) => {
-                            ActivateDeactivateUser(rowValues.id, e.target.checked, selectedSettings.find((x) => x.isSelected === true).id, setDeletedOrUpdated, deletedOrUpdated, jwt);
+                            ActivateDeactivateUser(rowValues.id, e.target.checked, setDeletedOrUpdated, deletedOrUpdated, jwt);
                           }}
                         />
                       )
@@ -149,7 +149,7 @@ const AdminDashboard = () => {
                           type="checkbox"
                           checked={rowValues.row.col3}
                           onChange={(e) => {
-                            ActivateDeactivateUser(rowValues.id, e.target.checked, selectedSettings.find((x) => x.isSelected === true).id, setDeletedOrUpdated, deletedOrUpdated, jwt);
+                            ActivateDeactivateUser(rowValues.id, e.target.checked, setDeletedOrUpdated, deletedOrUpdated, jwt);
                           }}
                         />
                       )
