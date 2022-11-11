@@ -1,20 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
-import CompanyDataPag1 from "../components/forms/CompanyRegisterForms/CompanyDataPag1";
-import CompanyDataPag2 from "../components/forms/CompanyRegisterForms/CompanyDataPag2";
-import UserContext from "../context/UserContext"
+import CompanyDataPag1 from "../../components/forms/CompanyRegisterForms/CompanyDataPag1";
+import CompanyDataPag2 from "../../components/forms/CompanyRegisterForms/CompanyDataPag2";
+import UserContext from "../../context/UserContext";
 
 const CompanyData = () => {
   const [data, setData] = useState({});
   const [boolPage2, setBoolPage2] = useState(false);
-  const [successfulCharge, setSuccessfulCharge] = useState(false);
   const {jwt} = useContext(UserContext);
 
-  console.log(successfulCharge);
-
-  const UpdateData= (datos) =>{
-    const _datos = {...data, ...datos}
-     setData(_datos);
-  }
+  const UpdateData = (datos) => {
+    const _datos = { ...data, ...datos };
+    setData(_datos);
+  };
 
   useEffect(() => {
     fetch("https://localhost:7172/api/UsersInfo/CreateDataCompany", {
@@ -31,14 +28,13 @@ const CompanyData = () => {
       });
   }, [data, jwt]);
 
-
   return !boolPage2 ? (
     <div>
-      <CompanyDataPag1 UpdateData={UpdateData} setBoolPage2={setBoolPage2}  />
+      <CompanyDataPag1 UpdateData={UpdateData} setBoolPage2={setBoolPage2} />
     </div>
   ) : (
     <div>
-      <CompanyDataPag2 UpdateData={UpdateData} setSuccessfulCharge={setSuccessfulCharge} />
+      <CompanyDataPag2 UpdateData={UpdateData} />
     </div>
   );
 };

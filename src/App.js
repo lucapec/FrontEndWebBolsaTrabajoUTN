@@ -7,15 +7,13 @@ import JobPositions from "./pages/student/JobPositions";
 import AddJobPosition from "./pages/company/AddJobPosition"
 import Profile from "./pages/student/Profile";
 import StudentData from "./pages/student/StudentData";
-import CompanyData from "./pages/CompanyData";
+import CompanyData from "./pages/company/CompanyData";
 import CompanyProfile from "./pages/company/CompanyProfile";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import ReplaceRoute from "./hooks/ReplaceRoute";
 import { UserContextProvider } from "./context/UserContext";
 import utnLogo from "./assets/logo-utn.png";
 import "./App.css";
-
-
 
 const App = () => {
   const location = useLocation();

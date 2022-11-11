@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UserContext from "../../context/UserContext";
 import "./Profile.css";
+import CvComponent from "../../components/forms/studetnRegisterForms/CvComponent";
 
 const Profile = () => {
   const [firstName, setFirstName] = useState("");
@@ -19,7 +20,6 @@ const Profile = () => {
   const [street, setStreet] = useState("");
   const [numberStreet, setNumberStreet] = useState("");
   const [sex, setSex] = useState("");
-  const [fileCv, setFileCv] = useState("");
   const [country, setCountry] = useState("");
   const [province, setProvince] = useState("");
   const [location, setLocation] = useState("");
@@ -32,6 +32,7 @@ const Profile = () => {
   const [averagesWithDeferrals, setAveragesWithDeferrals] = useState("");
   const [averagesWithoutDeferrals, setAveragesWithoutDeferrals] = useState("");
   const [studentData, setStudentData] = useState({});
+  const [dataCareer, setDataCareer] = useState([]);
 
   const { jwt } = useContext(UserContext);
   const navigate = useNavigate();
@@ -64,6 +65,19 @@ const Profile = () => {
   };
 
   useEffect(() => {
+    fetch("https://localhost:7172/api/Careers", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((r) => r.json())
+      .then((form) => {
+        setDataCareer(form);
+      });
+  }, []);
+
+  useEffect(() => {
     fetch("https://localhost:7172/api/UsersInfo/Student", {
       method: "GET",
       headers: {
@@ -91,7 +105,6 @@ const Profile = () => {
     setStreet(studentData.address);
     setNumberStreet(studentData.addressNum);
     setSex(studentData.sex);
-    setFileCv(studentData.curriculum);
     setCountry(studentData.country);
     setProvince(studentData.province);
     setLocation(studentData.city);
@@ -146,9 +159,6 @@ const Profile = () => {
       case "sex":
         setSex(e.target.value);
         break;
-      case "fileCv":
-        setFileCv(e.target.value);
-        break;
       case "country":
         setCountry(e.target.value);
         break;
@@ -194,7 +204,6 @@ const Profile = () => {
     AddressNum: numberStreet,
     Email: email,
     Sex: sex,
-    Curriculum: fileCv,
     Country: country,
     Province: province,
     City: location,
@@ -468,19 +477,7 @@ const Profile = () => {
                             />
                           </div>
                         </div>
-                        <div className="col mt-4">
-                          <label>Archivo CV</label>
-                          <div>
-                            <input
-                              type="file"
-                              name="fileCv"
-                              id="fileCv"
-                              className="form-control here"
-                              value={fileCv}
-                              onChange={inputHandler}
-                            />
-                          </div>
-                        </div>
+                        <CvComponent />
                         <div className="col mt-4">
                           <label>Pais</label>
                           <div>
@@ -523,14 +520,21 @@ const Profile = () => {
                         <div className="col mt-4">
                           <label>Especialidad</label>
                           <div>
-                            <input
-                              type="text"
+                            <select
+                              type="number"
                               name="specialty"
                               id="specialty"
                               className="form-control here"
                               value={specialty}
                               onChange={inputHandler}
-                            />
+                            >
+                              <option value={"Seleccionar"}>Seleccionar</option>
+                              {dataCareer.map((career) => (
+                                <option key={career.id} value={career.id}>
+                                  {career.name}
+                                </option>
+                              ))}
+                            </select>
                           </div>
                         </div>
                         <div className="col mt-4">
