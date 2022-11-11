@@ -25,6 +25,11 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
+                  <Link className="nav-link" to="/historial-aplicaciones">
+                    Historial de aplicaciones
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <Link className="nav-link" to="/perfil">
                     Perfil
                   </Link>

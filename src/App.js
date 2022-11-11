@@ -10,6 +10,7 @@ import StudentData from "./pages/student/StudentData";
 import CompanyData from "./pages/company/CompanyData";
 import CompanyProfile from "./pages/company/CompanyProfile";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import JobApplyHistory from "./pages/student/JobApplyHistory";
 import ReplaceRoute from "./hooks/ReplaceRoute";
 import { UserContextProvider } from "./context/UserContext";
 import utnLogo from "./assets/logo-utn.png";
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="/perfil" element={<Profile />}></Route>
           <Route path="/perfilEmpresa" element={<CompanyProfile />}></Route>
           <Route path="/adminDashboard" element={<AdminDashboard />}></Route>
+          <Route path="/historial-aplicaciones" element={<JobApplyHistory />}></Route>
           <Route path="*" element={<ReplaceRoute />}></Route>
         </Routes>
         {location.pathname === '/ingreso' || location.pathname === '/registro' || location.pathname === '/adminDashboard' ? (
