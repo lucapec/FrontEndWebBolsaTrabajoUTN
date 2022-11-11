@@ -175,16 +175,12 @@ const JobPositions = () => {
                 }).map((jobPosition) => {
                   return <div className="list-item" key={jobPosition.id} onClick={() => onSelectJobPosition(jobPosition.id)} style={{ backgroundColor: selectedJobPosition !== null && jobPosition.id === selectedJobPosition.id ? '#E2F0FE' : 'white' }}>
                     <h5>{jobPosition.jobTitle}</h5>
-                    {role === "Student" && (
-                      <>
-                        <div className="list-item__text">
-                          Empresa: {jobPosition.company.companyName}
-                        </div>
-                        <div className="list-item__text">
-                          Ubicación: {jobPosition.location}
-                        </div>
-                      </>
-                    )}
+                    <div className="list-item__text">
+                      Empresa: {jobPosition.company.companyName}
+                    </div>
+                    <div className="list-item__text">
+                      Ubicación: {jobPosition.location}
+                    </div>
                   </div>
                 })}
               </div>
@@ -239,9 +235,9 @@ const JobPositions = () => {
                       </div>
                     )}
                     <div className="feature">
-                        <FontAwesomeIcon icon={faPerson} />
-                        <p className="mx-2">{selectedJobPosition && `${selectedJobPosition.positionsToCover} puesto${selectedJobPosition.positionsToCover === 1 ? "" : "s"} disponible${selectedJobPosition.positionsToCover === 1 ? "" : "s"}`}</p>
-                      </div>
+                      <FontAwesomeIcon icon={faPerson} />
+                      <p className="mx-2">{selectedJobPosition && `${selectedJobPosition.positionsToCover} puesto${selectedJobPosition.positionsToCover === 1 ? "" : "s"} disponible${selectedJobPosition.positionsToCover === 1 ? "" : "s"}`}</p>
+                    </div>
                     <div className="description">
                       <p>{selectedJobPosition && selectedJobPosition.jobDescription}</p>
                     </div>

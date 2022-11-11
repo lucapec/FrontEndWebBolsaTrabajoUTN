@@ -7,7 +7,7 @@ import {  faLocationDot, faBriefcase, faBusinessTime, faCalendarDays, faPerson }
 const JobApplyHistory = () => {
   const { jwt, role } = useContext(UserContext);
   const [jobApplies, setJobApplies] = useState([]);
-  const [selectedJobApply, setselectedJobApply] = useState({});
+  const [selectedJobApply, setselectedJobApply] = useState(null);
   const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
@@ -81,7 +81,7 @@ const JobApplyHistory = () => {
               </div>
             </ul>
             <div className="details">
-              {role === "Student" && (
+              {jobApplies.length > 0 ? (
                 <div className="card-detail" key={selectedJobApply !== null && selectedJobApply.id}>
                   <div className="card-detail__title" style={{ justifyContent: selectedJobApply !== null && selectedJobApply.id ? "space-between" : "center" }}>
                     <h2>{selectedJobApply !== null && selectedJobApply.jobTitle}</h2>
@@ -121,6 +121,8 @@ const JobApplyHistory = () => {
                     </div>
                   </div>
                 </div>
+              ) : (
+                <h2>No has aplicado a ninguna oferta laboral</h2>
               )}
             </div>
           </div>
