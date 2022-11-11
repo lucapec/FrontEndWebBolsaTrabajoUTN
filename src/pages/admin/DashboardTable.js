@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Button } from "react-bootstrap";
 import AddCareerModal from "./AddCareerModal";
+import AddSkillModal from "./AddSkillModal";
 import UserContext from "../../context/UserContext";
 
 const DashboardTable = ({ url, title, columns, deletedOrUpdated, addFunctionality, setDeletedOrUpdated }) => {
@@ -14,9 +15,12 @@ const DashboardTable = ({ url, title, columns, deletedOrUpdated, addFunctionalit
         type: 0,
         totalSubjets: null,
     });
+    const [addSkillForm, setAddSkillForm] = useState({
+       name: '', 
+    });
 
     useEffect(() => {
-        fetch(url, {
+        fetch(title === "Habilidades" ? `${url}/GetAllSkills` : url, {
             method: 'GET',
             headers: {
                 "Content-type": "application/json",
@@ -47,13 +51,21 @@ const DashboardTable = ({ url, title, columns, deletedOrUpdated, addFunctionalit
                             activeAccount: company.activeAccount,
                         }
                     }));
+                } else if (title === "Habilidades") {
+                    setData(r.map((skill) => {
+                        return {
+                            id: skill.id,
+                            name: skill.name
+                        }
+                    }));
                 }
             });
     }, [url, deletedOrUpdated, title, jwt]);
 
     return (
         <>
-            {addFunctionality && <AddCareerModal url={url} setDeletedOrUpdated={setDeletedOrUpdated} deletedOrUpdated={deletedOrUpdated} setShowModal={setShowModal} visible={showModal} form={addCareerForm} setForm={setAddCareerForm} />}
+            {addFunctionality && title === "Carreras" && <AddCareerModal url={url} setDeletedOrUpdated={setDeletedOrUpdated} deletedOrUpdated={deletedOrUpdated} setShowModal={setShowModal} visible={showModal} form={addCareerForm} setForm={setAddCareerForm} />}
+            {addFunctionality && title === "Habilidades" && <AddSkillModal url={url} setDeletedOrUpdated={setDeletedOrUpdated} deletedOrUpdated={deletedOrUpdated} setShowModal={setShowModal} visible={showModal} form={addSkillForm} setForm={setAddSkillForm} />}
             <div className='card p-3' style={{ height: 450, width: 975 }}>
                 <h4>{title}</h4>
                 <DataGrid
@@ -84,11 +96,17 @@ const DashboardTable = ({ url, title, columns, deletedOrUpdated, addFunctionalit
                                 col2: item.companyName,
                                 col3: item.activeAccount,
                             }
+                        } else if (title === "Habilidades") {
+                            return {
+                                id: item.id,
+                                col1: item.id,
+                                col2: item.name
+                            }
                         }
                         return false;
                     }) : []}
                 />
-                {addFunctionality && (
+                {addFunctionality && title === "Carreras" && (
                     <Button
                         onClick={() => {
                             setShowModal(true);
@@ -101,6 +119,18 @@ const DashboardTable = ({ url, title, columns, deletedOrUpdated, addFunctionalit
                         }}
                     >
                         Agregar Carrera
+                    </Button>
+                )}
+                {addFunctionality && title === "Habilidades" && (
+                    <Button
+                        onClick={() => {
+                            setShowModal(true);
+                            setAddSkillForm({
+                                name: '',
+                            });
+                        }}
+                    >
+                        Agregar Habilidad
                     </Button>
                 )}
             </div>

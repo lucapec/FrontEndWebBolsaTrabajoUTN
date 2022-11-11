@@ -43,6 +43,51 @@ export const HandleUpdateCareer = (rowValues, setDeletedOrUpdated, deletedOrUpda
     });
 };
 
+export const HandleDeleteSkill = (rowValues, setDeletedOrUpdated, deletedOrUpdated, jwt) => {
+  fetch(`https://localhost:7172/api/Skills/DeleteSkill`, {
+    method: 'DELETE',
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${jwt}`,
+    },
+    body: JSON.stringify({
+      id: rowValues.id
+    })
+  })
+    .then((r) => {
+      if (r.ok) {
+        setDeletedOrUpdated(!deletedOrUpdated);
+      }
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const HandleUpdateSkill = (rowValues, setDeletedOrUpdated, deletedOrUpdated, jwt) => {
+  const { id } = rowValues;
+  const { col2 } = rowValues.row;
+  const updatedCareer = {
+    name: col2,
+  };
+  fetch(`https://localhost:7172/api/Careers?careerId=${id}`, {
+    method: 'PUT',
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${jwt}`,
+    },
+    body: JSON.stringify(updatedCareer),
+  })
+    .then((r) => {
+      if (r.ok) {
+        setDeletedOrUpdated(!deletedOrUpdated);
+      }
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
 export const ActivateDeactivateUser = (userId, activate, setDeletedOrUpdated, deletedOrUpdated, jwt) => {
   const updateRequest = {
     userId: userId,

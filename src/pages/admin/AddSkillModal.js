@@ -3,10 +3,10 @@ import { Button, Modal, Form } from 'react-bootstrap';
 import { ToastContainer, toast } from "react-toastify";
 import UserContext from "../../context/UserContext";
 
-function AddCareerModal({ url, setShowModal, visible, form, setForm, setDeletedOrUpdated, deletedOrUpdated }) {
+function AddSkillModal({ url, setShowModal, visible, form, setForm, setDeletedOrUpdated, deletedOrUpdated }) {
     const {jwt} = useContext(UserContext);
-    const handleNewCareer = () => {
-        if (form.name === '' || form.abbreviation === '' || form.totalSubjets === null || form.totalSubjets <= 0) {
+    const handleNewSkill = () => {
+        if (form.name === '') {
             toast("Ingrese datos válidos", {
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -15,7 +15,7 @@ function AddCareerModal({ url, setShowModal, visible, form, setForm, setDeletedO
                 position: toast.POSITION.TOP_LEFT,
             });
         } else {
-            fetch(url, {
+            fetch(`${url}/CreateSkill`, {
                 method: 'POST',
                 headers: {
                     "Content-type": "application/json",
@@ -28,9 +28,6 @@ function AddCareerModal({ url, setShowModal, visible, form, setForm, setDeletedO
                     setDeletedOrUpdated(!deletedOrUpdated);
                     setForm({
                         name: '',
-                        abbreviation: '',
-                        type: 0,
-                        totalSubjets: null,
                     });
                     setShowModal(false);
                     toast(`${r.name} creada correctamente`, {
@@ -57,42 +54,24 @@ function AddCareerModal({ url, setShowModal, visible, form, setForm, setDeletedO
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Agregar Carrera
+                        Agregar Habilidad
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Group className="mb-3" controlId="type">
-                            <Form.Label>Tipo</Form.Label>
-                            <Form.Select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })} aria-label="Default select example">
-                                <option value={0}>Grado</option>
-                                <option value={1}>Tecnicatura</option>
-                                <option value={2}>Posgrado</option>
-                                <option value={3}>Maestría</option>
-                                <option value={4}>Especialización</option>
-                            </Form.Select>
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="abbreviation">
-                            <Form.Label>Abreviatura</Form.Label>
-                            <Form.Control onChange={(e) => setForm({ ...form, abbreviation: e.target.value })} type="text" placeholder="Ingrese la abreviatura" />
-                        </Form.Group>
                         <Form.Group className="mb-3" controlId="careerName">
                             <Form.Label>Nombre</Form.Label>
-                            <Form.Control onChange={(e) => setForm({ ...form, name: e.target.value })} type="text" placeholder="Ingrese el nombre de la carrera" />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="totalSubjets">
-                            <Form.Label>Cantidad de materias</Form.Label>
-                            <Form.Control onChange={(e) => setForm({ ...form, totalSubjets: e.target.value })} type="number" placeholder="Ingrese la cantidad de materias" />
+                            <Form.Control onChange={(e) => setForm({ ...form, name: e.target.value })} type="text" placeholder="Ingrese el nombre de la habilidad" />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="danger" onClick={() => setShowModal(false)}>Close</Button>
-                    <Button variant="success" onClick={handleNewCareer}>Agregar</Button>
+                    <Button variant="success" onClick={handleNewSkill}>Agregar</Button>
                 </Modal.Footer>
             </Modal>
         </>
     );
 }
 
-export default AddCareerModal;
+export default AddSkillModal;
