@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
-import { Modal, Button } from 'react-bootstrap';
 import "./JobApplyHistory.css";
 import UserContext from "../../context/UserContext";
-import { toast, ToastContainer } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload, faLocationDot, faBriefcase, faBusinessTime, faCalendarDays, faPerson } from '@fortawesome/free-solid-svg-icons';
-import { faLinkedin, faGithubSquare } from '@fortawesome/free-brands-svg-icons';
+import {  faLocationDot, faBriefcase, faBusinessTime, faCalendarDays, faPerson } from '@fortawesome/free-solid-svg-icons';
 
 const JobApplyHistory = () => {
-  const { jwt, role, active } = useContext(UserContext);
+  const { jwt, role } = useContext(UserContext);
   const [jobApplies, setJobApplies] = useState([]);
   const [selectedJobApply, setselectedJobApply] = useState({});
   const [searchText, setSearchText] = useState('');
@@ -55,7 +52,6 @@ const JobApplyHistory = () => {
   return (
     <div className='divJobApplies'>
       <div className="container-fluid main">
-        <ToastContainer />
         <div className="main-card">
           <div className="job-positions">
             <ul className="list">
