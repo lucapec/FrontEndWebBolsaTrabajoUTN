@@ -6,7 +6,7 @@ import UserContext from "../../context/UserContext";
 function AddSkillModal({ url, setShowModal, visible, form, setForm, setDeletedOrUpdated, deletedOrUpdated }) {
     const {jwt} = useContext(UserContext);
     const handleNewSkill = () => {
-        if (form.name === '') {
+        if (form.skillName === '') {
             toast("Ingrese datos válidos", {
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -15,22 +15,25 @@ function AddSkillModal({ url, setShowModal, visible, form, setForm, setDeletedOr
                 position: toast.POSITION.TOP_LEFT,
             });
         } else {
+            console.log(form);
             fetch(`${url}/CreateSkill`, {
                 method: 'POST',
                 headers: {
                     "Content-type": "application/json",
                     Authorization: `Bearer ${jwt}`,
                 },
-                body: JSON.stringify(form),
+                body: JSON.stringify({
+                    skillName: form.name
+                }),
             })
                 .then((r) => r.json())
                 .then((r) => {
                     setDeletedOrUpdated(!deletedOrUpdated);
                     setForm({
-                        name: '',
+                        skillName: '',
                     });
                     setShowModal(false);
-                    toast(`${r.name} creada correctamente`, {
+                    toast(`${r.skillName} creada correctamente`, {
                         autoClose: 3000,
                         hideProgressBar: false,
                         type: "success",

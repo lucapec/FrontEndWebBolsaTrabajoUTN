@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import "./AdminDashboard.css";
 import { Row, Col, Button, Form } from 'react-bootstrap';
 import DashboardTable from "./DashboardTable";
-import { HandleUpdateCareer, HandleDeleteCareer, HandleUpdateSkill, HandleDeleteSkill, ActivateDeactivateUser } from "./Handlers";
+import { HandleUpdateCareer, HandleDeleteCareer, HandleDeleteSkill, ActivateDeactivateUser } from "./Handlers";
 import UserContext from "../../context/UserContext";
 
 const AdminDashboard = () => {
@@ -132,14 +132,6 @@ const AdminDashboard = () => {
                     field: 'col3', headerName: 'Acciones', width: 150, align: 'center', headerAlign: 'center', renderCell: (rowValues) => {
                       return (
                         <>
-                          <Button
-                            variant="success"
-                            color="success"
-                            style={{ margin: '0 5px 0 0' }}
-                            onClick={() => HandleUpdateSkill(rowValues, setDeletedOrUpdated, deletedOrUpdated, jwt)}
-                          >
-                            Guardar
-                          </Button>
                           <Button
                             variant="danger"
                             color="danger"

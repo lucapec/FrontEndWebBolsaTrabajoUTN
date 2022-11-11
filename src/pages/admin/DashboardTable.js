@@ -16,7 +16,7 @@ const DashboardTable = ({ url, title, columns, deletedOrUpdated, addFunctionalit
         totalSubjets: null,
     });
     const [addSkillForm, setAddSkillForm] = useState({
-       name: '', 
+       skillName: '', 
     });
 
     useEffect(() => {
@@ -55,7 +55,7 @@ const DashboardTable = ({ url, title, columns, deletedOrUpdated, addFunctionalit
                     setData(r.map((skill) => {
                         return {
                             id: skill.id,
-                            name: skill.name
+                            name: skill.skillName
                         }
                     }));
                 }
