@@ -6,15 +6,13 @@ import UserContext from "../../context/UserContext";
 const StudentData = () => {
   const { jwt } = useContext(UserContext);
   const [data, setData] = useState({});
-  const [boolUniversityData, setboolUniversityData] = useState(false);
+  const [boolUniversityData, setboolUniversityData] = useState(true);
   const [successfulCharge, setSuccessfulCharge] = useState(false);
 
   const UpdateData = (datos) => {
     const dataStudent = { ...data, ...datos };
     setData(dataStudent);
   };
-
-  console.log(successfulCharge);
 
   useEffect(() => {
     fetch('https://localhost:7172/api/UsersInfo/CreateDataStudent', {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import SkillsComponent from "./SkillsComponent"
 import "./UniversityData.css";
 
 const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
@@ -12,6 +13,7 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
   const [averagesWithDeferrals, setAveragesWithDeferrals] = useState("");
   const [averagesWithoutDeferrals, setAveragesWithoutDeferrals] = useState("");
   const [dataCareer, setDataCareer] = useState([]);
+  const [saveSkills, setSaveSkills] = useState(false);
   const navigate = useNavigate();
 
   const errorsList = () => {
@@ -62,6 +64,7 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
     if (errors.length === 0) {
       setSuccessfulCharge(true);
       UpdateData(universityData);
+      setSaveSkills(true);
       setTimeout(() => {
         navigate("/ofertas");
       }, 3000);
@@ -240,6 +243,12 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
                               value={averagesWithoutDeferrals}
                               onChange={inputHandler}
                             />
+                          </div>
+                        </div>
+                        <div className="col mt-4">
+                          <label>Habilidades</label>
+                          <div>
+                          <SkillsComponent saveSkills={saveSkills}/>
                           </div>
                         </div>
                         <div className="col-11">
