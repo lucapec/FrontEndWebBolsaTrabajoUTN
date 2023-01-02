@@ -245,12 +245,7 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
                             />
                           </div>
                         </div>
-                        <div className="col mt-4">
-                          <label>Habilidades</label>
-                          <div>
                           <SkillsComponent saveSkills={saveSkills}/>
-                          </div>
-                        </div>
                         <div className="col-11">
                           <div className="mt-5 ">
                             <button onClick={dataValidation} className="button">
