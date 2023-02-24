@@ -4,7 +4,7 @@ import UserContext from "../../../context/UserContext";
 
 const SelectComponent = ({ saveSkills }) => {
   const { jwt } = useContext(UserContext);
-  const [skillsList, setSkillsList] = useState();
+  const [skillsList, setSkillsList] = useState(null);
   const [isCharged, setIsCharged] = useState(false);
   const [selectedSkills, setSelectedSkills] = useState();
   const [studentData, setStudentData] = useState(null);
@@ -13,26 +13,20 @@ const SelectComponent = ({ saveSkills }) => {
     return selectedSkills.map(function (skill) {
       return skill.value;
     })};
-
-  // const IdToSkills = (skillIdStudent, skillsList) => {
-    //   var skillsmatched = skillsList.filter(function (skill) {
-  //     return skillIdStudent.includes(skill.id);
-  //   });
-  //   return skillsmatched
-  // };
   
   const IdToSkills = () => {
-    var skillsmatched = skillsList.filter(function (skill) {
+    return skillsList.filter(function (skill) {
       return studentData.skillsId.includes(skill.id);
     });
-    return skillsmatched
   };
   
-  // if (studentData != null) {
-  //   var asd = IdToSkills()
-    
-  //   console.log("del id a los skills ", asd)
-  // };
+  if (studentData != null && skillsList != null) {
+    const skillsOfStudent = IdToSkills()
+    var formattedSkills = skillsOfStudent.map(skill => ({
+      label: skill.skillName,
+      id: skill.id
+    }));
+  };
 
   const SelectHandler = (e) => {
     setSelectedSkills(e);
@@ -48,21 +42,6 @@ const SelectComponent = ({ saveSkills }) => {
       .then(() => setIsCharged(true));
   }, []);
 
-  if (saveSkills) {
-    var arrayIds = SkillsToId();
-    fetch("https://localhost:7172/api/Skills/AddSkillToStudent", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwt}`,
-      },
-      body: JSON.stringify({"skillsId": arrayIds}),
-    })
-      .then((res) => res.json())
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }
   
   useEffect(() => {
     fetch("https://localhost:7172/api/UsersInfo/Student", {
@@ -72,15 +51,29 @@ const SelectComponent = ({ saveSkills }) => {
         Authorization: `Bearer ${jwt}`,
       },
     })
-      .then((response) => response.json())
+    .then((response) => response.json())
       .then((data) => {
         setStudentData(data);
       })
-  }, [jwt]);
-  
-  var array = [{ label: "CSS", id: 5 }];
+    }, [jwt]);
+    
+    if (saveSkills) {
+      var arrayIds = SkillsToId();
+      fetch("https://localhost:7172/api/Skills/AddSkillToStudent", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt}`,
+        },
+        body: JSON.stringify({"skillsId": arrayIds}),
+      })
+        .then((res) => res.json())
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
 
-  return isCharged ? (
+  return isCharged && studentData ? (
     <div className="col mt-4">
       <label>Habilidades</label>
       <div>
@@ -91,7 +84,7 @@ const SelectComponent = ({ saveSkills }) => {
           }))}
           isMulti
           onChange={SelectHandler}
-          defaultValue={array}
+          defaultValue={formattedSkills}
         />
       </div>
     </div>

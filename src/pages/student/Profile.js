@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import UserContext from "../../context/UserContext";
 import "./Profile.css";
 import CvComponent from "../../components/forms/studetnRegisterForms/CvComponent";
+import SkillsComponent from "../../components/forms/studetnRegisterForms/SkillsComponent";
 
 const Profile = () => {
   const [firstName, setFirstName] = useState("");
@@ -551,19 +552,6 @@ const Profile = () => {
                           </div>
                         </div>
                         <div className="col mt-4">
-                          <label>Plan Especialidad</label>
-                          <div>
-                            <input
-                              type="text"
-                              name="specialtyPlan"
-                              id="specialtyPlan"
-                              className="form-control here"
-                              value={specialtyPlan}
-                              onChange={inputHandler}
-                            />
-                          </div>
-                        </div>
-                        <div className="col mt-4">
                           <label>Año que Cursa</label>
                           <div>
                             <input
@@ -619,6 +607,7 @@ const Profile = () => {
                             />
                           </div>
                         </div>
+                          <SkillsComponent/>
                         <div className="col-11">
                           <div className="mt-5">
                             <button onClick={dataValidation} className="button">

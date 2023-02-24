@@ -66,6 +66,7 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
       UpdateData(universityData);
       setSaveSkills(true);
       setTimeout(() => {
+        // setSaveSkills(false);
         navigate("/ofertas");
       }, 3000);
       toast("Los datos han sido cargados existosamente", {
