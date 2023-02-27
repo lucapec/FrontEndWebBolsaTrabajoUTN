@@ -6,7 +6,7 @@ import UserContext from "../../context/UserContext";
 const StudentData = () => {
   const { jwt } = useContext(UserContext);
   const [data, setData] = useState({});
-  const [boolUniversityData, setboolUniversityData] = useState(true);
+  const [boolUniversityData, setboolUniversityData] = useState(false);
   const [successfulCharge, setSuccessfulCharge] = useState(false);
 
   const UpdateData = (datos) => {
