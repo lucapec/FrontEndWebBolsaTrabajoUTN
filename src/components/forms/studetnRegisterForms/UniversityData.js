@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import SkillsComponent from "./SkillsComponent"
 import "./UniversityData.css";
 
 const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
@@ -12,6 +13,7 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
   const [averagesWithDeferrals, setAveragesWithDeferrals] = useState("");
   const [averagesWithoutDeferrals, setAveragesWithoutDeferrals] = useState("");
   const [dataCareer, setDataCareer] = useState([]);
+  const [saveSkills, setSaveSkills] = useState(false);
   const navigate = useNavigate();
 
   const errorsList = () => {
@@ -62,7 +64,9 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
     if (errors.length === 0) {
       setSuccessfulCharge(true);
       UpdateData(universityData);
+      setSaveSkills(true);
       setTimeout(() => {
+        // setSaveSkills(false);
         navigate("/ofertas");
       }, 3000);
       toast("Los datos han sido cargados existosamente", {
@@ -242,6 +246,7 @@ const UniversityData = ({ setSuccessfulCharge, UpdateData }) => {
                             />
                           </div>
                         </div>
+                          <SkillsComponent saveSkills={saveSkills}/>
                         <div className="col-11">
                           <div className="mt-5 ">
                             <button onClick={dataValidation} className="button">

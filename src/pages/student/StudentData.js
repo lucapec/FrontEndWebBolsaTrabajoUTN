@@ -14,8 +14,6 @@ const StudentData = () => {
     setData(dataStudent);
   };
 
-  console.log(successfulCharge);
-
   useEffect(() => {
     fetch('https://localhost:7172/api/UsersInfo/CreateDataStudent', {
       method: "PUT",
